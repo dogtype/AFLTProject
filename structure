@@ -1,0 +1,45 @@
+---------------------------Factor Graph---------------------------- 
+
+class Hypergraph
+ + V : set
+ + E : set(set)
+ + att : dict
+ + labV : dict
+ + labE : dict
+ + connect(v : any) -> set
+ + add_edge() -> bool
+ + add_vertex() -> bool 
+
+class Hypergraph fragment(Hypergraph) 
+ + external : dict 
+
+class Factor graphs(Hypergraph) 
+ + omega : dict
+ + phi : dict
+ + sum_product() 
+
+-------------------------------FGG---------------------------------
+
+class FGG
+ + T : set 
+ + N : set 
+ + S : string
+ + P : dict
+ + recursive() -> bool
+ + linearly_recursive() -> bool
+ + reentrant() -> bool
+ + conjunction(fgg : FGG) -> FGG
+ + add(head, body) -> bool
+ + copy() -> FGG
+ + print() -> string
+ + cyclic() -> bool
+ + size() -> number 
+ + P() -> Generator
+
+
+class FGGsum_product
+ + fgg : FGG
+ + inference() -> number
+ + inference_finite_variables() -> number 
+ + inference_finite_states() -> number
+
