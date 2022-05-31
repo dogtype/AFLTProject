@@ -11,4 +11,5 @@ Currently you can only download and use this library directely, but a setup migh
 ## Reference
 
 The algorithms were originally proposed in the following paper:
+
 Chiang, David, and Darcey, Riley. "Factor Graph Grammars." (2020).
