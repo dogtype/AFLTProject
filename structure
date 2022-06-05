@@ -2,13 +2,16 @@
 
 class Hypergraph
  + V : set
- + E : set(set)
+ + E : set "05.06: changed from nested set to a set"
  + att : dict
  + labV : dict
  + labE : dict
  + connect(v : any) -> set
- + add_edge() -> bool
- + add_vertex() -> bool 
+ + add_edge() -> bool "05.06: proposal to return nothing"
+ + add_vertex() -> bool "05.06: proposal to return nothing"
+ + map_edge()  "05.06: newly added"
+ + label_edge()  "05.06: newly added"
+ + label_vertex()  "05.06: newly added"
 
 class Hypergraph fragment(Hypergraph) 
  + external : dict 
