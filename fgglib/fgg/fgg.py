@@ -1,16 +1,17 @@
-from fgglib.src.fgg.exceptions import InvalidProduction
-from fgglib.src.fgg.nonterminal import NT, S
-from fgglib.src.fgg.production import Production
-from fgglib.src.fgg.symbol import Sym, ε
+from fgglib.fgg.exceptions import InvalidProduction
+from fgglib.fgg.nonterminal import NT, S
+from fgglib.fgg.production import Production
+
+#from fgglib.graph import FGfragment
 
 
 class FGG:
     # DEFINITION
     # A factor graph grammar is a 4-Tuple <T,N,S,P> where
-    # • T is a set of terminal symbols
+    # • T is a set of terminal symbols (factor graph fragments)
     # • N is a set of nonterminal symbols
     # • S is a string (or label) for the starting nonterminal
-    # • P is a set of productions, which are in turn tuples of head and body
+    # • P is a set of productions, which are in turn tuples of head and body (fgfragment)
 
     def __init__(self, T, N, P): # S NT is imported
         self.T = T
@@ -29,20 +30,43 @@ class FGG:
         """ returns the size of the grammar """
         size = 0
 		for (_, body) in self.P:
-			size+=len(body)+1
+			size+= body.size() +1
 		return size
 
     def recursive(self) -> bool:
         """ checks if the grammar contains recursive production rules """
-        raise NotImplementedError
+        for p in P:
+            nt = p.head
+            if nt in p.body.N: # requires factor graph fragment to have a set of nonterminals
+                return True
+
+        return False
 
     def linearly_recursive(self) -> bool:
         """ checks if the grammar is linearly recursive """
-        raise NotImplementedError
+        if(not self.recursive()):
+            return False # grammar is nonrecursive
+
+        for p in P:
+            nt = p.head
+            counter = 0
+            for n in p.body.N: # requires factor graph fragment to have a set of nonterminals
+                if(n==nt):
+                    counter += 1
+            if(counter>1):
+                return False # grammar is nonlinearly recursive
+
+        return True
 
     def reentrant(self) -> bool:
         """ checks if the grammar is reentrant """
-        raise NotImplementedError
+
+        for p in P:
+            size = len(p.body.N)
+            if(size>1):
+                return False
+
+        return True
 
     def conjunction(self,fgg : FGG) -> FGG:
         """ implements the conjunction algorithm for factor graph grammars """
@@ -52,15 +76,10 @@ class FGG:
         """ helper function to add production rules """
         if not isinstance(head, NT):
 			raise InvalidProduction
-		self.N.add(head)
 
-		for elem in body:
-			if isinstance(elem, NT):
-				self.N.add(elem)
-			elif isinstance(elem, Sym):
-				self.T.add(elem)
-			else:
-				raise InvalidProduction
+		self.N.add(head)
+		self.N.update(body.N)
+        self.T.add(body)
 
 		self._P.add(Production(head, body))
 
@@ -68,15 +87,18 @@ class FGG:
         """ returns a deepcopy of the entire grammar """
 		return copy.deepcopy(self)
 
-    def print(self) -> string:
+    def __str__(self) -> string:
         """ returns the grammar in a printable string format """
         string = "start: " + self.S + "\n"
         for p in self.P:
-            string += p.head + "--->" + p.body +"\n"
+            string += str(p) +"\n"
         return string
 
     def cyclic(self) -> bool:
         """ returns if the grammar has cyclic productions (probably not needed) """
+        if(self.recursive):
+            return true
+
         raise NotImplementedError
 
 
