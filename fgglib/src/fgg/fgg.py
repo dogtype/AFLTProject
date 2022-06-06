@@ -1,3 +1,9 @@
+from fgglib.src.fgg.exceptions import InvalidProduction
+from fgglib.src.fgg.nonterminal import NT, S
+from fgglib.src.fgg.production import Production
+from fgglib.src.fgg.symbol import Sym, ε
+
+
 class FGG:
     # DEFINITION
     # A factor graph grammar is a 4-Tuple <T,N,S,P> where
@@ -6,7 +12,7 @@ class FGG:
     # • S is a string (or label) for the starting nonterminal
     # • P is a set of productions, which are in turn tuples of head and body
 
-    def __init__(self, T, N, S, P):
+    def __init__(self, T, N, P): # S NT is imported
         self.T = T
         self.N = N
         self.S = S
@@ -57,7 +63,7 @@ class FGG:
 				raise InvalidProduction
 
 		self._P.add(Production(head, body))
-        
+
     def copy(self) -> FGG:
         """ returns a deepcopy of the entire grammar """
 		return copy.deepcopy(self)
