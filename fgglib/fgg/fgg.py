@@ -44,6 +44,7 @@ class FGG:
 
     def linearly_recursive(self) -> bool:
         """ checks if the grammar is linearly recursive """
+        # TODO: extend this to include the whole derivation tree, not just a single production
         if(not self.recursive()):
             return False # grammar is nonrecursive
 
@@ -60,7 +61,7 @@ class FGG:
 
     def reentrant(self) -> bool:
         """ checks if the grammar is reentrant """
-
+        # TODO: extend this to include the whole derivation tree, not just a single production
         for p in P:
             size = len(p.body.N)
             if(size>1):
