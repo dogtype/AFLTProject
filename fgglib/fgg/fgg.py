@@ -119,6 +119,37 @@ class FGG:
 
         return False
 
+    """
+    Adapted rayuela version of cyclic
+    def cyclic(self, reverse = True):
+		def has_cycles(X):
+			nonlocal counter
+			𝜷[X] = Boolean.one
+			started[X] = counter
+			counter += 1
+			X_productions = (p for p in self.P if p[0]==X)
+			for p in X_productions:
+				_, body = p
+				for n in body.N: # requires factor graph fragment to have a set of nonterminals
+					if n in self.T:
+						continue
+					elif 𝜷[n] == Boolean.one: # cycle detected
+						return True
+					elif has_cycles(n): # propagate cycle
+						return True
+			𝜷[X] = Boolean.zero
+			return False
+
+		𝜷 = Boolean.chart()
+		started = {}
+		counter = 0
+		cyclic = has_cycles(self.S)
+		if reverse:
+			sort = [k for k, v in sorted(started.items(), key=lambda item: item[1])]
+		else:
+			sort = [k for k, v in sorted(started.items(), key=lambda item: item[1], reverse=True)]
+		return cyclic, sort
+    """
 
 
 class FGGsum_product:
