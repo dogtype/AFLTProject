@@ -99,7 +99,25 @@ class FGG:
         if(self.recursive):
             return true
 
-        raise NotImplementedError
+        curr = self.S
+        searched = set()
+        todo = {self.S}
+
+        while(len(todo)>0):
+            nt = todo.pop()
+            if(nt in searched):
+                continue
+            else:
+                searched.add(nt)
+            for p in self.P:
+                if(p.head == nt):
+                    for(n in p.body.N): # requires factor graph fragment to have a set of nonterminals
+                        if(n in searched):
+                            return True
+                        else:
+                            todo.add(n)
+
+        return False
 
 
 
