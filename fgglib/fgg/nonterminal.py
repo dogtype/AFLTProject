@@ -1,6 +1,7 @@
 """ DISCLAIMER: taken from rayuela library """
 
-from rayuela.base.symbol import Sym
+from fgglib.fgg.symbol import Sym
+
 class NT:
 
 	def __init__(self, X, label=None, n=None):
