@@ -35,8 +35,8 @@ jobs:
 
       - name: Assert FG coverage
         run : |
-          pytest-cov fg fgglib/autotesting/fgtest.py
+          pytest --cov fgglib/fg fgglib/autotesting/fgtest.py
 
       - name: Assert FGG coverage
         run : |
-          pytest-cov fgg fgglib/autotesting/fggtest.py
+          pytest --cov fgglib/fgg fgglib/autotesting/fggtest.py
