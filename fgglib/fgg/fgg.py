@@ -2,7 +2,7 @@ from fgglib.fgg.exceptions import InvalidProduction
 from fgglib.fgg.nonterminal import NT, S
 from fgglib.fgg.production import Production
 
-#from fgglib.graph import FGfragment
+from fgglib.fg.fragment import Fragment
 
 
 class FGG:
@@ -37,25 +37,24 @@ class FGG:
         """ checks if the grammar contains recursive production rules """
         for p in P:
             nt = p.head
-            if nt in p.body.N: # requires factor graph fragment to have a set of nonterminals
+            if nt in p.body.external: # requires factor graph fragment to have a set of nonterminals
                 return True
 
         return False
 
+    def linearly_recursive_helper(self, expr, target) -> number:
+        """ returns the number of target nonterminals that can be derived from a given expression """
+
+
+        return 0
+
     def linearly_recursive(self) -> bool:
         """ checks if the grammar is linearly recursive """
-        # TODO: extend this to include the whole derivation tree, not just a single production
-        if(not self.recursive()):
-            return False # grammar is nonrecursive
 
         for p in P:
             nt = p.head
-            counter = 0
-            for n in p.body.N: # requires factor graph fragment to have a set of nonterminals
-                if(n==nt):
-                    counter += 1
-            if(counter>1):
-                return False # grammar is nonlinearly recursive
+            if(linearly_recursive_helper(p.body.external,nt)>1):
+                return False
 
         return True
 
@@ -63,7 +62,7 @@ class FGG:
         """ checks if the grammar is reentrant """
         # TODO: extend this to include the whole derivation tree, not just a single production
         for p in P:
-            size = len(p.body.N)
+            size = len(p.body.external)
             if(size>1):
                 return False
 
@@ -79,7 +78,7 @@ class FGG:
 			raise InvalidProduction
 
 		self.N.add(head)
-		self.N.update(body.N)
+		self.N.update(body.external)
         self.T.add(body)
 
 		self._P.add(Production(head, body))
@@ -112,7 +111,7 @@ class FGG:
                 searched.add(nt)
             for p in self.P:
                 if(p.head == nt):
-                    for(n in p.body.N): # requires factor graph fragment to have a set of nonterminals
+                    for(n in p.body.external): # requires factor graph fragment to have a set of nonterminals
                         if(n in searched):
                             return True
                         else:
