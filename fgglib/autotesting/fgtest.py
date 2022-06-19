@@ -1,7 +1,10 @@
-from ..fg.factorgraphs import Factorgraphs
+import sys # added!
+sys.path.append("..")
+sys.path.append("../fg")
+from fg.factorgraphs import Factorgraphs
 
 # Example 3 from Chiang, David, and Darcey, Riley. "Factor Graph Grammars." (2020).
-hmmFG = Factorgraph(
+hmmFG = Factorgraphs(
     {0,1,2,3,4,5,6,7}, # V
     {'e0','e1','e2','e3','e4','e5','e6','e7','e8'}, # E
     {'e0':{0},'e1':{0,1},'e2':{1,2},'e3':{1,3},'e4':{3,4},'e5':{3,5},
@@ -13,7 +16,7 @@ hmmFG = Factorgraph(
 )
 
 # Figure 4.1 from Wymeersch, H. (2007). Factor graphs and the sum–product algorithm.
-spaFG = Factorgraph(
+spaFG = Factorgraphs(
     {0,1,2,3}, # V
     {'e0','e1','e2'}, # E
     {'e0':{0},'e1':{0,1},'e2':{0,2,3}}, # att
@@ -24,7 +27,7 @@ spaFG = Factorgraph(
 )
 
 # Figure 3 from Chiang, David, and Darcey, Riley. "Factor Graph Grammars." (2020)., using only specific production rules
-conFG = Factorgraph( # not completed yet. I need to write this down first though
+conFG = Factorgraphs( # not completed yet. I need to write this down first though
     {0,1,2,3,4,5,6,7}, # V
     {'e0','e1','e2','e3','e4','e5','e6','e7','e8'}, # E
     {'e0':{0},'e1':{0,1},'e2':{1,2},'e3':{1,3},'e4':{3,4},'e5':{3,5},

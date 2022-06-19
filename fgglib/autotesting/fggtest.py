@@ -1,37 +1,37 @@
-from ..fgg.fgg import FGG
-from ..fg.fragment import Fragment
+import sys
+sys.path.append("..")
+sys.path.append("../fgg")
+from fgg import FGG
+from fg.fragment import Fragment
 
 frag0 = Fragment(
-    {'X'}, # do we use the nonterminal as an edge label or as an external node
     {0},
     {'e0','e1'},
     {'e0':{0},'e1':{0,'X'}},
     {0:'T1'},
-    {'e0':'BOS'},
-    {}, # omega
-    {} # phi
+    {'e0':'BOS'} # have to introduce nonterminals as edge labels
+    #{}, # omega
+    #{} # phi
 )
 
 frag1 = Fragment(
-    {'X'},
     {0},
     {'e0','e1'},
     {'e0':{0},'e1':{0,'X'}},
     {0:'T1'},
-    {'e0':'BOS'},
-    {}, # omega
-    {} # phi
+    {'e0':'BOS'} # have to introduce nonterminals as edge labels
+    #{}, # omega
+    #{} # phi
 )
 
 frag2 = Fragment(
-    {'X'},
     {0},
     {'e0','e1'},
     {'e0':{0},'e1':{0,'X'}},
     {0:'T1'},
-    {'e0':'BOS'},
-    {}, # omega
-    {} # phi
+    {'e0':'BOS'} # have to introduce nonterminals as edge labels
+    #{}, # omega
+    #{} # phi
 )
 
 hmmFGG = FGG(

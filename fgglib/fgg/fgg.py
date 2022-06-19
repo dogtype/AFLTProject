@@ -1,8 +1,10 @@
-from fgglib.fgg.exceptions import InvalidProduction
-from fgglib.fgg.nonterminal import NT, S
-from fgglib.fgg.production import Production
-
-from fgglib.fg.fragment import Fragment
+from exceptions import *
+from nonterminal import NT, S
+from production import Production
+import sys
+sys.path.append("..")
+sys.path.append("../fg")
+from fg.fragment import Fragment
 
 
 class FGG:
@@ -13,25 +15,25 @@ class FGG:
     # • S is a string (or label) for the starting nonterminal
     # • P is a set of productions, which are in turn tuples of head and body (fgfragment)
 
-    def __init__(self, T, N, P): # S NT is imported
+    def __init__(self, T, N, S, P): # S NT is imported
         self.T = T
         self.N = N
         self.S = S
         self._P = P
 
     @property
-    def P(self) -> Generator:
+    def P(self):
         """ returns a generator for all production rules """
-		for p in self._P.items():
-			yield p
+        for p in self._P.items():
+            yield p
 
     @property
-    def size(self) -> number:
+    def size(self):
         """ returns the size of the grammar """
         size = 0
-		for (_, body) in self.P:
-			size+= body.size() +1
-		return size
+        for (_, body) in self.P:
+            size+= body.size() +1
+        return size
 
     def recursive(self) -> bool:
         """ checks if the grammar contains recursive production rules """
@@ -42,52 +44,44 @@ class FGG:
 
         return False
 
-    def linearly_recursive_helper(self, expr, target) -> number:
-        """ returns the number of target nonterminals that can be derived from a given expression """
-
-
-        return 0
-
-    def linearly_recursive(self) -> bool:
+    def linearly_recursive(self) -> bool: # we might be able to use an algorithm for finding SCCs for this. Maybe split nodes (NTs) in in- and out-vertex
         """ checks if the grammar is linearly recursive """
 
         for p in P:
             nt = p.head
-            if(linearly_recursive_helper(p.body.external,nt)>1):
-                return False
 
-        return True
+        raise NotImplementedError
 
     def reentrant(self) -> bool:
         """ checks if the grammar is reentrant """
-        # TODO: extend this to include the whole derivation tree, not just a single production
-        for p in P:
-            size = len(p.body.external)
-            if(size>1):
-                return False
-
-        return True
-
-    def conjunction(self,fgg : FGG) -> FGG:
-        """ implements the conjunction algorithm for factor graph grammars """
         raise NotImplementedError
+
+    def conjunction(self,fgg):
+        """ implements the conjunction algorithm for factor graph grammars """
+        rules = {} # set of new rules that are part of the conjoined grammar
+        for p in self.P:
+            for pp in fgg.P:
+                if(p.conjoinable(pp)):
+                    rules.add(p.conjoin(pp))
+        newGrammar = FGG(self.T,self.N,self.S,rules)
+        return newGrammar
 
     def add(self, head, body) -> bool:
         """ helper function to add production rules """
         if not isinstance(head, NT):
-			raise InvalidProduction
+            raise InvalidProduction
 
-		self.N.add(head)
-		self.N.update(body.external)
+        self.N.add(head)
+        self.N.update(body.external)
         self.T.add(body)
 
-		self._P.add(Production(head, body))
+        self._P.add(Production(head, body))
 
-    def copy(self) -> FGG:
+    def copy(self):
         """ returns a deepcopy of the entire grammar """
-		return copy.deepcopy(self)
+        return copy.deepcopy(self)
 
-    def __str__(self) -> string:
+    def __str__(self):
         """ returns the grammar in a printable string format """
         string = "start: " + self.S + "\n"
         for p in self.P:
@@ -111,7 +105,7 @@ class FGG:
                 searched.add(nt)
             for p in self.P:
                 if(p.head == nt):
-                    for(n in p.body.external): # requires factor graph fragment to have a set of nonterminals
+                    for n in p.body.external: # requires factor graph fragment to have a set of nonterminals
                         if(n in searched):
                             return True
                         else:
@@ -158,14 +152,14 @@ class FGGsum_product:
     def __init__(self, fgg):
         self.fgg = fgg
 
-    def inference(self)-> number:
+    def inference(self):
         """ returns the sum product of a factor graph grammar for the general case """
         raise NotImplementedError
 
-    def inference_finite_variables(self) -> number:
+    def inference_finite_variables(self):
         """ returns the sum product of a factor graph grammar with finite variable domain """
         raise NotImplementedError
 
-    def inference_finite_states(self) -> number:
+    def inference_finite_states(self):
         """ returns the sum product of a factor graph grammar with finite number of states """
         raise NotImplementedError
