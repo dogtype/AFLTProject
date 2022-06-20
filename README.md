@@ -6,7 +6,7 @@ The goal is to implement a library to work with factor graph grammars, special h
 
 ## Installation
 
-Currently you can only download and use this library directly, but a setup might be provided to be able to use it with pip.
+To install and use this library, download the source code and run `pip install -e .` in the top directory. 
 
 ## Reference
 

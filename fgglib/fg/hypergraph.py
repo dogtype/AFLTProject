@@ -1,4 +1,3 @@
-
 class Hypergraph:
     # DEFINITION
     # A hypergraph is a 5-Tuple <V, E, att, labV, labE> where

@@ -1,4 +1,4 @@
-from hypergraph import Hypergraph
+from fgglib.fg.hypergraph import Hypergraph
 
 class Fragment(Hypergraph):
 

@@ -1,6 +1,6 @@
 """ DISCLAIMER: taken from rayuela library """
 
-from symbols import Sym
+from fgglib.fgg.symbols import Sym
 
 class NT:
 

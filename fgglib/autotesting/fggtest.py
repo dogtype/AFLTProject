@@ -1,8 +1,5 @@
-import sys
-sys.path.append("..")
-sys.path.append("../fgg")
-from fgg import FGG
-from fg.fragment import Fragment
+from fgglib.fgg.fgg import FGG
+from fgglib.fg.fragment import Fragment
 
 frag0 = Fragment(
     {0},

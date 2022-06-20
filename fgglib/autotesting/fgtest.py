@@ -1,7 +1,4 @@
-import sys # added!
-sys.path.append("..")
-sys.path.append("../fg")
-from fg.factorgraphs import Factorgraphs
+from fgglib.fg.factorgraphs import Factorgraphs
 
 # Example 3 from Chiang, David, and Darcey, Riley. "Factor Graph Grammars." (2020).
 hmmFG = Factorgraphs(

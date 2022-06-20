@@ -1,10 +1,7 @@
-from exceptions import *
-from nonterminal import NT, S
-from production import Production
-import sys
-sys.path.append("..")
-sys.path.append("../fg")
-from fg.fragment import Fragment
+from fgglib.fgg.exceptions import *
+from fgglib.fgg.nonterminal import NT, S
+from fgglib.fgg.production import Production
+from fgglib.fg.fragment import Fragment
 
 
 class FGG:
