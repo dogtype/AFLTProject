@@ -51,6 +51,16 @@ class Hypergraph:
     def label_vertex(self, vertex, lab_vertex):
         """ assigns label to the vertex """
         self.labV[vertex] = lab_vertex
+        
+    def cyclic(self) -> bool:
+        raise NotImplementedError
+        
+    def leaves(self) -> set[str]:
+        counter = {label:0 for _, label in self.labV.items()}
+        for _, targets in self.att:
+            for v in targets:
+                counter[self.labV[v]] += 1
+        return {l for l, edge_num in counter.items() if edge_num == 1}
 
     def visualize(self):
         G = pgv.AGraph(strict = False, directed = False)

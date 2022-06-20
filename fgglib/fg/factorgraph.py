@@ -7,9 +7,9 @@ class Factorgraphs(Hypergraph):
         self.R = R
         self.phi = dict()
 
-    def __init__(self,_V,_E,_att,_labV,_labE,_omega, _phi):
+    def __init__(self,_V,_E,_att,_labV,_labE, _R _phi):
         super().__init__(_V,_E,_att,_labV,_labE)
-        self.omega = _omega
+        self.R = _R
         self.phi = _phi
         
     def add_factor(self, edge_label, function):
@@ -20,8 +20,21 @@ class Factorgraphs(Hypergraph):
         for _, local_function in self.phi.items():
             global_function *= local_function
         return global_function(arguments)
-            
+    
+    def leaves(self) -> tuple[set[str], set[str]]:
+        return ({self.labE[e] for e, targets in self.att.items() if len(targets) == 1}, super().leaves())
 
-    def sum_product():
+    def sum_product(self, max_iter=100):
+        if self.cyclic:
+            return _cyclic_sum_product(max_iter)
+        else
+            return _acyclic_sum_product()
+        
         """ returns the sum product, returns a dict node_label -> FactorFunction"""
+        raise NotImplementedError
+        
+    def _acyclic_sum_product(self):
+        
+        
+    def _cyclic_sum_product(self, max_iter):
         raise NotImplementedError
