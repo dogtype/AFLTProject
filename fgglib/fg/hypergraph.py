@@ -1,3 +1,5 @@
+import pygraphviz as pgv
+
 class Hypergraph:
     # DEFINITION
     # A hypergraph is a 5-Tuple <V, E, att, labV, labE> where
@@ -49,3 +51,25 @@ class Hypergraph:
     def label_vertex(self, vertex, lab_vertex):
         """ assigns label to the vertex """
         self.labV[vertex] = lab_vertex
+
+    def visualize(self):
+        G = pgv.AGraph(strict = False, directed = False)
+        G.graph_attr["label"] = "Factorgraph"
+        G.node_attr["color"] = "black"
+        for v in self.V:
+            G.add_node(self.labV[v],shape="circle")
+        for e in self.E:
+            G.add_node(self.labE[e],shape="box", color ="red")
+        for e in self.att:
+            for node in self.att[e]:
+                G.add_edge(self.labE[e],self.labV[node], color = "black")
+        G.layout(prog="neato") # one of: neato|dot|twopi|circo|fdp|nop
+        return G
+
+    def __str__(self):
+        """ returns a dot-string representation of the graph """
+        return self.visualize().string()
+
+    def draw(self):
+        """ returns a png image of the graph """
+        return self.visualize().draw("graph.png")

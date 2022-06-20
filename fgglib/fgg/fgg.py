@@ -32,26 +32,36 @@ class FGG:
             size+= body.size() +1
         return size
 
+    def recursive_helper(self) -> bool:
+        """ performs dfs """
+        raise NotImplementedError
+
     def recursive(self) -> bool:
-        """ checks if the grammar contains recursive production rules """
-        for p in P:
-            nt = p.head
-            if nt in p.body.nonterminals(): # requires factor graph fragment to have a set of nonterminals
-                return True
+        """ checks if the grammar has an X-type derivation containing an X-type derivation as subtree """
+        # use a simple dfs here. If we find a node that has already been visited, return true. Otherwise return false
+        # alternatively: use a graph and sccs
+        raise NotImplementedError
 
-        return False
+    def linearly_recursive_helper(self) -> bool:
+        """ checks for linear recursiveness by performing a modified dfs """
+        raise NotImplementedError
 
-    def linearly_recursive(self) -> bool: # we might be able to use an algorithm for finding SCCs for this. Maybe split nodes (NTs) in in- and out-vertex
-        """ checks if the grammar is linearly recursive """
+    def linearly_recursive(self) -> bool:
+        """ checks if the grammar lacks an X-type derivation containing more than one X-type derivation as subtree """
+        # use a modified dfs here. The dfs is used to return a number of found nonterminals and list of possible backtracks to check cycles
+        raise NotImplementedError
 
-        for p in P:
-            nt = p.head
-
+    def reentrant_helper(self) -> bool:
+        """ helps to check if grammar is reentrant by counting number of times every nonterminal has occured """
         raise NotImplementedError
 
     def reentrant(self) -> bool:
-        """ checks if the grammar is reentrant """
-        raise NotImplementedError
+        """ checks if the grammar lacks a derivation containing more than one different X-type derivation as subtree """
+        if (self.recursive()):
+            return True
+        else:
+            # use another DFS here and check the number of times you find every nonterminal
+            return False
 
     def conjunction(self,fgg):
         """ implements the conjunction algorithm for factor graph grammars """
@@ -84,64 +94,6 @@ class FGG:
         for p in self.P:
             string += str(p) +"\n"
         return string
-
-    def cyclic(self) -> bool:
-        """ returns if the grammar has cyclic productions (probably not needed) """
-        if(self.recursive):
-            return true
-
-        curr = self.S
-        searched = set()
-        todo = {self.S}
-
-        while(len(todo)>0):
-            nt = todo.pop()
-            if(nt in searched):
-                continue
-            else:
-                searched.add(nt)
-            for p in self.P:
-                if(p.head == nt):
-                    for n in p.body.nonterminals: # requires factor graph fragment to have a set of nonterminals
-                        if(n in searched):
-                            return True
-                        else:
-                            todo.add(n)
-
-        return False
-
-    """
-    Adapted rayuela version of cyclic
-    def cyclic(self, reverse = True):
-		def has_cycles(X):
-			nonlocal counter
-			𝜷[X] = Boolean.one
-			started[X] = counter
-			counter += 1
-			X_productions = (p for p in self.P if p[0]==X)
-			for p in X_productions:
-				_, body = p
-				for n in body.N: # requires factor graph fragment to have a set of nonterminals
-					if n in self.T:
-						continue
-					elif 𝜷[n] == Boolean.one: # cycle detected
-						return True
-					elif has_cycles(n): # propagate cycle
-						return True
-			𝜷[X] = Boolean.zero
-			return False
-
-		𝜷 = Boolean.chart()
-		started = {}
-		counter = 0
-		cyclic = has_cycles(self.S)
-		if reverse:
-			sort = [k for k, v in sorted(started.items(), key=lambda item: item[1])]
-		else:
-			sort = [k for k, v in sorted(started.items(), key=lambda item: item[1], reverse=True)]
-		return cyclic, sort
-    """
-
 
 class FGGsum_product:
     # A helper class to compute the sum_product of a factor graph grammar

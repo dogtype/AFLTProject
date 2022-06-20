@@ -9,8 +9,8 @@ class Fragment(Hypergraph): # should this be hypergraph or factor graph fragment
         super()
 
     def nonterminals(self, NT):
-    """ returns a list of nonterminals that are edge labes of the factorgraph
-        and can be identified by a list of all nonterminals used """
+        """ returns a list of nonterminals that are edge labes of the factorgraph
+            and can be identified by a list of all nonterminals used """
         ntlist = {}
         for e,l in self.labE:
             if l in NT:

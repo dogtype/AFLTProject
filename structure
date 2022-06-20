@@ -1,4 +1,4 @@
----------------------------Factor Graph---------------------------- 
+---------------------------Factor Graph----------------------------
 
 class Hypergraph
  + V : set
@@ -12,20 +12,24 @@ class Hypergraph
  + map_edge()  "05.06: newly added"
  + label_edge()  "05.06: newly added"
  + label_vertex()  "05.06: newly added"
+ + draw() "20.06: newly added"
+ + visualize() "20.06: newly added"
+ + draw() "20.06: newly added"
 
-class Hypergraph fragment(Hypergraph) 
- + external : dict 
+class Hypergraph fragment(Hypergraph)
+ + external : dict
+ + nonterminals(nts) : set "20.06: newly addded"
 
-class Factor graphs(Hypergraph) 
+class Factor graphs(Hypergraph)
  + omega : dict
  + phi : dict
- + sum_product() 
+ + sum_product()
 
 -------------------------------FGG---------------------------------
 
 class FGG
- + T : set 
- + N : set 
+ + T : set
+ + N : set
  + S : string
  + P : dict
  + recursive() -> bool
@@ -35,14 +39,12 @@ class FGG
  + add(head, body) -> bool
  + copy() -> FGG
  + print() -> string
- + cyclic() -> bool
- + size() -> number 
+ + size() -> number
  + P() -> Generator
 
 
 class FGGsum_product
  + fgg : FGG
  + inference() -> number
- + inference_finite_variables() -> number 
+ + inference_finite_variables() -> number
  + inference_finite_states() -> number
-
