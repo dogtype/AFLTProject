@@ -35,12 +35,5 @@ conFG = Factorgraphs( # not completed yet. I need to write this down first thoug
     {} # Phi (probability function in dependance of the adjacent variables)
 )
 
-def test_printout():
-    print(hmmFG)
-    hmmFG.draw()
-    assert True
-
 def test_sum_product():
     assert True
-
-test_printout()
