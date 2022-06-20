@@ -1,5 +1,3 @@
-import pygraphviz as pgv
-
 class Hypergraph:
     # DEFINITION
     # A hypergraph is a 5-Tuple <V, E, att, labV, labE> where
@@ -63,6 +61,8 @@ class Hypergraph:
         return {l for l, edge_num in counter.items() if edge_num == 1}
 
     def visualize(self):
+        import pygraphviz as pgv
+
         G = pgv.AGraph(strict = False, directed = False)
         G.graph_attr["label"] = "Factorgraph"
         G.node_attr["color"] = "black"
@@ -77,9 +77,13 @@ class Hypergraph:
         return G
 
     def __str__(self):
+        import pygraphviz as pgv
+
         """ returns a dot-string representation of the graph """
         return self.visualize().string()
 
     def draw(self):
+        import pygraphviz as pgv
+
         """ returns a png image of the graph """
         return self.visualize().draw("graph.png")
