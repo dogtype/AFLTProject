@@ -11,7 +11,7 @@ class FactorFunction(ABC):
             raise ValueError
         return AdditiveFactorFunction(self, other)
         
-    def __mult__(self, other):
+    def __mul__(self, other):
         if self.R != other.R:
             raise ValueError
         return MultiplicativeFactorFunction(self, other)
@@ -63,7 +63,7 @@ class IdentityFactorFunction(FactorFunction):
         self.R = R
         self.variables = []
 
-    def __mult__(self, other):
+    def __mul__(self, other):
         return other
 
     def compute(self, arguments):
