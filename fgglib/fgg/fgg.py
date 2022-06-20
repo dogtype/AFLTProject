@@ -36,7 +36,7 @@ class FGG:
         """ checks if the grammar contains recursive production rules """
         for p in P:
             nt = p.head
-            if nt in p.body.external: # requires factor graph fragment to have a set of nonterminals
+            if nt in p.body.nonterminals(): # requires factor graph fragment to have a set of nonterminals
                 return True
 
         return False
@@ -69,7 +69,7 @@ class FGG:
             raise InvalidProduction
 
         self.N.add(head)
-        self.N.update(body.external)
+        self.N.update(body.nonterminals)
         self.T.add(body)
 
         self._P.add(Production(head, body))
@@ -102,7 +102,7 @@ class FGG:
                 searched.add(nt)
             for p in self.P:
                 if(p.head == nt):
-                    for n in p.body.external: # requires factor graph fragment to have a set of nonterminals
+                    for n in p.body.nonterminals: # requires factor graph fragment to have a set of nonterminals
                         if(n in searched):
                             return True
                         else:
