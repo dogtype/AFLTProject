@@ -1,6 +1,6 @@
 from fgglib.fg.hypergraph import Hypergraph
 
-class Fragment(Hypergraph): # should this be hypergraph or factor graph fragment?
+class Fragment(Hypergraph):
 
     def __init__(self):
         self.external = dict()
