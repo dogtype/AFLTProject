@@ -20,7 +20,7 @@ class Factorgraphs(Hypergraph):
             global_function *= e.function
         return global_function
         
-    def compute_assignment(self, arguments) -> R:
+    def compute_assignment(self, arguments):
         return self.global_function().compute(arguments)
     
     def sum_product(self, max_iter=100) -> Dict[FGVertex, FactorFunction]:
