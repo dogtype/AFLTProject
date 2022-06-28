@@ -12,7 +12,7 @@ class FGG:
     # • S is a string (or label) for the starting nonterminal
     # • P is a set of productions, which are in turn tuples of head and body (fgfragment)
 
-    def __init__(self, T, N, S, P): # S NT is imported
+    def __init__(self, T : set[Fragment], N : set[NT], S : str, P : set[Production]): # S NT is imported
         self.T = T
         self.N = N
         self.S = S
@@ -42,7 +42,7 @@ class FGG:
                 result.add(p)
         return result
 
-    def recursive_helper(self, visited : set, closed : set, nt : NT, curr : NT) -> bool:
+    def recursion_helper(self, visited : set, closed : set, nt : NT, curr : NT) -> bool:
         """ performs dfs """
         visited.add(nt)
         one_recursive = False
@@ -50,41 +50,51 @@ class FGG:
             if(nt in p.body.nonterminals(self.N)):
                 return True
             for n in p.body.nonterminals(self.N):
-                one_recursive = one_recursive or self.recursive_helper(visited,closed,n,curr)
+                one_recursive = one_recursive or self.recursion_helper(visited,closed,n,curr)
         closed.add(nt)
         return one_recursive
 
     def recursive(self) -> bool:
         """ checks if the grammar has an X-type derivation containing an X-type derivation as subtree """
         # use a simple dfs here. If we find a node that has already been visited, return true. Otherwise return false
-        visited = {}
-        closed = {}
         one_recursive = False
         for p in self.P:
-            one_recursive = one_recursive or self.recursive_helper(visited,closed,p.head,p.head)
+            one_recursive = one_recursive or self.recursion_helper({},{},p.head,p.head)
         return one_recursive
 
-    def linearly_recursive_helper(self) -> bool:
+    def linear_recursion_helper(self, visited : set, closed : set, nt : NT, curr : NT) -> int:
         """ checks for linear recursiveness by performing a modified dfs """
-        raise NotImplementedError
+        visited.add(nt)
+        num_recursions = 0
+        for p in self.nProductions(curr):
+            if(nt in p.body.nonterminals(self.N)):
+                num_recursions += 1
+            for n in p.body.nonterminals(self.N):
+                num_recursions += self.linear_recursion_helper(visited,closed,n,curr)
+        closed.add(nt)
+        return num_recursions
 
     def linearly_recursive(self) -> bool:
         """ checks if the grammar lacks an X-type derivation containing more than one X-type derivation as subtree """
         # use a modified dfs here. The dfs is used to return a number of found nonterminals and list of possible backtracks to check cycles
-        raise NotImplementedError
+        # Does not cover all edge cases yet !!!
+        num_recursions = 0
+        for p in self.P:
+            num_recursions += self.linear_recursion_helper({},{},p.head,p.head)
+        return num_recursions
 
     def reentrant_helper(self) -> bool:
         """ helps to check if grammar is reentrant by counting number of times every nonterminal has occured """
         raise NotImplementedError
 
-    def duplicate_helper(self, nt: NT, duplicates : set) -> bool:
+    def duplicate(self, nt: NT, duplicates : set[NT]) -> bool:
         """ returns true if the current nonterminal can produce a duplicate nt """
         if(nt in duplicates):
             return True
         else:
-            one_dup = False
-            for p in self.P:
-                pass
+            for p in self.nProductions(nt):
+                self.recursion_helper({},{},nt,p.head())
+
 
     def reentrant(self) -> bool:
         """ checks if the grammar lacks a derivation containing more than one different X-type derivation as subtree """
@@ -94,17 +104,16 @@ class FGG:
             # use another DFS here and check the number of times you find every nonterminal. A nonterminal has to be produced twice by a different one and two different derivations for this nonterminal must exist
             duplicates = {} # set of nonterminals with different derivation trees
             for p in self.P:
-                pass
+                if(self.duplicate(p.head,duplicates)):
+                    duplicates.add(p.head)
             for c in changeable:
                 for p in self.P:
-                    visited = {}
-                    closed = {}
-                    self.reentrant_helper(visited, closed, p, c)
+                    self.reentrant_helper({}, {}, p, c)
             return False
 
     def conjunction(self,fgg):
         """ implements the conjunction algorithm for factor graph grammars """
-        rules = {} # set of new rules that are part of the conjoined grammar
+        rules = set() # set of new rules that are part of the conjoined grammar
         for p in self.P:
             for pp in fgg.P:
                 if(p.conjoinable(pp)):
