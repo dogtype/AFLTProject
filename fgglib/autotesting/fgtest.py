@@ -1,38 +1,39 @@
 from fgglib.fg.factorgraph import Factorgraph
+from fgglib.fg.vertex import Vertex
+from fgglib.fg.edge import Edge
+from fgglib.base.semiring import *
+
+def createGraph(V, E, semiring): # maybe use labeling instead of an index, but this doesn't support same label on different vertices
+    vertexDict = {n: Vertex(None,l) for n,l in V.items()}
+    vertexSet = {v for i,v in vertexDict.items()}
+    edgeSet = set()
+    for l,s in E.items():
+        vs = {vertexDict[i] for i in s}
+        edgeSet.add(Edge(None,l,vs))
+    return Factorgraph(vertexSet, edgeSet, semiring)
+
 
 # Example 3 from Chiang, David, and Darcey, Riley. "Factor Graph Grammars." (2020).
-hmmFG = Factorgraph(
-    {0,1,2,3,4,5,6,7}, # V
-    {'e0','e1','e2','e3','e4','e5','e6','e7','e8'}, # E
+hmmFG = createGraph(
+    {0:'T0',1:'T1',2:'W2',3:'T3',4:'W4',5:'T5',6:'W6',7:'T7'}, # V
     {'e0':{0},'e1':{0,1},'e2':{1,2},'e3':{1,3},'e4':{3,4},'e5':{3,5},
-     'e6':{5,6},'e7':{5,7},'e8':{7}}, # att
-    {0:'T0',1:'T1',2:'W2',3:'T3',4:'W4',5:'T5',6:'W6',7:'T7'}, # labV
-    {'e0':'e0','e1':'e1','e2':'e2','e3':'e3','e4':'e4','e5':'e5','e6':'e6','e7':'e7','e8':'e8'}, # labE
-    {}, # Omega (set of possible tags or words)
-    {} # Phi (probability function in dependance of the adjacent variables)
+     'e6':{5,6},'e7':{5,7},'e8':{7}}, # E,
+    Real # R
 )
 
 # Figure 4.1 from Wymeersch, H. (2007). Factor graphs and the sum–product algorithm.
-spaFG = Factorgraph(
-    {0,1,2,3}, # V
-    {'e0','e1','e2'}, # E
-    {'e0':{0},'e1':{0,1},'e2':{0,2,3}}, # att
-    {0:'X1',1:'X2',2:'X3',3:'X4'}, # labV
-    {'e0':'fA','e1':'fB','e2':'fC'}, # labE
-    {}, # Omega (set of possible input values = real numbers?)
-    {} # Phi (factorized subfunctions doing arbitrary stuff)
+spaFG = createGraph(
+    {0:'X1',1:'X2',2:'X3',3:'X4'}, # V
+    {'fA':{0},'fB':{0,1},'fC':{0,2,3}}, # E,
+    Real
 )
 
 # Figure 3 from Chiang, David, and Darcey, Riley. "Factor Graph Grammars." (2020)., using only specific production rules
-conFG = Factorgraph( # not completed yet. I need to write this down first though
-    {0,1,2,3,4,5,6,7}, # V
-    {'e0','e1','e2','e3','e4','e5','e6','e7','e8'}, # E
+conFG = createGraph( # not completed yet. I need to write this down first
+    {0:'T0',1:'T1',2:'W2',3:'T3',4:'W4',5:'T5',6:'W6',7:'T7'}, # V
     {'e0':{0},'e1':{0,1},'e2':{1,2},'e3':{1,3},'e4':{3,4},'e5':{3,5},
-     'e6':{4,6},'e7':{4,7},'e8':{7}}, # att
-    {0:'T0',1:'T1',2:'W2',3:'T3',4:'W4',5:'T5',6:'W6',7:'T7'}, # labV
-    {}, # labE
-    {}, # Omega (set of possible tags or words)
-    {} # Phi (probability function in dependance of the adjacent variables)
+     'e6':{4,6},'e7':{4,7},'e8':{7}}, # E
+    Real # R
 )
 
 def test_sum_product():
