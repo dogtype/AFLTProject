@@ -1,6 +1,7 @@
 from typing import Set
 
-from fgglib.fg.vertex import Vertex, Edge
+from fgglib.fg.vertex import Vertex
+from fgglib.fg.edge import Edge
 
 class Hypergraph:
 
@@ -12,22 +13,22 @@ class Hypergraph:
     def __init__(self, _V, _E) -> None:
         self.V = _V
         self.E = _E
-    
+
     def add_edge(self, edge) -> None:
         if edge.label in {e.label for e in self.E}:
             raise RuntimeError("label already present in the graph")
-        
+
         self.E.add(edge)
-        
+
     def add_vertex(self, vertex) -> None:
         if edge.label in {e.label for e in self.E}:
             raise RuntimeError("label already present in the graph")
-        
+
         self.V.add(vertex)
-        
+
     def cyclic(self) -> bool:
         raise NotImplementedError
-        
+
     def leaves(self) -> Set[Vertex]:
         return {v for v in self.V if [v for t in [e.targets for e in self.E] for v in t].count(v) == 1}
 
@@ -44,7 +45,6 @@ class Hypergraph:
         for e in self.E:
             for v in e.targets:
                 G.add_edge(e.label, v.label, color = "black")
-        G.layout(prog="neato") # one of: neato|dot|twopi|circo|fdp|nop
         return G
 
     def __str__(self) -> str:
@@ -57,4 +57,6 @@ class Hypergraph:
         import pygraphviz as pgv
 
         """ returns a png image of the graph """
-        return self.visualize().draw("graph.png")
+        G = self.visualize()
+        G.layout(prog="neato") # one of: neato|dot|twopi|circo|fdp|nop
+        return G.draw("graph.png")
