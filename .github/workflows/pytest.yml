@@ -26,18 +26,14 @@ jobs:
         run: |
           python3 -m pip install -e .
 
-      - name: Run FG pytest
+      - name: Run all tests
         run: |
-          python3 -m pytest fgglib/autotesting/fgtest.py
-
-      - name: Run FGG pytest
-        run: |
-          python3 -m pytest fgglib/autotesting/fggtest.py
+          python3 -m pytest fgglib/autotesting/
 
       - name: Assert FG coverage
         run : |
-          python3 -m pytest --cov fgglib/fg fgglib/autotesting/fgtest.py
+          python3 -m pytest --cov fgglib/fg fgglib/autotesting/
 
       - name: Assert FGG coverage
         run : |
-          python3 -m pytest --cov fgglib/fgg fgglib/autotesting/fggtest.py
+          python3 -m pytest --cov fgglib/fgg fgglib/autotesting/

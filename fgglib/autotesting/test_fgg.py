@@ -45,27 +45,31 @@ addFGG = FGG(
 #-------------------------------- TESTS ----.-----------------------------------
 
 
-def test_add_example():
+def test_add_example1():
     addFGG.add('S',recFrag0)
     assert addFGG.nProductions('S')=={('S',recFrag0)}
 
-def test_nProductions_example():
+def copy_exampl1e():
+    newFGG = addFGG.copy()
+    assert newFGG == addFGG
+
+def test_nProductions_example1():
     assert recFGG.nProductions('X')=={('X',recFrag0),('X',recFrag1)}
 
-def test_recursive_example():
+def test_recursive_example1():
     assert True #recFGG.recursive()==True
 
-def test_linearly_recursive_example():
+def test_linearly_recursive_example1():
     assert True
 
-def test_reentrant_examle():
+def test_reentrant_example1():
     assert True# recFGG.reentrant()==False
 
-def test_conjunction_example():
+def test_conjunction_example1():
     assert True
 
-def test_inference_finite_variables_example():
+def test_inference_finite_variables_example1():
     assert True
 
-def test_inference_finite_states_example():
+def test_inference_finite_states_example1():
     assert True

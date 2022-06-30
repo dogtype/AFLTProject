@@ -25,7 +25,7 @@ class Production(namedtuple("Production", "head, body")):
 				return False
 
 		return True
-
+		
 
 	def conjoin(self, other, nts):
 		""" returns the conjunction of two different productions """
