@@ -41,7 +41,7 @@ class AdditiveFactorFunction(FactorFunction):
         return self.factor1.summary(variable) + self.factor2.summary(variable)
 
 
-def MultiplicativeFactorFunction(FactorFunction):
+class MultiplicativeFactorFunction(FactorFunction):
 
     def __init__(self, factor1, factor2):
         self.factor1 = factor1

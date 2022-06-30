@@ -21,8 +21,37 @@ class Hypergraph:
 
         self.V.add(vertex)
 
+    def get_vertex(self,label) -> Vertex:
+        """ returns vertex with given label """
+        for v in self.V:
+            if(v.label==label):
+                return v
+
+    def get_edge(self,label) -> Edge:
+        """ returns edge with given label """
+        for e in self.E:
+            if(e.label==label):
+                return e
+
     def cyclic(self) -> bool:
-        raise NotImplementedError
+        """ returns if graph is cyclic """
+        visited = set()
+        stack = [] # save vertices and inEdge over which the vertex was found
+        for v in self.V:
+            stack.append((v,Edge(None,None))) # set inital inEdge
+            while(visited != self.V and not (not stack)):
+                curr, inEdge = stack.pop()
+                visited.add(curr)
+
+                for e in self.E:
+                    if curr in e.targets and e != inEdge:
+                        nbs = e.targets.difference({curr})
+                        for n in nbs:
+                            if n in visited:
+                                return True
+                            else:
+                                stack.append((n,e))
+        return False
 
     def leaves(self) -> Set[Vertex]:
         return {v for v in self.V if [v for t in [e.targets for e in self.E] for v in t].count(v) == 1}

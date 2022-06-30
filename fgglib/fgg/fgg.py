@@ -21,20 +21,13 @@ class FGG:
     @property
     def P(self):
         """ returns a generator for all production rules """
-        for p in self._P.items():
+        for p in self._P:
             yield p
 
-    @property
-    def size(self):
-        """ returns the size of the grammar """
-        size = 0
-        for (_, body) in self.P:
-            size+= body.size() +1
-        return size
 
     def nProductions(self, n : NT):
         """ returns a set of productions starting with nonterminal n """
-        result = {}
+        result = set()
         for p in self.P:
             if(p.head!=n):
                 continue
@@ -123,11 +116,9 @@ class FGG:
 
     def add(self, head, body) -> bool:
         """ helper function to add production rules """
-        if not isinstance(head, NT):
-            raise InvalidProduction
 
         self.N.add(head)
-        self.N.update(body.nonterminals)
+        self.N.update(body.nonterminals(self.N))
         self.T.add(body)
 
         self._P.add(Production(head, body))

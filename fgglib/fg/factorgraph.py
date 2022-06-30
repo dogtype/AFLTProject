@@ -3,6 +3,7 @@ from collections import defaultdict
 
 from fgglib.fg.hypergraph import Hypergraph
 from fgglib.fg.factorfunction import FactorFunction
+from fgglib.fg.edge import FGEdge
 from fgglib.fg.vertex import FGVertex
 
 class Factorgraph(Hypergraph):
@@ -10,6 +11,11 @@ class Factorgraph(Hypergraph):
     def __init__(self, R) -> None:
         super().__init__()
         self.R = R
+
+    def set_function(self, edge, f: FactorFunction) -> None:
+        for e in self.E:
+            if(e==edge):
+                e.function=f
 
     def global_function(self) -> FactorFunction:
         global_function = IdentityFactorFunction(R)
