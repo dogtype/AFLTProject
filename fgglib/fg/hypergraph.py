@@ -9,11 +9,6 @@ class Hypergraph:
         self.V = set()
         self.E = set()
 
-    # direct constructor for testing
-    def __init__(self, _V, _E) -> None:
-        self.V = _V
-        self.E = _E
-
     def add_edge(self, edge) -> None:
         if edge.label in {e.label for e in self.E}:
             raise RuntimeError("label already present in the graph")
@@ -21,7 +16,7 @@ class Hypergraph:
         self.E.add(edge)
 
     def add_vertex(self, vertex) -> None:
-        if edge.label in {e.label for e in self.E}:
+        if vertex.label in {v.label for v in self.V}:
             raise RuntimeError("label already present in the graph")
 
         self.V.add(vertex)

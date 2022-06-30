@@ -11,10 +11,6 @@ class Factorgraph(Hypergraph):
         super().__init__()
         self.R = R
 
-    def __init__(self, _V, _E, _R) -> None:
-        super().__init__(_V, _E)
-        self.R = _R
-
     def global_function(self) -> FactorFunction:
         global_function = IdentityFactorFunction(R)
         for e in self.E:

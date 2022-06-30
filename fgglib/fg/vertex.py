@@ -5,6 +5,15 @@ class Vertex:
         self.content = content
         self.label = label
 
+    def __eq__(self,other) -> bool:
+        return (self.label) == (other.label)
+
+    def __hash__(self): # overwriting eq implicitely overwrites hash
+        return hash(self.__repr__())
+
+    def __repr__(self) -> str:
+        return "Vertex: "+self.label
+
 
 class FGVertex(Vertex):
 
@@ -14,6 +23,12 @@ class FGVertex(Vertex):
 
     def __eq__(self,other) -> bool:
         return (self.label, self.R) == (other.label, other.R)
+
+    def __hash__(self): # overwriting eq implicitely overwrites hash
+        return hash(self.__repr__())
+
+    def __repr__(self) -> str:
+        return "Vertex: "+self.label+" in "+str(self.R)
 
     def set_msg(self, edge, incoming_msg) -> None:
         new_msg = IdentityFactorFunction(R)

@@ -1,19 +1,22 @@
 from fgglib.fg.factorfunction import IdentityFactorFunction
+from fgglib.fg.vertex import Vertex
+
 
 class Edge:
     def __init__(self, content, label) -> None:
         self.content = content
         self.label = label
-        self.targets = {}
-
-    def __init__(self, content, label, targets) -> None:
-        self.content = content
-        self.label = label
-        self.targets = targets
+        self.targets = set()
 
     def add_target(self, vertex) -> None:
         if vertex not in self.targets:
             self.targets.add(vertex)
+
+    def __eq__(self,other) -> bool:
+        return (self.label,self.targets)==(other.label,other.targets)
+
+    def __hash__(self):
+        return super().__hash__()
 
 
 class FGEdge(Edge):
