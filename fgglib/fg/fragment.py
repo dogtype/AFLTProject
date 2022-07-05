@@ -21,3 +21,9 @@ class Fragment(Hypergraph):
             if e.label in NT:
                 ntset.add(e.label)
         return ntset
+
+    def __eq__(self,other):
+        return self.external == other.external and super().__eq__(other)
+
+    def __hash__(self):
+        return super().__hash__()

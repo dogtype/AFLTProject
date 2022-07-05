@@ -77,6 +77,17 @@ class Hypergraph:
         """ returns a dot-string representation of the graph """
         return self.visualize().string()
 
+    def __eq__(self,other) -> bool:
+        """ returns true if two hypergraphs have the same topology and labelling """
+        if (self.V != other.V):
+            return False
+        if (self.E != other.E):
+            return False
+        return True
+
+    def __hash__(self):
+        return hash(self.__str__())
+
     def draw(self):
         import pygraphviz as pgv
 

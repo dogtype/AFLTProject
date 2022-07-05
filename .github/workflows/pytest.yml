@@ -28,7 +28,7 @@ jobs:
 
       - name: Run all tests
         run: |
-          python3 -m pytest fgglib/autotesting/
+          python3 -m pytest -vv fgglib/autotesting/
 
       - name: Assert FG coverage
         run : |
