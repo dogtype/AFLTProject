@@ -107,11 +107,15 @@ class FGG:
     def conjunction(self,fgg):
         """ implements the conjunction algorithm for factor graph grammars """
         rules = set() # set of new rules that are part of the conjoined grammar
+        new_T = set() # set of new terminals (fragments)  that are created by conjunction
+        new_N = self.N.union(fgg.N)
         for p in self.P:
             for pp in fgg.P:
-                if(p.conjoinable(pp)):
-                    rules.add(p.conjoin(pp))
-        newGrammar = FGG(self.T,self.N,self.S,rules)
+                if(p.conjoinable(pp, new_N)):
+                    con = p.conjoin(pp, new_N)
+                    new_T.add(con.body)
+                    rules.add(con)
+        newGrammar = FGG(new_T,new_N,self.S,rules)
         return newGrammar
 
     def add(self, head, body) -> bool:
@@ -127,12 +131,30 @@ class FGG:
         """ returns a deepcopy of the entire grammar """
         return copy.deepcopy(self)
 
-    def __str__(self):
+    def __str__(self) -> str:
         """ returns the grammar in a printable string format """
-        string = "start: " + self.S + "\n"
+        return self.__repr__()
+
+    def __repr__(self) -> str():
+        """ returns a representation of the grammar """
+        string = "start: " + str(self.S) + "\n"
         for p in self.P:
             string += str(p) +"\n"
         return string
+
+    def __eq__(self,other) -> bool:
+        if(self.N!= other.N) or (self.S!=other.S) or (self.T!=other.T):
+            return False
+        for p in self.P:
+            if(p not in other.P):
+                return False
+        for p in other.P:
+            if(p not in self.P):
+                return False
+        return True
+
+    def __hash__(self):
+        return hash(self.__repr__())
 
 class FGGsum_product:
     # A helper class to compute the sum_product of a factor graph grammar

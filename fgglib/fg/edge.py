@@ -16,7 +16,13 @@ class Edge:
         return (self.label,self.targets)==(other.label,other.targets)
 
     def __hash__(self):
-        return super().__hash__()
+        return hash(self.__repr__())
+
+    def __repr__(self) -> str:
+        string =  "{Edge "+str(self.label)+ ": "
+        string += str(self.targets)
+        string += "}"
+        return string
 
 
 class FGEdge(Edge):

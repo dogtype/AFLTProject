@@ -71,11 +71,20 @@ class Hypergraph:
                 G.add_edge(e.label, v.label, color = "black")
         return G
 
-    def __str__(self) -> str:
-        import pygraphviz as pgv
+    def __repr__(self) -> str:
+        """ returns a representation of the graph """
+        #print(self.V)
+        #print(self.E)
+        #print("V"+str(hash(frozenset(self.V)))+"|E"+str(hash(frozenset(self.E))))
+        #print()
+        return "V"+str(hash(frozenset(self.V)))+"|E"+str(hash(frozenset(self.E)))
 
-        """ returns a dot-string representation of the graph """
-        return self.visualize().string()
+    def __str__(self) -> str:
+        """ returns a readable representation of the graph """
+        result = "[Graph: "
+        result += str(self.V)+" | "
+        result+=str(self.E)
+        return result + "]"
 
     def __eq__(self,other) -> bool:
         """ returns true if two hypergraphs have the same topology and labelling """
@@ -86,7 +95,7 @@ class Hypergraph:
         return True
 
     def __hash__(self):
-        return hash(self.__str__())
+        return hash(self.__repr__())
 
     def draw(self):
         import pygraphviz as pgv

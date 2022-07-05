@@ -31,30 +31,56 @@ frag4 = buildFragment(
 
 frag5 = buildFragment(
     {'T1'},
-    {'BOS':{'T1'},('BOS','(0)2'):{'T1'}},
+    {'BOS':{'T1'},('X2','(0)2'):{'T1'}},
     {}
 )
 
-prod1 = Production('X',frag1)
-prod2 = Production('(n)',frag2)
-prod3 = Production(('X','(n)'),frag1)
+frag6 = buildFragment(
+    {'T1','T2','W3'},
+    {'P21':{'T1','T2'},'P32':{'T2','W3'},'X4':{'T2'}},
+    {'T1'}
+)
 
-prod4 = Production('S',frag3)
-prod5 = Production('S',frag4)
-prod6 = Production('S',frag5)
+frag7 = buildFragment(
+    {'T1','T2','W3'},
+    {'(i)4':{'T2'},'wi':{'W3'}},
+    {'T1'}
+)
+
+frag8 = buildFragment(
+    {'T1','T2','W3'},
+    {'P21':{'T1','T2'},'P32':{'T2','W3'},('X4','(i)4'):{'T2'},'wi':{'W3'}},
+    {'T1'}
+)
+
+prod0 = Production('X',frag1)
+prod1 = Production('(n)',frag2)
+prod2 = Production(('X','(n)'),frag1)
+
+prod3 = Production('S',frag3)
+prod4 = Production('S',frag4)
+prod5 = Production(('S','S'),frag5)
+
+prod6 = Production('X',frag6)
+prod7 = Production('(i-1)',frag7)
+prod8 = Production(('X','(i-1)'),frag8)
 
 #-------------------------------- TESTS ----.-----------------------------------
 
 def test_conjoinable1():
-    assert prod1.conjoinable(prod2, {'X','(n)'})
+    assert prod0.conjoinable(prod1, {'X','(n)'})
 
 def test_conjoinable2():
-    assert prod4.conjoinable(prod5, {'S','(0)2','X2'})
+    assert prod3.conjoinable(prod4, {'S','(0)2','X2'})
+
+def test_conjoinable3():
+    assert prod6.conjoinable(prod7, {'(i-1)','(i)4','X4'})
 
 def test_conjoin1():
-    assert prod1.conjoin(prod2, {'X','(n)'}) == prod3
+    assert prod0.conjoin(prod1, {'X','(n)'}) == prod2
 
 def test_conjoin2():
-    print(prod4.conjoin(prod5, {'S','(0)2','X2'}))
+    assert prod3.conjoin(prod4, {'S','(0)2','X2'}) == prod5
 
-test_conjoin2()
+def test_conjoin3():
+    assert prod6.conjoin(prod7, {'(i-1)','(i)4','X4'}) == prod8

@@ -27,3 +27,6 @@ class Fragment(Hypergraph):
 
     def __hash__(self):
         return super().__hash__()
+
+    def __repr__(self):
+        return super().__repr__()+"|X"+str(hash(frozenset(self.external)))

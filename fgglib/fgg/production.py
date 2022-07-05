@@ -44,7 +44,7 @@ class Production(namedtuple("Production", "head, body")):
 				new_E.add(e) # careful with distinct premise
 		for e in other.body.E:
 			if(e.label in nts): # case E_N
-				ep = Edge(e.content,(e.label,edgeNTMap[str(e.targets)]))
+				ep = Edge(e.content,(edgeNTMap[str(e.targets)],e.label))
 				for t in e.targets:
 					ep.add_target(t)
 				new_E.add(ep)
