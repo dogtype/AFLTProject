@@ -45,7 +45,7 @@ class Hypergraph:
 
                 for e in self.E:
                     if curr in e.targets and e != inEdge:
-                        nbs = e.targets.difference({curr})
+                        nbs = set(e.targets).difference({curr})
                         for n in nbs:
                             if n in visited:
                                 return True

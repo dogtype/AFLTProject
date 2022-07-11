@@ -4,6 +4,7 @@ from fgglib.fg.vertex import Vertex, FGVertex
 from fgglib.fg.edge import Edge, FGEdge
 from fgglib.base.semiring import *
 from fgglib.autotesting.testenvironment import *
+from fgglib.fg.functions.discretedensity import DiscreteDensity
 
 #--------------------------- DEFINITIONS ---------------------------------------
 
@@ -80,6 +81,7 @@ cyclicFG = buildGraph(
 #      ----------------     ----------------     ----------------
 #      x1=0 | 0.3  0.4      x2=0 | 0.3  0.4      x2=0 | 0.3  0.4
 #      x1=1 | 0.3  0.0      x2=1 | 0.3  0.0      x2=1 | 0.3  0.0
+#                           x2=2 | 0.1  0.1      x2=2 | 0.1  0.1
 #
 spaFG = buildGraph(
     {'X1','X2','X3','X4'},
@@ -90,9 +92,16 @@ spaFG = buildGraph(
 #-------------------------------- TESTS ----.-----------------------------------
 
 def test_sum_product1():
-    #spaFG.sum_product()[spaFG.get_vertex('X4')] # calculate belief for node X4
-    # How to define the necessary functions? Should I instantiate new derived classes from Factorfunction?
-    assert True
+    spaFG.set_function(spaFG.get_edge('fa'), DiscreteDensity([[0.3, 0.4],[0.3, 0]]))
+    spaFG.set_function(spaFG.get_edge('fb'), DiscreteDensity([[0.3, 0.4],[0.3, 0],[0.1, 0.1]]))
+    spaFG.set_function(spaFG.get_edge('fc'), DiscreteDensity([[0.3, 0.4],[0.3, 0],[0.1, 0.1]]))
+    
+    marginals = spaFG.sum_product()
+    assert np.allclose(marginals[spaFG.get_vertex('X1')].normalize().pmf, [0.551136, 0.448863], atol=1e-3)
+    assert np.allclose(marginals[spaFG.get_vertex('X2')].normalize().pmf, [0.852272, 0.102272, 0.045454], atol=1e-3)
+    assert np.allclose(marginals[spaFG.get_vertex('X3')].normalize().pmf, [0.636363, 0.363636], atol=1e-3)
+    assert np.allclose(marginals[spaFG.get_vertex('X4')].normalize().pmf, [0.636363, 0.363636], atol=1e-3)
+    
 
 def test_cyclic1():
     assert hmmFG.cyclic() == False

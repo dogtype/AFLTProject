@@ -6,11 +6,11 @@ class Edge:
     def __init__(self, content, label) -> None:
         self.content = content
         self.label = label
-        self.targets = set()
+        self.targets = []
 
     def add_target(self, vertex) -> None:
         if vertex not in self.targets:
-            self.targets.add(vertex)
+            self.targets.append(vertex)
 
     def __eq__(self,other) -> bool:
         return (self.label,self.targets)==(other.label,other.targets)
@@ -32,9 +32,9 @@ class FGEdge(Edge):
         self.function = f
 
     def set_msg(self, vertex, incoming_msg) -> None:
-        f = IdentityFactorFunction(R)
-        for v, msg in incoming_msg[self]:
-            if v != vertex:
+        f = IdentityFactorFunction(self.R)
+        for v, msg in incoming_msg[self].items():
+            if v != vertex and msg is not None:
                 f *= msg
-        f = self.function * f
-        incoming_msg[vertex] = f.summary(vertex.label)
+        f *= self.function
+        incoming_msg[vertex][self] = f.summary(self.targets.index(vertex))
