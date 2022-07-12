@@ -37,34 +37,37 @@ class FGG:
 
     def recursion_helper(self, visited : set, closed : set, nt : NT, curr : NT) -> bool:
         """ performs dfs """
-        visited.add(nt)
-        one_recursive = False
+        visited.add(curr)
         for p in self.nProductions(curr):
             if(nt in p.body.nonterminals(self.N)):
                 return True
             for n in p.body.nonterminals(self.N):
-                one_recursive = one_recursive or self.recursion_helper(visited,closed,n,curr)
-        closed.add(nt)
-        return one_recursive
+                if(n not in visited and self.recursion_helper(visited,closed,nt,n)):
+                    return True
+        closed.add(curr)
+        return False
 
     def recursive(self) -> bool:
         """ checks if the grammar has an X-type derivation containing an X-type derivation as subtree """
-        # use a simple dfs here. If we find a node that has already been visited, return true. Otherwise return false
-        one_recursive = False
         for p in self.P:
-            one_recursive = one_recursive or self.recursion_helper({},{},p.head,p.head)
-        return one_recursive
+            if(self.recursion_helper(set(),set(),p.head,p.head)):
+                return True
+        return False
 
     def linear_recursion_helper(self, visited : set, closed : set, nt : NT, curr : NT) -> int:
         """ checks for linear recursiveness by performing a modified dfs """
-        visited.add(nt)
+        visited.add(curr)
         num_recursions = 0
         for p in self.nProductions(curr):
-            if(nt in p.body.nonterminals(self.N)):
-                num_recursions += 1
+            num_prod_recursions = 0
             for n in p.body.nonterminals(self.N):
-                num_recursions += self.linear_recursion_helper(visited,closed,n,curr)
-        closed.add(nt)
+                if(n==nt):
+                    num_prod_recursions+=1
+            for n in p.body.nonterminals(self.N):
+                if(n not in visited):
+                    num_prod_recursions += self.linear_recursion_helper(visited,closed,nt,n)
+            num_recursions = max(num_recursions,num_prod_recursions)
+        closed.add(curr)
         return num_recursions
 
     def linearly_recursive(self) -> bool:
@@ -73,12 +76,8 @@ class FGG:
         # Does not cover all edge cases yet !!!
         num_recursions = 0
         for p in self.P:
-            num_recursions += self.linear_recursion_helper({},{},p.head,p.head)
-        return num_recursions
-
-    def reentrant_helper(self) -> bool:
-        """ helps to check if grammar is reentrant by counting number of times every nonterminal has occured """
-        raise NotImplementedError
+            num_recursions = max(num_recursions,self.linear_recursion_helper(set(),set(),p.head,p.head))
+        return num_recursions==1
 
     def duplicate(self, nt: NT, duplicates : set[NT]) -> bool:
         """ returns true if the current nonterminal can produce a duplicate nt """
@@ -88,20 +87,36 @@ class FGG:
             for p in self.nProductions(nt):
                 self.recursion_helper({},{},nt,p.head())
 
+    def diffDerivTree(self) -> set:
+        """ returns a set of nonterminals that have more than one different derivation tree """
+        different = set()
+        nts = set()
+        for p in self.P:
+            if(p.head in nts):
+                different.add(p.head)
+            nts.add(p.head)
+        different_copy = set()
+        while(different_copy!=different): # check if something has changed since last iteration
+            different_copy = different.copy()
+            for p in self.P:
+                for nt in p.body.nonterminals(self.N):
+                    if(nt in different):
+                        different.add(p.head)
+        return different
+
 
     def reentrant(self) -> bool:
         """ checks if the grammar lacks a derivation containing more than one different X-type derivation as subtree """
-        if (self.recursive()):
+        if(self.recursive()):
             return True
         else:
-            # use another DFS here and check the number of times you find every nonterminal. A nonterminal has to be produced twice by a different one and two different derivations for this nonterminal must exist
-            duplicates = {} # set of nonterminals with different derivation trees
-            for p in self.P:
-                if(self.duplicate(p.head,duplicates)):
-                    duplicates.add(p.head)
-            for c in changeable:
-                for p in self.P:
-                    self.reentrant_helper({}, {}, p, c)
+            different = self.diffDerivTree()
+            for n in self.N:
+                if(n in different):
+                    for np in self.N:
+                        if(self.linear_recursion_helper(set(),set(),n,np)>1):
+                            return True
+
             return False
 
     def conjunction(self,fgg):

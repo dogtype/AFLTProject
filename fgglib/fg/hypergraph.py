@@ -10,9 +10,6 @@ class Hypergraph:
         self.E = set()
 
     def add_edge(self, edge) -> None:
-        if edge.label in {e.label for e in self.E}:
-            raise RuntimeError("label already present in the graph")
-
         self.E.add(edge)
 
     def add_vertex(self, vertex) -> None:
