@@ -1,5 +1,4 @@
 from fgglib.fgg.exceptions import *
-from fgglib.fgg.nonterminal import NT, S
 from fgglib.fgg.production import Production
 from fgglib.fg.fragment import Fragment
 
@@ -12,7 +11,7 @@ class FGG:
     # • S is a string (or label) for the starting nonterminal
     # • P is a set of productions, which are in turn tuples of head and body (fgfragment)
 
-    def __init__(self, T : set[Fragment], N : set[NT], S : str, P : set[Production]): # S NT is imported
+    def __init__(self, T : set[Fragment], N : set, S : str, P : set[Production]): # S NT is imported
         self.T = T
         self.N = N
         self.S = S
@@ -25,7 +24,7 @@ class FGG:
             yield p
 
 
-    def nProductions(self, n : NT):
+    def nProductions(self, n):
         """ returns a set of productions starting with nonterminal n """
         result = set()
         for p in self.P:
@@ -35,7 +34,7 @@ class FGG:
                 result.add(p)
         return result
 
-    def recursion_helper(self, visited : set, closed : set, nt : NT, curr : NT) -> bool:
+    def recursion_helper(self, visited : set, closed : set, nt , curr) -> bool:
         """ performs dfs """
         visited.add(curr)
         for p in self.nProductions(curr):
@@ -54,7 +53,7 @@ class FGG:
                 return True
         return False
 
-    def linear_recursion_helper(self, visited : set, closed : set, nt : NT, curr : NT) -> int:
+    def linear_recursion_helper(self, visited : set, closed : set, nt, curr) -> int:
         """ checks for linear recursiveness by performing a modified dfs """
         visited.add(curr)
         num_recursions = 0
@@ -79,7 +78,7 @@ class FGG:
             num_recursions = max(num_recursions,self.linear_recursion_helper(set(),set(),p.head,p.head))
         return num_recursions==1
 
-    def duplicate(self, nt: NT, duplicates : set[NT]) -> bool:
+    def duplicate(self, nt, duplicates : set) -> bool:
         """ returns true if the current nonterminal can produce a duplicate nt """
         if(nt in duplicates):
             return True

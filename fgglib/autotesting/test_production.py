@@ -7,49 +7,49 @@ from fgglib.autotesting.testenvironment import *
 
 frag1 = buildFragment(
     {'T1', 'T2'}, # V
-    {'P': {'T1','T2'}, 'EOS': {'T2'}}, # E
+    [('P', {'T1','T2'}), ('EOS', {'T2'})], # E
     {'T1'} # ext
 )
 
 frag2 = buildFragment(
     {'T1','T2'}, # V
-    {}, # E
+    [], # E
     {'T1'} # ext
 )
 
 frag3 = buildFragment(
     {'T1'},
-    {'BOS':{'T1'},'X2':{'T1'}},
+    [('BOS',{'T1'}),('X2',{'T1'})],
     {}
 )
 
 frag4 = buildFragment(
     {'T1'},
-    {'(0)2':{'T1'}},
+    [('(0)2',{'T1'})],
     {}
 )
 
 frag5 = buildFragment(
     {'T1'},
-    {'BOS':{'T1'},('X2','(0)2'):{'T1'}},
+    [('BOS',{'T1'}),(('X2','(0)2'),{'T1'})],
     {}
 )
 
 frag6 = buildFragment(
     {'T1','T2','W3'},
-    {'P21':{'T1','T2'},'P32':{'T2','W3'},'X4':{'T2'}},
+    [('P21',{'T1','T2'}),('P32',{'T2','W3'}),('X4',{'T2'})],
     {'T1'}
 )
 
 frag7 = buildFragment(
     {'T1','T2','W3'},
-    {'(i)4':{'T2'},'wi':{'W3'}},
+    [('(i)4',{'T2'}),('wi',{'W3'})],
     {'T1'}
 )
 
 frag8 = buildFragment(
     {'T1','T2','W3'},
-    {'P21':{'T1','T2'},'P32':{'T2','W3'},('X4','(i)4'):{'T2'},'wi':{'W3'}},
+    [('P21',{'T1','T2'}),('P32',{'T2','W3'}),(('X4','(i)4'),{'T2'}),('wi',{'W3'})],
     {'T1'}
 )
 

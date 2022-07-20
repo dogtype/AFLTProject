@@ -70,10 +70,6 @@ class Hypergraph:
 
     def __repr__(self) -> str:
         """ returns a representation of the graph """
-        #print(self.V)
-        #print(self.E)
-        #print("V"+str(hash(frozenset(self.V)))+"|E"+str(hash(frozenset(self.E))))
-        #print()
         return "V"+str(hash(frozenset(self.V)))+"|E"+str(hash(frozenset(self.E)))
 
     def __str__(self) -> str:
