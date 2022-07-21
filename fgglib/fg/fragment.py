@@ -16,11 +16,11 @@ class Fragment(Hypergraph):
     def nonterminals(self, NT):
         """ returns a list of nonterminals that are edge labes of the factorgraph
             and can be identified by a list of all nonterminals used """
-        ntset = set()
+        ntlist = []
         for e in self.E:
             if e.label in NT:
-                ntset.add(e.label)
-        return ntset
+                ntlist.append(e.label)
+        return ntlist
 
     def __eq__(self,other):
         return self.external == other.external and super().__eq__(other)

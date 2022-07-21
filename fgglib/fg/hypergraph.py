@@ -63,16 +63,12 @@ class Hypergraph:
         G.graph_attr["label"] = "Factorgraph"
         G.node_attr["color"] = "black"
         for v in self.V:
-            G.add_node(v.label,shape="circle")
-            print(v)
+            G.add_node(v.label,shape="circle")            
         for e in self.E:
-            G.add_node(e.label,shape="box", color ="red")
-            print("printing e")
-            print(e)
+            G.add_node(e.label,shape="box", color ="red")            
         for e in self.E:
             for v in e.targets:
-                G.add_edge(e.label, v.label, color = "black")
-                print(v)
+                G.add_edge(e.label, v.label, color = "black")                
         return G
 
     def __repr__(self) -> str:
@@ -106,7 +102,7 @@ class Hypergraph:
 
         """ returns a png image of the graph """
         G = self.visualize()
-        G.layout(prog="dot") # one of: neato|dot|twopi|circo|fdp|nop
-        return G.draw("graph123.png")
+        G.layout(prog="neato") # one of: neato|dot|twopi|circo|fdp|nop
+        return G.draw("graph.png")
 
    

@@ -40,13 +40,13 @@ spaFG = buildGraph(
 
 frag1 = buildFragment(
     {'EXT1', 'EXT2'},
-    {'N': {'EXT1','EXT2'}}, # V
+    [('N', {'EXT1','EXT2'})], # V
     {'EXT1','EXT2'}, # ext
 )
 
 frag2 = buildFragment(
     {'EXT1', 'EXT2', 'V1', 'V3'}, # V
-    {'N': {'EXT1','EXT2'}, 'M': {'EXT2','V1'}, 'K': {'V1','V3'}, 'V': {'EXT1','EXT2','V1'}, 'X': {'EXT1'}}, # E
+    [('N', {'EXT1','EXT2'}), ('M', {'EXT2','V1'}), ('K', {'V1','V3'}), ('V', {'EXT1','EXT2','V1'}), ('X', {'EXT1'})], # E
     {'EXT1','EXT2'} # ext
 )
 
@@ -95,13 +95,13 @@ def test_sum_product1():
     spaFG.set_function(spaFG.get_edge('fa'), DiscreteDensity([[0.3, 0.4],[0.3, 0]]))
     spaFG.set_function(spaFG.get_edge('fb'), DiscreteDensity([[0.3, 0.4],[0.3, 0],[0.1, 0.1]]))
     spaFG.set_function(spaFG.get_edge('fc'), DiscreteDensity([[0.3, 0.4],[0.3, 0],[0.1, 0.1]]))
-    
+
     marginals = spaFG.sum_product()
     assert np.allclose(marginals[spaFG.get_vertex('X1')].normalize().pmf, [0.551136, 0.448863], atol=1e-3)
     assert np.allclose(marginals[spaFG.get_vertex('X2')].normalize().pmf, [0.852272, 0.102272, 0.045454], atol=1e-3)
     assert np.allclose(marginals[spaFG.get_vertex('X3')].normalize().pmf, [0.636363, 0.363636], atol=1e-3)
     assert np.allclose(marginals[spaFG.get_vertex('X4')].normalize().pmf, [0.636363, 0.363636], atol=1e-3)
-    
+
 
 def test_cyclic1():
     assert hmmFG.cyclic() == False
@@ -119,11 +119,11 @@ def test_leaves3():
     assert frag2.leaves()=={Vertex(None,'V3')}
 
 def test_nonterminals1():
-    assert frag1.nonterminals({'A'})==set()
-    assert frag1.nonterminals({'N'})=={'N'}
+    assert set(frag1.nonterminals({'A'}))==set()
+    assert set(frag1.nonterminals({'N'}))=={'N'}
 
 def test_nonterminals2():
-    assert frag2.nonterminals(set())==set()
-    assert frag2.nonterminals({'N','M','Y'})=={'N','M'}
-    assert frag2.nonterminals({'X','Y','V'})=={'X','V'}
-    assert frag2.nonterminals({'N','M','K','V','X'})=={'N','M','K','V','X'}
+    assert set(frag2.nonterminals(set()))==set()
+    assert set(frag2.nonterminals({'N','M','Y'}))=={'N','M'}
+    assert set(frag2.nonterminals({'X','Y','V'}))=={'X','V'}
+    assert set(frag2.nonterminals({'N','M','K','V','X'}))=={'N','M','K','V','X'}
