@@ -12,7 +12,7 @@ class Hypergraph:
     def add_edge(self, edge) -> None:
         if edge.label in {e.label for e in self.E}:
             raise RuntimeError("label already present in the graph")
-
+        
         self.E.add(edge)
 
     def add_vertex(self, vertex) -> None:
@@ -25,13 +25,13 @@ class Hypergraph:
         """ returns vertex with given label """
         for v in self.V:
             if(v.label==label):
-                return v
+                return v.content
 
     def get_edge(self,label) -> Edge:
-        """ returns edge with given label """
+        """ returns the edge content with given label """
         for e in self.E:
             if(e.label==label):
-                return e
+                return e.content
 
     def cyclic(self) -> bool:
         """ returns if graph is cyclic """
@@ -64,11 +64,15 @@ class Hypergraph:
         G.node_attr["color"] = "black"
         for v in self.V:
             G.add_node(v.label,shape="circle")
+            print(v)
         for e in self.E:
             G.add_node(e.label,shape="box", color ="red")
+            print("printing e")
+            print(e)
         for e in self.E:
             for v in e.targets:
                 G.add_edge(e.label, v.label, color = "black")
+                print(v)
         return G
 
     def __repr__(self) -> str:
@@ -102,5 +106,7 @@ class Hypergraph:
 
         """ returns a png image of the graph """
         G = self.visualize()
-        G.layout(prog="neato") # one of: neato|dot|twopi|circo|fdp|nop
-        return G.draw("graph.png")
+        G.layout(prog="dot") # one of: neato|dot|twopi|circo|fdp|nop
+        return G.draw("graph123.png")
+
+   
