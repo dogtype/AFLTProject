@@ -306,11 +306,3 @@ def test_reentrant_example5():
 
 def test_conjunction_example1():
     assert conFGG1.conjunction(conFGG2) == conFGG3
-
-def test_inference_finite_variables_example1():
-    assert True
-
-def test_inference_finite_states_example1():
-    assert True
-
-test_conjunction_example1()

@@ -5,13 +5,13 @@ class Fragment(Hypergraph):
 
     def __init__(self):
         super().__init__()
-        self.external = set()
+        self.external = []
 
     def add_external(self,vertex):
         if vertex.label in {v.label for v in self.external}:
             raise RuntimeError("vertex already markes")
 
-        self.external.add(vertex)
+        self.external.append(vertex)
 
     def nonterminals(self, NT):
         """ returns a list of nonterminals that are edge labes of the factorgraph

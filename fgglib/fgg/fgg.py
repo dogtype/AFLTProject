@@ -169,21 +169,3 @@ class FGG:
 
     def __hash__(self):
         return hash(self.__repr__())
-
-class FGGsum_product:
-    # A helper class to compute the sum_product of a factor graph grammar
-
-    def __init__(self, fgg):
-        self.fgg = fgg
-
-    def inference(self):
-        """ returns the sum product of a factor graph grammar for the general case """
-        raise NotImplementedError
-
-    def inference_finite_variables(self):
-        """ returns the sum product of a factor graph grammar with finite variable domain """
-        raise NotImplementedError
-
-    def inference_finite_states(self):
-        """ returns the sum product of a factor graph grammar with finite number of states """
-        raise NotImplementedError
