@@ -32,7 +32,7 @@ recFrag3 = buildFragment(
 recFGG = FGG(
     {recFrag0, recFrag1}, # T
     {'S','X'}, # N
-    {'S'}, # S
+    'S', # S
     {Production('S',recFrag0),
      Production('X',recFrag0),
      Production('X',recFrag1)} # P
@@ -41,7 +41,7 @@ recFGG = FGG(
 nonRecFGG = FGG(
     {recFrag0, recFrag1}, # T
     {'S','X'}, # N
-    {'S'}, # S
+    'S', # S
     {Production('S',recFrag0),
      Production('X',recFrag1)} # P
 )
@@ -67,7 +67,7 @@ nonlinRecFrag3 = buildFragment(
 nonlinRecFGG = FGG(
     {recFrag0, recFrag1, nonlinRecFrag1}, # T
     {'S','X'}, # N
-    {'S'}, # S
+    'S', # S
     {Production('S',recFrag0),
      Production('X',nonlinRecFrag1),
      Production('X',recFrag1)} # P
@@ -76,7 +76,7 @@ nonlinRecFGG = FGG(
 nonlinRecFGG2 = FGG(
     {recFrag0, recFrag1, nonlinRecFrag2}, # T
     {'S','X','Y'}, # N
-    {'S'}, # S
+    'S', # S
     {Production('S',recFrag0),
      Production('X',nonlinRecFrag2),
      Production('X',recFrag1),
@@ -86,7 +86,7 @@ nonlinRecFGG2 = FGG(
 nonlinRecFGG3 = FGG(
     {recFrag0, recFrag1, nonlinRecFrag2}, # T
     {'S','X','Y'}, # N
-    {'S'}, # S
+    'S', # S
     {Production('S',recFrag0),
      Production('X',nonlinRecFrag2),
      Production('Y',recFrag1)} # P
@@ -95,7 +95,7 @@ nonlinRecFGG3 = FGG(
 nonlinRecFGG4 = FGG(
     {recFrag0, recFrag1, nonlinRecFrag3}, # T
     {'S','X','Y'}, # N
-    {'S'}, # S
+    'S', # S
     {Production('S',recFrag0),
      Production('X',recFrag1),
      Production('X',nonlinRecFrag3),
@@ -105,7 +105,7 @@ nonlinRecFGG4 = FGG(
 nonlinRecFGG5 = FGG(
     {recFrag0, recFrag1, recFrag2, nonlinRecFrag3}, # T
     {'S','X','Y'}, # N
-    {'S'}, # S
+    'S', # S
     {Production('S',recFrag0),
      Production('X',recFrag1),
      Production('X',nonlinRecFrag3),
@@ -115,7 +115,7 @@ nonlinRecFGG5 = FGG(
 linRecFGG = FGG(
     {recFrag0, recFrag1, recFrag2, nonlinRecFrag2}, # T
     {'S','X','Y'}, # N
-    {'S'}, # S
+    'S', # S
     {Production('S',recFrag0),
      Production('S',recFrag1),
      Production('S',recFrag2),
@@ -129,7 +129,7 @@ linRecFGG = FGG(
 nonReentFGG = FGG(
     {recFrag0, recFrag1, recFrag2, nonlinRecFrag2}, # T
     {'S','X','Y'}, # N
-    {'S'}, # S
+    'S', # S
     {Production('S',recFrag0),
      Production('X',nonlinRecFrag2),
      Production('Y',recFrag1)} # P
@@ -138,7 +138,7 @@ nonReentFGG = FGG(
 reentFGG = FGG(
     {recFrag0, recFrag1, recFrag2, nonlinRecFrag2}, # T
     {'S','X','Y'}, # N
-    {'S'}, # S
+    'S', # S
     {Production('S',recFrag0),
      Production('X',nonlinRecFrag2),
      Production('Y',recFrag1),
@@ -148,7 +148,7 @@ reentFGG = FGG(
 addFGG = FGG(
     set(),
     {'S'},
-    {'S'},
+    'S',
     set()
 )
 
@@ -215,7 +215,7 @@ prod8 = Production(('X','(i-1)'),frag8)
 conFGG1 = FGG(
     {frag1,frag3,frag6}, # T
     {'S','X','X4','X2'}, # N
-    {'S'}, # S
+    'S', # S
     {Production('X',frag1),
      Production('S',frag3),
      Production('X',frag6)} # P
@@ -224,7 +224,7 @@ conFGG1 = FGG(
 conFGG2 = FGG(
     {frag2,frag4,frag7}, # T
     {'(n)','S','(i-1)','(i)4','(0)2'}, # N
-    {'S'}, # S
+    'S', # S
     {Production('(n)',frag2),
      Production('S',frag4),
      Production('(i-1)',frag7)} # P
@@ -233,7 +233,7 @@ conFGG2 = FGG(
 conFGG3 = FGG(
     {frag1,frag5,frag8}, # T
     {'(n)','X','X4','S','(i-1)','(i)4','X2','(0)2'}, # N
-    {'S'}, # S
+    'S', # S
     {Production(('X','(n)'),frag1),
      Production(('S','S'),frag5),
      Production(('X','(i-1)'),frag8)} # P

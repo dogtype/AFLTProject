@@ -18,6 +18,12 @@ recFrag1 = buildFragment(
     {'EXT1','EXT2'}, # ext
 )
 
+recFragp = buildFragment(
+    {'V'}, # V
+    [('X', {'V','V'})], # E
+    {}, # ext
+)
+
 
 nonlinRecFrag1 = buildFragment(
     {'EXT1', 'EXT2', 'v1'}, # V
@@ -26,30 +32,35 @@ nonlinRecFrag1 = buildFragment(
 )
 
 nonRecFGG = FGG(
-    {recFrag0, recFrag1}, # T
+    {recFrag0, recFrag1, recFragp}, # T
     {'S','X'}, # N
-    {'S'}, # S
-    {Production('S',recFrag0),
+    'S', # S
+    {Production('S',recFragp),
      Production('X',recFrag1)}, # P
 )
+nonRecFGG.set_variable_domain('V',defaultDomain)
 
 recFGG = FGG(
     {recFrag0, recFrag1}, # T
     {'S','X'}, # N
-    {'S'}, # S
+    'S', # S
     {Production('S',recFrag0),
      Production('X',recFrag0),
      Production('X',recFrag1)} # P
 )
+recFGG.set_variable_domain('l',defaultDomain)
+
 
 nonlinRecFGG = FGG(
     {recFrag0, recFrag1, nonlinRecFrag1}, # T
     {'S','X'}, # N
-    {'S'}, # S
+    'S', # S
     {Production('S',recFrag0),
      Production('X',nonlinRecFrag1),
      Production('X',recFrag1)} # P
 )
+nonlinRecFGG.set_variable_domain('l',defaultDomain)
+
 
 
 
@@ -58,7 +69,11 @@ nonlinRecFGG = FGG(
 
 def test_inference_finite_variables_example1():
     fggsp = FGGsum_product(nonRecFGG)
-    assert True #fggsp.inference()==0.875
+    result = fggsp.inference()
+    print("Result:",result)
+    assert result==0.875
+
+test_inference_finite_variables_example1()
 
 def test_inference_finite_variables_example2():
     fggsp = FGGsum_product(recFGG)#

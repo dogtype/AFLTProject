@@ -18,6 +18,7 @@ class FGG:
         self.N = N
         self.S = S
         self._P = P
+        self.domains = {}
 
     @property
     def P(self):
@@ -33,11 +34,11 @@ class FGG:
                 if(e==edge):
                     e.function=f
 
-    def set_variable_domain(self,vertex,domain):
+    def set_variable_domain(self,vertex_label,domain):
         for p in self.P:
             for v in p.body.V:
-                if(v==vertex):
-                    v.domain = domain
+                if(v.label==vertex_label):
+                    self.domains[v] = domain
 
     def nProductions(self, n):
         """ returns a set of productions starting with nonterminal n """
@@ -146,6 +147,12 @@ class FGG:
                     rules.add(con)
         newGrammar = FGG(new_T,new_N,self.S,rules)
         return newGrammar
+
+    def finite_domain(self) -> bool:
+        for v in self.domains:
+            if(self.domains[v].infinite):
+                return False
+        return True
 
     def add(self, head, body) -> bool:
         """ helper function to add production rules """

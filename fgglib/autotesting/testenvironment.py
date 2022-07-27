@@ -56,4 +56,5 @@ def buildFragment(V, E, ext): # prohibits use of vertex label multiple times
     external = {vertexDict[e] for e in ext}
     return createFragment(vertexSet, edgeSet, external)
 
-defaultDomain = VariableDomain("false")
+defaultDomain = VariableDomain(False)
+defaultDomain.set_content({0.25,0.5,0.75})

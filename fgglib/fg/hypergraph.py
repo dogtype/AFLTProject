@@ -16,8 +16,8 @@ class Hypergraph:
         self.E.add(edge)
 
     def add_vertex(self, vertex) -> None:
-        # if vertex.label in {v.label for v in self.V}:
-        #     raise RuntimeError("label already present in the graph")
+        if vertex.label in {v.label for v in self.V}:
+            raise RuntimeError("label already present in the graph")
 
         self.V.add(vertex)
 
