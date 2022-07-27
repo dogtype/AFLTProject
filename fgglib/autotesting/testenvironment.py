@@ -2,8 +2,8 @@ from fgglib.fg.factorgraph import Factorgraph
 from fgglib.fg.fragment import Fragment
 from fgglib.fg.vertex import Vertex, FGVertex
 from fgglib.fg.edge import Edge, FGEdge
+from fgglib.fg.variabledomain import VariableDomain
 from fgglib.base.semiring import *
-
 
 def createEdge(content,label,targets): # add this as a classmethod alternatively
     e = Edge(content,label)
@@ -36,7 +36,7 @@ def createFGGraph(vertexSet, edgeSet, semiring):
     return fg
 
 def buildGraph(V, E, semiring): # prohibits use of label multiple times
-    vertexDict = {l: FGVertex(None,l,semiring) for l in V}
+    vertexDict = {l: FGVertex(None,l,semiring,defaultDomain) for l in V}
     vertexSet = {v for l,v in vertexDict.items()}
     edgeSet = set()
     for l,s in E.items():
@@ -55,3 +55,5 @@ def buildFragment(V, E, ext): # prohibits use of vertex label multiple times
         edgeSet.add(createEdge(None,l,vs))
     external = {vertexDict[e] for e in ext}
     return createFragment(vertexSet, edgeSet, external)
+
+defaultDomain = VariableDomain("false")

@@ -6,7 +6,7 @@ from fgglib.autotesting.testenvironment import *
 #--------------------------- DEFINITIONS ---------------------------------------
 
 e1 = createEdge(None, 'e1', [Vertex(None,'V1'),Vertex(None,'V2')])
-e2 = createFGEdge(None, 'e2', [FGVertex(None,'V1',Real),FGVertex(None,'V2',Real)], Real)
+e2 = createFGEdge(None, 'e2', [FGVertex(None,'V1',Real,defaultDomain),FGVertex(None,'V2',Real,defaultDomain)], Real)
 e3 = createEdge(None,'e3',set())
 
 #-------------------------------- TESTS ----.-----------------------------------
@@ -16,8 +16,8 @@ def test_add_target1():
     assert e1==createEdge(None, 'e1', [Vertex(None,'V1'),Vertex(None,'V2'),Vertex(None,'V3')])
 
 def test_add_target2():
-    e2.add_target(FGVertex(None,'V3',Real))
-    assert e2==createFGEdge(None, 'e2', [FGVertex(None,'V1',Real),FGVertex(None,'V2',Real),FGVertex(None,'V3',Real)], Real)
+    e2.add_target(FGVertex(None,'V3',Real,defaultDomain))
+    assert e2==createFGEdge(None, 'e2', [FGVertex(None,'V1',Real,defaultDomain),FGVertex(None,'V2',Real,defaultDomain),FGVertex(None,'V3',Real,defaultDomain)], Real)
 
 def test_add_target3():
     e3.add_target(Vertex(None,'V1'))

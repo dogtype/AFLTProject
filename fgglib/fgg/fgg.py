@@ -1,6 +1,8 @@
 from fgglib.fgg.exceptions import *
 from fgglib.fgg.production import Production
 from fgglib.fg.fragment import Fragment
+from fgglib.fg.factorfunction import FactorFunction
+
 
 
 class FGG:
@@ -23,6 +25,19 @@ class FGG:
         for p in self._P:
             yield p
 
+    def set_function(self, edge, f: FactorFunction) -> None:
+        for p in self.P:
+            for e in p.body.E:
+                if(e.label in self.N): # cannot assign functions to nonterminal edges
+                    continue
+                if(e==edge):
+                    e.function=f
+
+    def set_variable_domain(self,vertex,domain):
+        for p in self.P:
+            for v in p.body.V:
+                if(v==vertex):
+                    v.domain = domain
 
     def nProductions(self, n):
         """ returns a set of productions starting with nonterminal n """

@@ -31,7 +31,7 @@ class Hypergraph:
         """ returns the edge content with given label """
         for e in self.E:
             if(e.label==label):
-                return e.content
+                return e.content,e.label
 
     def cyclic(self) -> bool:
         """ returns if graph is cyclic """
