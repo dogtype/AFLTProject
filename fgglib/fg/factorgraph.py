@@ -12,6 +12,27 @@ class Factorgraph(Hypergraph):
         super().__init__()
         self.R = R
 
+    def createVertex(self, content, label, R):
+        v = FGVertex(content, label, R)
+        self.add_vertex(v)
+        return v
+    
+    def createVertices(self, contentSet, labelSet, R):
+        iter = len(labelSet)
+        for i in range(iter):
+            if contentSet != None:
+                content=contentSet[i]
+            else:
+                content=None    
+            label=labelSet[i]
+            v= self.createVertex(content, label, R)                        
+        
+    def createEdge(self, content, label, targets, f, semiring):
+        fgedge = FGEdge(content,label,semiring, f)
+        self.add_edge(fgedge)
+        for t in targets:
+            fgedge.add_target(self.get_vertex(t))        
+            
     def set_function(self, edge, f: FactorFunction) -> None:
         for e in self.E:
             if(e==edge):

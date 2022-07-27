@@ -10,10 +10,14 @@ class Hypergraph:
         self.E = set()
 
     def add_edge(self, edge) -> None:
-        #if edge.label in {e.label for e in self.E}:
-        #    raise RuntimeError("label already present in the graph")
+        if edge.label in {e.label for e in self.E}:
+            raise RuntimeError("label already present in the graph")
+        
+        return self.E.add(edge)
 
-        self.E.add(edge)
+    def add_edges(self, edgeset) -> None:
+        for e in edgeset:
+            self.add_edge(e)
 
     def add_vertex(self, vertex) -> None:
         # if vertex.label in {v.label for v in self.V}:
@@ -25,13 +29,13 @@ class Hypergraph:
         """ returns vertex with given label """
         for v in self.V:
             if(v.label==label):
-                return v.content
+                return v
 
     def get_edge(self,label) -> Edge:
         """ returns the edge content with given label """
         for e in self.E:
             if(e.label==label):
-                return e.content
+                return e
 
     def cyclic(self) -> bool:
         """ returns if graph is cyclic """
