@@ -25,13 +25,13 @@ class Hypergraph:
         """ returns vertex with given label """
         for v in self.V:
             if(v.label==label):
-                return v.content
+                return v
 
     def get_edge(self,label) -> Edge:
         """ returns the edge content with given label """
         for e in self.E:
             if(e.label==label):
-                return e.content,e.label
+                return e
 
     def cyclic(self) -> bool:
         """ returns if graph is cyclic """

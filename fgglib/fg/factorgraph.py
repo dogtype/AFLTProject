@@ -14,7 +14,7 @@ class Factorgraph(Hypergraph):
 
     def set_function(self, edge, f: FactorFunction) -> None:
         for e in self.E:
-            if(e.label==edge[1]):
+            if(e.label==edge.label):
                 e.function=f
 
     def compute_assignment(self, *args):

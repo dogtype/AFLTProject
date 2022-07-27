@@ -49,7 +49,6 @@ class FGGsum_product:
 
     def calculate_phi(self,X,xi,db):
         """ calculates the phi variable for nonterminal X """
-        print("query:","phi"+str(X)+str(xi))
         if("phi"+str(X)+str(xi) in db):
             return db["phi"+str(X)+str(xi)]
         result = 0
@@ -60,21 +59,35 @@ class FGGsum_product:
 
     def calculate_tau(self,frag,xi,db):
         """ calculates the tau variable for fragment R """
-        print("query:","tau"+str(frag)+str(xi))
         if("tau"+str(frag)+str(xi) in db):
             return db["phi"+str(frag)+str(xi)]
         result = 0
-        print(self.xiR(frag),frag)
+
         for v in self.xiR(frag):
+            varMap = {} # assign assigments to vertices
+            index = 0
+            exindex = 0
+            for vtx in frag.V:
+                if(vtx in frag.external):
+                    varMap[vtx]=xi[exindex]
+                    exindex+=1
+                else:
+                    varMap[vtx]=v[index]
+                    index+=1
+
             ntproduct = 1
             tproduct = 1
-            for e in frag.E:
+            for e in frag.E: # compute changes in values
                 if(e.label in self.fgg.N): # case E_N
-                    ntproduct *= self.calculate_phi(e.label,v,db)
+                    asmntList = []
+                    for tgt in e.targets:
+                        asmntList.append(varMap[tgt])
+                    ntproduct *= self.calculate_phi(e.label,asmntList,db)
                 else: # case E_T
-                    tproduct *= xi[0]*xi[0]
-            result += ntproduct + tproduct
-        print("save:","phi"+str(frag)+str(xi),result)
+                    for tgt in e.targets:
+                        tproduct *= varMap[tgt]
+            result += ntproduct * tproduct
+
         db["phi"+str(frag)+str(xi)] = result
         return result
 

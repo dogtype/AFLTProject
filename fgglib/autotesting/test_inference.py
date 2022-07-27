@@ -23,7 +23,7 @@ recFragp = buildFragment(
     [('X', {'V','V'})], # E
     {}, # ext
 )
-
+recFragp.get_edge('X').add_target(recFragp.get_vertex('V'))
 
 nonlinRecFrag1 = buildFragment(
     {'EXT1', 'EXT2', 'v1'}, # V
