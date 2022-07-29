@@ -32,23 +32,23 @@ nonlinRecFrag1 = buildFragment(
 )
 
 nonRecFGG = FGG(
-    {recFrag0, recFrag1, recFragp}, # T
+    {recFrag1, recFragp}, # T
     {'S','X'}, # N
     'S', # S
     {Production('S',recFragp),
      Production('X',recFrag1)}, # P
 )
-nonRecFGG.set_variable_domain('V',defaultDomain)
+nonRecFGG.set_variable_domain('V',singularDomain)
 
 recFGG = FGG(
-    {recFrag0, recFrag1}, # T
+    {recFrag0, recFrag1, recFragp}, # T
     {'S','X'}, # N
     'S', # S
-    {Production('S',recFrag0),
+    {Production('S',recFragp),
      Production('X',recFrag0),
      Production('X',recFrag1)} # P
 )
-recFGG.set_variable_domain('l',defaultDomain)
+recFGG.set_variable_domain('V',singularDomain)
 
 
 nonlinRecFGG = FGG(
@@ -59,7 +59,7 @@ nonlinRecFGG = FGG(
      Production('X',nonlinRecFrag1),
      Production('X',recFrag1)} # P
 )
-nonlinRecFGG.set_variable_domain('l',defaultDomain)
+nonlinRecFGG.set_variable_domain('V',defaultDomain)
 
 
 
@@ -69,18 +69,26 @@ nonlinRecFGG.set_variable_domain('l',defaultDomain)
 
 def test_inference_finite_variables_example1():
     fggsp = FGGsum_product(nonRecFGG)
-    result = fggsp.inference()
-    print("Result:",result)
-    assert result==0.875
-
-test_inference_finite_variables_example1()
+    assert fggsp.inference()==0.25
 
 def test_inference_finite_variables_example2():
-    fggsp = FGGsum_product(recFGG)#
-    assert True # fggsp.inference()==
+    nonRecFGG.set_variable_domain('V',defaultDomain)
+    fggsp = FGGsum_product(nonRecFGG)
+    assert fggsp.inference()==0.875
 
 def test_inference_finite_variables_example3():
-    fggsp = FGGsum_product(nonlinRecFGG)#
+    fggsp = FGGsum_product(recFGG)
+    assert fggsp.inference()==0.875
+
+test_inference_finite_variables_example3()
+
+def test_inference_finite_variables_example4():
+    recFGG.set_variable_domain('V',defaultDomain)
+    fggsp = FGGsum_product(recFGG)
+    assert True#fggsp.inference()==
+
+def test_inference_finite_variables_example5():
+    fggsp = FGGsum_product(nonlinRecFGG)
     assert True # fggsp.inference()==
 
 

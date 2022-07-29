@@ -58,3 +58,5 @@ def buildFragment(V, E, ext): # prohibits use of vertex label multiple times
 
 defaultDomain = VariableDomain(False)
 defaultDomain.set_content({0.25,0.5,0.75})
+singularDomain = VariableDomain(False)
+singularDomain.set_content({0.5})
