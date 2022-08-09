@@ -95,6 +95,17 @@ class FGGsum_product:
         db["phi"+str(frag)+str(xi)] = result
         return result
 
+    def function_from_list(self,index,entries):
+        """ returns a lambda function created from the list of factors in the function """
+        def f(x):
+            result = 0
+            for e in entries:
+                factor, var, exp = e
+                result += factor*pow(x[index[var]],exp)
+            return result
+
+        return f
+
     def inference_finite_variables(self):
         """ returns the sum product of a factor graph grammar with finite variable domain """
         g = nx.DiGraph()
@@ -206,8 +217,86 @@ class FGGsum_product:
             return solution[index["phiS[]"]]
 
         else: # Case 3
-            raise Exception("not a linear equation system! Approximate nonlinearly")
+            from scipy.optimize import fsolve
+            #import math
+            index = {}
+            new_index = 0
+            equations = [] # list of lambda functions mapping to the correct shit
 
+            for nt in self.fgg.N: # create phi equations
+                for v in self.xiX(nt):
+                    new_equation = [0]*new_index
+                    if(not ("phi"+str(nt)+str(v)) in index):
+                        index["phi"+str(nt)+str(v)] = new_index
+                        new_index +=1
+                        new_equation.append(-1)
+                    else:
+                        new_equation[index["phi"+str(nt)+str(v)]]=-1
+
+
+                    for p in self.fgg.nProductions(nt):
+                            if(("tau"+str(p.body)+str(v)) not in index):
+                                index["tau"+str(p.body)+str(v)] = new_index
+                                new_index +=1
+                                new_equation.append(1)
+                            else:
+                                new_equation[index["tau"+str(p.body)+str(v)]]=1
+
+                    equations.append([])
+
+                    for p in self.fgg.nProductions(nt): # create tau equations
+                        new_equation = [0]*new_index
+                        r = p.body
+                        new_equation[index["tau"+str(r)+str(v)]]=-1
+                        for var in self.xiR(r):
+                            varMap = {} # assign assigments to vertices
+                            curr_index = 0
+                            exindex = 0
+                            for vtx in r.V:
+                                if(vtx in r.external):
+                                    varMap[vtx]=v[exindex]
+                                    exindex+=1
+                                else:
+                                    varMap[vtx]=var[curr_index]
+                                    curr_index+=1
+
+                            product = 1
+                            for e in r.E: # add actual variables
+                                if(e.label not in self.fgg.N): # case E_T
+                                    for tgt in e.targets:
+                                        product *= varMap[tgt]
+                            containsNT = False
+                            for e in r.E:
+                                if(e.label in self.fgg.N): # case E_N
+                                    containsNT = True
+                                    asmntList = []
+                                    for tgt in e.targets:
+                                        asmntList.append(varMap[tgt])
+
+                                    if(not ("phi"+str(e.label)+str(asmntList)) in index):
+                                        index["phi"+str(e.label)+str(asmntList)] = new_index
+                                        new_index +=1
+                                        new_equation.append(0) # increase length of the equation
+                                    new_equation[index["phi"+str(e.label)+str(asmntList)]]=product
+
+
+
+                            equations.append(new_equation)
+                            if(containsNT):
+                                B.append(0)
+                            else:
+                                B.append(-product)
+
+            def system(x):
+                sol = []
+                index = 0
+                for xi in x:
+                    sol.append(equations[index],xi)
+                    index+=1
+                return sol
+
+            solution = fsolve(system,[1]*new_index)
+            return solution[index["phiS[]"]]
 
 
 
