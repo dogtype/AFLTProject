@@ -24,18 +24,17 @@ class FGGsum_product:
             for e in p.body.E:
                 if(e.label==X):
                     for t in e.targets:
-                        if(t in p.body.external): # might want to introduce a nice type definition
-                            continue
                         new_assignments = []
                         for v in self.fgg.domains[t].enumerate():
                             for a in assignments:
                                 ap = a.copy()
                                 ap.append(v)
                                 new_assignments.append(ap)
+                                #print("appended for:",t)
                         assignments = new_assignments
                     if(assignments==[[]]):
                         continue
-                    break
+                    return assignments
         return assignments
 
     def xiR(self,fragment):
@@ -161,20 +160,34 @@ class FGGsum_product:
                                     varMap[vtx]=var[curr_index]
                                     curr_index+=1
 
+                            product = 1
                             for e in r.E: # add actual variables
-                                product = 1
+                                if(e.label not in self.fgg.N): # case E_T
+                                    for tgt in e.targets:
+                                        product *= varMap[tgt]
+                            containsNT = False
+                            for e in r.E:
                                 if(e.label in self.fgg.N): # case E_N
+                                    containsNT = True
                                     asmntList = []
                                     for tgt in e.targets:
                                         asmntList.append(varMap[tgt])
-                                    new_equation[index["phi"+str(e.label)+str(asmntList)]]=1
-                                else: # case E_T
-                                    for tgt in e.targets:
-                                        product *= varMap[tgt]
+
+                                    if(not ("phi"+str(e.label)+str(asmntList)) in index):
+                                        index["phi"+str(e.label)+str(asmntList)] = new_index
+                                        new_index +=1
+                                        new_equation.append(0) # increase length of the equation
+                                    new_equation[index["phi"+str(e.label)+str(asmntList)]]=product
+
 
 
                             equations.append(new_equation)
-                            B.append(-product)
+                            if(containsNT):
+                                B.append(0)
+                            else:
+                                B.append(-product)
+
+
             counter = 0
             for e in equations:
                 while(len(e)<new_index):
@@ -183,8 +196,14 @@ class FGGsum_product:
                 counter+=1
             print(index)
             solution = np.linalg.solve(equations,B)
-
-            return solution
+            revIndex = {}
+            for n,i in index.items():
+                revIndex[i]=n
+            counter = 0
+            for s in solution:
+                print(revIndex[counter],s)
+                counter+=1
+            return solution[index["phiS[]"]]
 
         else: # Case 3
             raise Exception("not a linear equation system! Approximate nonlinearly")

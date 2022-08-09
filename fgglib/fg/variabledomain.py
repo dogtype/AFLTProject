@@ -8,7 +8,7 @@ class VariableDomain:
         return self.__repr__()
 
     def __repr__(self):
-        return "Domain: "+self.infinite+", "+str(self.content)
+        return "Domain: "+str(self.infinite)+", "+str(self.content)
 
     def set_content(self, content):
         if(self.infinite):

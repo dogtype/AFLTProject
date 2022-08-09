@@ -39,7 +39,7 @@ class FGG:
             for v in p.body.V:
                 if(v.label==vertex_label):
                     self.domains[v] = domain
-
+                    
     def nProductions(self, n):
         """ returns a set of productions starting with nonterminal n """
         result = set()
