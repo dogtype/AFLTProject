@@ -17,9 +17,10 @@ class Vertex:
 
 class FGVertex(Vertex):
 
-    def __init__(self, content, label, R) -> None:
+    def __init__(self, content, label, R, domain) -> None:
         super().__init__(content, label)
         self.R = R
+        self.domain = domain
 
     def __eq__(self,other) -> bool:
         return (self.label, self.R) == (other.label, other.R)

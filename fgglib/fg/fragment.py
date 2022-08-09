@@ -1,5 +1,6 @@
 from fgglib.fg.hypergraph import Hypergraph
 from fgglib.fg.vertex import Vertex
+from fgglib.fg.factorgraph import Factorgraph
 
 class Fragment(Hypergraph):
 

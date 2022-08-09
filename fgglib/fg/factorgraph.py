@@ -35,14 +35,14 @@ class Factorgraph(Hypergraph):
             
     def set_function(self, edge, f: FactorFunction) -> None:
         for e in self.E:
-            if(e==edge):
+            if(e.label==edge.label):
                 e.function=f
 
     def compute_assignment(self, *args):
         result = self.R.one
         for e in self.E:
             result *= e.function.compute(*[args[v] for v in factor.targets])
-        
+
         return result
 
     def _acyclic_sum_product(self) -> dict[FGVertex, FactorFunction]:
@@ -73,10 +73,10 @@ class Factorgraph(Hypergraph):
 
     def _cyclic_sum_product(self, max_iter) -> dict[FGVertex, FactorFunction]:
         raise NotImplementedError
-        
+
     def sum_product(self, max_iter=100) -> dict[FGVertex, FactorFunction]:
         return self._cyclic_sum_product(max_iter) if self.cyclic() else self._acyclic_sum_product()
-        
+
     def normalization_constant(self, root=None):
         if root is None:
             root = list(self.V)[0]

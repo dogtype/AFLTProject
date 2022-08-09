@@ -9,8 +9,9 @@ class Edge:
         self.targets = []
 
     def add_target(self, vertex) -> None:
-        if vertex not in self.targets:
-            self.targets.append(vertex)
+        # i believe you connect the same node multiple times with an edge
+        #if vertex not in self.targets:
+        self.targets.append(vertex)
 
     def __eq__(self,other) -> bool:
         return (self.label,self.targets)==(other.label,other.targets)
@@ -19,9 +20,8 @@ class Edge:
         return hash(self.__repr__())
 
     def __repr__(self) -> str:
-        string =  "{Edge "+str(self.label)+ ": "
+        string =  "Edge "+str(self.label)+ ": "
         string += str(self.targets)
-        string += "}"
         return string
 
 

@@ -1,6 +1,8 @@
 from fgglib.fgg.exceptions import *
 from fgglib.fgg.production import Production
 from fgglib.fg.fragment import Fragment
+from fgglib.fg.factorfunction import FactorFunction
+
 
 
 class FGG:
@@ -16,6 +18,7 @@ class FGG:
         self.N = N
         self.S = S
         self._P = P
+        self.domains = {}
 
     @property
     def P(self):
@@ -23,7 +26,20 @@ class FGG:
         for p in self._P:
             yield p
 
+    def set_function(self, edge, f: FactorFunction) -> None:
+        for p in self.P:
+            for e in p.body.E:
+                if(e.label in self.N): # cannot assign functions to nonterminal edges
+                    continue
+                if(e==edge):
+                    e.function=f
 
+    def set_variable_domain(self,vertex_label,domain):
+        for p in self.P:
+            for v in p.body.V:
+                if(v.label==vertex_label):
+                    self.domains[v] = domain
+                    
     def nProductions(self, n):
         """ returns a set of productions starting with nonterminal n """
         result = set()
@@ -131,6 +147,12 @@ class FGG:
                     rules.add(con)
         newGrammar = FGG(new_T,new_N,self.S,rules)
         return newGrammar
+
+    def finite_domain(self) -> bool:
+        for v in self.domains:
+            if(self.domains[v].infinite):
+                return False
+        return True
 
     def add(self, head, body) -> bool:
         """ helper function to add production rules """
