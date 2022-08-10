@@ -81,8 +81,6 @@ class Factorgraph(Hypergraph):
         if root is None:
             root = list(self.V)[0]
         return self.sum_product()[root].normalization_constant()
-<<<<<<< Updated upstream
-=======
     
     def createFGGraph(self, vertexSet, edgeSet, semiring):
         fg = Factorgraph(semiring)
@@ -98,6 +96,5 @@ class Factorgraph(Hypergraph):
         edgeSet = set()
         for l,s in E.items():
             vs = {vertexDict[i] for i in s}
-            edgeSet.add(self.createEdge(None, l, vs, f, semiring))
+            edgeSet.add(self.createEdge(None, l, vs, None, semiring))
         return self.createFGGraph(vertexSet, edgeSet, semiring)    
->>>>>>> Stashed changes
