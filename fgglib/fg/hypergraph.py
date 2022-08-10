@@ -24,7 +24,11 @@ class Hypergraph:
         #    raise RuntimeError("label already present in the graph")
 
         self.V.add(vertex)
-
+    
+    def add_vertices(self, vertexset) -> None:
+        for v in vertexset:
+            self.V.add(v)
+        
     def get_vertex(self,label) -> Vertex:
         """ returns vertex with given label """
         for v in self.V:

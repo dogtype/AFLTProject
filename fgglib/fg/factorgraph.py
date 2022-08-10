@@ -81,3 +81,23 @@ class Factorgraph(Hypergraph):
         if root is None:
             root = list(self.V)[0]
         return self.sum_product()[root].normalization_constant()
+<<<<<<< Updated upstream
+=======
+    
+    def createFGGraph(self, vertexSet, edgeSet, semiring):
+        fg = Factorgraph(semiring)
+        for v in vertexSet:
+            fg.add_vertex(v)
+        for e in edgeSet:
+            fg.add_edge(e)
+        return fg
+    
+    def buildGraph(V, E, semiring): # prohibits use of label multiple times
+        vertexDict = {l: FGVertex(None,l,semiring) for l in V}
+        vertexSet = {v for l,v in vertexDict.items()}
+        edgeSet = set()
+        for l,s in E.items():
+            vs = {vertexDict[i] for i in s}
+            edgeSet.add(self.createEdge(None, l, vs, f, semiring))
+        return self.createFGGraph(vertexSet, edgeSet, semiring)    
+>>>>>>> Stashed changes

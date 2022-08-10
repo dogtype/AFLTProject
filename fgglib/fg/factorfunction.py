@@ -49,7 +49,7 @@ class IdentityFactorFunction(FactorFunction):
         return other
 
     def compute(self, *args):
-        return R.one
+        return self.R.one
 
     def summary(self, arg_index):
         return self

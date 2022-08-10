@@ -30,7 +30,7 @@ class And(FactorFunction):
             raise RuntimeError("wrong number of arguments")
         
         res = Boolean.one
-        for x in args
+        for x in args:
             res *= Boolean(arg)
         return res
         
