@@ -70,8 +70,8 @@ nonlinRecFGG = FGG(
      Production('X',recFrag1)} # P
 )
 nonlinRecFGG.set_variable_domain('V',singularDomain)
-recFGG.set_variable_domain('EXT1',singularDomain)
-recFGG.set_variable_domain('EXT2',singularDomain)
+nonlinRecFGG.set_variable_domain('EXT1',singularDomain)
+nonlinRecFGG.set_variable_domain('EXT2',singularDomain)
 
 
 
@@ -92,11 +92,11 @@ def test_inference_finite_variables_example3():
     fggsp = FGGsum_product(recFGG)
     assert fggsp.inference()==0.3333333333333333
 
-
-def test_inference_finite_variables_example5():
+def test_inference_finite_variables_example4():
     fggsp = FGGsum_product(nonlinRecFGG)
-    assert True#fggsp.inference()==0.5
+    assert fggsp.inference()==0.5
 
+test_inference_finite_variables_example4()
 
 def test_inference_finite_states_example1():
     assert True

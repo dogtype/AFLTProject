@@ -64,21 +64,6 @@ class Hypergraph:
     def leaves(self) -> Set[Vertex]:
         return {v for v in self.V if [v for t in [e.targets for e in self.E] for v in t].count(v) == 1}
 
-    def visualize(self):
-        import pygraphviz as pgv
-
-        G = pgv.AGraph(strict = False, directed = False)
-        G.graph_attr["label"] = "Factorgraph"
-        G.node_attr["color"] = "black"
-        for v in self.V:
-            G.add_node(v.label,shape="circle")
-        for e in self.E:
-            G.add_node(e.label,shape="box", color ="red")
-        for e in self.E:
-            for v in e.targets:
-                G.add_edge(e.label, v.label, color = "black")
-        return G
-
     def __repr__(self) -> str:
         """ returns a representation of the graph """
         return "V"+str(hash(frozenset(self.V)))+"|E"+str(hash(frozenset(self.E)))
@@ -101,10 +86,3 @@ class Hypergraph:
     def __hash__(self):
         return hash(self.__repr__())
 
-    def draw(self):
-        import pygraphviz as pgv
-
-        """ returns a png image of the graph """
-        G = self.visualize()
-        G.layout(prog="neato") # one of: neato|dot|twopi|circo|fdp|nop
-        return G.draw("graph.png")
