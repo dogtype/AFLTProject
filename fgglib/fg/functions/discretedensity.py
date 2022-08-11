@@ -4,14 +4,17 @@ from fgglib.fg.factorfunction import FactorFunction
 import numpy as np
 
 class DiscreteDensity(FactorFunction):
-    # for now we limit to random variable with a contingous subset {0, 1, ... X} of N as codomain
+    # random variable with a contingous subset {0, 1, ... X} of N as codomain
     
     def __init__(self, raw_pmf):
         self.pmf = np.asarray(raw_pmf, dtype=np.float64)
         super().__init__(Real, len(self.pmf.shape))
             
-    def compute(self, *args) -> Real:
-        return self.pmf[arg]
+    def compute(self, *args):
+        return Real(self.pmf[args])
+        
+    def normalize(self):
+        return DiscreteDensity(self.pmf / np.abs(np.sum(self.pmf)))
     
     '''
     def __mul__(self, other):
@@ -22,7 +25,7 @@ class DiscreteDensity(FactorFunction):
         
     def normalization_constant(self) -> Real:
         return np.abs(np.sum(self.pmf))
-        
-    def normalize(self):
-        return DiscreteDensity(self.pmf / self.normalization_constant())
     '''
+        
+    
+    

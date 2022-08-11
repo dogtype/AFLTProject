@@ -40,7 +40,7 @@ def buildGraph(V, E, semiring): # prohibits use of label multiple times
     vertexSet = {v for l,v in vertexDict.items()}
     edgeSet = set()
     for l,s in E.items():
-        vs = {vertexDict[i] for i in s}
+        vs = [vertexDict[i] for i in s]
         edgeSet.add(createFGEdge(None,l,vs,semiring))
     return createFGGraph(vertexSet, edgeSet, semiring)
 
@@ -51,7 +51,7 @@ def buildFragment(V, E, ext): # prohibits use of vertex label multiple times
     for tup in E:
         l = tup[0]
         s = tup[1]
-        vs = {vertexDict[i] for i in s}
+        vs = [vertexDict[i] for i in s]
         edgeSet.add(createEdge(None,l,vs))
     external = {vertexDict[e] for e in ext}
     return createFragment(vertexSet, edgeSet, external)

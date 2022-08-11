@@ -1,4 +1,4 @@
-from fgglib.fg.factorfunction import FactorFunction, IdentityFactorFunction
+from fgglib.fg.factorfunction import FactorFunction, MulIdentityFactorFunction
 
 class Vertex:
     def __init__(self, content, label) -> None:
@@ -32,11 +32,17 @@ class FGVertex(Vertex):
         return "Vertex: "+self.label+" in "+str(self.R)
 
     def set_msg(self, edge, incoming_msg) -> None:
-        incoming_msg[edge][self] = self.marginal(incoming_msg)
+        f = MulIdentityFactorFunction(self.R)
+        for e, msg in incoming_msg[self].items():
+            if msg is not None and e != edge:
+                f = f.left_mul(msg, 0)
+        incoming_msg[edge][self] = f
 
     def marginal(self, incoming_msg) -> FactorFunction:
-        marginal = IdentityFactorFunction(self.R)
+        print(self.label, "MARGINAL!!!!!")
+        marginal = MulIdentityFactorFunction(self.R)
         for _, msg in incoming_msg[self].items():
-            if msg is not None:
-                marginal *= msg
+            print(msg.arg_num)
+            marginal = marginal.left_mul(msg, 0)
+        print(marginal.arg_num)
         return marginal

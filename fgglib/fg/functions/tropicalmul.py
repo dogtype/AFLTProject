@@ -1,7 +1,7 @@
 from fgglib.base.semiring import Tropical
 from fgglib.fg.factorfunction import FactorFunction
 
-class DiscreteDensity(FactorFunction):
+class TropicalMul(FactorFunction):
     def __init__(self, num_arg):
         super().__init__(Tropical, num_arg)
             

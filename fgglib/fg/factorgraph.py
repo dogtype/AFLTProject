@@ -53,17 +53,14 @@ class Factorgraph(Hypergraph):
         while stack:
             node = stack.pop(0) # here with "node" with mean both vertices and hyperedges
             missing_neighbors = [neigh for neigh, f in incoming_msg[node].items() if f is None]
+ 
             if states[node] == 0 and len(missing_neighbors) == 1:
                 dest = missing_neighbors.pop()
                 node.set_msg(dest, incoming_msg)
                 stack.append(dest)
                 states[node] = 1
             elif states[node] != 2 and len(missing_neighbors) == 0:
-                for dest in list(incoming_msg[node].keys())[:-1]:
-                    node.set_msg(dest, incoming_msg)
-                    stack.append(dest)
-                if states[node] == 0:
-                    dest = list(incoming_msg[node].keys())[-1] #this needs to be updated
+                for dest in list(incoming_msg[node].keys()):
                     node.set_msg(dest, incoming_msg)
                     stack.append(dest)
                 states[node] = 2
@@ -76,7 +73,7 @@ class Factorgraph(Hypergraph):
     def sum_product(self, max_iter=100) -> dict[FGVertex, FactorFunction]:
         return self._cyclic_sum_product(max_iter) if self.cyclic() else self._acyclic_sum_product()
         
-    def normalization_constant(self, root=None):
+    def normalization_constant_(self, root=None):
         #if root is None:
         #    root = list(self.V)[0]
         #return self.sum_product()[root].normalization_constant()
@@ -91,19 +88,24 @@ class Factorgraph(Hypergraph):
                 for value in d.enumerate():
                     arg_combs.append([value])
             else:
-                new_arg_com = []
+                new_arg_combs = []
                 for value in d.enumerate():
-                    new_arg_comba += [a + [value] for a in arg_combs]
+                    new_arg_combs += [a + [value] for a in arg_combs]
                 arg_combs = new_arg_combs
                 
         Z = self.R.zero
-        for comb in arg_coms:
+        for comb in arg_combs:
             cur_res = self.R.one
             for e in self.E:
-                args = [v_indexes[v] for v in e.targets]
-                cur_res *= e.function(*args)
+                args = [comb[v_indexes[v]] for v in e.targets]
+                cur_res *= e.function.compute(*args)
             Z += cur_res
         return Z
+        
+    def normalization_constant(self, root=None):
+        if root is None:
+            root = list(self.V)[0]
+        return self.sum_product()[root].normalization_constant(root.domain)
         
     
     def createFGGraph(self, vertexSet, edgeSet, semiring):
