@@ -23,15 +23,15 @@ class Factorgraph(Hypergraph):
             if contentSet != None:
                 content=contentSet[i]
             else:
-                content=None    
+                content=None
             label=labelSet[i]
-            v= self.createVertex(content, label, R)                        
+            v= self.createVertex(content, label, R)
         
     def createEdge(self, content, label, targets, f, semiring):
         fgedge = FGEdge(content,label,semiring, f)
         self.add_edge(fgedge)
         for t in targets:
-            fgedge.add_target(self.get_vertex(t))        
+            fgedge.add_target(self.get_vertex(t))
             
     def set_function(self, edge, f: FactorFunction) -> None:
         for e in self.E:
@@ -42,7 +42,6 @@ class Factorgraph(Hypergraph):
         result = self.R.one
         for e in self.E:
             result *= e.function.compute(*[args[v] for v in factor.targets])
-
         return result
 
     def _acyclic_sum_product(self) -> dict[FGVertex, FactorFunction]:
@@ -76,11 +75,36 @@ class Factorgraph(Hypergraph):
 
     def sum_product(self, max_iter=100) -> dict[FGVertex, FactorFunction]:
         return self._cyclic_sum_product(max_iter) if self.cyclic() else self._acyclic_sum_product()
-
+        
     def normalization_constant(self, root=None):
-        if root is None:
-            root = list(self.V)[0]
-        return self.sum_product()[root].normalization_constant()
+        #if root is None:
+        #    root = list(self.V)[0]
+        #return self.sum_product()[root].normalization_constant()
+        
+        # naive version: generate all assignments and compute the product of the functions summing over
+        v_indexes = {v:i for i, v in enumerate(self.V)}
+            
+        arg_combs = []
+        for v, _ in v_indexes.items():
+            d = v.domain
+            if len(arg_combs) == 0:
+                for value in d.enumerate():
+                    arg_combs.append([value])
+            else:
+                new_arg_com = []
+                for value in d.enumerate():
+                    new_arg_comba += [a + [value] for a in arg_combs]
+                arg_combs = new_arg_combs
+                
+        Z = self.R.zero
+        for comb in arg_coms:
+            cur_res = self.R.one
+            for e in self.E:
+                args = [v_indexes[v] for v in e.targets]
+                cur_res *= e.function(*args)
+            Z += cur_res
+        return Z
+        
     
     def createFGGraph(self, vertexSet, edgeSet, semiring):
         fg = Factorgraph(semiring)
@@ -97,4 +121,4 @@ class Factorgraph(Hypergraph):
         for l,s in E.items():
             vs = {vertexDict[i] for i in s}
             edgeSet.add(self.createEdge(None, l, vs, None, semiring))
-        return self.createFGGraph(vertexSet, edgeSet, semiring)    
+        return self.createFGGraph(vertexSet, edgeSet, semiring)
