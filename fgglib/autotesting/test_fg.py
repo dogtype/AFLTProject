@@ -90,12 +90,15 @@ def test_sum_product1():
     spaFG1.set_function(spaFG1.get_edge('fb'), DiscreteDensity([[0.3, 0.2],[0.3, 0],[0.1, 0.1]]))
     spaFG1.set_function(spaFG1.get_edge('fc'), DiscreteDensity([[0.3, 0.2],[0.3, 0],[0.1, 0.1]]))
 
-    return True
-    marginals = spaFG.sum_product()
-    assert np.allclose(marginals[spaFG.get_vertex('X1')].normalize().pmf, [0.551136, 0.448863], atol=1e-3)
-    assert np.allclose(marginals[spaFG.get_vertex('X2')].normalize().pmf, [0.852272, 0.102272, 0.045454], atol=1e-3)
-    assert np.allclose(marginals[spaFG.get_vertex('X3')].normalize().pmf, [0.636363, 0.363636], atol=1e-3)
-    assert np.allclose(marginals[spaFG.get_vertex('X4')].normalize().pmf, [0.636363, 0.363636], atol=1e-3)
+    marginals = spaFG1.sum_product()
+    m1 = marginals[spaFG1.get_vertex('X1')]
+    m2 = marginals[spaFG1.get_vertex('X2')]
+    m3 = marginals[spaFG1.get_vertex('X3')]
+    m4 = marginals[spaFG1.get_vertex('X4')]
+    assert np.allclose(np.asarray([m1.compute(0).score, m1.compute(1).score]) / m1.normalization_constant(d1).score, [0.551136, 0.448863], atol=1e-3)
+    assert np.allclose(np.asarray([m2.compute(0).score, m2.compute(1).score, m2.compute(2).score]) / m2.normalization_constant(d2).score, [0.852272, 0.102272, 0.045454], atol=1e-3)
+    assert np.allclose(np.asarray([m3.compute(0).score, m3.compute(1).score]) / m3.normalization_constant(d1).score, [0.636363, 0.363636], atol=1e-3)
+    assert np.allclose(np.asarray([m4.compute(0).score, m4.compute(1).score]) / m3.normalization_constant(d1).score, [0.636363, 0.363636], atol=1e-3)
     
 def test_normalization_constant1():
     d1 = VariableDomain(False)

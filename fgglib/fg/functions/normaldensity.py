@@ -17,30 +17,30 @@ class NormalDensity(FactorFunction):
         cap_lambda = np.linalg.inv(np.asarray(cov, dtype=np.float64))
         eta = np.dot(cap_lambda, np.asarray(mean, dtype=np.float64))
         return cls(cap_lambda, eta, scale_factor)
-    
-    def get_xi(self):
-        return -0.5 * (self.cap_lambda.shape[0] * np.log(2 * numpy.pi) - np.log(np.linalg.det(self.cap_lambda)) + np.dot(np.dot(np.transponse(self.eta), np.linalg.inv(self.cap_lambda)), self.eta)
-    
-    def __mul__(self, other):
-        new_density = NormalDensity(self.cap_lambda + other.cap_lambda, self.eta + other.eta)
-        new_density.scale_factor = self.get_xi() + other.get_xi() - new_density.get_xi()
-        return new_density
-        
-    def compute(self, *args) -> Real:
-        x = args[0]
-        return Real(self.scale_factor * (np.exp(self.get_xi() + np.dot(np.transpose(self.eta), x)) - 0.5 * np.dot(np.dot(np.transpose(x), self.cap_lambda), x)))
-            
-    def summary(self, arg_index) -> FactorFunction:
-        return NormalDensity.from_moments(self.get_mean()[arg_index], self.get_cov()[arg_index][arg_index], self.scale_factor)
-        
-    def normalization_constant(self) -> Real:
-        return Real(self.scale_factor)
-        
-    def normalize(self):
-        self.scale_factor = 1
         
     def get_mean(self):
         return np.dot(np.linalg.inv(self.cap_lambda), self.eta)
         
     def get_cov(self):
         return np.linalg.inv(self.cap_lambda)
+    
+    def _get_xi(self):
+        return -0.5 * (self.cap_lambda.shape[0] * np.log(2 * numpy.pi) - np.log(np.linalg.det(self.cap_lambda)) + np.dot(np.dot(np.transponse(self.eta), np.linalg.inv(self.cap_lambda)), self.eta)
+        
+    def normalize(self):
+        self.scale_factor = 1
+    
+    def compute(self, *args) -> Real:
+        x = np.transpose(np.asarray(args))
+        return Real(self.scale_factor * (np.exp(self._get_xi() + np.dot(np.transpose(self.eta), x)) - 0.5 * np.dot(np.dot(np.transpose(x), self.cap_lambda), x)))
+    
+    def left_mul(self, other, arg_index):
+        new_density = NormalDensity(self.cap_lambda + other.cap_lambda, self.eta + other.eta)
+        new_density.scale_factor = self._get_xi() + other._get_xi() - new_density._get_xi()
+        return new_density
+        
+    def marginal(self, arg_index, *domains) -> FactorFunction:
+        return NormalDensity.from_moments(self.get_mean()[arg_index], self.get_cov()[arg_index][arg_index], self.scale_factor)
+        
+    def normalization_constant(self, *domains) -> Real:
+        return Real(self.scale_factor)
