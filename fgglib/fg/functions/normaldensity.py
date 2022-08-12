@@ -4,8 +4,7 @@ from fgglib.fg.factorfunction import FactorFunction
 import numpy as np
 
 class NormalDensity(FactorFunction):
-    # for now we limit to random variable with a contingous subset {0, 1, ... X} of N as codomain
-    
+
     def __init__(self, cap_lambda, eta, scale_factor=1):
         super().__init__(Real, cap_lambda.shape[0])
         self.cap_lambda = cap_lambda
@@ -35,7 +34,12 @@ class NormalDensity(FactorFunction):
         return Real(self.scale_factor * (np.exp(self._get_xi() + np.dot(np.transpose(self.eta), x)) - 0.5 * np.dot(np.dot(np.transpose(x), self.cap_lambda), x)))
     
     def left_mul(self, other, arg_index):
-        new_density = NormalDensity(self.cap_lambda + other.cap_lambda, self.eta + other.eta)
+        new_cap_lambda = self.cap_lambda
+        new_cap_lambda[arg_index][arg_index] += other.cap_lambda[0][0]
+        new_eta = self.eta
+        new_eta[arg_index] += other.eta[0]
+        
+        new_density = NormalDensity(new_cap_lambda, new_eta)
         new_density.scale_factor = self._get_xi() + other._get_xi() - new_density._get_xi()
         return new_density
         
