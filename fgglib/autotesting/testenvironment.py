@@ -11,14 +11,14 @@ def createEdge(content,label,targets): # add this as a classmethod alternatively
         e.add_target(t)
     return e
 
-def createFGEdge(content,label,targets, semiring):
+def createFGEdge(content,label,targets, semiring=None):
     e = FGEdge(content,label,semiring, None)
     for t in targets:
         e.add_target(t)
     return e
-
-def createFragment(vertexSet, edgeSet, external):
-    frag = Fragment()
+    
+def createFragment(vertexSet, edgeSet, external, semiring=None):
+    frag = Fragment(semiring)
     for v in vertexSet:
         frag.add_vertex(v)
     for e in edgeSet:
@@ -43,18 +43,18 @@ def buildGraph(V, E, semiring): # prohibits use of label multiple times
         vs = [vertexDict[i] for i in s]
         edgeSet.add(createFGEdge(None,l,vs,semiring))
     return createFGGraph(vertexSet, edgeSet, semiring)
-
-def buildFragment(V, E, ext): # prohibits use of vertex label multiple times
-    vertexDict = {l: Vertex(None,l) for l in V}
+    
+def buildFragment(V, E, ext, semiring=None): # prohibits use of vertex label multiple times
+    vertexDict = {l: FGVertex(None,l,semiring,defaultDomain) for l in V}
     vertexSet = {v for i,v in vertexDict.items()}
     edgeSet = set()
     for tup in E:
         l = tup[0]
         s = tup[1]
         vs = [vertexDict[i] for i in s]
-        edgeSet.add(createEdge(None,l,vs))
+        edgeSet.add(createFGEdge(None,l,vs,semiring))
     external = {vertexDict[e] for e in ext}
-    return createFragment(vertexSet, edgeSet, external)
+    return createFragment(vertexSet, edgeSet, external, semiring)
 
 defaultDomain = VariableDomain(False)
 defaultDomain.set_content({0.25,0.5,0.75})

@@ -51,7 +51,7 @@ class Production(namedtuple("Production", "head, body")):
 			else: # case E_2
 				new_E.add(e) # careful with distinct premise
 
-		new_body = Fragment()
+		new_body = Fragment(self.body.R)
 		for v in self.body.V:
 			new_body.add_vertex(v)
 		for e in new_E:
