@@ -191,31 +191,3 @@ class FGG:
 
     def __hash__(self):
         return hash(self.__repr__())
-    
-    def draw(self):
-        import pygraphviz as pgv
-
-        """ returns a png image of the graph """
-        G = self.visualize()
-        G.layout(prog="neato") # one of: neato|dot|twopi|circo|fdp|nop
-        return G.draw("fgggraph.png")
-
-    def visualize(self):
-        import pygraphviz as pgv
-        G = pgv.AGraph(strict = False, directed = False)
-        G.graph_attr["label"] = "Factorgraph"
-        G.node_attr["color"] = "black"
-        for p in  self.P:
-            body = p.body
-            for v in body.V:
-                G.add_node(v.label,shape="circle")
-            for e in body.E:
-                G.add_node(e.label,shape="box")
-                for t in e.targets:
-                    G.add_edge(e.label, t.label,shape="box")
-        #for t in self.T:
-        #    G.add_node(t,shape="box", color ="red")
-        #for e in self.E:
-         #   for v in e.targets:
-          #      G.add_edge(e.label, v.label, color = "black")
-        return G

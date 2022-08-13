@@ -12,9 +12,9 @@ class Factorgraph(Hypergraph):
     def __init__(self, R) -> None:
         super().__init__()
         self.R = R
-
-    def createVertex(self, content, label, R):
-        v = FGVertex(content, label, R)
+        
+    def createVertex(self, content, label, R, domain=False):
+        v = FGVertex(content, label, R, domain)
         self.add_vertex(v)
         return v
     
