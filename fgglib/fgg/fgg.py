@@ -39,7 +39,7 @@ class FGG:
             for v in p.body.V:
                 if(v.label==vertex_label):
                     self.domains[v] = domain
-                    
+
     def nProductions(self, n):
         """ returns a set of productions starting with nonterminal n """
         result = set()
@@ -88,7 +88,6 @@ class FGG:
     def linearly_recursive(self) -> bool:
         """ checks if the grammar lacks an X-type derivation containing more than one X-type derivation as subtree """
         # use a modified dfs here. The dfs is used to return a number of found nonterminals and list of possible backtracks to check cycles
-        # Does not cover all edge cases yet !!!
         num_recursions = 0
         for p in self.P:
             num_recursions = max(num_recursions,self.linear_recursion_helper(set(),set(),p.head,p.head))
