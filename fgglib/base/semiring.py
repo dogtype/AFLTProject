@@ -84,6 +84,53 @@ Boolean.one = Boolean(True)
 Boolean.idempotent = True
 
 
+class Tropical(Semiring):
+
+    def __init__(self, score):
+        self.score = score
+
+    def star(self):
+        return self.one
+
+    def __float__(self):
+        return float(self.score)
+
+    def __int__(self):
+        return int(self.score)
+
+    def __add__(self, other):
+        return Tropical(min(self.score, other.score))
+
+    def __mul__(self, other):
+        if other is self.one: return self
+        if self is self.one: return other
+        if other is self.zero: return self.zero
+        if self is self.zero: return self.zero
+        return Tropical(self.score + other.score)
+
+    def __invert__(self):
+        return Tropical(-self.score)
+
+    def __truediv__(self, other):
+        return Tropical(self.score - other.score)
+
+    def __lt__(self, other):
+        return self.score < other.score
+
+    def __repr__(self):
+        return f'Tropical({self.score})'
+
+    def __str__(self):
+        return str(self.score)
+        
+
+Tropical.zero = Tropical(float('inf'))
+Tropical.one = Tropical(0.0)
+Tropical.idempotent = True
+Tropical.superior = True
+Tropical.cancellative = True
+
+
 class Real(Semiring):
 
     def __init__(self, score):

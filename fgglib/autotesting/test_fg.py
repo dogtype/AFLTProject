@@ -5,6 +5,7 @@ from fgglib.fg.edge import Edge, FGEdge
 from fgglib.base.semiring import *
 from fgglib.autotesting.testenvironment import *
 from fgglib.fg.functions.discretedensity import DiscreteDensity
+from fgglib.fg.functions.tropicalmul import TropicalMul
 
 #--------------------------- DEFINITIONS ---------------------------------------
 
@@ -13,13 +14,6 @@ hmmFG = buildGraph(
     {'e0':{'T0'},'e1':{'T0','T1'},'e2':{'T1','W2'},'e3':{'T1','T3'},'e4':{'T3','W4'},'e5':{'T3','T5'},
      'e6':{'T5','W6'},'e7':{'T5','T7'},'e8':{'T7'}}, # E,
     Real # R
-)
-
-# Figure 4.1 from Wymeersch, H. (2007). Factor graphs and the sum–product algorithm.
-spaFG = buildGraph(
-    {'X1','X2','X3','X4'}, # V
-    {'fA':{'X1'},'fB':{'X1','X2'},'fC':{'X1','X2','X3'}}, # E,
-    Real
 )
 
 frag1 = buildFragment(
@@ -62,32 +56,122 @@ cyclicFG = buildGraph(
 #
 # The following joint distributions are used for the factor nodes.
 #
-#      fa   | x2=0 x2=1     fb   | x3=0 x3=1     fc   | x4=0 x4=1
-#      ----------------     ----------------     ----------------
-#      x1=0 | 0.3  0.4      x2=0 | 0.3  0.4      x2=0 | 0.3  0.4
-#      x1=1 | 0.3  0.0      x2=1 | 0.3  0.0      x2=1 | 0.3  0.0
-#                           x2=2 | 0.1  0.1      x2=2 | 0.1  0.1
+#      fa   | x2=0 x2=1 x2=2     fb   | x3=0 x3=1     fc   | x4=0 x4=1
+#      ---------------------     ----------------     ----------------
+#      x1=0 | 0.3  0.2  0.1      x2=0 | 0.3  0.2      x2=0 | 0.3  0.2
+#      x1=1 | 0.3  0.0  0.1      x2=1 | 0.3  0.0      x2=1 | 0.3  0.0
+#                                x2=2 | 0.1  0.1      x2=2 | 0.1  0.1
 
-spaFG = buildGraph(
-    {'X1','X2','X3','X4'},
-    {'fa':{'X1','X2'},'fb':{'X2','X3'},'fc':{'X2','X4'}},
+spaFG1 = buildGraph(
+    ['X1','X2','X3','X4'],
+    {'fa':['X1','X2'],'fb':['X2','X3'],'fc':['X2','X4']},
     Real
 )
 
-#-------------------------------- TESTS ----.-----------------------------------
+spaFG2 = buildGraph(
+    ['X1','X2','X3','X4'],
+    {'fa':['X1','X2'],'fb':['X2','X3','X4']},
+    Tropical
+)
+
+#-------------------------------- TESTS ----------------------------------------
 
 def test_sum_product1():
-    spaFG.set_function(spaFG.get_edge('fa'), DiscreteDensity([[0.3, 0.4],[0.3, 0]]))
-    spaFG.set_function(spaFG.get_edge('fb'), DiscreteDensity([[0.3, 0.4],[0.3, 0],[0.1, 0.1]]))
-    spaFG.set_function(spaFG.get_edge('fc'), DiscreteDensity([[0.3, 0.4],[0.3, 0],[0.1, 0.1]]))
+    d1 = VariableDomain(False)
+    d1.set_content({0,1})
+    d2 = VariableDomain(False)
+    d2.set_content({0,1,2})
+    spaFG1.get_vertex('X1').domain = d1
+    spaFG1.get_vertex('X2').domain = d2
+    spaFG1.get_vertex('X3').domain = d1
+    spaFG1.get_vertex('X4').domain = d1
+    
+    spaFG1.set_function(spaFG1.get_edge('fa'), DiscreteDensity([[0.3, 0.2, 0.1],[0.3, 0, 0.1]]))
+    spaFG1.set_function(spaFG1.get_edge('fb'), DiscreteDensity([[0.3, 0.2],[0.3, 0],[0.1, 0.1]]))
+    spaFG1.set_function(spaFG1.get_edge('fc'), DiscreteDensity([[0.3, 0.2],[0.3, 0],[0.1, 0.1]]))
 
-    return True
-    #marginals = spaFG.sum_product()
-    #assert np.allclose(marginals[spaFG.get_vertex('X1')].normalize().pmf, [0.551136, 0.448863], atol=1e-3)
-    #assert np.allclose(marginals[spaFG.get_vertex('X2')].normalize().pmf, [0.852272, 0.102272, 0.045454], atol=1e-3)
-    #assert np.allclose(marginals[spaFG.get_vertex('X3')].normalize().pmf, [0.636363, 0.363636], atol=1e-3)
-    #assert np.allclose(marginals[spaFG.get_vertex('X4')].normalize().pmf, [0.636363, 0.363636], atol=1e-3)
+    marginals = spaFG1.sum_product()
+    m1 = marginals[spaFG1.get_vertex('X1')]
+    m2 = marginals[spaFG1.get_vertex('X2')]
+    m3 = marginals[spaFG1.get_vertex('X3')]
+    m4 = marginals[spaFG1.get_vertex('X4')]
+    assert np.allclose(np.asarray([m1.compute(0).score, m1.compute(1).score]) / m1.normalization_constant(d1).score, [0.551136, 0.448863], atol=1e-3)
+    assert np.allclose(np.asarray([m2.compute(0).score, m2.compute(1).score, m2.compute(2).score]) / m2.normalization_constant(d2).score, [0.852272, 0.102272, 0.045454], atol=1e-3)
+    assert np.allclose(np.asarray([m3.compute(0).score, m3.compute(1).score]) / m3.normalization_constant(d1).score, [0.636363, 0.363636], atol=1e-3)
+    assert np.allclose(np.asarray([m4.compute(0).score, m4.compute(1).score]) / m3.normalization_constant(d1).score, [0.636363, 0.363636], atol=1e-3)
+    
+def test_normalization_constant1():
+    d1 = VariableDomain(False)
+    d1.set_content({0,1})
+    d2 = VariableDomain(False)
+    d2.set_content({0,1,2})
+    spaFG1.get_vertex('X1').domain = d1
+    spaFG1.get_vertex('X2').domain = d2
+    spaFG1.get_vertex('X3').domain = d1
+    spaFG1.get_vertex('X4').domain = d1
+    
+    spaFG1.set_function(spaFG1.get_edge('fa'), DiscreteDensity([[0.3, 0.2, 0.1],[0.3, 0, 0.1]]))
+    spaFG1.set_function(spaFG1.get_edge('fb'), DiscreteDensity([[0.3, 0.2],[0.3, 0],[0.1, 0.1]]))
+    spaFG1.set_function(spaFG1.get_edge('fc'), DiscreteDensity([[0.3, 0.2],[0.3, 0],[0.1, 0.1]]))
+    
+    assert np.allclose(float(spaFG1.normalization_constant().score), 0.176, atol=1e-3)
+    
+    
+def test_sum_product2():
+    d1 = VariableDomain(False)
+    d1.set_content({1,2,3})
+    d2 = VariableDomain(False)
+    d2.set_content({4,5})
+    d3 = VariableDomain(False)
+    d3.set_content({6})
+    d4 = VariableDomain(False)
+    d4.set_content({7,8})
+    spaFG2.get_vertex('X1').domain = d1
+    spaFG2.get_vertex('X2').domain = d2
+    spaFG2.get_vertex('X3').domain = d3
+    spaFG2.get_vertex('X4').domain = d4
+    
+    spaFG2.set_function(spaFG2.get_edge('fa'), TropicalMul(2))
+    spaFG2.set_function(spaFG2.get_edge('fb'), TropicalMul(3))
+    
+    marginals = spaFG2.sum_product()
+    assert np.allclose(marginals[spaFG2.get_vertex('X1')].compute(1).score, 22, atol=1e-3)
+    assert np.allclose(marginals[spaFG2.get_vertex('X1')].compute(2).score, 23, atol=1e-3)
+    assert np.allclose(marginals[spaFG2.get_vertex('X1')].compute(3).score, 24, atol=1e-3)
+    assert np.allclose(marginals[spaFG2.get_vertex('X2')].compute(4).score, 22, atol=1e-3)
+    assert np.allclose(marginals[spaFG2.get_vertex('X2')].compute(5).score, 24, atol=1e-3)
+    assert np.allclose(marginals[spaFG2.get_vertex('X3')].compute(6).score, 22, atol=1e-3)
+    assert np.allclose(marginals[spaFG2.get_vertex('X4')].compute(7).score, 22, atol=1e-3)
+    assert np.allclose(marginals[spaFG2.get_vertex('X4')].compute(8).score, 23, atol=1e-3)
+    
+def test_normalization_constant2():
+    d1 = VariableDomain(False)
+    d1.set_content({1,2,3})
+    d2 = VariableDomain(False)
+    d2.set_content({4,5})
+    d3 = VariableDomain(False)
+    d3.set_content({6})
+    d4 = VariableDomain(False)
+    d4.set_content({7,8})
+    spaFG2.get_vertex('X1').domain = d1
+    spaFG2.get_vertex('X2').domain = d2
+    spaFG2.get_vertex('X3').domain = d3
+    spaFG2.get_vertex('X4').domain = d4
+    
+    spaFG2.set_function(spaFG2.get_edge('fa'), TropicalMul(2))
+    spaFG2.set_function(spaFG2.get_edge('fb'), TropicalMul(3))
+    
+    assert spaFG2.normalization_constant().score == 22
+    
+def test_sum_product3():
+    # set domains
+    # set functions (normals)
+    pass
 
+def test_normalization_constant3():
+    # set domains
+    # set functions (normals)
+    pass
 
 def test_cyclic1():
     assert hmmFG.cyclic() == False

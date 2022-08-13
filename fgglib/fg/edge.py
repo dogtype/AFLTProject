@@ -1,5 +1,5 @@
-from fgglib.fg.factorfunction import IdentityFactorFunction
 from fgglib.fg.vertex import Vertex
+from fgglib.fg.factorfunction import MulIdentityFactorFunction
 
 
 class Edge:
@@ -32,9 +32,8 @@ class FGEdge(Edge):
         self.function = f
 
     def set_msg(self, vertex, incoming_msg) -> None:
-        f = IdentityFactorFunction(self.R)
+        f = self.function
         for v, msg in incoming_msg[self].items():
-            if v != vertex and msg is not None:
-                f *= msg
-        f *= self.function
-        incoming_msg[vertex][self] = f.summary(self.targets.index(vertex))
+            if v != vertex and msg is not None and not isinstance(msg, MulIdentityFactorFunction):
+                f = f.left_mul(msg, self.targets.index(v))
+        incoming_msg[vertex][self] = f.marginal(self.targets.index(vertex), *[v.domain for v in self.targets])
