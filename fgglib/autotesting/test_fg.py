@@ -183,10 +183,10 @@ def test_leaves1():
     assert hmmFG.leaves()=={FGVertex(None,'W2',Real,defaultDomain),FGVertex(None,'W4',Real,defaultDomain),FGVertex(None,'W6',Real,defaultDomain)}
 
 def test_leaves2():
-    assert frag1.leaves()=={Vertex(None,'EXT1'),Vertex(None,'EXT2')}
+    assert frag1.leaves()=={FGVertex(None,'EXT1',frag1.R, VariableDomain(False)),FGVertex(None,'EXT2',frag1.R, VariableDomain(False))}
 
 def test_leaves3():
-    assert frag2.leaves()=={Vertex(None,'V3')}
+    assert frag2.leaves()=={FGVertex(None,'V3',frag2.R, VariableDomain(False))}
 
 def test_nonterminals1():
     assert set(frag1.nonterminals({'A'}))==set()

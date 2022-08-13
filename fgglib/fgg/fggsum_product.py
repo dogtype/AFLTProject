@@ -1,5 +1,12 @@
 import networkx as nx
 import numpy as np
+from fgglib.fg.factorfunction import FactorFunction
+from fgglib.fg.factorgraph import Factorgraph
+from fgglib.base.semiring import Real
+from fgglib.fg.edge import FGEdge
+from fgglib.fg.vertex import FGVertex
+from fgglib.fg.variabledomain import VariableDomain
+import pprint
 
 class FGGsum_product:
     # A helper class to compute the sum_product of a factor graph grammar
@@ -310,4 +317,175 @@ class FGGsum_product:
 
     def inference_finite_states(self):
         """ returns the sum product of a factor graph grammar with finite number of states """
-        raise NotImplementedError
+        productions = list(self.fgg.P)
+        fg = Factorgraph(productions[0].body.R)
+        
+        # add binary variables for all nonterminals and rules
+        bin_domain = VariableDomain(False)
+        bin_domain.set_content({False, True})
+        nt_bin_vars = {}
+        for X in self.fgg.N:
+            b_var = FGVertex(X, "B_" + X, fg.R, bin_domain)
+            fg.add_vertex(b_var)
+            nt_bin_vars[X] = b_var
+        rules_bin_vars = {}
+        for i, p in enumerate(productions):
+            b_var = FGVertex(p, "B_π" + str(i), fg.R, bin_domain)
+            fg.add_vertex(b_var)
+            rules_bin_vars[p] = b_var
+            
+        pprint.pprint(fg)
+        pprint.pprint(nt_bin_vars)
+        pprint.pprint(rules_bin_vars)
+        
+        # add conditions to constraint to valid derivations
+        start_e = FGEdge(self.fgg.S, "B_S = true", fg.R, CondStart(fg.R))
+        start_e.add_target(nt_bin_vars[self.fgg.S])
+        for X in self.fgg.N:
+            if X != self.fgg.S:
+                p_X_left = [p for p in productions if X == p.head]
+                e = FGEdge(X, "CondOne(B_" + X + ''.join([','+rules_bin_vars[p_].label for p_ in p_X_left]) + ")", fg.R, CondOne(fg.R, 1 + len(p_X_left)))
+                e.add_target(nt_bin_vars[X])
+                for p in p_X_left:
+                    e.add_target(rules_bin_vars[p])
+                fg.add_edge(e)
+                
+                p_X_right = [p for p in productions if X in p.body.nonterminals(self.fgg.N)]
+                e = FGEdge(X, "CondOne(B_" + X + ''.join([','+rules_bin_vars[p_].label for p_ in p_X_right]) + ")", fg.R, CondOne(fg.R, 1 + len(p_X_right)))
+                e.add_target(nt_bin_vars[X])
+                for p in p_X_right:
+                    e.add_target(rules_bin_vars[p])
+                fg.add_edge(e)
+                    
+        # create clusters
+        new_p_vars = {}
+        for i, p in enumerate(productions):
+            new_vars = {}
+            for v in p.body.V:
+                var = FGVertex(str(p), v.label + "_" + str(i), fg.R, v.domain)
+                new_vars[v] = var
+                e = FGEdge(str(p), "CN_" + v.label + "_" + str(i), fg.R, CondNormalize(v.domain))
+                e.add_target(rules_bin_vars[p])
+                e.add_target(var)
+                fg.add_vertex(var)
+                fg.add_edge(e)
+            for e in p.body.E:
+                if e.label not in self.fgg.N:
+                    new_edge = FGEdge(str(p), e.label, fg.R, CondFactor(fg.R, e.function))
+                    new_edge.add_target(rules_bin_vars[p])
+                    for v in e.targets:
+                        new_edge.add_target(new_vars[v])
+                    fg.add_edge(new_edge)
+            new_p_vars[p] = new_vars
+                
+        new_nt_vars = {}
+        for X in self.fgg.N:
+            for p in productions:
+                if X in p.body.nonterminals(self.fgg.N):
+                    X_vars = {}
+                    e = p.body.get_edge(X)
+                    for t in e.targets:
+                        v = FGVertex(X, t.label + "_" + X, fg.R, t.domain)
+                        X_vars[t] = v
+                        new_edge = FGEdge(X, "CN_" + v.label + "_" + X, fg.R, CondNormalize(t.domain))
+                        new_edge.add_target(nt_bin_vars[X])
+                        new_edge.add_target(v)
+                        fg.add_vertex(v)
+                        fg.add_edge(new_edge)
+                    new_nt_vars[X] = X_vars
+                    
+        print(new_nt_vars)
+        # create same-variable bindings
+        for X in self.fgg.N:
+            for i, p in enumerate(productions):
+                if X == p.head:
+                    for v in p.body.external:
+                        new_edge = FGEdge(X, "CE_" + X + "_" + str(i) + "_" + v.label, fg.R, CondEquals(fg.R))
+                        new_edge.add_target(rules_bin_vars[p])
+                        new_edge.add_target(new_nt_vars[X][v])
+                        new_edge.add_target(new_p_vars[p][v])
+                        
+                if X in p.body.nonterminals(self.fgg.N):
+                    e = p.body.get_edge(X)
+                    for t in e.targets:
+                        new_edge = FGEdge(X, "CE_" + X + "_" + str(i) + "_" + t.label, fg.R, CondEquals(fg.R))
+                        new_edge.add_target(rules_bin_vars[p])
+                        print(X,v.label)
+                        new_edge.add_target(new_nt_vars[X][t])
+                        new_edge.add_target(new_p_vars[p][t])
+                        
+        return fg.normalization_constant()
+
+
+class CondStart(FactorFunction):
+    
+    def __init__(self, R):
+        super().__init__(R, 1)
+        
+    def compute(self, *args):
+        if len(args) != arg_num:
+            raise Exception("wrong number of arguments")
+            
+        return self.R.one if args[0] else self.R.zero
+    
+    
+class CondOne(FactorFunction):
+        
+    def __init__(self, R, arg_num):
+        super().__init__(R, arg_num)
+        
+    def compute(self, *args):
+        if len(args) != arg_num:
+            raise Exception("wrong number of arguments")
+            
+        if args[0]:
+            return self.R.one if args[1:].count(True) == 1 else self.R.zero
+        else:
+            return self.R.one if args[1:].count(True) == 0 else self.R.zero
+            
+            
+class CondEquals(FactorFunction):
+    
+    def __init__(self, R):
+        super().__init__(R, 3)
+        
+    def compute(self, *args):
+        if len(args) != arg_num:
+            raise Exception("wrong number of arguments")
+            
+        if args[0]:
+            return self.R.one if args[1] == args[2] else self.R.zero
+        else:
+            return self.R.one
+            
+
+class CondFactor(FactorFunction):
+    
+    def __init__(self, R, f):
+        super().__init__(R, 1 + f.arg_num)
+        self.f = f
+        
+    def compute(self, *args):
+        if len(args) != arg_num:
+            raise Exception("wrong number of arguments")
+            
+        if args[0]:
+            return f.compute(*args[1:])
+        else:
+            return self.R.one
+            
+            
+class CondNormalize(FactorFunction):
+    
+    def __init__(self, domain):
+        super().__init__(Real, 2)
+        self.weight_distr = lambda x : float(1) / float(len(domain.content))
+        
+    def compute(self, *args):
+        if len(args) != arg_num:
+            raise Exception("wrong number of arguments")
+            
+        if args[0]:
+            return Real(self.weight_distr(args[1]))
+        else:
+            return self.R.one

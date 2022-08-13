@@ -2,6 +2,8 @@ from fgglib.fgg.fgg import FGG
 from fgglib.fg.fragment import Fragment
 from fgglib.fgg.production import *
 from fgglib.fgg.fggsum_product import FGGsum_product
+from fgglib.base.semiring import Real
+from fgglib.fg.functions.discretedensity import DiscreteDensity
 from fgglib.autotesting.testenvironment import *
 
 #--------------------------- DEFINITIONS --------------------------------------
@@ -73,6 +75,44 @@ nonlinRecFGG.set_variable_domain('V',singularDomain)
 nonlinRecFGG.set_variable_domain('EXT1',singularDomain)
 nonlinRecFGG.set_variable_domain('EXT2',singularDomain)
 
+finStatesFrag0 = buildFragment(
+    ['A1', 'B2', 'A4'],
+    [('X',['A1', 'B2', 'A4'])],
+    {},
+    Real
+)
+
+finStatesFrag1 = buildFragment(
+    ['A1', 'B2'],
+    [('Y',['A1', 'B2'])],
+    {},
+    Real
+)
+
+finStatesFrag2 = buildFragment(
+    ['A1', 'B2', 'A4'],
+    [('f',['A1', 'A4']), ('Y', ['B2', 'A4'])],
+    {'A1', 'B2', 'A4'},
+    Real
+)
+
+finStatesFrag3 = buildFragment(
+    ['A1', 'B2'],
+    [('g',['A1', 'B2'])],
+    {'A1', 'B2'},
+    Real
+)
+
+finStatesFGG = FGG(
+    {finStatesFrag0, finStatesFrag1, finStatesFrag2, finStatesFrag3},
+    {'S','X','Y'},
+    'S',
+    {Production('S', finStatesFrag0),
+     Production('S', finStatesFrag1),
+     Production('X', finStatesFrag2),
+     Production('Y', finStatesFrag3)
+    }
+)
 
 
 #-------------------------------- TESTS ----.-----------------------------------
@@ -99,4 +139,24 @@ def test_inference_finite_variables_example4():
 test_inference_finite_variables_example4()
 
 def test_inference_finite_states_example1():
+    assert True
+    return
+    
+    # STILL NOT WORKING!!!
+    fggsp = FGGsum_product(finStatesFGG)
+    
+    finStatesDomain = VariableDomain(False)
+    finStatesDomain.set_content({0, 1})
+    finStatesFunction = DiscreteDensity([[0.1, 0.5],[0.3, 0.2]])
+    
+    for p in finStatesFGG.P:
+        for v in p.body.V:
+            v.domain = finStatesDomain
+        for e in p.body.E:
+            if e.label not in finStatesFGG.N:
+                e.function = finStatesFunction
+            
+    
+    
+    fggsp.inference_finite_states()
     assert True

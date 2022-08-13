@@ -39,10 +39,7 @@ class FGVertex(Vertex):
         incoming_msg[edge][self] = f
 
     def marginal(self, incoming_msg) -> FactorFunction:
-        print(self.label, "MARGINAL!!!!!")
         marginal = MulIdentityFactorFunction(self.R)
         for _, msg in incoming_msg[self].items():
-            print(msg.arg_num)
             marginal = marginal.left_mul(msg, 0)
-        print(marginal.arg_num)
         return marginal
