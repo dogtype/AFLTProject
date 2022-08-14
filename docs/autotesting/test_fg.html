@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>fgglib.autotesting.test_fg API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>fgglib.autotesting.test_fg</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from fgglib.fg.factorgraph import Factorgraph
+from fgglib.fg.fragment import Fragment
+from fgglib.fg.vertex import Vertex, FGVertex
+from fgglib.fg.edge import Edge, FGEdge
+from fgglib.base.semiring import *
+from fgglib.autotesting.testenvironment import *
+from fgglib.fg.functions.discretedensity import DiscreteDensity
+from fgglib.fg.functions.tropicalmul import TropicalMul
+
+#--------------------------- DEFINITIONS ---------------------------------------
+
+hmmFG = buildGraph(
+    {&#39;T0&#39;,&#39;T1&#39;,&#39;W2&#39;,&#39;T3&#39;,&#39;W4&#39;,&#39;T5&#39;,&#39;W6&#39;,&#39;T7&#39;}, # V
+    {&#39;e0&#39;:{&#39;T0&#39;},&#39;e1&#39;:{&#39;T0&#39;,&#39;T1&#39;},&#39;e2&#39;:{&#39;T1&#39;,&#39;W2&#39;},&#39;e3&#39;:{&#39;T1&#39;,&#39;T3&#39;},&#39;e4&#39;:{&#39;T3&#39;,&#39;W4&#39;},&#39;e5&#39;:{&#39;T3&#39;,&#39;T5&#39;},
+     &#39;e6&#39;:{&#39;T5&#39;,&#39;W6&#39;},&#39;e7&#39;:{&#39;T5&#39;,&#39;T7&#39;},&#39;e8&#39;:{&#39;T7&#39;}}, # E,
+    Real # R
+)
+
+frag1 = buildFragment(
+    {&#39;EXT1&#39;, &#39;EXT2&#39;},
+    [(&#39;N&#39;, {&#39;EXT1&#39;,&#39;EXT2&#39;})], # V
+    {&#39;EXT1&#39;,&#39;EXT2&#39;}, # ext
+
+)
+
+frag2 = buildFragment(
+    {&#39;EXT1&#39;, &#39;EXT2&#39;, &#39;V1&#39;, &#39;V3&#39;}, # V
+    [(&#39;N&#39;, {&#39;EXT1&#39;,&#39;EXT2&#39;}), (&#39;M&#39;, {&#39;EXT2&#39;,&#39;V1&#39;}), (&#39;K&#39;, {&#39;V1&#39;,&#39;V3&#39;}), (&#39;V&#39;, {&#39;EXT1&#39;,&#39;EXT2&#39;,&#39;V1&#39;}), (&#39;X&#39;, {&#39;EXT1&#39;})], # E
+    {&#39;EXT1&#39;,&#39;EXT2&#39;} # ext
+)
+
+cyclicFG = buildGraph(
+    {&#39;X1&#39;,&#39;X2&#39;,&#39;X3&#39;},
+    {&#39;e1&#39;:{&#39;X1&#39;,&#39;X2&#39;},&#39;e2&#39;:{&#39;X2&#39;,&#39;X3&#39;},&#39;e3&#39;:{&#39;X3&#39;,&#39;X1&#39;}},
+    Real
+)
+
+# taken from https://github.com/danbar/fglib/blob/master/examples/example_spa
+# A simple example of the sum-product algorithm
+#
+# This is a simple example of the sum-product algorithm on a factor graph
+# with Bernoulli random variables, which is taken from page 409 of the book
+# C. M. Bishop, Pattern Recognition and Machine Learning. Springer, 2006.
+#
+#       /--\      +----+      /--\      +----+      /--\
+#      | x1 |-----| fa |-----| x2 |-----| fb |-----| x3 |
+#       \--/      +----+      \--/      +----+      \--/
+#                              |
+#                            +----+
+#                            | fc |
+#                            +----+
+#                              |
+#                             /--\
+#                            | x4 |
+#                             \--/
+#
+# The following joint distributions are used for the factor nodes.
+#
+#      fa   | x2=0 x2=1 x2=2     fb   | x3=0 x3=1     fc   | x4=0 x4=1
+#      ---------------------     ----------------     ----------------
+#      x1=0 | 0.3  0.2  0.1      x2=0 | 0.3  0.2      x2=0 | 0.3  0.2
+#      x1=1 | 0.3  0.0  0.1      x2=1 | 0.3  0.0      x2=1 | 0.3  0.0
+#                                x2=2 | 0.1  0.1      x2=2 | 0.1  0.1
+
+spaFG1 = buildGraph(
+    [&#39;X1&#39;,&#39;X2&#39;,&#39;X3&#39;,&#39;X4&#39;],
+    {&#39;fa&#39;:[&#39;X1&#39;,&#39;X2&#39;],&#39;fb&#39;:[&#39;X2&#39;,&#39;X3&#39;],&#39;fc&#39;:[&#39;X2&#39;,&#39;X4&#39;]},
+    Real
+)
+
+spaFG2 = buildGraph(
+    [&#39;X1&#39;,&#39;X2&#39;,&#39;X3&#39;,&#39;X4&#39;],
+    {&#39;fa&#39;:[&#39;X1&#39;,&#39;X2&#39;],&#39;fb&#39;:[&#39;X2&#39;,&#39;X3&#39;,&#39;X4&#39;]},
+    Tropical
+)
+
+#-------------------------------- TESTS ----------------------------------------
+
+def test_sum_product1():
+    &#39;&#39;&#39;
+    Testing the sum-product algorithm on an example for discrete density
+    functions taken from https://github.com/danbar/fglib/blob/master/examples/example_spa
+    &#39;&#39;&#39;
+    d1 = VariableDomain(False)
+    d1.set_content({0,1})
+    d2 = VariableDomain(False)
+    d2.set_content({0,1,2})
+    spaFG1.get_vertex(&#39;X1&#39;).domain = d1
+    spaFG1.get_vertex(&#39;X2&#39;).domain = d2
+    spaFG1.get_vertex(&#39;X3&#39;).domain = d1
+    spaFG1.get_vertex(&#39;X4&#39;).domain = d1
+
+    spaFG1.set_function(spaFG1.get_edge(&#39;fa&#39;), DiscreteDensity([[0.3, 0.2, 0.1],[0.3, 0, 0.1]]))
+    spaFG1.set_function(spaFG1.get_edge(&#39;fb&#39;), DiscreteDensity([[0.3, 0.2],[0.3, 0],[0.1, 0.1]]))
+    spaFG1.set_function(spaFG1.get_edge(&#39;fc&#39;), DiscreteDensity([[0.3, 0.2],[0.3, 0],[0.1, 0.1]]))
+
+    marginals = spaFG1.sum_product()
+    m1 = marginals[spaFG1.get_vertex(&#39;X1&#39;)]
+    m2 = marginals[spaFG1.get_vertex(&#39;X2&#39;)]
+    m3 = marginals[spaFG1.get_vertex(&#39;X3&#39;)]
+    m4 = marginals[spaFG1.get_vertex(&#39;X4&#39;)]
+    assert np.allclose(np.asarray([m1.compute(0).score, m1.compute(1).score]) / m1.normalization_constant(d1).score, [0.551136, 0.448863], atol=1e-3)
+    assert np.allclose(np.asarray([m2.compute(0).score, m2.compute(1).score, m2.compute(2).score]) / m2.normalization_constant(d2).score, [0.852272, 0.102272, 0.045454], atol=1e-3)
+    assert np.allclose(np.asarray([m3.compute(0).score, m3.compute(1).score]) / m3.normalization_constant(d1).score, [0.636363, 0.363636], atol=1e-3)
+    assert np.allclose(np.asarray([m4.compute(0).score, m4.compute(1).score]) / m3.normalization_constant(d1).score, [0.636363, 0.363636], atol=1e-3)
+
+def test_normalization_constant1():
+    &#39;&#39;&#39;
+    Testing the computation of the normalizing constant on an example with the
+    DiscreteDensity FactorFunction
+    &#39;&#39;&#39;
+    d1 = VariableDomain(False)
+    d1.set_content({0,1})
+    d2 = VariableDomain(False)
+    d2.set_content({0,1,2})
+    spaFG1.get_vertex(&#39;X1&#39;).domain = d1
+    spaFG1.get_vertex(&#39;X2&#39;).domain = d2
+    spaFG1.get_vertex(&#39;X3&#39;).domain = d1
+    spaFG1.get_vertex(&#39;X4&#39;).domain = d1
+
+    spaFG1.set_function(spaFG1.get_edge(&#39;fa&#39;), DiscreteDensity([[0.3, 0.2, 0.1],[0.3, 0, 0.1]]))
+    spaFG1.set_function(spaFG1.get_edge(&#39;fb&#39;), DiscreteDensity([[0.3, 0.2],[0.3, 0],[0.1, 0.1]]))
+    spaFG1.set_function(spaFG1.get_edge(&#39;fc&#39;), DiscreteDensity([[0.3, 0.2],[0.3, 0],[0.1, 0.1]]))
+
+    assert np.allclose(float(spaFG1.normalization_constant().score), 0.176, atol=1e-3)
+
+
+def test_sum_product2():
+    &#39;&#39;&#39;
+    Testing the sum-product algorithm on an example of tropical multiplicative
+    factor functions
+    &#39;&#39;&#39;
+    d1 = VariableDomain(False)
+    d1.set_content({1,2,3})
+    d2 = VariableDomain(False)
+    d2.set_content({4,5})
+    d3 = VariableDomain(False)
+    d3.set_content({6})
+    d4 = VariableDomain(False)
+    d4.set_content({7,8})
+    spaFG2.get_vertex(&#39;X1&#39;).domain = d1
+    spaFG2.get_vertex(&#39;X2&#39;).domain = d2
+    spaFG2.get_vertex(&#39;X3&#39;).domain = d3
+    spaFG2.get_vertex(&#39;X4&#39;).domain = d4
+
+    spaFG2.set_function(spaFG2.get_edge(&#39;fa&#39;), TropicalMul(2))
+    spaFG2.set_function(spaFG2.get_edge(&#39;fb&#39;), TropicalMul(3))
+
+    marginals = spaFG2.sum_product()
+    assert np.allclose(marginals[spaFG2.get_vertex(&#39;X1&#39;)].compute(1).score, 22, atol=1e-3)
+    assert np.allclose(marginals[spaFG2.get_vertex(&#39;X1&#39;)].compute(2).score, 23, atol=1e-3)
+    assert np.allclose(marginals[spaFG2.get_vertex(&#39;X1&#39;)].compute(3).score, 24, atol=1e-3)
+    assert np.allclose(marginals[spaFG2.get_vertex(&#39;X2&#39;)].compute(4).score, 22, atol=1e-3)
+    assert np.allclose(marginals[spaFG2.get_vertex(&#39;X2&#39;)].compute(5).score, 24, atol=1e-3)
+    assert np.allclose(marginals[spaFG2.get_vertex(&#39;X3&#39;)].compute(6).score, 22, atol=1e-3)
+    assert np.allclose(marginals[spaFG2.get_vertex(&#39;X4&#39;)].compute(7).score, 22, atol=1e-3)
+    assert np.allclose(marginals[spaFG2.get_vertex(&#39;X4&#39;)].compute(8).score, 23, atol=1e-3)
+
+def test_normalization_constant2():
+    &#39;&#39;&#39;
+    Testing the computation of the normalizing constant on an example with the
+    tropical mul FactorFunction
+    &#39;&#39;&#39;
+    d1 = VariableDomain(False)
+    d1.set_content({1,2,3})
+    d2 = VariableDomain(False)
+    d2.set_content({4,5})
+    d3 = VariableDomain(False)
+    d3.set_content({6})
+    d4 = VariableDomain(False)
+    d4.set_content({7,8})
+    spaFG2.get_vertex(&#39;X1&#39;).domain = d1
+    spaFG2.get_vertex(&#39;X2&#39;).domain = d2
+    spaFG2.get_vertex(&#39;X3&#39;).domain = d3
+    spaFG2.get_vertex(&#39;X4&#39;).domain = d4
+
+    spaFG2.set_function(spaFG2.get_edge(&#39;fa&#39;), TropicalMul(2))
+    spaFG2.set_function(spaFG2.get_edge(&#39;fb&#39;), TropicalMul(3))
+
+    assert spaFG2.normalization_constant().score == 22
+
+def test_sum_product3():
+    # set domains
+    # set functions (normals)
+    pass
+
+def test_normalization_constant3():
+    # set domains
+    # set functions (normals)
+    pass
+
+def test_cyclic1():
+    &#39;&#39;&#39;
+    Testing the cyclic predicate on an example for a factorgraph of a hidden
+    markov model
+    &#39;&#39;&#39;
+    assert hmmFG.cyclic() == False
+
+def test_cyclic2():
+    &#39;&#39;&#39;
+    Testing the cyclic predicate on an example of a simple cyclic factorgraph
+    &#39;&#39;&#39;
+    assert cyclicFG.cyclic() == True
+
+def test_leaves1():
+    &#39;&#39;&#39;
+    Testing the leaves function on an example for a factorgraph of an HMM
+    &#39;&#39;&#39;
+    assert hmmFG.leaves()=={FGVertex(None,&#39;W2&#39;,Real,defaultDomain),FGVertex(None,&#39;W4&#39;,Real,defaultDomain),FGVertex(None,&#39;W6&#39;,Real,defaultDomain)}
+
+def test_leaves2():
+    &#39;&#39;&#39;
+    Testing the leaves function on a simple example of a fragement to check the external nodes
+    &#39;&#39;&#39;
+    assert frag1.leaves()=={FGVertex(None,&#39;EXT1&#39;,frag1.R, VariableDomain(False)),FGVertex(None,&#39;EXT2&#39;,frag1.R, VariableDomain(False))}
+
+def test_leaves3():
+    &#39;&#39;&#39;
+    Testing the leaves function on another example of a factorgraph fragment
+    &#39;&#39;&#39;
+    assert frag2.leaves()=={FGVertex(None,&#39;V3&#39;,frag2.R, VariableDomain(False))}
+
+def test_nonterminals1():
+    &#39;&#39;&#39;
+    Testing the nonterminals function on a simple example of a fragment
+    &#39;&#39;&#39;
+    assert set(frag1.nonterminals({&#39;A&#39;}))==set()
+    assert set(frag1.nonterminals({&#39;N&#39;}))=={&#39;N&#39;}
+
+def test_nonterminals2():
+    &#39;&#39;&#39;
+    Testsing the nonterminals function with different inputs on another fragment
+    &#39;&#39;&#39;
+    assert set(frag2.nonterminals(set()))==set()
+    assert set(frag2.nonterminals({&#39;N&#39;,&#39;M&#39;,&#39;Y&#39;}))=={&#39;N&#39;,&#39;M&#39;}
+    assert set(frag2.nonterminals({&#39;X&#39;,&#39;Y&#39;,&#39;V&#39;}))=={&#39;X&#39;,&#39;V&#39;}
+    assert set(frag2.nonterminals({&#39;N&#39;,&#39;M&#39;,&#39;K&#39;,&#39;V&#39;,&#39;X&#39;}))=={&#39;N&#39;,&#39;M&#39;,&#39;K&#39;,&#39;V&#39;,&#39;X&#39;}</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="fgglib.autotesting.test_fg.test_cyclic1"><code class="name flex">
+<span>def <span class="ident">test_cyclic1</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Testing the cyclic predicate on an example for a factorgraph of a hidden
+markov model</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_cyclic1():
+    &#39;&#39;&#39;
+    Testing the cyclic predicate on an example for a factorgraph of a hidden
+    markov model
+    &#39;&#39;&#39;
+    assert hmmFG.cyclic() == False</code></pre>
+</details>
+</dd>
+<dt id="fgglib.autotesting.test_fg.test_cyclic2"><code class="name flex">
+<span>def <span class="ident">test_cyclic2</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Testing the cyclic predicate on an example of a simple cyclic factorgraph</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_cyclic2():
+    &#39;&#39;&#39;
+    Testing the cyclic predicate on an example of a simple cyclic factorgraph
+    &#39;&#39;&#39;
+    assert cyclicFG.cyclic() == True</code></pre>
+</details>
+</dd>
+<dt id="fgglib.autotesting.test_fg.test_leaves1"><code class="name flex">
+<span>def <span class="ident">test_leaves1</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Testing the leaves function on an example for a factorgraph of an HMM</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_leaves1():
+    &#39;&#39;&#39;
+    Testing the leaves function on an example for a factorgraph of an HMM
+    &#39;&#39;&#39;
+    assert hmmFG.leaves()=={FGVertex(None,&#39;W2&#39;,Real,defaultDomain),FGVertex(None,&#39;W4&#39;,Real,defaultDomain),FGVertex(None,&#39;W6&#39;,Real,defaultDomain)}</code></pre>
+</details>
+</dd>
+<dt id="fgglib.autotesting.test_fg.test_leaves2"><code class="name flex">
+<span>def <span class="ident">test_leaves2</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Testing the leaves function on a simple example of a fragement to check the external nodes</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_leaves2():
+    &#39;&#39;&#39;
+    Testing the leaves function on a simple example of a fragement to check the external nodes
+    &#39;&#39;&#39;
+    assert frag1.leaves()=={FGVertex(None,&#39;EXT1&#39;,frag1.R, VariableDomain(False)),FGVertex(None,&#39;EXT2&#39;,frag1.R, VariableDomain(False))}</code></pre>
+</details>
+</dd>
+<dt id="fgglib.autotesting.test_fg.test_leaves3"><code class="name flex">
+<span>def <span class="ident">test_leaves3</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Testing the leaves function on another example of a factorgraph fragment</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_leaves3():
+    &#39;&#39;&#39;
+    Testing the leaves function on another example of a factorgraph fragment
+    &#39;&#39;&#39;
+    assert frag2.leaves()=={FGVertex(None,&#39;V3&#39;,frag2.R, VariableDomain(False))}</code></pre>
+</details>
+</dd>
+<dt id="fgglib.autotesting.test_fg.test_nonterminals1"><code class="name flex">
+<span>def <span class="ident">test_nonterminals1</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Testing the nonterminals function on a simple example of a fragment</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_nonterminals1():
+    &#39;&#39;&#39;
+    Testing the nonterminals function on a simple example of a fragment
+    &#39;&#39;&#39;
+    assert set(frag1.nonterminals({&#39;A&#39;}))==set()
+    assert set(frag1.nonterminals({&#39;N&#39;}))=={&#39;N&#39;}</code></pre>
+</details>
+</dd>
+<dt id="fgglib.autotesting.test_fg.test_nonterminals2"><code class="name flex">
+<span>def <span class="ident">test_nonterminals2</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Testsing the nonterminals function with different inputs on another fragment</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_nonterminals2():
+    &#39;&#39;&#39;
+    Testsing the nonterminals function with different inputs on another fragment
+    &#39;&#39;&#39;
+    assert set(frag2.nonterminals(set()))==set()
+    assert set(frag2.nonterminals({&#39;N&#39;,&#39;M&#39;,&#39;Y&#39;}))=={&#39;N&#39;,&#39;M&#39;}
+    assert set(frag2.nonterminals({&#39;X&#39;,&#39;Y&#39;,&#39;V&#39;}))=={&#39;X&#39;,&#39;V&#39;}
+    assert set(frag2.nonterminals({&#39;N&#39;,&#39;M&#39;,&#39;K&#39;,&#39;V&#39;,&#39;X&#39;}))=={&#39;N&#39;,&#39;M&#39;,&#39;K&#39;,&#39;V&#39;,&#39;X&#39;}</code></pre>
+</details>
+</dd>
+<dt id="fgglib.autotesting.test_fg.test_normalization_constant1"><code class="name flex">
+<span>def <span class="ident">test_normalization_constant1</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Testing the computation of the normalizing constant on an example with the
+DiscreteDensity FactorFunction</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_normalization_constant1():
+    &#39;&#39;&#39;
+    Testing the computation of the normalizing constant on an example with the
+    DiscreteDensity FactorFunction
+    &#39;&#39;&#39;
+    d1 = VariableDomain(False)
+    d1.set_content({0,1})
+    d2 = VariableDomain(False)
+    d2.set_content({0,1,2})
+    spaFG1.get_vertex(&#39;X1&#39;).domain = d1
+    spaFG1.get_vertex(&#39;X2&#39;).domain = d2
+    spaFG1.get_vertex(&#39;X3&#39;).domain = d1
+    spaFG1.get_vertex(&#39;X4&#39;).domain = d1
+
+    spaFG1.set_function(spaFG1.get_edge(&#39;fa&#39;), DiscreteDensity([[0.3, 0.2, 0.1],[0.3, 0, 0.1]]))
+    spaFG1.set_function(spaFG1.get_edge(&#39;fb&#39;), DiscreteDensity([[0.3, 0.2],[0.3, 0],[0.1, 0.1]]))
+    spaFG1.set_function(spaFG1.get_edge(&#39;fc&#39;), DiscreteDensity([[0.3, 0.2],[0.3, 0],[0.1, 0.1]]))
+
+    assert np.allclose(float(spaFG1.normalization_constant().score), 0.176, atol=1e-3)</code></pre>
+</details>
+</dd>
+<dt id="fgglib.autotesting.test_fg.test_normalization_constant2"><code class="name flex">
+<span>def <span class="ident">test_normalization_constant2</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Testing the computation of the normalizing constant on an example with the
+tropical mul FactorFunction</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_normalization_constant2():
+    &#39;&#39;&#39;
+    Testing the computation of the normalizing constant on an example with the
+    tropical mul FactorFunction
+    &#39;&#39;&#39;
+    d1 = VariableDomain(False)
+    d1.set_content({1,2,3})
+    d2 = VariableDomain(False)
+    d2.set_content({4,5})
+    d3 = VariableDomain(False)
+    d3.set_content({6})
+    d4 = VariableDomain(False)
+    d4.set_content({7,8})
+    spaFG2.get_vertex(&#39;X1&#39;).domain = d1
+    spaFG2.get_vertex(&#39;X2&#39;).domain = d2
+    spaFG2.get_vertex(&#39;X3&#39;).domain = d3
+    spaFG2.get_vertex(&#39;X4&#39;).domain = d4
+
+    spaFG2.set_function(spaFG2.get_edge(&#39;fa&#39;), TropicalMul(2))
+    spaFG2.set_function(spaFG2.get_edge(&#39;fb&#39;), TropicalMul(3))
+
+    assert spaFG2.normalization_constant().score == 22</code></pre>
+</details>
+</dd>
+<dt id="fgglib.autotesting.test_fg.test_normalization_constant3"><code class="name flex">
+<span>def <span class="ident">test_normalization_constant3</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_normalization_constant3():
+    # set domains
+    # set functions (normals)
+    pass</code></pre>
+</details>
+</dd>
+<dt id="fgglib.autotesting.test_fg.test_sum_product1"><code class="name flex">
+<span>def <span class="ident">test_sum_product1</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Testing the sum-product algorithm on an example for discrete density
+functions taken from <a href="https://github.com/danbar/fglib/blob/master/examples/example_spa">https://github.com/danbar/fglib/blob/master/examples/example_spa</a></p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_sum_product1():
+    &#39;&#39;&#39;
+    Testing the sum-product algorithm on an example for discrete density
+    functions taken from https://github.com/danbar/fglib/blob/master/examples/example_spa
+    &#39;&#39;&#39;
+    d1 = VariableDomain(False)
+    d1.set_content({0,1})
+    d2 = VariableDomain(False)
+    d2.set_content({0,1,2})
+    spaFG1.get_vertex(&#39;X1&#39;).domain = d1
+    spaFG1.get_vertex(&#39;X2&#39;).domain = d2
+    spaFG1.get_vertex(&#39;X3&#39;).domain = d1
+    spaFG1.get_vertex(&#39;X4&#39;).domain = d1
+
+    spaFG1.set_function(spaFG1.get_edge(&#39;fa&#39;), DiscreteDensity([[0.3, 0.2, 0.1],[0.3, 0, 0.1]]))
+    spaFG1.set_function(spaFG1.get_edge(&#39;fb&#39;), DiscreteDensity([[0.3, 0.2],[0.3, 0],[0.1, 0.1]]))
+    spaFG1.set_function(spaFG1.get_edge(&#39;fc&#39;), DiscreteDensity([[0.3, 0.2],[0.3, 0],[0.1, 0.1]]))
+
+    marginals = spaFG1.sum_product()
+    m1 = marginals[spaFG1.get_vertex(&#39;X1&#39;)]
+    m2 = marginals[spaFG1.get_vertex(&#39;X2&#39;)]
+    m3 = marginals[spaFG1.get_vertex(&#39;X3&#39;)]
+    m4 = marginals[spaFG1.get_vertex(&#39;X4&#39;)]
+    assert np.allclose(np.asarray([m1.compute(0).score, m1.compute(1).score]) / m1.normalization_constant(d1).score, [0.551136, 0.448863], atol=1e-3)
+    assert np.allclose(np.asarray([m2.compute(0).score, m2.compute(1).score, m2.compute(2).score]) / m2.normalization_constant(d2).score, [0.852272, 0.102272, 0.045454], atol=1e-3)
+    assert np.allclose(np.asarray([m3.compute(0).score, m3.compute(1).score]) / m3.normalization_constant(d1).score, [0.636363, 0.363636], atol=1e-3)
+    assert np.allclose(np.asarray([m4.compute(0).score, m4.compute(1).score]) / m3.normalization_constant(d1).score, [0.636363, 0.363636], atol=1e-3)</code></pre>
+</details>
+</dd>
+<dt id="fgglib.autotesting.test_fg.test_sum_product2"><code class="name flex">
+<span>def <span class="ident">test_sum_product2</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Testing the sum-product algorithm on an example of tropical multiplicative
+factor functions</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_sum_product2():
+    &#39;&#39;&#39;
+    Testing the sum-product algorithm on an example of tropical multiplicative
+    factor functions
+    &#39;&#39;&#39;
+    d1 = VariableDomain(False)
+    d1.set_content({1,2,3})
+    d2 = VariableDomain(False)
+    d2.set_content({4,5})
+    d3 = VariableDomain(False)
+    d3.set_content({6})
+    d4 = VariableDomain(False)
+    d4.set_content({7,8})
+    spaFG2.get_vertex(&#39;X1&#39;).domain = d1
+    spaFG2.get_vertex(&#39;X2&#39;).domain = d2
+    spaFG2.get_vertex(&#39;X3&#39;).domain = d3
+    spaFG2.get_vertex(&#39;X4&#39;).domain = d4
+
+    spaFG2.set_function(spaFG2.get_edge(&#39;fa&#39;), TropicalMul(2))
+    spaFG2.set_function(spaFG2.get_edge(&#39;fb&#39;), TropicalMul(3))
+
+    marginals = spaFG2.sum_product()
+    assert np.allclose(marginals[spaFG2.get_vertex(&#39;X1&#39;)].compute(1).score, 22, atol=1e-3)
+    assert np.allclose(marginals[spaFG2.get_vertex(&#39;X1&#39;)].compute(2).score, 23, atol=1e-3)
+    assert np.allclose(marginals[spaFG2.get_vertex(&#39;X1&#39;)].compute(3).score, 24, atol=1e-3)
+    assert np.allclose(marginals[spaFG2.get_vertex(&#39;X2&#39;)].compute(4).score, 22, atol=1e-3)
+    assert np.allclose(marginals[spaFG2.get_vertex(&#39;X2&#39;)].compute(5).score, 24, atol=1e-3)
+    assert np.allclose(marginals[spaFG2.get_vertex(&#39;X3&#39;)].compute(6).score, 22, atol=1e-3)
+    assert np.allclose(marginals[spaFG2.get_vertex(&#39;X4&#39;)].compute(7).score, 22, atol=1e-3)
+    assert np.allclose(marginals[spaFG2.get_vertex(&#39;X4&#39;)].compute(8).score, 23, atol=1e-3)</code></pre>
+</details>
+</dd>
+<dt id="fgglib.autotesting.test_fg.test_sum_product3"><code class="name flex">
+<span>def <span class="ident">test_sum_product3</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_sum_product3():
+    # set domains
+    # set functions (normals)
+    pass</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="fgglib.autotesting" href="index.html">fgglib.autotesting</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="fgglib.autotesting.test_fg.test_cyclic1" href="#fgglib.autotesting.test_fg.test_cyclic1">test_cyclic1</a></code></li>
+<li><code><a title="fgglib.autotesting.test_fg.test_cyclic2" href="#fgglib.autotesting.test_fg.test_cyclic2">test_cyclic2</a></code></li>
+<li><code><a title="fgglib.autotesting.test_fg.test_leaves1" href="#fgglib.autotesting.test_fg.test_leaves1">test_leaves1</a></code></li>
+<li><code><a title="fgglib.autotesting.test_fg.test_leaves2" href="#fgglib.autotesting.test_fg.test_leaves2">test_leaves2</a></code></li>
+<li><code><a title="fgglib.autotesting.test_fg.test_leaves3" href="#fgglib.autotesting.test_fg.test_leaves3">test_leaves3</a></code></li>
+<li><code><a title="fgglib.autotesting.test_fg.test_nonterminals1" href="#fgglib.autotesting.test_fg.test_nonterminals1">test_nonterminals1</a></code></li>
+<li><code><a title="fgglib.autotesting.test_fg.test_nonterminals2" href="#fgglib.autotesting.test_fg.test_nonterminals2">test_nonterminals2</a></code></li>
+<li><code><a title="fgglib.autotesting.test_fg.test_normalization_constant1" href="#fgglib.autotesting.test_fg.test_normalization_constant1">test_normalization_constant1</a></code></li>
+<li><code><a title="fgglib.autotesting.test_fg.test_normalization_constant2" href="#fgglib.autotesting.test_fg.test_normalization_constant2">test_normalization_constant2</a></code></li>
+<li><code><a title="fgglib.autotesting.test_fg.test_normalization_constant3" href="#fgglib.autotesting.test_fg.test_normalization_constant3">test_normalization_constant3</a></code></li>
+<li><code><a title="fgglib.autotesting.test_fg.test_sum_product1" href="#fgglib.autotesting.test_fg.test_sum_product1">test_sum_product1</a></code></li>
+<li><code><a title="fgglib.autotesting.test_fg.test_sum_product2" href="#fgglib.autotesting.test_fg.test_sum_product2">test_sum_product2</a></code></li>
+<li><code><a title="fgglib.autotesting.test_fg.test_sum_product3" href="#fgglib.autotesting.test_fg.test_sum_product3">test_sum_product3</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

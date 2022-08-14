@@ -105,6 +105,10 @@ def test_sum_product1():
     assert np.allclose(np.asarray([m4.compute(0).score, m4.compute(1).score]) / m3.normalization_constant(d1).score, [0.636363, 0.363636], atol=1e-3)
 
 def test_normalization_constant1():
+    '''
+    Testing the computation of the normalizing constant on an example with the
+    DiscreteDensity FactorFunction
+    '''
     d1 = VariableDomain(False)
     d1.set_content({0,1})
     d2 = VariableDomain(False)

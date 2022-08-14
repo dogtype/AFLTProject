@@ -1,0 +1,2058 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>fgglib.fg.factorfunction API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>fgglib.fg.factorfunction</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from abc import *
+from fgglib.fg.variabledomain import VariableDomain
+
+class FactorFunction(ABC):
+    &#39;&#39;&#39;
+    Abstract class that represents a function attached to a factor in a factor graph.
+    &#39;&#39;&#39;
+
+    def __init__(self, R, arg_num):
+        &#39;&#39;&#39;
+        Creates a new FactorFunction object.
+
+        Args:
+            R (): Semiring class, it will be the codomain of the function.
+            arg_num (int): Number of arguments the function accepts.
+
+        Returns:
+            FactorFunction: The newly created FactorFunction object.
+        &#39;&#39;&#39;
+
+        self.R = R
+        self.arg_num = arg_num
+
+    def __add__(self, other):
+        &#39;&#39;&#39;
+        Creates a new FactorFunction that is the result of the addition of other two functions
+        that have the same arguments.
+
+        Args:
+            other (FactorFunction): The second operando of the sum.
+
+        Returns:
+            SumFactorFunction: The function representing the sum.
+
+        Raises:
+            Exception: If the operands do not have the same arguments.
+        &#39;&#39;&#39;
+
+        if self.arg_num != other.arg_num:
+            raise Exception(&#34;sum operands must have the same arguments&#34;)
+
+        return SumFactorFunction(self, other)
+
+    @abstractmethod
+    def compute(self, *args):
+        &#39;&#39;&#39;
+        Computes the value the functions assumes with some specific arguments.
+        Assumptions:
+            - the arguments are compatible with the function.
+
+        Args:
+            args (tuple): The arguments to evaluate the function on.
+
+        Returns:
+            Semiring: The value of the function.
+        &#39;&#39;&#39;
+
+        pass
+
+    def left_mul(self, other, arg_index):
+        &#39;&#39;&#39;
+        It multiplies the FactorFunction by another one, used during the sum-product algorithm.
+        The second operands has only one argument, shared with self.
+        Assumptions:
+            - the resulting function will be used only with finite variable domains, in order to
+                work with infinite domains this method must be overriden.
+
+        Args:
+            other (FactorFunction): The second operand of the multiplication.
+            arg_index (int): It is the index other&#39;s argument has w.r.t self arguments.
+
+        Returns:
+            NaiveProductFactorFunction: The function representing the product.
+
+        Raises:
+            Exception: If other does not have only one argument shared with self.
+        &#39;&#39;&#39;
+
+        if other.arg_num != 1 or arg_index &gt;= self.arg_num:
+            raise Exception(&#34;the second operand must have only one argument, shared with the first&#34;)
+
+        return NaiveProductFactorFunction(self, other, arg_index)
+
+    def marginal(self, arg_index, *domains):
+        &#39;&#39;&#39;
+        Marginalize the function w.r.t to one argument.
+        Assumptions:
+            -the domains are compatible with the functions, i.e. their content is a subset of
+                the set of correct arguments implicitly defined by the function&#39;s compute method
+            - all domains are finite and the resulting function will be used only with finite variable domains,
+                in order to work with infinite domains this method must be overriden.
+
+        Args:
+            arg_index (int): The index of the argument we will keep &#34;free&#34; while marginalizing.
+            domains (tuple[VariableDomain]): The domains for all the arguments of the function.
+
+        Returns:
+            FactorFunction: The marginal function.
+
+        Raises:
+            Exception: If arg_index is incorrect, the number of domains is incorrect or some domain is infinite.
+        &#39;&#39;&#39;
+
+        if arg_index &lt; 0 or arg_index &gt;= self.arg_num:
+            raise Exception(&#34;incorrect arg_index parameter&#34;)
+
+        if len(domains) != self.arg_num:
+            raise Exception(&#34;you must pass one domain for each argument of the function&#34;)
+
+        for d in domains:
+            if d.infinite:
+                raise Exception(&#34;to work with infinite domains, marginal method must be overridden&#34;)
+
+        fixed_arg_combs = []
+        for i, d in enumerate(domains):
+            if len(fixed_arg_combs) == 0:
+                if i == arg_index:
+                    fixed_arg_combs.append([None])
+                else:
+                    for value in d.enumerate():
+                        fixed_arg_combs.append([value])
+            else:
+                new_fixed_arg_combs = []
+                if i == arg_index:
+                    new_fixed_arg_combs += [a + [None] for a in fixed_arg_combs]
+                else:
+                    for value in d.enumerate():
+                        new_fixed_arg_combs += [a + [value] for a in fixed_arg_combs]
+                fixed_arg_combs = new_fixed_arg_combs
+
+        s = AddIdentityFactorFunction(self.R)
+        for comb in fixed_arg_combs:
+            s += FixedArgsFactorFunction(self, *comb)
+        return s
+
+    def normalization_constant(self, *domains):
+        &#39;&#39;&#39;
+        Computes the normalization constant Z of the FactorFunction.
+        Recall that Z is the sum of the values the function assumes over all possible arguments
+        assignments.
+        Assumptions:
+            - the domains are compatible with the functions, i.e. their content is a subset of
+                the set of correct arguments implicitly defined by the function&#39;s compute method
+            - all domains are finite, in order to work with infinite domains this method must be overridden.
+
+        Args:
+            domains (tuple[VariableDomain]): Tuple containing the domain for each argument of the function.
+
+        Returns:
+            Semiring: The normalization constant value.
+
+        Raises:
+            Exception: If the number of domains is incorrect or some domain is infinite.
+        &#39;&#39;&#39;
+        if len(domains) != self.arg_num:
+            raise Exception(&#34;you must pass one domain for each argument of the function&#34;)
+
+        for d in domains:
+            if d.infinite:
+                raise Exception(&#34;to work with infinite domains, marginal method must be overridden&#34;)
+
+        arg_combs = []
+        for d in domains:
+            if len(arg_combs) == 0:
+                for value in d.enumerate():
+                    arg_combs.append([value])
+            else:
+                new_arg_combs = []
+                for value in d.enumerate():
+                    new_arg_combs += [a + [value] for a in arg_combs]
+                arg_combs = new_arg_combs
+
+        Z = self.R.zero
+        for comb in arg_combs:
+            Z += self.compute(*comb)
+        return Z
+
+
+class SumFactorFunction(FactorFunction):
+    &#39;&#39;&#39;
+    Class that represents the sum of two different factor functions with the same arguments.
+    &#39;&#39;&#39;
+
+    def __init__(self, factor1, factor2):
+        &#39;&#39;&#39;
+        Creates a new SumFactorFunction object.
+
+        Args:
+            factor1 (FactorFunction): The first sum operand.
+            factor2 (FactorFunction): The second sum operand.
+
+        Returns:
+            SumFactorFunction: the result of the sum.
+
+        Raises:
+            Exception: If the two operands do not have the same number of arguments.
+        &#39;&#39;&#39;
+
+        if factor1.arg_num != factor2.arg_num:
+            raise Exception(&#34;sum operands must have the same arguments&#34;)
+
+        super().__init__(factor1.R, factor1.arg_num)
+        self.factor1 = factor1
+        self.factor2 = factor2
+        self.arg_num = factor1.arg_num
+
+    def compute(self, *args):
+        &#39;&#39;&#39;
+        See FactorFunction.compute docstring.
+        &#39;&#39;&#39;
+
+        return self.factor1.compute(*args) + self.factor2.compute(*args)
+
+    def marginal(self, arg_index, *domains):
+        &#39;&#39;&#39;
+        See FactorFunction.marginal docstring.
+        &#39;&#39;&#39;
+
+        return self.factor1.marginal(arg_index, *domains) + self.factor2.marginal(arg_index, *domains)
+
+    def normalization_constant(self, *domains):
+        &#39;&#39;&#39;
+        See FactorFunction.normalization_constant docstring.
+        &#39;&#39;&#39;
+        return self.factor1.normalization_constant(*domains) + self.factor2.normalization_constant(*domains)
+
+
+class ConstantFactorFunction(FactorFunction):
+    &#39;&#39;&#39;
+    Class that represent a FactorFunction with zero arguments and a fixed output value.
+    &#39;&#39;&#39;
+
+    def __init__(self, R, value):
+        &#39;&#39;&#39;
+        Creates the new ConstantFactorFunction object.
+
+        Args:
+            R (): Semiring class, it will be the codomain of the function.
+            value (Semiring): The fixed value the functions assumes.
+        &#39;&#39;&#39;
+
+        super().__init__(R, 0)
+        self.value = value
+
+    def compute(self, *args):
+        &#39;&#39;&#39;
+        Compute the function value, i.e. always return self.value whatever args are passed.
+
+        Args:
+            args (tuple): The arguments passed, they should be zero, but are ignored anyway.
+
+        Returns:
+            Semiring: The fixed value of the function.
+        &#39;&#39;&#39;
+
+        return self.value
+
+    def marginal(self, arg_index, *domains):
+        &#39;&#39;&#39;
+        Computes the marginal. Given that a constant function has no argument, the marginal will
+        be the function itself.
+
+        Args:
+            arg_index (int): The index of the &#34;free&#34; argument, it is ignored as the function has zero arguments
+            domains (tuple[VariableDomain]): The domains of the arguments. Ignored as well.
+
+        Returns:
+            ConstantFactorFunction: The marginal, which always coincides with self.
+        &#39;&#39;&#39;
+
+        return self
+
+    def normalization_constant(self, *domains):
+        &#39;&#39;&#39;
+        Computes the normalization constant Z of the FactorFunction.
+        Recall that Z is the sum of the values the function assumes over all possible arguments
+        assignments. In the case of a constant function, Z is equal to the constant value.
+
+        Args:
+            domains (tuple[VariableDomain]): The domains of the arguments. Ignored, given that there are zero arguments.
+
+        Returns:
+            Semiring: The value of Z, which always coincides with self.value.
+        &#39;&#39;&#39;
+        return self.value
+
+
+class AddIdentityFactorFunction(ConstantFactorFunction):
+    &#39;&#39;&#39;
+    Class that represent a constant function with the additive identity as the fixed value.
+    &#39;&#39;&#39;
+
+    def __init__(self, R):
+        &#39;&#39;&#39;
+        Creates the new AddIdentityFactorFunction object.
+
+        Args:
+            R (): Semiring whose additive identity will be the value.
+
+        Returns.
+            AddIdentityFactorFunction: The newly created object.
+        &#39;&#39;&#39;
+
+        super().__init__(R, R.zero)
+
+    def __add__(self, other):
+        &#39;&#39;&#39;
+        Add together self and another factor function. Given that self is the additive identity,
+        it always return the other function.
+
+        Args:
+            other (FactorFunction): The second operand of the sum.
+
+        Returns.
+            FactorFunction: The result of the sum, always coincides with other.
+        &#39;&#39;&#39;
+
+        return other
+
+
+class MulIdentityFactorFunction(ConstantFactorFunction):
+    &#39;&#39;&#39;
+    Class that represent a constant function with the multiplicative identity as the fixed value.
+    &#39;&#39;&#39;
+
+    def __init__(self, R):
+        &#39;&#39;&#39;
+        Creates the new MulIdentityFactorFunction object.
+
+        Args:
+            R (): Semiring whose multiplicative identity will be the value.
+
+        Returns.
+            MulIdentityFactorFunction: The newly created object.
+        &#39;&#39;&#39;
+
+        super().__init__(R, R.one)
+
+    def left_mul(self, other, arg_index):
+        &#39;&#39;&#39;
+        It multiplies the FactorFunction by another one, used during the sum-product algorithm.
+        Given that the first operand is the multiplicative identity, the operation is valid even if
+        the second operands does not have only one argument, shared with self.
+
+        Args:
+            other (FactorFunction): The second operand of the multiplication.
+            arg_index (int): It is the index other&#39;s argument has w.r.t self arguments.
+
+        Returns:
+            FactorFunction: The function representing the product, always coincides with other.
+        &#39;&#39;&#39;
+
+        return other
+
+
+class FixedArgsFactorFunction(FactorFunction):
+    &#39;&#39;&#39;
+    Class that represents a function with some argument that have a predefined fixed value,
+    while others are free. The actual arguments of the function are the free ones.
+    &#39;&#39;&#39;
+
+    def __init__(self, f, *fixed_args):
+        &#39;&#39;&#39;
+        Created a new FixedArgsFactorFunction object.
+
+        Args:
+            f (FactorFunction): The original function.
+            fixed_args (tuple): Tuple with one value for each argument. The free arguments have a None.
+
+        Returns:
+            FixedArgsFactorFunction: The newly created object.
+
+        Raises:
+            Exception: If fixed_args has an incorrect length.
+        &#39;&#39;&#39;
+
+        if len(fixed_args) != f.arg_num:
+            raise Exception(&#34;wrong number of fixed arguments&#34;)
+
+        super().__init__(f.R, fixed_args.count(None))
+        self.f = f
+        self.fixed_args = fixed_args
+
+    def _fill_args(self, *args):
+        &#39;&#39;&#39;
+        Given the arguments to the FixedArgsFactorFunction, it fill a list with the corresponding arguments
+        to pass to the original function.
+
+        Args:
+            args (tuple): the value we want to pass to the free arguments of this function
+
+        Returns:
+            list: List containing the fixed arguments and the one in args, ready to be passed to the original
+                function&#39;s compute method.
+
+        Raises:
+            Exception: If args has an incorrect size.
+        &#39;&#39;&#39;
+
+        indexes_to_fill = [i for i, value in enumerate(self.fixed_args) if value is None]
+        if len(indexes_to_fill) != len(args):
+            raise Exception(&#34;wrong number of arguments&#34;)
+
+        filled_args = [value for value in self.fixed_args]
+        for i, value in enumerate(args):
+            filled_args[indexes_to_fill[i]] = value
+
+        return filled_args
+
+    def _fill_domains(self, *domains):
+        &#39;&#39;&#39;
+        Given the domains to the FixedArgsFactorFunction, it fill a list with the corresponding domains
+        to pass to the original function.
+
+        Args:
+            domains (tuple[VariableDomain]): the domains we want to pass to the free arguments of this function
+
+        Returns:
+            list[VariableDomain]: List containing the fixed domains and the ones in the argument of this method.
+
+        Raises:
+            Exception: If domains has an incorrect size.
+        &#39;&#39;&#39;
+
+        indexes_to_fill = [i for i, value in enumerate(self.fixed_args) if value is None]
+        if len(indexes_to_fill) != len(domains):
+            raise Exception(&#34;wrong number of domains&#34;)
+
+        filled_domains = [VariableDomain(False) if value is not None else None for value in self.fixed_args]
+        for i, value in enumerate(self.fixed_args):
+            if value is not None:
+                filled_domains[i].set_content({value})
+        for i, d in enumerate(domains):
+            filled_domains[indexes_to_fill[i]] = d
+
+        return filled_domains
+
+    def compute(self, *args):
+        &#39;&#39;&#39;
+        See FactorFunction.compute docstring.
+        &#39;&#39;&#39;
+        return self.f.compute(*(self._fill_args(*args)))
+
+    def marginal(self, arg_index, *domains):
+        &#39;&#39;&#39;
+        Marginalize the function w.r.t to one argument. In order to do it, it computes the shift to apply
+        to arg_index and then call the marginal method of the original functions.
+        Assumptions:
+            -the domains are compatible with the functions, i.e. their content is a subset of
+                the set of correct arguments implicitly defined by the function&#39;s compute method
+
+        Args:
+            arg_index (int): The index of the argument we will keep &#34;free&#34; while marginalizing.
+            domains (tuple[VariableDomain]): The domains for all the arguments of the function.
+
+        Returns:
+            FactorFunction: The marginal function.
+
+        Raises:
+            Exception: If arg_index is incorrect, the number of domains is incorrect or some domain is infinite.
+        &#39;&#39;&#39;
+        cont = 0
+        shift = 0
+        for i, value in enumerate(self.fixed_args):
+            if self.fixed_args[i] is None:
+                if cont == arg_index:
+                    for j in range(0, i):
+                        if self.fixed_args[j] is not None:
+                            shift += 1
+                    break
+                else:
+                    cont += 1
+
+        return self.f.marginal(shift + arg_index, *(self._fill_domains(*domains)))
+
+    def normalization_constant(self, *domains):
+        &#39;&#39;&#39;
+        Computes the normalization constant Z of the FixedArgsFactorFunction.
+        Recall that Z is the sum of the values the function assumes over all possible arguments
+        assignments. In order to do it, it add do the proper domains a dummy single-valued domain
+        for each of the fixed arguments.
+        Assumptions:
+            - the domains are compatible with the functions, i.e. their content is a subset of
+                the set of correct arguments implicitly defined by the function&#39;s compute method
+
+        Args:
+            domains (tuple[VariableDomain]): Tuple containing the domain for each (free) argument of the function.
+
+        Returns:
+            Semiring: The normalization constant value.
+        &#39;&#39;&#39;
+        return self.f.normalization_constant(*(self._fill_domains(*domains)))
+
+
+class NaiveProductFactorFunction(FactorFunction):
+    &#39;&#39;&#39;
+    Class that represents the result of the multiplication bewteen two factor functions, with second one
+    that only has one argument, shared with the first. This can be used only if the resulting function
+    will work exclusively with finite domains. In order to work with infinite domains, FactorFunction.left_mul
+    must be overridden, thus this class would not be used anymore.
+    &#39;&#39;&#39;
+
+    def __init__(self, factor1, factor2, arg2_index):
+        &#39;&#39;&#39;
+        Creates a new NaiveProductFactorFunction object.
+
+        Args:
+            factor1 (FactorFunction): The first operand of the product.
+            factor2 (FactorFunction): The second operand of the product.
+            arg2_index (int) : It is the index factor2&#39;s argument has w.r.t factor2 arguments.
+
+        Returns:
+            NaiveProductFactorFunction: The function representing the product.
+
+        Raises:
+            Exception: If factor2 does not have only one argument shared with factor1.
+        &#39;&#39;&#39;
+
+        if factor2.arg_num != 1 or arg2_index &gt;= factor1.arg_num:
+            raise Exception(&#34;the second operand must have only one argument, shared with the first&#34;)
+
+        super().__init__(factor1.R, factor1.arg_num)
+        self.factor1 = factor1
+        self.factor2 = factor2
+        self.arg2_index = arg2_index
+
+    def compute(self, *args):
+        &#39;&#39;&#39;
+        See FactorFunction.compute docstring.
+        &#39;&#39;&#39;
+        return self.factor1.compute(*args) * self.factor2.compute(args[self.arg2_index])</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="fgglib.fg.factorfunction.AddIdentityFactorFunction"><code class="flex name class">
+<span>class <span class="ident">AddIdentityFactorFunction</span></span>
+<span>(</span><span>R)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Class that represent a constant function with the additive identity as the fixed value.</p>
+<p>Creates the new AddIdentityFactorFunction object.</p>
+<h2 id="args">Args</h2>
+<p>R (): Semiring whose additive identity will be the value.
+Returns.
+AddIdentityFactorFunction: The newly created object.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class AddIdentityFactorFunction(ConstantFactorFunction):
+    &#39;&#39;&#39;
+    Class that represent a constant function with the additive identity as the fixed value.
+    &#39;&#39;&#39;
+
+    def __init__(self, R):
+        &#39;&#39;&#39;
+        Creates the new AddIdentityFactorFunction object.
+
+        Args:
+            R (): Semiring whose additive identity will be the value.
+
+        Returns.
+            AddIdentityFactorFunction: The newly created object.
+        &#39;&#39;&#39;
+
+        super().__init__(R, R.zero)
+
+    def __add__(self, other):
+        &#39;&#39;&#39;
+        Add together self and another factor function. Given that self is the additive identity,
+        it always return the other function.
+
+        Args:
+            other (FactorFunction): The second operand of the sum.
+
+        Returns.
+            FactorFunction: The result of the sum, always coincides with other.
+        &#39;&#39;&#39;
+
+        return other</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fgglib.fg.factorfunction.ConstantFactorFunction" href="#fgglib.fg.factorfunction.ConstantFactorFunction">ConstantFactorFunction</a></li>
+<li><a title="fgglib.fg.factorfunction.FactorFunction" href="#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="fgglib.fg.factorfunction.ConstantFactorFunction" href="#fgglib.fg.factorfunction.ConstantFactorFunction">ConstantFactorFunction</a></b></code>:
+<ul class="hlist">
+<li><code><a title="fgglib.fg.factorfunction.ConstantFactorFunction.compute" href="#fgglib.fg.factorfunction.ConstantFactorFunction.compute">compute</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.ConstantFactorFunction.left_mul" href="#fgglib.fg.factorfunction.FactorFunction.left_mul">left_mul</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.ConstantFactorFunction.marginal" href="#fgglib.fg.factorfunction.ConstantFactorFunction.marginal">marginal</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.ConstantFactorFunction.normalization_constant" href="#fgglib.fg.factorfunction.ConstantFactorFunction.normalization_constant">normalization_constant</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="fgglib.fg.factorfunction.ConstantFactorFunction"><code class="flex name class">
+<span>class <span class="ident">ConstantFactorFunction</span></span>
+<span>(</span><span>R, value)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Class that represent a FactorFunction with zero arguments and a fixed output value.</p>
+<p>Creates the new ConstantFactorFunction object.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt>R (): Semiring class, it will be the codomain of the function.</dt>
+<dt><strong><code>value</code></strong> :&ensp;<code>Semiring</code></dt>
+<dd>The fixed value the functions assumes.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ConstantFactorFunction(FactorFunction):
+    &#39;&#39;&#39;
+    Class that represent a FactorFunction with zero arguments and a fixed output value.
+    &#39;&#39;&#39;
+
+    def __init__(self, R, value):
+        &#39;&#39;&#39;
+        Creates the new ConstantFactorFunction object.
+
+        Args:
+            R (): Semiring class, it will be the codomain of the function.
+            value (Semiring): The fixed value the functions assumes.
+        &#39;&#39;&#39;
+
+        super().__init__(R, 0)
+        self.value = value
+
+    def compute(self, *args):
+        &#39;&#39;&#39;
+        Compute the function value, i.e. always return self.value whatever args are passed.
+
+        Args:
+            args (tuple): The arguments passed, they should be zero, but are ignored anyway.
+
+        Returns:
+            Semiring: The fixed value of the function.
+        &#39;&#39;&#39;
+
+        return self.value
+
+    def marginal(self, arg_index, *domains):
+        &#39;&#39;&#39;
+        Computes the marginal. Given that a constant function has no argument, the marginal will
+        be the function itself.
+
+        Args:
+            arg_index (int): The index of the &#34;free&#34; argument, it is ignored as the function has zero arguments
+            domains (tuple[VariableDomain]): The domains of the arguments. Ignored as well.
+
+        Returns:
+            ConstantFactorFunction: The marginal, which always coincides with self.
+        &#39;&#39;&#39;
+
+        return self
+
+    def normalization_constant(self, *domains):
+        &#39;&#39;&#39;
+        Computes the normalization constant Z of the FactorFunction.
+        Recall that Z is the sum of the values the function assumes over all possible arguments
+        assignments. In the case of a constant function, Z is equal to the constant value.
+
+        Args:
+            domains (tuple[VariableDomain]): The domains of the arguments. Ignored, given that there are zero arguments.
+
+        Returns:
+            Semiring: The value of Z, which always coincides with self.value.
+        &#39;&#39;&#39;
+        return self.value</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fgglib.fg.factorfunction.FactorFunction" href="#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="fgglib.fg.factorfunction.AddIdentityFactorFunction" href="#fgglib.fg.factorfunction.AddIdentityFactorFunction">AddIdentityFactorFunction</a></li>
+<li><a title="fgglib.fg.factorfunction.MulIdentityFactorFunction" href="#fgglib.fg.factorfunction.MulIdentityFactorFunction">MulIdentityFactorFunction</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="fgglib.fg.factorfunction.ConstantFactorFunction.compute"><code class="name flex">
+<span>def <span class="ident">compute</span></span>(<span>self, *args)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the function value, i.e. always return self.value whatever args are passed.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>args</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>The arguments passed, they should be zero, but are ignored anyway.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Semiring</code></dt>
+<dd>The fixed value of the function.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute(self, *args):
+    &#39;&#39;&#39;
+    Compute the function value, i.e. always return self.value whatever args are passed.
+
+    Args:
+        args (tuple): The arguments passed, they should be zero, but are ignored anyway.
+
+    Returns:
+        Semiring: The fixed value of the function.
+    &#39;&#39;&#39;
+
+    return self.value</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fg.factorfunction.ConstantFactorFunction.marginal"><code class="name flex">
+<span>def <span class="ident">marginal</span></span>(<span>self, arg_index, *domains)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes the marginal. Given that a constant function has no argument, the marginal will
+be the function itself.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>arg_index</code></strong> :&ensp;<code>int</code></dt>
+<dd>The index of the "free" argument, it is ignored as the function has zero arguments</dd>
+<dt><strong><code>domains</code></strong> :&ensp;<code>tuple[VariableDomain]</code></dt>
+<dd>The domains of the arguments. Ignored as well.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="fgglib.fg.factorfunction.ConstantFactorFunction" href="#fgglib.fg.factorfunction.ConstantFactorFunction">ConstantFactorFunction</a></code></dt>
+<dd>The marginal, which always coincides with self.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def marginal(self, arg_index, *domains):
+    &#39;&#39;&#39;
+    Computes the marginal. Given that a constant function has no argument, the marginal will
+    be the function itself.
+
+    Args:
+        arg_index (int): The index of the &#34;free&#34; argument, it is ignored as the function has zero arguments
+        domains (tuple[VariableDomain]): The domains of the arguments. Ignored as well.
+
+    Returns:
+        ConstantFactorFunction: The marginal, which always coincides with self.
+    &#39;&#39;&#39;
+
+    return self</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fg.factorfunction.ConstantFactorFunction.normalization_constant"><code class="name flex">
+<span>def <span class="ident">normalization_constant</span></span>(<span>self, *domains)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes the normalization constant Z of the FactorFunction.
+Recall that Z is the sum of the values the function assumes over all possible arguments
+assignments. In the case of a constant function, Z is equal to the constant value.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>domains</code></strong> :&ensp;<code>tuple[VariableDomain]</code></dt>
+<dd>The domains of the arguments. Ignored, given that there are zero arguments.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Semiring</code></dt>
+<dd>The value of Z, which always coincides with self.value.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def normalization_constant(self, *domains):
+    &#39;&#39;&#39;
+    Computes the normalization constant Z of the FactorFunction.
+    Recall that Z is the sum of the values the function assumes over all possible arguments
+    assignments. In the case of a constant function, Z is equal to the constant value.
+
+    Args:
+        domains (tuple[VariableDomain]): The domains of the arguments. Ignored, given that there are zero arguments.
+
+    Returns:
+        Semiring: The value of Z, which always coincides with self.value.
+    &#39;&#39;&#39;
+    return self.value</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="fgglib.fg.factorfunction.FactorFunction" href="#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></b></code>:
+<ul class="hlist">
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.left_mul" href="#fgglib.fg.factorfunction.FactorFunction.left_mul">left_mul</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="fgglib.fg.factorfunction.FactorFunction"><code class="flex name class">
+<span>class <span class="ident">FactorFunction</span></span>
+<span>(</span><span>R, arg_num)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Abstract class that represents a function attached to a factor in a factor graph.</p>
+<p>Creates a new FactorFunction object.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt>R (): Semiring class, it will be the codomain of the function.</dt>
+<dt><strong><code>arg_num</code></strong> :&ensp;<code>int</code></dt>
+<dd>Number of arguments the function accepts.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="fgglib.fg.factorfunction.FactorFunction" href="#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></code></dt>
+<dd>The newly created FactorFunction object.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class FactorFunction(ABC):
+    &#39;&#39;&#39;
+    Abstract class that represents a function attached to a factor in a factor graph.
+    &#39;&#39;&#39;
+
+    def __init__(self, R, arg_num):
+        &#39;&#39;&#39;
+        Creates a new FactorFunction object.
+
+        Args:
+            R (): Semiring class, it will be the codomain of the function.
+            arg_num (int): Number of arguments the function accepts.
+
+        Returns:
+            FactorFunction: The newly created FactorFunction object.
+        &#39;&#39;&#39;
+
+        self.R = R
+        self.arg_num = arg_num
+
+    def __add__(self, other):
+        &#39;&#39;&#39;
+        Creates a new FactorFunction that is the result of the addition of other two functions
+        that have the same arguments.
+
+        Args:
+            other (FactorFunction): The second operando of the sum.
+
+        Returns:
+            SumFactorFunction: The function representing the sum.
+
+        Raises:
+            Exception: If the operands do not have the same arguments.
+        &#39;&#39;&#39;
+
+        if self.arg_num != other.arg_num:
+            raise Exception(&#34;sum operands must have the same arguments&#34;)
+
+        return SumFactorFunction(self, other)
+
+    @abstractmethod
+    def compute(self, *args):
+        &#39;&#39;&#39;
+        Computes the value the functions assumes with some specific arguments.
+        Assumptions:
+            - the arguments are compatible with the function.
+
+        Args:
+            args (tuple): The arguments to evaluate the function on.
+
+        Returns:
+            Semiring: The value of the function.
+        &#39;&#39;&#39;
+
+        pass
+
+    def left_mul(self, other, arg_index):
+        &#39;&#39;&#39;
+        It multiplies the FactorFunction by another one, used during the sum-product algorithm.
+        The second operands has only one argument, shared with self.
+        Assumptions:
+            - the resulting function will be used only with finite variable domains, in order to
+                work with infinite domains this method must be overriden.
+
+        Args:
+            other (FactorFunction): The second operand of the multiplication.
+            arg_index (int): It is the index other&#39;s argument has w.r.t self arguments.
+
+        Returns:
+            NaiveProductFactorFunction: The function representing the product.
+
+        Raises:
+            Exception: If other does not have only one argument shared with self.
+        &#39;&#39;&#39;
+
+        if other.arg_num != 1 or arg_index &gt;= self.arg_num:
+            raise Exception(&#34;the second operand must have only one argument, shared with the first&#34;)
+
+        return NaiveProductFactorFunction(self, other, arg_index)
+
+    def marginal(self, arg_index, *domains):
+        &#39;&#39;&#39;
+        Marginalize the function w.r.t to one argument.
+        Assumptions:
+            -the domains are compatible with the functions, i.e. their content is a subset of
+                the set of correct arguments implicitly defined by the function&#39;s compute method
+            - all domains are finite and the resulting function will be used only with finite variable domains,
+                in order to work with infinite domains this method must be overriden.
+
+        Args:
+            arg_index (int): The index of the argument we will keep &#34;free&#34; while marginalizing.
+            domains (tuple[VariableDomain]): The domains for all the arguments of the function.
+
+        Returns:
+            FactorFunction: The marginal function.
+
+        Raises:
+            Exception: If arg_index is incorrect, the number of domains is incorrect or some domain is infinite.
+        &#39;&#39;&#39;
+
+        if arg_index &lt; 0 or arg_index &gt;= self.arg_num:
+            raise Exception(&#34;incorrect arg_index parameter&#34;)
+
+        if len(domains) != self.arg_num:
+            raise Exception(&#34;you must pass one domain for each argument of the function&#34;)
+
+        for d in domains:
+            if d.infinite:
+                raise Exception(&#34;to work with infinite domains, marginal method must be overridden&#34;)
+
+        fixed_arg_combs = []
+        for i, d in enumerate(domains):
+            if len(fixed_arg_combs) == 0:
+                if i == arg_index:
+                    fixed_arg_combs.append([None])
+                else:
+                    for value in d.enumerate():
+                        fixed_arg_combs.append([value])
+            else:
+                new_fixed_arg_combs = []
+                if i == arg_index:
+                    new_fixed_arg_combs += [a + [None] for a in fixed_arg_combs]
+                else:
+                    for value in d.enumerate():
+                        new_fixed_arg_combs += [a + [value] for a in fixed_arg_combs]
+                fixed_arg_combs = new_fixed_arg_combs
+
+        s = AddIdentityFactorFunction(self.R)
+        for comb in fixed_arg_combs:
+            s += FixedArgsFactorFunction(self, *comb)
+        return s
+
+    def normalization_constant(self, *domains):
+        &#39;&#39;&#39;
+        Computes the normalization constant Z of the FactorFunction.
+        Recall that Z is the sum of the values the function assumes over all possible arguments
+        assignments.
+        Assumptions:
+            - the domains are compatible with the functions, i.e. their content is a subset of
+                the set of correct arguments implicitly defined by the function&#39;s compute method
+            - all domains are finite, in order to work with infinite domains this method must be overridden.
+
+        Args:
+            domains (tuple[VariableDomain]): Tuple containing the domain for each argument of the function.
+
+        Returns:
+            Semiring: The normalization constant value.
+
+        Raises:
+            Exception: If the number of domains is incorrect or some domain is infinite.
+        &#39;&#39;&#39;
+        if len(domains) != self.arg_num:
+            raise Exception(&#34;you must pass one domain for each argument of the function&#34;)
+
+        for d in domains:
+            if d.infinite:
+                raise Exception(&#34;to work with infinite domains, marginal method must be overridden&#34;)
+
+        arg_combs = []
+        for d in domains:
+            if len(arg_combs) == 0:
+                for value in d.enumerate():
+                    arg_combs.append([value])
+            else:
+                new_arg_combs = []
+                for value in d.enumerate():
+                    new_arg_combs += [a + [value] for a in arg_combs]
+                arg_combs = new_arg_combs
+
+        Z = self.R.zero
+        for comb in arg_combs:
+            Z += self.compute(*comb)
+        return Z</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>abc.ABC</li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="fgglib.fg.factorfunction.ConstantFactorFunction" href="#fgglib.fg.factorfunction.ConstantFactorFunction">ConstantFactorFunction</a></li>
+<li><a title="fgglib.fg.factorfunction.FixedArgsFactorFunction" href="#fgglib.fg.factorfunction.FixedArgsFactorFunction">FixedArgsFactorFunction</a></li>
+<li><a title="fgglib.fg.factorfunction.NaiveProductFactorFunction" href="#fgglib.fg.factorfunction.NaiveProductFactorFunction">NaiveProductFactorFunction</a></li>
+<li><a title="fgglib.fg.factorfunction.SumFactorFunction" href="#fgglib.fg.factorfunction.SumFactorFunction">SumFactorFunction</a></li>
+<li><a title="fgglib.fg.functions.circuit.And" href="functions/circuit.html#fgglib.fg.functions.circuit.And">And</a></li>
+<li><a title="fgglib.fg.functions.circuit.Not" href="functions/circuit.html#fgglib.fg.functions.circuit.Not">Not</a></li>
+<li><a title="fgglib.fg.functions.circuit.Or" href="functions/circuit.html#fgglib.fg.functions.circuit.Or">Or</a></li>
+<li><a title="fgglib.fg.functions.discretedensity.DiscreteDensity" href="functions/discretedensity.html#fgglib.fg.functions.discretedensity.DiscreteDensity">DiscreteDensity</a></li>
+<li><a title="fgglib.fg.functions.normaldensity.NormalDensity" href="functions/normaldensity.html#fgglib.fg.functions.normaldensity.NormalDensity">NormalDensity</a></li>
+<li><a title="fgglib.fg.functions.tropicalmul.TropicalMul" href="functions/tropicalmul.html#fgglib.fg.functions.tropicalmul.TropicalMul">TropicalMul</a></li>
+<li><a title="fgglib.fgg.fggsum_product.CondEquals" href="../fgg/fggsum_product.html#fgglib.fgg.fggsum_product.CondEquals">CondEquals</a></li>
+<li><a title="fgglib.fgg.fggsum_product.CondFactor" href="../fgg/fggsum_product.html#fgglib.fgg.fggsum_product.CondFactor">CondFactor</a></li>
+<li><a title="fgglib.fgg.fggsum_product.CondNormalize" href="../fgg/fggsum_product.html#fgglib.fgg.fggsum_product.CondNormalize">CondNormalize</a></li>
+<li><a title="fgglib.fgg.fggsum_product.CondOne" href="../fgg/fggsum_product.html#fgglib.fgg.fggsum_product.CondOne">CondOne</a></li>
+<li><a title="fgglib.fgg.fggsum_product.CondStart" href="../fgg/fggsum_product.html#fgglib.fgg.fggsum_product.CondStart">CondStart</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="fgglib.fg.factorfunction.FactorFunction.compute"><code class="name flex">
+<span>def <span class="ident">compute</span></span>(<span>self, *args)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes the value the functions assumes with some specific arguments.</p>
+<h2 id="assumptions">Assumptions</h2>
+<ul>
+<li>the arguments are compatible with the function.</li>
+</ul>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>args</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>The arguments to evaluate the function on.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Semiring</code></dt>
+<dd>The value of the function.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@abstractmethod
+def compute(self, *args):
+    &#39;&#39;&#39;
+    Computes the value the functions assumes with some specific arguments.
+    Assumptions:
+        - the arguments are compatible with the function.
+
+    Args:
+        args (tuple): The arguments to evaluate the function on.
+
+    Returns:
+        Semiring: The value of the function.
+    &#39;&#39;&#39;
+
+    pass</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fg.factorfunction.FactorFunction.left_mul"><code class="name flex">
+<span>def <span class="ident">left_mul</span></span>(<span>self, other, arg_index)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>It multiplies the FactorFunction by another one, used during the sum-product algorithm.
+The second operands has only one argument, shared with self.</p>
+<h2 id="assumptions">Assumptions</h2>
+<ul>
+<li>the resulting function will be used only with finite variable domains, in order to
+work with infinite domains this method must be overriden.</li>
+</ul>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>other</code></strong> :&ensp;<code><a title="fgglib.fg.factorfunction.FactorFunction" href="#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></code></dt>
+<dd>The second operand of the multiplication.</dd>
+<dt><strong><code>arg_index</code></strong> :&ensp;<code>int</code></dt>
+<dd>It is the index other's argument has w.r.t self arguments.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="fgglib.fg.factorfunction.NaiveProductFactorFunction" href="#fgglib.fg.factorfunction.NaiveProductFactorFunction">NaiveProductFactorFunction</a></code></dt>
+<dd>The function representing the product.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>Exception</code></dt>
+<dd>If other does not have only one argument shared with self.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def left_mul(self, other, arg_index):
+    &#39;&#39;&#39;
+    It multiplies the FactorFunction by another one, used during the sum-product algorithm.
+    The second operands has only one argument, shared with self.
+    Assumptions:
+        - the resulting function will be used only with finite variable domains, in order to
+            work with infinite domains this method must be overriden.
+
+    Args:
+        other (FactorFunction): The second operand of the multiplication.
+        arg_index (int): It is the index other&#39;s argument has w.r.t self arguments.
+
+    Returns:
+        NaiveProductFactorFunction: The function representing the product.
+
+    Raises:
+        Exception: If other does not have only one argument shared with self.
+    &#39;&#39;&#39;
+
+    if other.arg_num != 1 or arg_index &gt;= self.arg_num:
+        raise Exception(&#34;the second operand must have only one argument, shared with the first&#34;)
+
+    return NaiveProductFactorFunction(self, other, arg_index)</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fg.factorfunction.FactorFunction.marginal"><code class="name flex">
+<span>def <span class="ident">marginal</span></span>(<span>self, arg_index, *domains)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Marginalize the function w.r.t to one argument.</p>
+<h2 id="assumptions">Assumptions</h2>
+<p>-the domains are compatible with the functions, i.e. their content is a subset of
+the set of correct arguments implicitly defined by the function's compute method
+- all domains are finite and the resulting function will be used only with finite variable domains,
+in order to work with infinite domains this method must be overriden.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>arg_index</code></strong> :&ensp;<code>int</code></dt>
+<dd>The index of the argument we will keep "free" while marginalizing.</dd>
+<dt><strong><code>domains</code></strong> :&ensp;<code>tuple[VariableDomain]</code></dt>
+<dd>The domains for all the arguments of the function.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="fgglib.fg.factorfunction.FactorFunction" href="#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></code></dt>
+<dd>The marginal function.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>Exception</code></dt>
+<dd>If arg_index is incorrect, the number of domains is incorrect or some domain is infinite.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def marginal(self, arg_index, *domains):
+    &#39;&#39;&#39;
+    Marginalize the function w.r.t to one argument.
+    Assumptions:
+        -the domains are compatible with the functions, i.e. their content is a subset of
+            the set of correct arguments implicitly defined by the function&#39;s compute method
+        - all domains are finite and the resulting function will be used only with finite variable domains,
+            in order to work with infinite domains this method must be overriden.
+
+    Args:
+        arg_index (int): The index of the argument we will keep &#34;free&#34; while marginalizing.
+        domains (tuple[VariableDomain]): The domains for all the arguments of the function.
+
+    Returns:
+        FactorFunction: The marginal function.
+
+    Raises:
+        Exception: If arg_index is incorrect, the number of domains is incorrect or some domain is infinite.
+    &#39;&#39;&#39;
+
+    if arg_index &lt; 0 or arg_index &gt;= self.arg_num:
+        raise Exception(&#34;incorrect arg_index parameter&#34;)
+
+    if len(domains) != self.arg_num:
+        raise Exception(&#34;you must pass one domain for each argument of the function&#34;)
+
+    for d in domains:
+        if d.infinite:
+            raise Exception(&#34;to work with infinite domains, marginal method must be overridden&#34;)
+
+    fixed_arg_combs = []
+    for i, d in enumerate(domains):
+        if len(fixed_arg_combs) == 0:
+            if i == arg_index:
+                fixed_arg_combs.append([None])
+            else:
+                for value in d.enumerate():
+                    fixed_arg_combs.append([value])
+        else:
+            new_fixed_arg_combs = []
+            if i == arg_index:
+                new_fixed_arg_combs += [a + [None] for a in fixed_arg_combs]
+            else:
+                for value in d.enumerate():
+                    new_fixed_arg_combs += [a + [value] for a in fixed_arg_combs]
+            fixed_arg_combs = new_fixed_arg_combs
+
+    s = AddIdentityFactorFunction(self.R)
+    for comb in fixed_arg_combs:
+        s += FixedArgsFactorFunction(self, *comb)
+    return s</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fg.factorfunction.FactorFunction.normalization_constant"><code class="name flex">
+<span>def <span class="ident">normalization_constant</span></span>(<span>self, *domains)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes the normalization constant Z of the FactorFunction.
+Recall that Z is the sum of the values the function assumes over all possible arguments
+assignments.</p>
+<h2 id="assumptions">Assumptions</h2>
+<ul>
+<li>the domains are compatible with the functions, i.e. their content is a subset of
+the set of correct arguments implicitly defined by the function's compute method</li>
+<li>all domains are finite, in order to work with infinite domains this method must be overridden.</li>
+</ul>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>domains</code></strong> :&ensp;<code>tuple[VariableDomain]</code></dt>
+<dd>Tuple containing the domain for each argument of the function.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Semiring</code></dt>
+<dd>The normalization constant value.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>Exception</code></dt>
+<dd>If the number of domains is incorrect or some domain is infinite.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def normalization_constant(self, *domains):
+    &#39;&#39;&#39;
+    Computes the normalization constant Z of the FactorFunction.
+    Recall that Z is the sum of the values the function assumes over all possible arguments
+    assignments.
+    Assumptions:
+        - the domains are compatible with the functions, i.e. their content is a subset of
+            the set of correct arguments implicitly defined by the function&#39;s compute method
+        - all domains are finite, in order to work with infinite domains this method must be overridden.
+
+    Args:
+        domains (tuple[VariableDomain]): Tuple containing the domain for each argument of the function.
+
+    Returns:
+        Semiring: The normalization constant value.
+
+    Raises:
+        Exception: If the number of domains is incorrect or some domain is infinite.
+    &#39;&#39;&#39;
+    if len(domains) != self.arg_num:
+        raise Exception(&#34;you must pass one domain for each argument of the function&#34;)
+
+    for d in domains:
+        if d.infinite:
+            raise Exception(&#34;to work with infinite domains, marginal method must be overridden&#34;)
+
+    arg_combs = []
+    for d in domains:
+        if len(arg_combs) == 0:
+            for value in d.enumerate():
+                arg_combs.append([value])
+        else:
+            new_arg_combs = []
+            for value in d.enumerate():
+                new_arg_combs += [a + [value] for a in arg_combs]
+            arg_combs = new_arg_combs
+
+    Z = self.R.zero
+    for comb in arg_combs:
+        Z += self.compute(*comb)
+    return Z</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="fgglib.fg.factorfunction.FixedArgsFactorFunction"><code class="flex name class">
+<span>class <span class="ident">FixedArgsFactorFunction</span></span>
+<span>(</span><span>f, *fixed_args)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Class that represents a function with some argument that have a predefined fixed value,
+while others are free. The actual arguments of the function are the free ones.</p>
+<p>Created a new FixedArgsFactorFunction object.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>f</code></strong> :&ensp;<code><a title="fgglib.fg.factorfunction.FactorFunction" href="#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></code></dt>
+<dd>The original function.</dd>
+<dt><strong><code>fixed_args</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>Tuple with one value for each argument. The free arguments have a None.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="fgglib.fg.factorfunction.FixedArgsFactorFunction" href="#fgglib.fg.factorfunction.FixedArgsFactorFunction">FixedArgsFactorFunction</a></code></dt>
+<dd>The newly created object.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>Exception</code></dt>
+<dd>If fixed_args has an incorrect length.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class FixedArgsFactorFunction(FactorFunction):
+    &#39;&#39;&#39;
+    Class that represents a function with some argument that have a predefined fixed value,
+    while others are free. The actual arguments of the function are the free ones.
+    &#39;&#39;&#39;
+
+    def __init__(self, f, *fixed_args):
+        &#39;&#39;&#39;
+        Created a new FixedArgsFactorFunction object.
+
+        Args:
+            f (FactorFunction): The original function.
+            fixed_args (tuple): Tuple with one value for each argument. The free arguments have a None.
+
+        Returns:
+            FixedArgsFactorFunction: The newly created object.
+
+        Raises:
+            Exception: If fixed_args has an incorrect length.
+        &#39;&#39;&#39;
+
+        if len(fixed_args) != f.arg_num:
+            raise Exception(&#34;wrong number of fixed arguments&#34;)
+
+        super().__init__(f.R, fixed_args.count(None))
+        self.f = f
+        self.fixed_args = fixed_args
+
+    def _fill_args(self, *args):
+        &#39;&#39;&#39;
+        Given the arguments to the FixedArgsFactorFunction, it fill a list with the corresponding arguments
+        to pass to the original function.
+
+        Args:
+            args (tuple): the value we want to pass to the free arguments of this function
+
+        Returns:
+            list: List containing the fixed arguments and the one in args, ready to be passed to the original
+                function&#39;s compute method.
+
+        Raises:
+            Exception: If args has an incorrect size.
+        &#39;&#39;&#39;
+
+        indexes_to_fill = [i for i, value in enumerate(self.fixed_args) if value is None]
+        if len(indexes_to_fill) != len(args):
+            raise Exception(&#34;wrong number of arguments&#34;)
+
+        filled_args = [value for value in self.fixed_args]
+        for i, value in enumerate(args):
+            filled_args[indexes_to_fill[i]] = value
+
+        return filled_args
+
+    def _fill_domains(self, *domains):
+        &#39;&#39;&#39;
+        Given the domains to the FixedArgsFactorFunction, it fill a list with the corresponding domains
+        to pass to the original function.
+
+        Args:
+            domains (tuple[VariableDomain]): the domains we want to pass to the free arguments of this function
+
+        Returns:
+            list[VariableDomain]: List containing the fixed domains and the ones in the argument of this method.
+
+        Raises:
+            Exception: If domains has an incorrect size.
+        &#39;&#39;&#39;
+
+        indexes_to_fill = [i for i, value in enumerate(self.fixed_args) if value is None]
+        if len(indexes_to_fill) != len(domains):
+            raise Exception(&#34;wrong number of domains&#34;)
+
+        filled_domains = [VariableDomain(False) if value is not None else None for value in self.fixed_args]
+        for i, value in enumerate(self.fixed_args):
+            if value is not None:
+                filled_domains[i].set_content({value})
+        for i, d in enumerate(domains):
+            filled_domains[indexes_to_fill[i]] = d
+
+        return filled_domains
+
+    def compute(self, *args):
+        &#39;&#39;&#39;
+        See FactorFunction.compute docstring.
+        &#39;&#39;&#39;
+        return self.f.compute(*(self._fill_args(*args)))
+
+    def marginal(self, arg_index, *domains):
+        &#39;&#39;&#39;
+        Marginalize the function w.r.t to one argument. In order to do it, it computes the shift to apply
+        to arg_index and then call the marginal method of the original functions.
+        Assumptions:
+            -the domains are compatible with the functions, i.e. their content is a subset of
+                the set of correct arguments implicitly defined by the function&#39;s compute method
+
+        Args:
+            arg_index (int): The index of the argument we will keep &#34;free&#34; while marginalizing.
+            domains (tuple[VariableDomain]): The domains for all the arguments of the function.
+
+        Returns:
+            FactorFunction: The marginal function.
+
+        Raises:
+            Exception: If arg_index is incorrect, the number of domains is incorrect or some domain is infinite.
+        &#39;&#39;&#39;
+        cont = 0
+        shift = 0
+        for i, value in enumerate(self.fixed_args):
+            if self.fixed_args[i] is None:
+                if cont == arg_index:
+                    for j in range(0, i):
+                        if self.fixed_args[j] is not None:
+                            shift += 1
+                    break
+                else:
+                    cont += 1
+
+        return self.f.marginal(shift + arg_index, *(self._fill_domains(*domains)))
+
+    def normalization_constant(self, *domains):
+        &#39;&#39;&#39;
+        Computes the normalization constant Z of the FixedArgsFactorFunction.
+        Recall that Z is the sum of the values the function assumes over all possible arguments
+        assignments. In order to do it, it add do the proper domains a dummy single-valued domain
+        for each of the fixed arguments.
+        Assumptions:
+            - the domains are compatible with the functions, i.e. their content is a subset of
+                the set of correct arguments implicitly defined by the function&#39;s compute method
+
+        Args:
+            domains (tuple[VariableDomain]): Tuple containing the domain for each (free) argument of the function.
+
+        Returns:
+            Semiring: The normalization constant value.
+        &#39;&#39;&#39;
+        return self.f.normalization_constant(*(self._fill_domains(*domains)))</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fgglib.fg.factorfunction.FactorFunction" href="#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="fgglib.fg.factorfunction.FixedArgsFactorFunction.compute"><code class="name flex">
+<span>def <span class="ident">compute</span></span>(<span>self, *args)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>See FactorFunction.compute docstring.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute(self, *args):
+    &#39;&#39;&#39;
+    See FactorFunction.compute docstring.
+    &#39;&#39;&#39;
+    return self.f.compute(*(self._fill_args(*args)))</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fg.factorfunction.FixedArgsFactorFunction.marginal"><code class="name flex">
+<span>def <span class="ident">marginal</span></span>(<span>self, arg_index, *domains)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Marginalize the function w.r.t to one argument. In order to do it, it computes the shift to apply
+to arg_index and then call the marginal method of the original functions.</p>
+<h2 id="assumptions">Assumptions</h2>
+<p>-the domains are compatible with the functions, i.e. their content is a subset of
+the set of correct arguments implicitly defined by the function's compute method</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>arg_index</code></strong> :&ensp;<code>int</code></dt>
+<dd>The index of the argument we will keep "free" while marginalizing.</dd>
+<dt><strong><code>domains</code></strong> :&ensp;<code>tuple[VariableDomain]</code></dt>
+<dd>The domains for all the arguments of the function.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="fgglib.fg.factorfunction.FactorFunction" href="#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></code></dt>
+<dd>The marginal function.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>Exception</code></dt>
+<dd>If arg_index is incorrect, the number of domains is incorrect or some domain is infinite.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def marginal(self, arg_index, *domains):
+    &#39;&#39;&#39;
+    Marginalize the function w.r.t to one argument. In order to do it, it computes the shift to apply
+    to arg_index and then call the marginal method of the original functions.
+    Assumptions:
+        -the domains are compatible with the functions, i.e. their content is a subset of
+            the set of correct arguments implicitly defined by the function&#39;s compute method
+
+    Args:
+        arg_index (int): The index of the argument we will keep &#34;free&#34; while marginalizing.
+        domains (tuple[VariableDomain]): The domains for all the arguments of the function.
+
+    Returns:
+        FactorFunction: The marginal function.
+
+    Raises:
+        Exception: If arg_index is incorrect, the number of domains is incorrect or some domain is infinite.
+    &#39;&#39;&#39;
+    cont = 0
+    shift = 0
+    for i, value in enumerate(self.fixed_args):
+        if self.fixed_args[i] is None:
+            if cont == arg_index:
+                for j in range(0, i):
+                    if self.fixed_args[j] is not None:
+                        shift += 1
+                break
+            else:
+                cont += 1
+
+    return self.f.marginal(shift + arg_index, *(self._fill_domains(*domains)))</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fg.factorfunction.FixedArgsFactorFunction.normalization_constant"><code class="name flex">
+<span>def <span class="ident">normalization_constant</span></span>(<span>self, *domains)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes the normalization constant Z of the FixedArgsFactorFunction.
+Recall that Z is the sum of the values the function assumes over all possible arguments
+assignments. In order to do it, it add do the proper domains a dummy single-valued domain
+for each of the fixed arguments.</p>
+<h2 id="assumptions">Assumptions</h2>
+<ul>
+<li>the domains are compatible with the functions, i.e. their content is a subset of
+the set of correct arguments implicitly defined by the function's compute method</li>
+</ul>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>domains</code></strong> :&ensp;<code>tuple[VariableDomain]</code></dt>
+<dd>Tuple containing the domain for each (free) argument of the function.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Semiring</code></dt>
+<dd>The normalization constant value.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def normalization_constant(self, *domains):
+    &#39;&#39;&#39;
+    Computes the normalization constant Z of the FixedArgsFactorFunction.
+    Recall that Z is the sum of the values the function assumes over all possible arguments
+    assignments. In order to do it, it add do the proper domains a dummy single-valued domain
+    for each of the fixed arguments.
+    Assumptions:
+        - the domains are compatible with the functions, i.e. their content is a subset of
+            the set of correct arguments implicitly defined by the function&#39;s compute method
+
+    Args:
+        domains (tuple[VariableDomain]): Tuple containing the domain for each (free) argument of the function.
+
+    Returns:
+        Semiring: The normalization constant value.
+    &#39;&#39;&#39;
+    return self.f.normalization_constant(*(self._fill_domains(*domains)))</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="fgglib.fg.factorfunction.FactorFunction" href="#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></b></code>:
+<ul class="hlist">
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.left_mul" href="#fgglib.fg.factorfunction.FactorFunction.left_mul">left_mul</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="fgglib.fg.factorfunction.MulIdentityFactorFunction"><code class="flex name class">
+<span>class <span class="ident">MulIdentityFactorFunction</span></span>
+<span>(</span><span>R)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Class that represent a constant function with the multiplicative identity as the fixed value.</p>
+<p>Creates the new MulIdentityFactorFunction object.</p>
+<h2 id="args">Args</h2>
+<p>R (): Semiring whose multiplicative identity will be the value.
+Returns.
+MulIdentityFactorFunction: The newly created object.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class MulIdentityFactorFunction(ConstantFactorFunction):
+    &#39;&#39;&#39;
+    Class that represent a constant function with the multiplicative identity as the fixed value.
+    &#39;&#39;&#39;
+
+    def __init__(self, R):
+        &#39;&#39;&#39;
+        Creates the new MulIdentityFactorFunction object.
+
+        Args:
+            R (): Semiring whose multiplicative identity will be the value.
+
+        Returns.
+            MulIdentityFactorFunction: The newly created object.
+        &#39;&#39;&#39;
+
+        super().__init__(R, R.one)
+
+    def left_mul(self, other, arg_index):
+        &#39;&#39;&#39;
+        It multiplies the FactorFunction by another one, used during the sum-product algorithm.
+        Given that the first operand is the multiplicative identity, the operation is valid even if
+        the second operands does not have only one argument, shared with self.
+
+        Args:
+            other (FactorFunction): The second operand of the multiplication.
+            arg_index (int): It is the index other&#39;s argument has w.r.t self arguments.
+
+        Returns:
+            FactorFunction: The function representing the product, always coincides with other.
+        &#39;&#39;&#39;
+
+        return other</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fgglib.fg.factorfunction.ConstantFactorFunction" href="#fgglib.fg.factorfunction.ConstantFactorFunction">ConstantFactorFunction</a></li>
+<li><a title="fgglib.fg.factorfunction.FactorFunction" href="#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="fgglib.fg.factorfunction.MulIdentityFactorFunction.left_mul"><code class="name flex">
+<span>def <span class="ident">left_mul</span></span>(<span>self, other, arg_index)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>It multiplies the FactorFunction by another one, used during the sum-product algorithm.
+Given that the first operand is the multiplicative identity, the operation is valid even if
+the second operands does not have only one argument, shared with self.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>other</code></strong> :&ensp;<code><a title="fgglib.fg.factorfunction.FactorFunction" href="#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></code></dt>
+<dd>The second operand of the multiplication.</dd>
+<dt><strong><code>arg_index</code></strong> :&ensp;<code>int</code></dt>
+<dd>It is the index other's argument has w.r.t self arguments.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="fgglib.fg.factorfunction.FactorFunction" href="#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></code></dt>
+<dd>The function representing the product, always coincides with other.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def left_mul(self, other, arg_index):
+    &#39;&#39;&#39;
+    It multiplies the FactorFunction by another one, used during the sum-product algorithm.
+    Given that the first operand is the multiplicative identity, the operation is valid even if
+    the second operands does not have only one argument, shared with self.
+
+    Args:
+        other (FactorFunction): The second operand of the multiplication.
+        arg_index (int): It is the index other&#39;s argument has w.r.t self arguments.
+
+    Returns:
+        FactorFunction: The function representing the product, always coincides with other.
+    &#39;&#39;&#39;
+
+    return other</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="fgglib.fg.factorfunction.ConstantFactorFunction" href="#fgglib.fg.factorfunction.ConstantFactorFunction">ConstantFactorFunction</a></b></code>:
+<ul class="hlist">
+<li><code><a title="fgglib.fg.factorfunction.ConstantFactorFunction.compute" href="#fgglib.fg.factorfunction.ConstantFactorFunction.compute">compute</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.ConstantFactorFunction.marginal" href="#fgglib.fg.factorfunction.ConstantFactorFunction.marginal">marginal</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.ConstantFactorFunction.normalization_constant" href="#fgglib.fg.factorfunction.ConstantFactorFunction.normalization_constant">normalization_constant</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="fgglib.fg.factorfunction.NaiveProductFactorFunction"><code class="flex name class">
+<span>class <span class="ident">NaiveProductFactorFunction</span></span>
+<span>(</span><span>factor1, factor2, arg2_index)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Class that represents the result of the multiplication bewteen two factor functions, with second one
+that only has one argument, shared with the first. This can be used only if the resulting function
+will work exclusively with finite domains. In order to work with infinite domains, FactorFunction.left_mul
+must be overridden, thus this class would not be used anymore.</p>
+<p>Creates a new NaiveProductFactorFunction object.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>factor1</code></strong> :&ensp;<code><a title="fgglib.fg.factorfunction.FactorFunction" href="#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></code></dt>
+<dd>The first operand of the product.</dd>
+<dt><strong><code>factor2</code></strong> :&ensp;<code><a title="fgglib.fg.factorfunction.FactorFunction" href="#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></code></dt>
+<dd>The second operand of the product.</dd>
+</dl>
+<p>arg2_index (int) : It is the index factor2's argument has w.r.t factor2 arguments.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="fgglib.fg.factorfunction.NaiveProductFactorFunction" href="#fgglib.fg.factorfunction.NaiveProductFactorFunction">NaiveProductFactorFunction</a></code></dt>
+<dd>The function representing the product.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>Exception</code></dt>
+<dd>If factor2 does not have only one argument shared with factor1.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class NaiveProductFactorFunction(FactorFunction):
+    &#39;&#39;&#39;
+    Class that represents the result of the multiplication bewteen two factor functions, with second one
+    that only has one argument, shared with the first. This can be used only if the resulting function
+    will work exclusively with finite domains. In order to work with infinite domains, FactorFunction.left_mul
+    must be overridden, thus this class would not be used anymore.
+    &#39;&#39;&#39;
+
+    def __init__(self, factor1, factor2, arg2_index):
+        &#39;&#39;&#39;
+        Creates a new NaiveProductFactorFunction object.
+
+        Args:
+            factor1 (FactorFunction): The first operand of the product.
+            factor2 (FactorFunction): The second operand of the product.
+            arg2_index (int) : It is the index factor2&#39;s argument has w.r.t factor2 arguments.
+
+        Returns:
+            NaiveProductFactorFunction: The function representing the product.
+
+        Raises:
+            Exception: If factor2 does not have only one argument shared with factor1.
+        &#39;&#39;&#39;
+
+        if factor2.arg_num != 1 or arg2_index &gt;= factor1.arg_num:
+            raise Exception(&#34;the second operand must have only one argument, shared with the first&#34;)
+
+        super().__init__(factor1.R, factor1.arg_num)
+        self.factor1 = factor1
+        self.factor2 = factor2
+        self.arg2_index = arg2_index
+
+    def compute(self, *args):
+        &#39;&#39;&#39;
+        See FactorFunction.compute docstring.
+        &#39;&#39;&#39;
+        return self.factor1.compute(*args) * self.factor2.compute(args[self.arg2_index])</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fgglib.fg.factorfunction.FactorFunction" href="#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="fgglib.fg.factorfunction.NaiveProductFactorFunction.compute"><code class="name flex">
+<span>def <span class="ident">compute</span></span>(<span>self, *args)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>See FactorFunction.compute docstring.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute(self, *args):
+    &#39;&#39;&#39;
+    See FactorFunction.compute docstring.
+    &#39;&#39;&#39;
+    return self.factor1.compute(*args) * self.factor2.compute(args[self.arg2_index])</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="fgglib.fg.factorfunction.FactorFunction" href="#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></b></code>:
+<ul class="hlist">
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.left_mul" href="#fgglib.fg.factorfunction.FactorFunction.left_mul">left_mul</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.marginal" href="#fgglib.fg.factorfunction.FactorFunction.marginal">marginal</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.normalization_constant" href="#fgglib.fg.factorfunction.FactorFunction.normalization_constant">normalization_constant</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="fgglib.fg.factorfunction.SumFactorFunction"><code class="flex name class">
+<span>class <span class="ident">SumFactorFunction</span></span>
+<span>(</span><span>factor1, factor2)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Class that represents the sum of two different factor functions with the same arguments.</p>
+<p>Creates a new SumFactorFunction object.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>factor1</code></strong> :&ensp;<code><a title="fgglib.fg.factorfunction.FactorFunction" href="#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></code></dt>
+<dd>The first sum operand.</dd>
+<dt><strong><code>factor2</code></strong> :&ensp;<code><a title="fgglib.fg.factorfunction.FactorFunction" href="#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></code></dt>
+<dd>The second sum operand.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="fgglib.fg.factorfunction.SumFactorFunction" href="#fgglib.fg.factorfunction.SumFactorFunction">SumFactorFunction</a></code></dt>
+<dd>the result of the sum.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>Exception</code></dt>
+<dd>If the two operands do not have the same number of arguments.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class SumFactorFunction(FactorFunction):
+    &#39;&#39;&#39;
+    Class that represents the sum of two different factor functions with the same arguments.
+    &#39;&#39;&#39;
+
+    def __init__(self, factor1, factor2):
+        &#39;&#39;&#39;
+        Creates a new SumFactorFunction object.
+
+        Args:
+            factor1 (FactorFunction): The first sum operand.
+            factor2 (FactorFunction): The second sum operand.
+
+        Returns:
+            SumFactorFunction: the result of the sum.
+
+        Raises:
+            Exception: If the two operands do not have the same number of arguments.
+        &#39;&#39;&#39;
+
+        if factor1.arg_num != factor2.arg_num:
+            raise Exception(&#34;sum operands must have the same arguments&#34;)
+
+        super().__init__(factor1.R, factor1.arg_num)
+        self.factor1 = factor1
+        self.factor2 = factor2
+        self.arg_num = factor1.arg_num
+
+    def compute(self, *args):
+        &#39;&#39;&#39;
+        See FactorFunction.compute docstring.
+        &#39;&#39;&#39;
+
+        return self.factor1.compute(*args) + self.factor2.compute(*args)
+
+    def marginal(self, arg_index, *domains):
+        &#39;&#39;&#39;
+        See FactorFunction.marginal docstring.
+        &#39;&#39;&#39;
+
+        return self.factor1.marginal(arg_index, *domains) + self.factor2.marginal(arg_index, *domains)
+
+    def normalization_constant(self, *domains):
+        &#39;&#39;&#39;
+        See FactorFunction.normalization_constant docstring.
+        &#39;&#39;&#39;
+        return self.factor1.normalization_constant(*domains) + self.factor2.normalization_constant(*domains)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fgglib.fg.factorfunction.FactorFunction" href="#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="fgglib.fg.factorfunction.SumFactorFunction.compute"><code class="name flex">
+<span>def <span class="ident">compute</span></span>(<span>self, *args)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>See FactorFunction.compute docstring.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute(self, *args):
+    &#39;&#39;&#39;
+    See FactorFunction.compute docstring.
+    &#39;&#39;&#39;
+
+    return self.factor1.compute(*args) + self.factor2.compute(*args)</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fg.factorfunction.SumFactorFunction.marginal"><code class="name flex">
+<span>def <span class="ident">marginal</span></span>(<span>self, arg_index, *domains)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>See FactorFunction.marginal docstring.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def marginal(self, arg_index, *domains):
+    &#39;&#39;&#39;
+    See FactorFunction.marginal docstring.
+    &#39;&#39;&#39;
+
+    return self.factor1.marginal(arg_index, *domains) + self.factor2.marginal(arg_index, *domains)</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fg.factorfunction.SumFactorFunction.normalization_constant"><code class="name flex">
+<span>def <span class="ident">normalization_constant</span></span>(<span>self, *domains)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>See FactorFunction.normalization_constant docstring.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def normalization_constant(self, *domains):
+    &#39;&#39;&#39;
+    See FactorFunction.normalization_constant docstring.
+    &#39;&#39;&#39;
+    return self.factor1.normalization_constant(*domains) + self.factor2.normalization_constant(*domains)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="fgglib.fg.factorfunction.FactorFunction" href="#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></b></code>:
+<ul class="hlist">
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.left_mul" href="#fgglib.fg.factorfunction.FactorFunction.left_mul">left_mul</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="fgglib.fg" href="index.html">fgglib.fg</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="fgglib.fg.factorfunction.AddIdentityFactorFunction" href="#fgglib.fg.factorfunction.AddIdentityFactorFunction">AddIdentityFactorFunction</a></code></h4>
+</li>
+<li>
+<h4><code><a title="fgglib.fg.factorfunction.ConstantFactorFunction" href="#fgglib.fg.factorfunction.ConstantFactorFunction">ConstantFactorFunction</a></code></h4>
+<ul class="">
+<li><code><a title="fgglib.fg.factorfunction.ConstantFactorFunction.compute" href="#fgglib.fg.factorfunction.ConstantFactorFunction.compute">compute</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.ConstantFactorFunction.marginal" href="#fgglib.fg.factorfunction.ConstantFactorFunction.marginal">marginal</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.ConstantFactorFunction.normalization_constant" href="#fgglib.fg.factorfunction.ConstantFactorFunction.normalization_constant">normalization_constant</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="fgglib.fg.factorfunction.FactorFunction" href="#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></code></h4>
+<ul class="">
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.compute" href="#fgglib.fg.factorfunction.FactorFunction.compute">compute</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.left_mul" href="#fgglib.fg.factorfunction.FactorFunction.left_mul">left_mul</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.marginal" href="#fgglib.fg.factorfunction.FactorFunction.marginal">marginal</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.normalization_constant" href="#fgglib.fg.factorfunction.FactorFunction.normalization_constant">normalization_constant</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="fgglib.fg.factorfunction.FixedArgsFactorFunction" href="#fgglib.fg.factorfunction.FixedArgsFactorFunction">FixedArgsFactorFunction</a></code></h4>
+<ul class="">
+<li><code><a title="fgglib.fg.factorfunction.FixedArgsFactorFunction.compute" href="#fgglib.fg.factorfunction.FixedArgsFactorFunction.compute">compute</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.FixedArgsFactorFunction.marginal" href="#fgglib.fg.factorfunction.FixedArgsFactorFunction.marginal">marginal</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.FixedArgsFactorFunction.normalization_constant" href="#fgglib.fg.factorfunction.FixedArgsFactorFunction.normalization_constant">normalization_constant</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="fgglib.fg.factorfunction.MulIdentityFactorFunction" href="#fgglib.fg.factorfunction.MulIdentityFactorFunction">MulIdentityFactorFunction</a></code></h4>
+<ul class="">
+<li><code><a title="fgglib.fg.factorfunction.MulIdentityFactorFunction.left_mul" href="#fgglib.fg.factorfunction.MulIdentityFactorFunction.left_mul">left_mul</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="fgglib.fg.factorfunction.NaiveProductFactorFunction" href="#fgglib.fg.factorfunction.NaiveProductFactorFunction">NaiveProductFactorFunction</a></code></h4>
+<ul class="">
+<li><code><a title="fgglib.fg.factorfunction.NaiveProductFactorFunction.compute" href="#fgglib.fg.factorfunction.NaiveProductFactorFunction.compute">compute</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="fgglib.fg.factorfunction.SumFactorFunction" href="#fgglib.fg.factorfunction.SumFactorFunction">SumFactorFunction</a></code></h4>
+<ul class="">
+<li><code><a title="fgglib.fg.factorfunction.SumFactorFunction.compute" href="#fgglib.fg.factorfunction.SumFactorFunction.compute">compute</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.SumFactorFunction.marginal" href="#fgglib.fg.factorfunction.SumFactorFunction.marginal">marginal</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.SumFactorFunction.normalization_constant" href="#fgglib.fg.factorfunction.SumFactorFunction.normalization_constant">normalization_constant</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

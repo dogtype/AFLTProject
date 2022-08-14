@@ -1,0 +1,2349 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>fgglib.fgg.fggsum_product API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>fgglib.fgg.fggsum_product</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import networkx as nx
+import numpy as np
+from fgglib.fg.factorfunction import FactorFunction
+from fgglib.fg.factorgraph import Factorgraph
+from fgglib.base.semiring import Real
+from fgglib.fg.edge import FGEdge
+from fgglib.fg.vertex import FGVertex
+from fgglib.fg.variabledomain import VariableDomain
+import pprint
+
+class FGGsum_product:
+    &#39;&#39;&#39;
+    A helper class to compute the sum product of FGGs
+    &#39;&#39;&#39;
+
+    def __init__(self, fgg):
+        &#39;&#39;&#39;
+        Creates a new FGGsum_product object.
+
+        Args:
+            fgg: The factor graph grammar of which the sum-product is to be computed
+
+        Returns:
+            FGGsum_product: The newly created FGGsum_product object.
+        &#39;&#39;&#39;
+        self.fgg = fgg
+        self.variable_domain = {0.25,0.5,0.75}
+
+    def inference(self):
+        &#39;&#39;&#39;
+        Computes the sum-product of a factor graph grammar by distinguishing
+        between the finite variable domain and finite graph language case
+
+        Returns:
+            The computed sum-product
+        &#39;&#39;&#39;
+        if(self.fgg.finite_domain()): # finite variable domain
+            return self.inference_finite_variables()
+        if(not fgg.recursive()): # finite graph language
+            return self.inference_finite_states()
+        else:
+            raise Exception(&#34;Inference undecidable for infinite graph languages and infinte variable domain!&#34;) # both infinte
+
+    def xiX(self,X):
+        &#39;&#39;&#39;
+        Enumerates all possible assignments of variables adjacent to a nonterminal X
+
+        Args:
+            X: The nonterminal labelling the edge for which we want to enumerate
+            the possible variable assignments
+
+        Returns:
+            assignments (list): A list of lists where every entry corresponds to
+            a list of assignments to the adjacent variables
+        &#39;&#39;&#39;
+        assignments = [[]]
+        for p in self.fgg.P:
+            for e in p.body.E:
+                if(e.label==X):
+                    for t in e.targets:
+                        new_assignments = []
+                        for v in self.fgg.domains[t].enumerate():
+                            for a in assignments:
+                                ap = a.copy()
+                                ap.append(v)
+                                new_assignments.append(ap)
+                        assignments = new_assignments
+                    if(assignments==[[]]):
+                        continue
+                    return assignments
+        return assignments
+
+    def xiR(self,fragment):
+        &#39;&#39;&#39;
+        Enumerates all possible assignments of free variables of a FG fragment
+
+        Args:
+            fragment (Fragment): The fragment for which we want to enumerate all
+            possible variable assignments
+
+        Returns:
+            assignments (list): A list of lists where every entry corresponds to
+            a list of assignments to the fragments free variables
+        &#39;&#39;&#39;
+        assignments = [[]]
+        for n in fragment.V:
+            if(n not in fragment.external):
+                new_assignments = []
+                for v in self.fgg.domains[n].enumerate():
+                    for a in assignments:
+                        ap = a.copy()
+                        ap.append(v)
+                        new_assignments.append(ap)
+                assignments = new_assignments
+        return assignments
+
+    def calculate_phi(self,X,xi,db):
+        &#39;&#39;&#39;
+        Directly calculates the value of the phi variable (sum-product of a nonterminal)
+        for a given nonterminal and assignment
+
+        Args:
+            X: The nonterminal for which the sum-product is to be computed
+            xi (list): A list of assignments to the variables adjacent to X
+            db (dict): A dictionary used for storing the result of recursive
+            computations in order to avoid redundance
+
+        Returns:
+            result: The computed sum-product for the variable X and the assignment xi
+        &#39;&#39;&#39;
+
+        if(&#34;phi&#34;+str(X)+str(xi) in db):
+            return db[&#34;phi&#34;+str(X)+str(xi)]
+        result = 0
+        for p in self.fgg.nProductions(X):
+            result += self.calculate_tau(p.body,xi,db)
+        db[&#34;phi&#34;+str(X)+str(xi)]=result
+        return result
+
+    def calculate_tau(self,frag,xi,db):
+        &#39;&#39;&#39;
+        Directly calculates the value of the tau variable (sum-product of a right-hand side)
+        for a given fragment and assignment
+
+        Args:
+            frag (Fragment): The fragment for which the sum-product is to be computed
+            xi (list): A list of assignments to the external variables of frag
+            db (dict): A dictionary used for storing the result of recursive
+            computations in order to avoid redundance
+
+        Returns:
+            result: The computed sum-product for fragment frag and the assignment xi
+        &#39;&#39;&#39;
+
+        if(&#34;tau&#34;+str(frag)+str(xi) in db):
+            return db[&#34;phi&#34;+str(frag)+str(xi)]
+        result = 0
+
+        for v in self.xiR(frag):
+            varMap = {} # assign assigments to vertices
+            index = 0
+            exindex = 0
+            for vtx in frag.V:
+                if(vtx in frag.external):
+                    varMap[vtx]=xi[exindex]
+                    exindex+=1
+                else:
+                    varMap[vtx]=v[index]
+                    index+=1
+
+            ntproduct = 1
+            tproduct = 1
+            for e in frag.E: # compute changes in values
+                if(e.label in self.fgg.N): # case E_N
+                    asmntList = []
+                    for tgt in e.targets:
+                        asmntList.append(varMap[tgt])
+                    ntproduct *= self.calculate_phi(e.label,asmntList,db)
+                else: # case E_T
+                    for tgt in e.targets:
+                        tproduct *= varMap[tgt] # would want to use factorfunction, but hypergraphs don&#39;t have functions!
+            result += ntproduct * tproduct
+
+        db[&#34;phi&#34;+str(frag)+str(xi)] = result
+        return result
+
+    def create_phi_equations(self,index,new_index,equations,B,nt):
+        &#39;&#39;&#39;
+        Helper function to calculate the value of the phi variable (sum-product of a nonterminal)
+         that creates linear equations and adds them to the equation system
+
+        Args:
+            index (dict): A mapping of variables to indices in the equation system
+            new_index (index): The value of the next free index for new variables
+            equations (list): A matrix storing the equations for the equation system
+            B (list): The vector for which the linear system in matrix form is to be solved
+            nt: The nonterminal, for which we want to create the phi equation
+
+        Returns:
+            new_index: The new index of the next free variable. All other changes are passed by reference
+        &#39;&#39;&#39;
+
+        for v in self.xiX(nt):
+            new_equation = [0]*new_index
+            if(not (&#34;phi&#34;+str(nt)+str(v)) in index):
+                index[&#34;phi&#34;+str(nt)+str(v)] = new_index
+                new_index +=1
+                new_equation.append(-1)
+            else:
+                new_equation[index[&#34;phi&#34;+str(nt)+str(v)]]=-1
+
+
+            for p in self.fgg.nProductions(nt):
+                    if((&#34;tau&#34;+str(p.body)+str(v)) not in index):
+                        index[&#34;tau&#34;+str(p.body)+str(v)] = new_index
+                        new_index +=1
+                        new_equation.append(1)
+                    else:
+                        new_equation[index[&#34;tau&#34;+str(p.body)+str(v)]]=1
+
+            equations.append(new_equation)
+            B.append(0)
+
+            for p in self.fgg.nProductions(nt): # create tau equations for every v
+                new_index = self.create_tau_equations(index,new_index,equations,B,p.body,v)
+
+        return new_index # return the current new index. All other parameters are passed by object reference
+
+    def create_tau_equations(self,index,new_index,equations,B,r,v):
+        &#39;&#39;&#39;
+        Helper function to calculate the value of the tau variable (sum-product of a fragment)
+         that creates linear equations and adds them to the equation system
+
+        Args:
+            index (dict): A mapping of variables to indices in the equation system
+            new_index (index): The value of the next free index for new variables
+            equations (list): A matrix storing the equations for the equation system
+            B (list): The vector for which the linear system in matrix form is to be solved
+            r (Fragment): The fragment for which we want to compute the sum-product
+            v (list): The list of external assignments given to the fragment
+
+        Returns:
+            new_index: The new index of the next free variable. All other changes are passed by reference
+        &#39;&#39;&#39;
+
+        new_equation = [0]*new_index
+        new_equation[index[&#34;tau&#34;+str(r)+str(v)]]=-1
+        for var in self.xiR(r):
+            varMap = {} # assign assigments to vertices
+            curr_index = 0
+            exindex = 0
+            for vtx in r.V:
+                if(vtx in r.external):
+                    varMap[vtx]=v[exindex]
+                    exindex+=1
+                else:
+                    varMap[vtx]=var[curr_index]
+                    curr_index+=1
+
+            product = 1
+            for e in r.E: # add actual variables
+                if(e.label not in self.fgg.N): # case E_T
+                    for tgt in e.targets:
+                        product *= varMap[tgt]
+            containsNT = False
+            for e in r.E:
+                if(e.label in self.fgg.N): # case E_N
+                    containsNT = True
+                    asmntList = []
+                    for tgt in e.targets:
+                        asmntList.append(varMap[tgt])
+
+                    if(not (&#34;phi&#34;+str(e.label)+str(asmntList)) in index):
+                        index[&#34;phi&#34;+str(e.label)+str(asmntList)] = new_index
+                        new_index +=1
+                        new_equation.append(0) # increase length of the equation
+                    new_equation[index[&#34;phi&#34;+str(e.label)+str(asmntList)]]=product
+
+            equations.append(new_equation)
+            if(containsNT):
+                B.append(0)
+            else:
+                B.append(-product)
+
+        return new_index # return the current new index. All other parameters are passed by object reference
+
+    def create_nl_phi_equations(self,index,new_index,equations,nt):
+        &#39;&#39;&#39;
+        Helper function to calculate the value of the phi variable (sum-product of a nonterminal)
+         that creates nonlinear equations and adds them to the equation system
+
+        Args:
+            index (dict): A mapping of variables to indices in the equation system
+            new_index (index): The value of the next free index for new variables
+            equations (list): A list of functions calculating the value of every equation in the system
+            nt: The nonterminal, for which we want to create the phi equation
+
+        Returns:
+            new_index: The new index of the next free variable. All other changes are passed by reference
+        &#39;&#39;&#39;
+
+        for v in self.xiX(nt):
+            new_equation = []
+            if(not (&#34;phi&#34;+str(nt)+str(v)) in index):
+                index[&#34;phi&#34;+str(nt)+str(v)] = new_index
+                new_index +=1
+
+            new_equation.append((-1,index[&#34;phi&#34;+str(nt)+str(v)],1))
+
+            for p in self.fgg.nProductions(nt):
+                    if((&#34;tau&#34;+str(p.body)+str(v)) not in index):
+                        index[&#34;tau&#34;+str(p.body)+str(v)] = new_index
+                        new_index +=1
+
+                    new_equation.append((-1,index[&#34;tau&#34;+str(p.body)+str(v)],1))
+
+            equations.append(self.function_from_list(new_equation))
+
+            for p in self.fgg.nProductions(nt): # create tau equations
+                new_index = self.create_nl_tau_equations(index,new_index,equations,p.body,v)
+
+        return new_index
+
+    def create_nl_tau_equations(self,index,new_index,equations,r,v):
+        &#39;&#39;&#39;
+        Helper function to calculate the value of the phi variable (sum-product of a nonterminal)
+         that creates nonlinear equations and adds them to the equation system
+
+        Args:
+            index (dict): A mapping of variables to indices in the equation system
+            new_index (index): The value of the next free index for new variables
+            equations (list): A list of functions calculating the value of every equation in the system
+            r (Fragment): The fragment for which we want to compute the sum-product
+            v (list): The list of external assignments given to the fragment
+
+        Returns:
+            new_index: The new index of the next free variable. All other changes are passed by reference
+        &#39;&#39;&#39;
+
+        new_equation = []
+        new_equation.append((-1,index[&#34;tau&#34;+str(r)+str(v)],1))
+        for var in self.xiR(r):
+            varMap = {} # assign assigments to vertices
+            curr_index = 0
+            exindex = 0
+            for vtx in r.V:
+                if(vtx in r.external):
+                    varMap[vtx]=v[exindex]
+                    exindex+=1
+                else:
+                    varMap[vtx]=var[curr_index]
+                    curr_index+=1
+
+            product = 1
+            for e in r.E: # add actual variables
+                if(e.label not in self.fgg.N): # case E_T
+                    for tgt in e.targets:
+                        product *= varMap[tgt]
+            occurances = {} # checks the number of times a nonterminal occurs
+            for e in r.E:
+                if(e.label in self.fgg.N):
+                    if(e.label not in occurances):
+                        occurances[e.label]=0
+                    occurances[e.label]+=1
+
+            if(len(occurances)==0):
+                new_equation.append((product,0,0))
+
+            for e in r.E:
+                if(e.label in self.fgg.N and e.label in occurances): # check if the equation has been updated for e.label
+                    asmntList = []
+                    for tgt in e.targets:
+                        asmntList.append(varMap[tgt])
+
+                    if(not (&#34;phi&#34;+str(e.label)+str(asmntList)) in index):
+                        index[&#34;phi&#34;+str(e.label)+str(asmntList)] = new_index
+                        new_index +=1
+                    new_equation.append((product,index[&#34;phi&#34;+str(e.label)+str(asmntList)],occurances[e.label]))
+                    occurances.pop(e.label)
+
+            equations.append(self.function_from_list(new_equation))
+
+        return new_index
+
+    def function_from_list(self,entries):
+        &#39;&#39;&#39;
+        Creates and returns a function that represents a equation in the system
+        from the list of all factors, variables and powers in the equation
+
+        Args:
+            entries (list): A list of tuples of factor, variable index and power of a summand
+
+        Return:
+            g: The function computing a single equation line
+        &#39;&#39;&#39;
+        def f(x):
+            result = 0
+            for e in entries:
+                factor, ind, exp = e
+                result += factor*pow(x[ind],exp)
+            return result
+
+        return f
+
+    def inference_finite_variables(self):
+        &#39;&#39;&#39;
+        Computes the sum product of a factor graph grammar with finite variable domain
+        by distinguishing between nonrecursive, linearly recursive and nonlinearly recursive grammars
+
+        Returns:
+            The computed sum-product of the grammer
+        &#39;&#39;&#39;
+        g = nx.DiGraph()
+        for p in self.fgg.P:
+            for nt in p.body.nonterminals(self.fgg.N):
+                g.add_edge(p.head,nt)
+        comp = nx.strongly_connected_components(g)
+
+        if(not self.fgg.recursive()): # Case 1
+            db = {}
+            for c in comp: # reverse topological order might be needed here
+                if(len(c)==1): # case (1)
+                    node = c.pop()
+                    for v in self.xiX(node):
+                        self.calculate_phi(node,v,db)
+
+            return self.calculate_phi(self.fgg.S,[],db)
+
+        elif(self.fgg.linearly_recursive()): # Case 2
+            index = {}
+            new_index = 0
+            equations = []
+            B = []
+
+            for nt in self.fgg.N: # create phi equations
+                new_index = self.create_phi_equations(index,new_index,equations,B,nt)
+
+            counter = 0
+            for e in equations:
+                while(len(e)&lt;new_index):
+                    e.append(0)
+                #print(e,&#34;[&#34;,B[counter],&#34;]&#34;)
+                counter+=1
+            solution = np.linalg.solve(equations,B)
+            return solution[index[&#34;phiS[]&#34;]]
+
+        else: # Case 3
+            from scipy.optimize import fsolve
+            index = {}
+            new_index = 0
+            equations = [] # list of lambda functions mapping to the correct shit
+
+            for nt in self.fgg.N: # create phi equations
+                new_index = self.create_nl_phi_equations(index,new_index,equations,nt)
+
+            def system(x):
+                sol = []
+                index = 0
+                for xi in x:
+                    sol.append(equations[index](x))
+                    index+=1
+                return sol
+
+            solution = fsolve(system,[1]*new_index)
+            print(index)
+            print(solution)
+            return round(solution[index[&#34;phiS[]&#34;]],4) # the solver is not always precise. Return a rounded number
+
+
+
+    def inference_finite_states(self):
+        &#39;&#39;&#39;
+        Returns the sum product of a factor graph grammar with finite graph language
+
+        Returns:
+            The sum product of the FGG of the FGGsum object
+        &#39;&#39;&#39;
+        productions = list(self.fgg.P)
+        fg = Factorgraph(productions[0].body.R)
+
+        # add binary variables for all nonterminals and rules
+        bin_domain = VariableDomain(False)
+        bin_domain.set_content({False, True})
+        nt_bin_vars = {}
+        for X in self.fgg.N:
+            b_var = FGVertex(X, &#34;B_&#34; + X, fg.R, bin_domain)
+            fg.add_vertex(b_var)
+            nt_bin_vars[X] = b_var
+        rules_bin_vars = {}
+        for i, p in enumerate(productions):
+            b_var = FGVertex(p, &#34;B_π&#34; + str(i), fg.R, bin_domain)
+            fg.add_vertex(b_var)
+            rules_bin_vars[p] = b_var
+
+        pprint.pprint(fg)
+        pprint.pprint(nt_bin_vars)
+        pprint.pprint(rules_bin_vars)
+
+        # add conditions to constraint to valid derivations
+        start_e = FGEdge(self.fgg.S, &#34;B_S = true&#34;, fg.R, CondStart(fg.R))
+        start_e.add_target(nt_bin_vars[self.fgg.S])
+        for X in self.fgg.N:
+            if X != self.fgg.S:
+                p_X_left = [p for p in productions if X == p.head]
+                e = FGEdge(X, &#34;CondOne(B_&#34; + X + &#39;&#39;.join([&#39;,&#39;+rules_bin_vars[p_].label for p_ in p_X_left]) + &#34;)&#34;, fg.R, CondOne(fg.R, 1 + len(p_X_left)))
+                e.add_target(nt_bin_vars[X])
+                for p in p_X_left:
+                    e.add_target(rules_bin_vars[p])
+                fg.add_edge(e)
+
+                p_X_right = [p for p in productions if X in p.body.nonterminals(self.fgg.N)]
+                e = FGEdge(X, &#34;CondOne(B_&#34; + X + &#39;&#39;.join([&#39;,&#39;+rules_bin_vars[p_].label for p_ in p_X_right]) + &#34;)&#34;, fg.R, CondOne(fg.R, 1 + len(p_X_right)))
+                e.add_target(nt_bin_vars[X])
+                for p in p_X_right:
+                    e.add_target(rules_bin_vars[p])
+                fg.add_edge(e)
+
+        # create clusters
+        new_p_vars = {}
+        for i, p in enumerate(productions):
+            new_vars = {}
+            for v in p.body.V:
+                var = FGVertex(str(p), v.label + &#34;_&#34; + str(i), fg.R, v.domain)
+                new_vars[v] = var
+                e = FGEdge(str(p), &#34;CN_&#34; + v.label + &#34;_&#34; + str(i), fg.R, CondNormalize(v.domain))
+                e.add_target(rules_bin_vars[p])
+                e.add_target(var)
+                fg.add_vertex(var)
+                fg.add_edge(e)
+            for e in p.body.E:
+                if e.label not in self.fgg.N:
+                    new_edge = FGEdge(str(p), e.label, fg.R, CondFactor(fg.R, e.function))
+                    new_edge.add_target(rules_bin_vars[p])
+                    for v in e.targets:
+                        new_edge.add_target(new_vars[v])
+                    fg.add_edge(new_edge)
+            new_p_vars[p] = new_vars
+
+        new_nt_vars = {}
+        for X in self.fgg.N:
+            for p in productions:
+                if X in p.body.nonterminals(self.fgg.N):
+                    X_vars = {}
+                    e = p.body.get_edge(X)
+                    for t in e.targets:
+                        v = FGVertex(X, t.label + &#34;_&#34; + X, fg.R, t.domain)
+                        X_vars[t] = v
+                        new_edge = FGEdge(X, &#34;CN_&#34; + v.label + &#34;_&#34; + X, fg.R, CondNormalize(t.domain))
+                        new_edge.add_target(nt_bin_vars[X])
+                        new_edge.add_target(v)
+                        fg.add_vertex(v)
+                        fg.add_edge(new_edge)
+                    new_nt_vars[X] = X_vars
+
+        print(new_nt_vars)
+        # create same-variable bindings
+        for X in self.fgg.N:
+            for i, p in enumerate(productions):
+                if X == p.head:
+                    for v in p.body.external:
+                        new_edge = FGEdge(X, &#34;CE_&#34; + X + &#34;_&#34; + str(i) + &#34;_&#34; + v.label, fg.R, CondEquals(fg.R))
+                        new_edge.add_target(rules_bin_vars[p])
+                        new_edge.add_target(new_nt_vars[X][v])
+                        new_edge.add_target(new_p_vars[p][v])
+
+                if X in p.body.nonterminals(self.fgg.N):
+                    e = p.body.get_edge(X)
+                    for t in e.targets:
+                        new_edge = FGEdge(X, &#34;CE_&#34; + X + &#34;_&#34; + str(i) + &#34;_&#34; + t.label, fg.R, CondEquals(fg.R))
+                        new_edge.add_target(rules_bin_vars[p])
+                        print(X,v.label)
+                        new_edge.add_target(new_nt_vars[X][t])
+                        new_edge.add_target(new_p_vars[p][t])
+
+        return fg.normalization_constant()
+
+
+class CondStart(FactorFunction):
+
+    def __init__(self, R):
+        super().__init__(R, 1)
+
+    def compute(self, *args):
+        if len(args) != arg_num:
+            raise Exception(&#34;wrong number of arguments&#34;)
+
+        return self.R.one if args[0] else self.R.zero
+
+
+class CondOne(FactorFunction):
+
+    def __init__(self, R, arg_num):
+        super().__init__(R, arg_num)
+
+    def compute(self, *args):
+        if len(args) != arg_num:
+            raise Exception(&#34;wrong number of arguments&#34;)
+
+        if args[0]:
+            return self.R.one if args[1:].count(True) == 1 else self.R.zero
+        else:
+            return self.R.one if args[1:].count(True) == 0 else self.R.zero
+
+
+class CondEquals(FactorFunction):
+
+    def __init__(self, R):
+        super().__init__(R, 3)
+
+    def compute(self, *args):
+        if len(args) != arg_num:
+            raise Exception(&#34;wrong number of arguments&#34;)
+
+        if args[0]:
+            return self.R.one if args[1] == args[2] else self.R.zero
+        else:
+            return self.R.one
+
+
+class CondFactor(FactorFunction):
+
+    def __init__(self, R, f):
+        super().__init__(R, 1 + f.arg_num)
+        self.f = f
+
+    def compute(self, *args):
+        if len(args) != arg_num:
+            raise Exception(&#34;wrong number of arguments&#34;)
+
+        if args[0]:
+            return f.compute(*args[1:])
+        else:
+            return self.R.one
+
+
+class CondNormalize(FactorFunction):
+
+    def __init__(self, domain):
+        super().__init__(Real, 2)
+        self.weight_distr = lambda x : float(1) / float(len(domain.content))
+
+    def compute(self, *args):
+        if len(args) != arg_num:
+            raise Exception(&#34;wrong number of arguments&#34;)
+
+        if args[0]:
+            return Real(self.weight_distr(args[1]))
+        else:
+            return self.R.one</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="fgglib.fgg.fggsum_product.CondEquals"><code class="flex name class">
+<span>class <span class="ident">CondEquals</span></span>
+<span>(</span><span>R)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Abstract class that represents a function attached to a factor in a factor graph.</p>
+<p>Creates a new FactorFunction object.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt>R (): Semiring class, it will be the codomain of the function.</dt>
+<dt><strong><code>arg_num</code></strong> :&ensp;<code>int</code></dt>
+<dd>Number of arguments the function accepts.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>FactorFunction</code></dt>
+<dd>The newly created FactorFunction object.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class CondEquals(FactorFunction):
+
+    def __init__(self, R):
+        super().__init__(R, 3)
+
+    def compute(self, *args):
+        if len(args) != arg_num:
+            raise Exception(&#34;wrong number of arguments&#34;)
+
+        if args[0]:
+            return self.R.one if args[1] == args[2] else self.R.zero
+        else:
+            return self.R.one</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fgglib.fg.factorfunction.FactorFunction" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="fgglib.fg.factorfunction.FactorFunction" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></b></code>:
+<ul class="hlist">
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.compute" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction.compute">compute</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.left_mul" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction.left_mul">left_mul</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.marginal" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction.marginal">marginal</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.normalization_constant" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction.normalization_constant">normalization_constant</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="fgglib.fgg.fggsum_product.CondFactor"><code class="flex name class">
+<span>class <span class="ident">CondFactor</span></span>
+<span>(</span><span>R, f)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Abstract class that represents a function attached to a factor in a factor graph.</p>
+<p>Creates a new FactorFunction object.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt>R (): Semiring class, it will be the codomain of the function.</dt>
+<dt><strong><code>arg_num</code></strong> :&ensp;<code>int</code></dt>
+<dd>Number of arguments the function accepts.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>FactorFunction</code></dt>
+<dd>The newly created FactorFunction object.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class CondFactor(FactorFunction):
+
+    def __init__(self, R, f):
+        super().__init__(R, 1 + f.arg_num)
+        self.f = f
+
+    def compute(self, *args):
+        if len(args) != arg_num:
+            raise Exception(&#34;wrong number of arguments&#34;)
+
+        if args[0]:
+            return f.compute(*args[1:])
+        else:
+            return self.R.one</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fgglib.fg.factorfunction.FactorFunction" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="fgglib.fg.factorfunction.FactorFunction" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></b></code>:
+<ul class="hlist">
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.compute" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction.compute">compute</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.left_mul" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction.left_mul">left_mul</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.marginal" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction.marginal">marginal</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.normalization_constant" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction.normalization_constant">normalization_constant</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="fgglib.fgg.fggsum_product.CondNormalize"><code class="flex name class">
+<span>class <span class="ident">CondNormalize</span></span>
+<span>(</span><span>domain)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Abstract class that represents a function attached to a factor in a factor graph.</p>
+<p>Creates a new FactorFunction object.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt>R (): Semiring class, it will be the codomain of the function.</dt>
+<dt><strong><code>arg_num</code></strong> :&ensp;<code>int</code></dt>
+<dd>Number of arguments the function accepts.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>FactorFunction</code></dt>
+<dd>The newly created FactorFunction object.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class CondNormalize(FactorFunction):
+
+    def __init__(self, domain):
+        super().__init__(Real, 2)
+        self.weight_distr = lambda x : float(1) / float(len(domain.content))
+
+    def compute(self, *args):
+        if len(args) != arg_num:
+            raise Exception(&#34;wrong number of arguments&#34;)
+
+        if args[0]:
+            return Real(self.weight_distr(args[1]))
+        else:
+            return self.R.one</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fgglib.fg.factorfunction.FactorFunction" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="fgglib.fg.factorfunction.FactorFunction" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></b></code>:
+<ul class="hlist">
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.compute" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction.compute">compute</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.left_mul" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction.left_mul">left_mul</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.marginal" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction.marginal">marginal</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.normalization_constant" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction.normalization_constant">normalization_constant</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="fgglib.fgg.fggsum_product.CondOne"><code class="flex name class">
+<span>class <span class="ident">CondOne</span></span>
+<span>(</span><span>R, arg_num)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Abstract class that represents a function attached to a factor in a factor graph.</p>
+<p>Creates a new FactorFunction object.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt>R (): Semiring class, it will be the codomain of the function.</dt>
+<dt><strong><code>arg_num</code></strong> :&ensp;<code>int</code></dt>
+<dd>Number of arguments the function accepts.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>FactorFunction</code></dt>
+<dd>The newly created FactorFunction object.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class CondOne(FactorFunction):
+
+    def __init__(self, R, arg_num):
+        super().__init__(R, arg_num)
+
+    def compute(self, *args):
+        if len(args) != arg_num:
+            raise Exception(&#34;wrong number of arguments&#34;)
+
+        if args[0]:
+            return self.R.one if args[1:].count(True) == 1 else self.R.zero
+        else:
+            return self.R.one if args[1:].count(True) == 0 else self.R.zero</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fgglib.fg.factorfunction.FactorFunction" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="fgglib.fg.factorfunction.FactorFunction" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></b></code>:
+<ul class="hlist">
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.compute" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction.compute">compute</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.left_mul" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction.left_mul">left_mul</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.marginal" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction.marginal">marginal</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.normalization_constant" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction.normalization_constant">normalization_constant</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="fgglib.fgg.fggsum_product.CondStart"><code class="flex name class">
+<span>class <span class="ident">CondStart</span></span>
+<span>(</span><span>R)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Abstract class that represents a function attached to a factor in a factor graph.</p>
+<p>Creates a new FactorFunction object.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt>R (): Semiring class, it will be the codomain of the function.</dt>
+<dt><strong><code>arg_num</code></strong> :&ensp;<code>int</code></dt>
+<dd>Number of arguments the function accepts.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>FactorFunction</code></dt>
+<dd>The newly created FactorFunction object.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class CondStart(FactorFunction):
+
+    def __init__(self, R):
+        super().__init__(R, 1)
+
+    def compute(self, *args):
+        if len(args) != arg_num:
+            raise Exception(&#34;wrong number of arguments&#34;)
+
+        return self.R.one if args[0] else self.R.zero</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fgglib.fg.factorfunction.FactorFunction" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="fgglib.fg.factorfunction.FactorFunction" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a></b></code>:
+<ul class="hlist">
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.compute" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction.compute">compute</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.left_mul" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction.left_mul">left_mul</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.marginal" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction.marginal">marginal</a></code></li>
+<li><code><a title="fgglib.fg.factorfunction.FactorFunction.normalization_constant" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction.normalization_constant">normalization_constant</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="fgglib.fgg.fggsum_product.FGGsum_product"><code class="flex name class">
+<span>class <span class="ident">FGGsum_product</span></span>
+<span>(</span><span>fgg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A helper class to compute the sum product of FGGs</p>
+<p>Creates a new FGGsum_product object.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>fgg</code></strong></dt>
+<dd>The factor graph grammar of which the sum-product is to be computed</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="fgglib.fgg.fggsum_product.FGGsum_product" href="#fgglib.fgg.fggsum_product.FGGsum_product">FGGsum_product</a></code></dt>
+<dd>The newly created FGGsum_product object.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class FGGsum_product:
+    &#39;&#39;&#39;
+    A helper class to compute the sum product of FGGs
+    &#39;&#39;&#39;
+
+    def __init__(self, fgg):
+        &#39;&#39;&#39;
+        Creates a new FGGsum_product object.
+
+        Args:
+            fgg: The factor graph grammar of which the sum-product is to be computed
+
+        Returns:
+            FGGsum_product: The newly created FGGsum_product object.
+        &#39;&#39;&#39;
+        self.fgg = fgg
+        self.variable_domain = {0.25,0.5,0.75}
+
+    def inference(self):
+        &#39;&#39;&#39;
+        Computes the sum-product of a factor graph grammar by distinguishing
+        between the finite variable domain and finite graph language case
+
+        Returns:
+            The computed sum-product
+        &#39;&#39;&#39;
+        if(self.fgg.finite_domain()): # finite variable domain
+            return self.inference_finite_variables()
+        if(not fgg.recursive()): # finite graph language
+            return self.inference_finite_states()
+        else:
+            raise Exception(&#34;Inference undecidable for infinite graph languages and infinte variable domain!&#34;) # both infinte
+
+    def xiX(self,X):
+        &#39;&#39;&#39;
+        Enumerates all possible assignments of variables adjacent to a nonterminal X
+
+        Args:
+            X: The nonterminal labelling the edge for which we want to enumerate
+            the possible variable assignments
+
+        Returns:
+            assignments (list): A list of lists where every entry corresponds to
+            a list of assignments to the adjacent variables
+        &#39;&#39;&#39;
+        assignments = [[]]
+        for p in self.fgg.P:
+            for e in p.body.E:
+                if(e.label==X):
+                    for t in e.targets:
+                        new_assignments = []
+                        for v in self.fgg.domains[t].enumerate():
+                            for a in assignments:
+                                ap = a.copy()
+                                ap.append(v)
+                                new_assignments.append(ap)
+                        assignments = new_assignments
+                    if(assignments==[[]]):
+                        continue
+                    return assignments
+        return assignments
+
+    def xiR(self,fragment):
+        &#39;&#39;&#39;
+        Enumerates all possible assignments of free variables of a FG fragment
+
+        Args:
+            fragment (Fragment): The fragment for which we want to enumerate all
+            possible variable assignments
+
+        Returns:
+            assignments (list): A list of lists where every entry corresponds to
+            a list of assignments to the fragments free variables
+        &#39;&#39;&#39;
+        assignments = [[]]
+        for n in fragment.V:
+            if(n not in fragment.external):
+                new_assignments = []
+                for v in self.fgg.domains[n].enumerate():
+                    for a in assignments:
+                        ap = a.copy()
+                        ap.append(v)
+                        new_assignments.append(ap)
+                assignments = new_assignments
+        return assignments
+
+    def calculate_phi(self,X,xi,db):
+        &#39;&#39;&#39;
+        Directly calculates the value of the phi variable (sum-product of a nonterminal)
+        for a given nonterminal and assignment
+
+        Args:
+            X: The nonterminal for which the sum-product is to be computed
+            xi (list): A list of assignments to the variables adjacent to X
+            db (dict): A dictionary used for storing the result of recursive
+            computations in order to avoid redundance
+
+        Returns:
+            result: The computed sum-product for the variable X and the assignment xi
+        &#39;&#39;&#39;
+
+        if(&#34;phi&#34;+str(X)+str(xi) in db):
+            return db[&#34;phi&#34;+str(X)+str(xi)]
+        result = 0
+        for p in self.fgg.nProductions(X):
+            result += self.calculate_tau(p.body,xi,db)
+        db[&#34;phi&#34;+str(X)+str(xi)]=result
+        return result
+
+    def calculate_tau(self,frag,xi,db):
+        &#39;&#39;&#39;
+        Directly calculates the value of the tau variable (sum-product of a right-hand side)
+        for a given fragment and assignment
+
+        Args:
+            frag (Fragment): The fragment for which the sum-product is to be computed
+            xi (list): A list of assignments to the external variables of frag
+            db (dict): A dictionary used for storing the result of recursive
+            computations in order to avoid redundance
+
+        Returns:
+            result: The computed sum-product for fragment frag and the assignment xi
+        &#39;&#39;&#39;
+
+        if(&#34;tau&#34;+str(frag)+str(xi) in db):
+            return db[&#34;phi&#34;+str(frag)+str(xi)]
+        result = 0
+
+        for v in self.xiR(frag):
+            varMap = {} # assign assigments to vertices
+            index = 0
+            exindex = 0
+            for vtx in frag.V:
+                if(vtx in frag.external):
+                    varMap[vtx]=xi[exindex]
+                    exindex+=1
+                else:
+                    varMap[vtx]=v[index]
+                    index+=1
+
+            ntproduct = 1
+            tproduct = 1
+            for e in frag.E: # compute changes in values
+                if(e.label in self.fgg.N): # case E_N
+                    asmntList = []
+                    for tgt in e.targets:
+                        asmntList.append(varMap[tgt])
+                    ntproduct *= self.calculate_phi(e.label,asmntList,db)
+                else: # case E_T
+                    for tgt in e.targets:
+                        tproduct *= varMap[tgt] # would want to use factorfunction, but hypergraphs don&#39;t have functions!
+            result += ntproduct * tproduct
+
+        db[&#34;phi&#34;+str(frag)+str(xi)] = result
+        return result
+
+    def create_phi_equations(self,index,new_index,equations,B,nt):
+        &#39;&#39;&#39;
+        Helper function to calculate the value of the phi variable (sum-product of a nonterminal)
+         that creates linear equations and adds them to the equation system
+
+        Args:
+            index (dict): A mapping of variables to indices in the equation system
+            new_index (index): The value of the next free index for new variables
+            equations (list): A matrix storing the equations for the equation system
+            B (list): The vector for which the linear system in matrix form is to be solved
+            nt: The nonterminal, for which we want to create the phi equation
+
+        Returns:
+            new_index: The new index of the next free variable. All other changes are passed by reference
+        &#39;&#39;&#39;
+
+        for v in self.xiX(nt):
+            new_equation = [0]*new_index
+            if(not (&#34;phi&#34;+str(nt)+str(v)) in index):
+                index[&#34;phi&#34;+str(nt)+str(v)] = new_index
+                new_index +=1
+                new_equation.append(-1)
+            else:
+                new_equation[index[&#34;phi&#34;+str(nt)+str(v)]]=-1
+
+
+            for p in self.fgg.nProductions(nt):
+                    if((&#34;tau&#34;+str(p.body)+str(v)) not in index):
+                        index[&#34;tau&#34;+str(p.body)+str(v)] = new_index
+                        new_index +=1
+                        new_equation.append(1)
+                    else:
+                        new_equation[index[&#34;tau&#34;+str(p.body)+str(v)]]=1
+
+            equations.append(new_equation)
+            B.append(0)
+
+            for p in self.fgg.nProductions(nt): # create tau equations for every v
+                new_index = self.create_tau_equations(index,new_index,equations,B,p.body,v)
+
+        return new_index # return the current new index. All other parameters are passed by object reference
+
+    def create_tau_equations(self,index,new_index,equations,B,r,v):
+        &#39;&#39;&#39;
+        Helper function to calculate the value of the tau variable (sum-product of a fragment)
+         that creates linear equations and adds them to the equation system
+
+        Args:
+            index (dict): A mapping of variables to indices in the equation system
+            new_index (index): The value of the next free index for new variables
+            equations (list): A matrix storing the equations for the equation system
+            B (list): The vector for which the linear system in matrix form is to be solved
+            r (Fragment): The fragment for which we want to compute the sum-product
+            v (list): The list of external assignments given to the fragment
+
+        Returns:
+            new_index: The new index of the next free variable. All other changes are passed by reference
+        &#39;&#39;&#39;
+
+        new_equation = [0]*new_index
+        new_equation[index[&#34;tau&#34;+str(r)+str(v)]]=-1
+        for var in self.xiR(r):
+            varMap = {} # assign assigments to vertices
+            curr_index = 0
+            exindex = 0
+            for vtx in r.V:
+                if(vtx in r.external):
+                    varMap[vtx]=v[exindex]
+                    exindex+=1
+                else:
+                    varMap[vtx]=var[curr_index]
+                    curr_index+=1
+
+            product = 1
+            for e in r.E: # add actual variables
+                if(e.label not in self.fgg.N): # case E_T
+                    for tgt in e.targets:
+                        product *= varMap[tgt]
+            containsNT = False
+            for e in r.E:
+                if(e.label in self.fgg.N): # case E_N
+                    containsNT = True
+                    asmntList = []
+                    for tgt in e.targets:
+                        asmntList.append(varMap[tgt])
+
+                    if(not (&#34;phi&#34;+str(e.label)+str(asmntList)) in index):
+                        index[&#34;phi&#34;+str(e.label)+str(asmntList)] = new_index
+                        new_index +=1
+                        new_equation.append(0) # increase length of the equation
+                    new_equation[index[&#34;phi&#34;+str(e.label)+str(asmntList)]]=product
+
+            equations.append(new_equation)
+            if(containsNT):
+                B.append(0)
+            else:
+                B.append(-product)
+
+        return new_index # return the current new index. All other parameters are passed by object reference
+
+    def create_nl_phi_equations(self,index,new_index,equations,nt):
+        &#39;&#39;&#39;
+        Helper function to calculate the value of the phi variable (sum-product of a nonterminal)
+         that creates nonlinear equations and adds them to the equation system
+
+        Args:
+            index (dict): A mapping of variables to indices in the equation system
+            new_index (index): The value of the next free index for new variables
+            equations (list): A list of functions calculating the value of every equation in the system
+            nt: The nonterminal, for which we want to create the phi equation
+
+        Returns:
+            new_index: The new index of the next free variable. All other changes are passed by reference
+        &#39;&#39;&#39;
+
+        for v in self.xiX(nt):
+            new_equation = []
+            if(not (&#34;phi&#34;+str(nt)+str(v)) in index):
+                index[&#34;phi&#34;+str(nt)+str(v)] = new_index
+                new_index +=1
+
+            new_equation.append((-1,index[&#34;phi&#34;+str(nt)+str(v)],1))
+
+            for p in self.fgg.nProductions(nt):
+                    if((&#34;tau&#34;+str(p.body)+str(v)) not in index):
+                        index[&#34;tau&#34;+str(p.body)+str(v)] = new_index
+                        new_index +=1
+
+                    new_equation.append((-1,index[&#34;tau&#34;+str(p.body)+str(v)],1))
+
+            equations.append(self.function_from_list(new_equation))
+
+            for p in self.fgg.nProductions(nt): # create tau equations
+                new_index = self.create_nl_tau_equations(index,new_index,equations,p.body,v)
+
+        return new_index
+
+    def create_nl_tau_equations(self,index,new_index,equations,r,v):
+        &#39;&#39;&#39;
+        Helper function to calculate the value of the phi variable (sum-product of a nonterminal)
+         that creates nonlinear equations and adds them to the equation system
+
+        Args:
+            index (dict): A mapping of variables to indices in the equation system
+            new_index (index): The value of the next free index for new variables
+            equations (list): A list of functions calculating the value of every equation in the system
+            r (Fragment): The fragment for which we want to compute the sum-product
+            v (list): The list of external assignments given to the fragment
+
+        Returns:
+            new_index: The new index of the next free variable. All other changes are passed by reference
+        &#39;&#39;&#39;
+
+        new_equation = []
+        new_equation.append((-1,index[&#34;tau&#34;+str(r)+str(v)],1))
+        for var in self.xiR(r):
+            varMap = {} # assign assigments to vertices
+            curr_index = 0
+            exindex = 0
+            for vtx in r.V:
+                if(vtx in r.external):
+                    varMap[vtx]=v[exindex]
+                    exindex+=1
+                else:
+                    varMap[vtx]=var[curr_index]
+                    curr_index+=1
+
+            product = 1
+            for e in r.E: # add actual variables
+                if(e.label not in self.fgg.N): # case E_T
+                    for tgt in e.targets:
+                        product *= varMap[tgt]
+            occurances = {} # checks the number of times a nonterminal occurs
+            for e in r.E:
+                if(e.label in self.fgg.N):
+                    if(e.label not in occurances):
+                        occurances[e.label]=0
+                    occurances[e.label]+=1
+
+            if(len(occurances)==0):
+                new_equation.append((product,0,0))
+
+            for e in r.E:
+                if(e.label in self.fgg.N and e.label in occurances): # check if the equation has been updated for e.label
+                    asmntList = []
+                    for tgt in e.targets:
+                        asmntList.append(varMap[tgt])
+
+                    if(not (&#34;phi&#34;+str(e.label)+str(asmntList)) in index):
+                        index[&#34;phi&#34;+str(e.label)+str(asmntList)] = new_index
+                        new_index +=1
+                    new_equation.append((product,index[&#34;phi&#34;+str(e.label)+str(asmntList)],occurances[e.label]))
+                    occurances.pop(e.label)
+
+            equations.append(self.function_from_list(new_equation))
+
+        return new_index
+
+    def function_from_list(self,entries):
+        &#39;&#39;&#39;
+        Creates and returns a function that represents a equation in the system
+        from the list of all factors, variables and powers in the equation
+
+        Args:
+            entries (list): A list of tuples of factor, variable index and power of a summand
+
+        Return:
+            g: The function computing a single equation line
+        &#39;&#39;&#39;
+        def f(x):
+            result = 0
+            for e in entries:
+                factor, ind, exp = e
+                result += factor*pow(x[ind],exp)
+            return result
+
+        return f
+
+    def inference_finite_variables(self):
+        &#39;&#39;&#39;
+        Computes the sum product of a factor graph grammar with finite variable domain
+        by distinguishing between nonrecursive, linearly recursive and nonlinearly recursive grammars
+
+        Returns:
+            The computed sum-product of the grammer
+        &#39;&#39;&#39;
+        g = nx.DiGraph()
+        for p in self.fgg.P:
+            for nt in p.body.nonterminals(self.fgg.N):
+                g.add_edge(p.head,nt)
+        comp = nx.strongly_connected_components(g)
+
+        if(not self.fgg.recursive()): # Case 1
+            db = {}
+            for c in comp: # reverse topological order might be needed here
+                if(len(c)==1): # case (1)
+                    node = c.pop()
+                    for v in self.xiX(node):
+                        self.calculate_phi(node,v,db)
+
+            return self.calculate_phi(self.fgg.S,[],db)
+
+        elif(self.fgg.linearly_recursive()): # Case 2
+            index = {}
+            new_index = 0
+            equations = []
+            B = []
+
+            for nt in self.fgg.N: # create phi equations
+                new_index = self.create_phi_equations(index,new_index,equations,B,nt)
+
+            counter = 0
+            for e in equations:
+                while(len(e)&lt;new_index):
+                    e.append(0)
+                #print(e,&#34;[&#34;,B[counter],&#34;]&#34;)
+                counter+=1
+            solution = np.linalg.solve(equations,B)
+            return solution[index[&#34;phiS[]&#34;]]
+
+        else: # Case 3
+            from scipy.optimize import fsolve
+            index = {}
+            new_index = 0
+            equations = [] # list of lambda functions mapping to the correct shit
+
+            for nt in self.fgg.N: # create phi equations
+                new_index = self.create_nl_phi_equations(index,new_index,equations,nt)
+
+            def system(x):
+                sol = []
+                index = 0
+                for xi in x:
+                    sol.append(equations[index](x))
+                    index+=1
+                return sol
+
+            solution = fsolve(system,[1]*new_index)
+            print(index)
+            print(solution)
+            return round(solution[index[&#34;phiS[]&#34;]],4) # the solver is not always precise. Return a rounded number
+
+
+
+    def inference_finite_states(self):
+        &#39;&#39;&#39;
+        Returns the sum product of a factor graph grammar with finite graph language
+
+        Returns:
+            The sum product of the FGG of the FGGsum object
+        &#39;&#39;&#39;
+        productions = list(self.fgg.P)
+        fg = Factorgraph(productions[0].body.R)
+
+        # add binary variables for all nonterminals and rules
+        bin_domain = VariableDomain(False)
+        bin_domain.set_content({False, True})
+        nt_bin_vars = {}
+        for X in self.fgg.N:
+            b_var = FGVertex(X, &#34;B_&#34; + X, fg.R, bin_domain)
+            fg.add_vertex(b_var)
+            nt_bin_vars[X] = b_var
+        rules_bin_vars = {}
+        for i, p in enumerate(productions):
+            b_var = FGVertex(p, &#34;B_π&#34; + str(i), fg.R, bin_domain)
+            fg.add_vertex(b_var)
+            rules_bin_vars[p] = b_var
+
+        pprint.pprint(fg)
+        pprint.pprint(nt_bin_vars)
+        pprint.pprint(rules_bin_vars)
+
+        # add conditions to constraint to valid derivations
+        start_e = FGEdge(self.fgg.S, &#34;B_S = true&#34;, fg.R, CondStart(fg.R))
+        start_e.add_target(nt_bin_vars[self.fgg.S])
+        for X in self.fgg.N:
+            if X != self.fgg.S:
+                p_X_left = [p for p in productions if X == p.head]
+                e = FGEdge(X, &#34;CondOne(B_&#34; + X + &#39;&#39;.join([&#39;,&#39;+rules_bin_vars[p_].label for p_ in p_X_left]) + &#34;)&#34;, fg.R, CondOne(fg.R, 1 + len(p_X_left)))
+                e.add_target(nt_bin_vars[X])
+                for p in p_X_left:
+                    e.add_target(rules_bin_vars[p])
+                fg.add_edge(e)
+
+                p_X_right = [p for p in productions if X in p.body.nonterminals(self.fgg.N)]
+                e = FGEdge(X, &#34;CondOne(B_&#34; + X + &#39;&#39;.join([&#39;,&#39;+rules_bin_vars[p_].label for p_ in p_X_right]) + &#34;)&#34;, fg.R, CondOne(fg.R, 1 + len(p_X_right)))
+                e.add_target(nt_bin_vars[X])
+                for p in p_X_right:
+                    e.add_target(rules_bin_vars[p])
+                fg.add_edge(e)
+
+        # create clusters
+        new_p_vars = {}
+        for i, p in enumerate(productions):
+            new_vars = {}
+            for v in p.body.V:
+                var = FGVertex(str(p), v.label + &#34;_&#34; + str(i), fg.R, v.domain)
+                new_vars[v] = var
+                e = FGEdge(str(p), &#34;CN_&#34; + v.label + &#34;_&#34; + str(i), fg.R, CondNormalize(v.domain))
+                e.add_target(rules_bin_vars[p])
+                e.add_target(var)
+                fg.add_vertex(var)
+                fg.add_edge(e)
+            for e in p.body.E:
+                if e.label not in self.fgg.N:
+                    new_edge = FGEdge(str(p), e.label, fg.R, CondFactor(fg.R, e.function))
+                    new_edge.add_target(rules_bin_vars[p])
+                    for v in e.targets:
+                        new_edge.add_target(new_vars[v])
+                    fg.add_edge(new_edge)
+            new_p_vars[p] = new_vars
+
+        new_nt_vars = {}
+        for X in self.fgg.N:
+            for p in productions:
+                if X in p.body.nonterminals(self.fgg.N):
+                    X_vars = {}
+                    e = p.body.get_edge(X)
+                    for t in e.targets:
+                        v = FGVertex(X, t.label + &#34;_&#34; + X, fg.R, t.domain)
+                        X_vars[t] = v
+                        new_edge = FGEdge(X, &#34;CN_&#34; + v.label + &#34;_&#34; + X, fg.R, CondNormalize(t.domain))
+                        new_edge.add_target(nt_bin_vars[X])
+                        new_edge.add_target(v)
+                        fg.add_vertex(v)
+                        fg.add_edge(new_edge)
+                    new_nt_vars[X] = X_vars
+
+        print(new_nt_vars)
+        # create same-variable bindings
+        for X in self.fgg.N:
+            for i, p in enumerate(productions):
+                if X == p.head:
+                    for v in p.body.external:
+                        new_edge = FGEdge(X, &#34;CE_&#34; + X + &#34;_&#34; + str(i) + &#34;_&#34; + v.label, fg.R, CondEquals(fg.R))
+                        new_edge.add_target(rules_bin_vars[p])
+                        new_edge.add_target(new_nt_vars[X][v])
+                        new_edge.add_target(new_p_vars[p][v])
+
+                if X in p.body.nonterminals(self.fgg.N):
+                    e = p.body.get_edge(X)
+                    for t in e.targets:
+                        new_edge = FGEdge(X, &#34;CE_&#34; + X + &#34;_&#34; + str(i) + &#34;_&#34; + t.label, fg.R, CondEquals(fg.R))
+                        new_edge.add_target(rules_bin_vars[p])
+                        print(X,v.label)
+                        new_edge.add_target(new_nt_vars[X][t])
+                        new_edge.add_target(new_p_vars[p][t])
+
+        return fg.normalization_constant()</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="fgglib.fgg.fggsum_product.FGGsum_product.calculate_phi"><code class="name flex">
+<span>def <span class="ident">calculate_phi</span></span>(<span>self, X, xi, db)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Directly calculates the value of the phi variable (sum-product of a nonterminal)
+for a given nonterminal and assignment</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>X</code></strong></dt>
+<dd>The nonterminal for which the sum-product is to be computed</dd>
+<dt><strong><code>xi</code></strong> :&ensp;<code>list</code></dt>
+<dd>A list of assignments to the variables adjacent to X</dd>
+<dt><strong><code>db</code></strong> :&ensp;<code>dict</code></dt>
+<dd>A dictionary used for storing the result of recursive</dd>
+</dl>
+<p>computations in order to avoid redundance</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>result</code></dt>
+<dd>The computed sum-product for the variable X and the assignment xi</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calculate_phi(self,X,xi,db):
+    &#39;&#39;&#39;
+    Directly calculates the value of the phi variable (sum-product of a nonterminal)
+    for a given nonterminal and assignment
+
+    Args:
+        X: The nonterminal for which the sum-product is to be computed
+        xi (list): A list of assignments to the variables adjacent to X
+        db (dict): A dictionary used for storing the result of recursive
+        computations in order to avoid redundance
+
+    Returns:
+        result: The computed sum-product for the variable X and the assignment xi
+    &#39;&#39;&#39;
+
+    if(&#34;phi&#34;+str(X)+str(xi) in db):
+        return db[&#34;phi&#34;+str(X)+str(xi)]
+    result = 0
+    for p in self.fgg.nProductions(X):
+        result += self.calculate_tau(p.body,xi,db)
+    db[&#34;phi&#34;+str(X)+str(xi)]=result
+    return result</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fgg.fggsum_product.FGGsum_product.calculate_tau"><code class="name flex">
+<span>def <span class="ident">calculate_tau</span></span>(<span>self, frag, xi, db)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Directly calculates the value of the tau variable (sum-product of a right-hand side)
+for a given fragment and assignment</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>frag</code></strong> :&ensp;<code>Fragment</code></dt>
+<dd>The fragment for which the sum-product is to be computed</dd>
+<dt><strong><code>xi</code></strong> :&ensp;<code>list</code></dt>
+<dd>A list of assignments to the external variables of frag</dd>
+<dt><strong><code>db</code></strong> :&ensp;<code>dict</code></dt>
+<dd>A dictionary used for storing the result of recursive</dd>
+</dl>
+<p>computations in order to avoid redundance</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>result</code></dt>
+<dd>The computed sum-product for fragment frag and the assignment xi</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calculate_tau(self,frag,xi,db):
+    &#39;&#39;&#39;
+    Directly calculates the value of the tau variable (sum-product of a right-hand side)
+    for a given fragment and assignment
+
+    Args:
+        frag (Fragment): The fragment for which the sum-product is to be computed
+        xi (list): A list of assignments to the external variables of frag
+        db (dict): A dictionary used for storing the result of recursive
+        computations in order to avoid redundance
+
+    Returns:
+        result: The computed sum-product for fragment frag and the assignment xi
+    &#39;&#39;&#39;
+
+    if(&#34;tau&#34;+str(frag)+str(xi) in db):
+        return db[&#34;phi&#34;+str(frag)+str(xi)]
+    result = 0
+
+    for v in self.xiR(frag):
+        varMap = {} # assign assigments to vertices
+        index = 0
+        exindex = 0
+        for vtx in frag.V:
+            if(vtx in frag.external):
+                varMap[vtx]=xi[exindex]
+                exindex+=1
+            else:
+                varMap[vtx]=v[index]
+                index+=1
+
+        ntproduct = 1
+        tproduct = 1
+        for e in frag.E: # compute changes in values
+            if(e.label in self.fgg.N): # case E_N
+                asmntList = []
+                for tgt in e.targets:
+                    asmntList.append(varMap[tgt])
+                ntproduct *= self.calculate_phi(e.label,asmntList,db)
+            else: # case E_T
+                for tgt in e.targets:
+                    tproduct *= varMap[tgt] # would want to use factorfunction, but hypergraphs don&#39;t have functions!
+        result += ntproduct * tproduct
+
+    db[&#34;phi&#34;+str(frag)+str(xi)] = result
+    return result</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fgg.fggsum_product.FGGsum_product.create_nl_phi_equations"><code class="name flex">
+<span>def <span class="ident">create_nl_phi_equations</span></span>(<span>self, index, new_index, equations, nt)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Helper function to calculate the value of the phi variable (sum-product of a nonterminal)
+that creates nonlinear equations and adds them to the equation system</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>index</code></strong> :&ensp;<code>dict</code></dt>
+<dd>A mapping of variables to indices in the equation system</dd>
+<dt><strong><code>new_index</code></strong> :&ensp;<code>index</code></dt>
+<dd>The value of the next free index for new variables</dd>
+<dt><strong><code>equations</code></strong> :&ensp;<code>list</code></dt>
+<dd>A list of functions calculating the value of every equation in the system</dd>
+<dt><strong><code>nt</code></strong></dt>
+<dd>The nonterminal, for which we want to create the phi equation</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>new_index</code></dt>
+<dd>The new index of the next free variable. All other changes are passed by reference</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_nl_phi_equations(self,index,new_index,equations,nt):
+    &#39;&#39;&#39;
+    Helper function to calculate the value of the phi variable (sum-product of a nonterminal)
+     that creates nonlinear equations and adds them to the equation system
+
+    Args:
+        index (dict): A mapping of variables to indices in the equation system
+        new_index (index): The value of the next free index for new variables
+        equations (list): A list of functions calculating the value of every equation in the system
+        nt: The nonterminal, for which we want to create the phi equation
+
+    Returns:
+        new_index: The new index of the next free variable. All other changes are passed by reference
+    &#39;&#39;&#39;
+
+    for v in self.xiX(nt):
+        new_equation = []
+        if(not (&#34;phi&#34;+str(nt)+str(v)) in index):
+            index[&#34;phi&#34;+str(nt)+str(v)] = new_index
+            new_index +=1
+
+        new_equation.append((-1,index[&#34;phi&#34;+str(nt)+str(v)],1))
+
+        for p in self.fgg.nProductions(nt):
+                if((&#34;tau&#34;+str(p.body)+str(v)) not in index):
+                    index[&#34;tau&#34;+str(p.body)+str(v)] = new_index
+                    new_index +=1
+
+                new_equation.append((-1,index[&#34;tau&#34;+str(p.body)+str(v)],1))
+
+        equations.append(self.function_from_list(new_equation))
+
+        for p in self.fgg.nProductions(nt): # create tau equations
+            new_index = self.create_nl_tau_equations(index,new_index,equations,p.body,v)
+
+    return new_index</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fgg.fggsum_product.FGGsum_product.create_nl_tau_equations"><code class="name flex">
+<span>def <span class="ident">create_nl_tau_equations</span></span>(<span>self, index, new_index, equations, r, v)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Helper function to calculate the value of the phi variable (sum-product of a nonterminal)
+that creates nonlinear equations and adds them to the equation system</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>index</code></strong> :&ensp;<code>dict</code></dt>
+<dd>A mapping of variables to indices in the equation system</dd>
+<dt><strong><code>new_index</code></strong> :&ensp;<code>index</code></dt>
+<dd>The value of the next free index for new variables</dd>
+<dt><strong><code>equations</code></strong> :&ensp;<code>list</code></dt>
+<dd>A list of functions calculating the value of every equation in the system</dd>
+<dt><strong><code>r</code></strong> :&ensp;<code>Fragment</code></dt>
+<dd>The fragment for which we want to compute the sum-product</dd>
+<dt><strong><code>v</code></strong> :&ensp;<code>list</code></dt>
+<dd>The list of external assignments given to the fragment</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>new_index</code></dt>
+<dd>The new index of the next free variable. All other changes are passed by reference</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_nl_tau_equations(self,index,new_index,equations,r,v):
+    &#39;&#39;&#39;
+    Helper function to calculate the value of the phi variable (sum-product of a nonterminal)
+     that creates nonlinear equations and adds them to the equation system
+
+    Args:
+        index (dict): A mapping of variables to indices in the equation system
+        new_index (index): The value of the next free index for new variables
+        equations (list): A list of functions calculating the value of every equation in the system
+        r (Fragment): The fragment for which we want to compute the sum-product
+        v (list): The list of external assignments given to the fragment
+
+    Returns:
+        new_index: The new index of the next free variable. All other changes are passed by reference
+    &#39;&#39;&#39;
+
+    new_equation = []
+    new_equation.append((-1,index[&#34;tau&#34;+str(r)+str(v)],1))
+    for var in self.xiR(r):
+        varMap = {} # assign assigments to vertices
+        curr_index = 0
+        exindex = 0
+        for vtx in r.V:
+            if(vtx in r.external):
+                varMap[vtx]=v[exindex]
+                exindex+=1
+            else:
+                varMap[vtx]=var[curr_index]
+                curr_index+=1
+
+        product = 1
+        for e in r.E: # add actual variables
+            if(e.label not in self.fgg.N): # case E_T
+                for tgt in e.targets:
+                    product *= varMap[tgt]
+        occurances = {} # checks the number of times a nonterminal occurs
+        for e in r.E:
+            if(e.label in self.fgg.N):
+                if(e.label not in occurances):
+                    occurances[e.label]=0
+                occurances[e.label]+=1
+
+        if(len(occurances)==0):
+            new_equation.append((product,0,0))
+
+        for e in r.E:
+            if(e.label in self.fgg.N and e.label in occurances): # check if the equation has been updated for e.label
+                asmntList = []
+                for tgt in e.targets:
+                    asmntList.append(varMap[tgt])
+
+                if(not (&#34;phi&#34;+str(e.label)+str(asmntList)) in index):
+                    index[&#34;phi&#34;+str(e.label)+str(asmntList)] = new_index
+                    new_index +=1
+                new_equation.append((product,index[&#34;phi&#34;+str(e.label)+str(asmntList)],occurances[e.label]))
+                occurances.pop(e.label)
+
+        equations.append(self.function_from_list(new_equation))
+
+    return new_index</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fgg.fggsum_product.FGGsum_product.create_phi_equations"><code class="name flex">
+<span>def <span class="ident">create_phi_equations</span></span>(<span>self, index, new_index, equations, B, nt)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Helper function to calculate the value of the phi variable (sum-product of a nonterminal)
+that creates linear equations and adds them to the equation system</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>index</code></strong> :&ensp;<code>dict</code></dt>
+<dd>A mapping of variables to indices in the equation system</dd>
+<dt><strong><code>new_index</code></strong> :&ensp;<code>index</code></dt>
+<dd>The value of the next free index for new variables</dd>
+<dt><strong><code>equations</code></strong> :&ensp;<code>list</code></dt>
+<dd>A matrix storing the equations for the equation system</dd>
+<dt><strong><code>B</code></strong> :&ensp;<code>list</code></dt>
+<dd>The vector for which the linear system in matrix form is to be solved</dd>
+<dt><strong><code>nt</code></strong></dt>
+<dd>The nonterminal, for which we want to create the phi equation</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>new_index</code></dt>
+<dd>The new index of the next free variable. All other changes are passed by reference</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_phi_equations(self,index,new_index,equations,B,nt):
+    &#39;&#39;&#39;
+    Helper function to calculate the value of the phi variable (sum-product of a nonterminal)
+     that creates linear equations and adds them to the equation system
+
+    Args:
+        index (dict): A mapping of variables to indices in the equation system
+        new_index (index): The value of the next free index for new variables
+        equations (list): A matrix storing the equations for the equation system
+        B (list): The vector for which the linear system in matrix form is to be solved
+        nt: The nonterminal, for which we want to create the phi equation
+
+    Returns:
+        new_index: The new index of the next free variable. All other changes are passed by reference
+    &#39;&#39;&#39;
+
+    for v in self.xiX(nt):
+        new_equation = [0]*new_index
+        if(not (&#34;phi&#34;+str(nt)+str(v)) in index):
+            index[&#34;phi&#34;+str(nt)+str(v)] = new_index
+            new_index +=1
+            new_equation.append(-1)
+        else:
+            new_equation[index[&#34;phi&#34;+str(nt)+str(v)]]=-1
+
+
+        for p in self.fgg.nProductions(nt):
+                if((&#34;tau&#34;+str(p.body)+str(v)) not in index):
+                    index[&#34;tau&#34;+str(p.body)+str(v)] = new_index
+                    new_index +=1
+                    new_equation.append(1)
+                else:
+                    new_equation[index[&#34;tau&#34;+str(p.body)+str(v)]]=1
+
+        equations.append(new_equation)
+        B.append(0)
+
+        for p in self.fgg.nProductions(nt): # create tau equations for every v
+            new_index = self.create_tau_equations(index,new_index,equations,B,p.body,v)
+
+    return new_index # return the current new index. All other parameters are passed by object reference</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fgg.fggsum_product.FGGsum_product.create_tau_equations"><code class="name flex">
+<span>def <span class="ident">create_tau_equations</span></span>(<span>self, index, new_index, equations, B, r, v)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Helper function to calculate the value of the tau variable (sum-product of a fragment)
+that creates linear equations and adds them to the equation system</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>index</code></strong> :&ensp;<code>dict</code></dt>
+<dd>A mapping of variables to indices in the equation system</dd>
+<dt><strong><code>new_index</code></strong> :&ensp;<code>index</code></dt>
+<dd>The value of the next free index for new variables</dd>
+<dt><strong><code>equations</code></strong> :&ensp;<code>list</code></dt>
+<dd>A matrix storing the equations for the equation system</dd>
+<dt><strong><code>B</code></strong> :&ensp;<code>list</code></dt>
+<dd>The vector for which the linear system in matrix form is to be solved</dd>
+<dt><strong><code>r</code></strong> :&ensp;<code>Fragment</code></dt>
+<dd>The fragment for which we want to compute the sum-product</dd>
+<dt><strong><code>v</code></strong> :&ensp;<code>list</code></dt>
+<dd>The list of external assignments given to the fragment</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>new_index</code></dt>
+<dd>The new index of the next free variable. All other changes are passed by reference</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_tau_equations(self,index,new_index,equations,B,r,v):
+    &#39;&#39;&#39;
+    Helper function to calculate the value of the tau variable (sum-product of a fragment)
+     that creates linear equations and adds them to the equation system
+
+    Args:
+        index (dict): A mapping of variables to indices in the equation system
+        new_index (index): The value of the next free index for new variables
+        equations (list): A matrix storing the equations for the equation system
+        B (list): The vector for which the linear system in matrix form is to be solved
+        r (Fragment): The fragment for which we want to compute the sum-product
+        v (list): The list of external assignments given to the fragment
+
+    Returns:
+        new_index: The new index of the next free variable. All other changes are passed by reference
+    &#39;&#39;&#39;
+
+    new_equation = [0]*new_index
+    new_equation[index[&#34;tau&#34;+str(r)+str(v)]]=-1
+    for var in self.xiR(r):
+        varMap = {} # assign assigments to vertices
+        curr_index = 0
+        exindex = 0
+        for vtx in r.V:
+            if(vtx in r.external):
+                varMap[vtx]=v[exindex]
+                exindex+=1
+            else:
+                varMap[vtx]=var[curr_index]
+                curr_index+=1
+
+        product = 1
+        for e in r.E: # add actual variables
+            if(e.label not in self.fgg.N): # case E_T
+                for tgt in e.targets:
+                    product *= varMap[tgt]
+        containsNT = False
+        for e in r.E:
+            if(e.label in self.fgg.N): # case E_N
+                containsNT = True
+                asmntList = []
+                for tgt in e.targets:
+                    asmntList.append(varMap[tgt])
+
+                if(not (&#34;phi&#34;+str(e.label)+str(asmntList)) in index):
+                    index[&#34;phi&#34;+str(e.label)+str(asmntList)] = new_index
+                    new_index +=1
+                    new_equation.append(0) # increase length of the equation
+                new_equation[index[&#34;phi&#34;+str(e.label)+str(asmntList)]]=product
+
+        equations.append(new_equation)
+        if(containsNT):
+            B.append(0)
+        else:
+            B.append(-product)
+
+    return new_index # return the current new index. All other parameters are passed by object reference</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fgg.fggsum_product.FGGsum_product.function_from_list"><code class="name flex">
+<span>def <span class="ident">function_from_list</span></span>(<span>self, entries)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Creates and returns a function that represents a equation in the system
+from the list of all factors, variables and powers in the equation</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>entries</code></strong> :&ensp;<code>list</code></dt>
+<dd>A list of tuples of factor, variable index and power of a summand</dd>
+</dl>
+<h2 id="return">Return</h2>
+<p>g: The function computing a single equation line</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def function_from_list(self,entries):
+    &#39;&#39;&#39;
+    Creates and returns a function that represents a equation in the system
+    from the list of all factors, variables and powers in the equation
+
+    Args:
+        entries (list): A list of tuples of factor, variable index and power of a summand
+
+    Return:
+        g: The function computing a single equation line
+    &#39;&#39;&#39;
+    def f(x):
+        result = 0
+        for e in entries:
+            factor, ind, exp = e
+            result += factor*pow(x[ind],exp)
+        return result
+
+    return f</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fgg.fggsum_product.FGGsum_product.inference"><code class="name flex">
+<span>def <span class="ident">inference</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes the sum-product of a factor graph grammar by distinguishing
+between the finite variable domain and finite graph language case</p>
+<h2 id="returns">Returns</h2>
+<p>The computed sum-product</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def inference(self):
+    &#39;&#39;&#39;
+    Computes the sum-product of a factor graph grammar by distinguishing
+    between the finite variable domain and finite graph language case
+
+    Returns:
+        The computed sum-product
+    &#39;&#39;&#39;
+    if(self.fgg.finite_domain()): # finite variable domain
+        return self.inference_finite_variables()
+    if(not fgg.recursive()): # finite graph language
+        return self.inference_finite_states()
+    else:
+        raise Exception(&#34;Inference undecidable for infinite graph languages and infinte variable domain!&#34;) # both infinte</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fgg.fggsum_product.FGGsum_product.inference_finite_states"><code class="name flex">
+<span>def <span class="ident">inference_finite_states</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the sum product of a factor graph grammar with finite graph language</p>
+<h2 id="returns">Returns</h2>
+<p>The sum product of the FGG of the FGGsum object</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def inference_finite_states(self):
+    &#39;&#39;&#39;
+    Returns the sum product of a factor graph grammar with finite graph language
+
+    Returns:
+        The sum product of the FGG of the FGGsum object
+    &#39;&#39;&#39;
+    productions = list(self.fgg.P)
+    fg = Factorgraph(productions[0].body.R)
+
+    # add binary variables for all nonterminals and rules
+    bin_domain = VariableDomain(False)
+    bin_domain.set_content({False, True})
+    nt_bin_vars = {}
+    for X in self.fgg.N:
+        b_var = FGVertex(X, &#34;B_&#34; + X, fg.R, bin_domain)
+        fg.add_vertex(b_var)
+        nt_bin_vars[X] = b_var
+    rules_bin_vars = {}
+    for i, p in enumerate(productions):
+        b_var = FGVertex(p, &#34;B_π&#34; + str(i), fg.R, bin_domain)
+        fg.add_vertex(b_var)
+        rules_bin_vars[p] = b_var
+
+    pprint.pprint(fg)
+    pprint.pprint(nt_bin_vars)
+    pprint.pprint(rules_bin_vars)
+
+    # add conditions to constraint to valid derivations
+    start_e = FGEdge(self.fgg.S, &#34;B_S = true&#34;, fg.R, CondStart(fg.R))
+    start_e.add_target(nt_bin_vars[self.fgg.S])
+    for X in self.fgg.N:
+        if X != self.fgg.S:
+            p_X_left = [p for p in productions if X == p.head]
+            e = FGEdge(X, &#34;CondOne(B_&#34; + X + &#39;&#39;.join([&#39;,&#39;+rules_bin_vars[p_].label for p_ in p_X_left]) + &#34;)&#34;, fg.R, CondOne(fg.R, 1 + len(p_X_left)))
+            e.add_target(nt_bin_vars[X])
+            for p in p_X_left:
+                e.add_target(rules_bin_vars[p])
+            fg.add_edge(e)
+
+            p_X_right = [p for p in productions if X in p.body.nonterminals(self.fgg.N)]
+            e = FGEdge(X, &#34;CondOne(B_&#34; + X + &#39;&#39;.join([&#39;,&#39;+rules_bin_vars[p_].label for p_ in p_X_right]) + &#34;)&#34;, fg.R, CondOne(fg.R, 1 + len(p_X_right)))
+            e.add_target(nt_bin_vars[X])
+            for p in p_X_right:
+                e.add_target(rules_bin_vars[p])
+            fg.add_edge(e)
+
+    # create clusters
+    new_p_vars = {}
+    for i, p in enumerate(productions):
+        new_vars = {}
+        for v in p.body.V:
+            var = FGVertex(str(p), v.label + &#34;_&#34; + str(i), fg.R, v.domain)
+            new_vars[v] = var
+            e = FGEdge(str(p), &#34;CN_&#34; + v.label + &#34;_&#34; + str(i), fg.R, CondNormalize(v.domain))
+            e.add_target(rules_bin_vars[p])
+            e.add_target(var)
+            fg.add_vertex(var)
+            fg.add_edge(e)
+        for e in p.body.E:
+            if e.label not in self.fgg.N:
+                new_edge = FGEdge(str(p), e.label, fg.R, CondFactor(fg.R, e.function))
+                new_edge.add_target(rules_bin_vars[p])
+                for v in e.targets:
+                    new_edge.add_target(new_vars[v])
+                fg.add_edge(new_edge)
+        new_p_vars[p] = new_vars
+
+    new_nt_vars = {}
+    for X in self.fgg.N:
+        for p in productions:
+            if X in p.body.nonterminals(self.fgg.N):
+                X_vars = {}
+                e = p.body.get_edge(X)
+                for t in e.targets:
+                    v = FGVertex(X, t.label + &#34;_&#34; + X, fg.R, t.domain)
+                    X_vars[t] = v
+                    new_edge = FGEdge(X, &#34;CN_&#34; + v.label + &#34;_&#34; + X, fg.R, CondNormalize(t.domain))
+                    new_edge.add_target(nt_bin_vars[X])
+                    new_edge.add_target(v)
+                    fg.add_vertex(v)
+                    fg.add_edge(new_edge)
+                new_nt_vars[X] = X_vars
+
+    print(new_nt_vars)
+    # create same-variable bindings
+    for X in self.fgg.N:
+        for i, p in enumerate(productions):
+            if X == p.head:
+                for v in p.body.external:
+                    new_edge = FGEdge(X, &#34;CE_&#34; + X + &#34;_&#34; + str(i) + &#34;_&#34; + v.label, fg.R, CondEquals(fg.R))
+                    new_edge.add_target(rules_bin_vars[p])
+                    new_edge.add_target(new_nt_vars[X][v])
+                    new_edge.add_target(new_p_vars[p][v])
+
+            if X in p.body.nonterminals(self.fgg.N):
+                e = p.body.get_edge(X)
+                for t in e.targets:
+                    new_edge = FGEdge(X, &#34;CE_&#34; + X + &#34;_&#34; + str(i) + &#34;_&#34; + t.label, fg.R, CondEquals(fg.R))
+                    new_edge.add_target(rules_bin_vars[p])
+                    print(X,v.label)
+                    new_edge.add_target(new_nt_vars[X][t])
+                    new_edge.add_target(new_p_vars[p][t])
+
+    return fg.normalization_constant()</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fgg.fggsum_product.FGGsum_product.inference_finite_variables"><code class="name flex">
+<span>def <span class="ident">inference_finite_variables</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes the sum product of a factor graph grammar with finite variable domain
+by distinguishing between nonrecursive, linearly recursive and nonlinearly recursive grammars</p>
+<h2 id="returns">Returns</h2>
+<p>The computed sum-product of the grammer</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def inference_finite_variables(self):
+    &#39;&#39;&#39;
+    Computes the sum product of a factor graph grammar with finite variable domain
+    by distinguishing between nonrecursive, linearly recursive and nonlinearly recursive grammars
+
+    Returns:
+        The computed sum-product of the grammer
+    &#39;&#39;&#39;
+    g = nx.DiGraph()
+    for p in self.fgg.P:
+        for nt in p.body.nonterminals(self.fgg.N):
+            g.add_edge(p.head,nt)
+    comp = nx.strongly_connected_components(g)
+
+    if(not self.fgg.recursive()): # Case 1
+        db = {}
+        for c in comp: # reverse topological order might be needed here
+            if(len(c)==1): # case (1)
+                node = c.pop()
+                for v in self.xiX(node):
+                    self.calculate_phi(node,v,db)
+
+        return self.calculate_phi(self.fgg.S,[],db)
+
+    elif(self.fgg.linearly_recursive()): # Case 2
+        index = {}
+        new_index = 0
+        equations = []
+        B = []
+
+        for nt in self.fgg.N: # create phi equations
+            new_index = self.create_phi_equations(index,new_index,equations,B,nt)
+
+        counter = 0
+        for e in equations:
+            while(len(e)&lt;new_index):
+                e.append(0)
+            #print(e,&#34;[&#34;,B[counter],&#34;]&#34;)
+            counter+=1
+        solution = np.linalg.solve(equations,B)
+        return solution[index[&#34;phiS[]&#34;]]
+
+    else: # Case 3
+        from scipy.optimize import fsolve
+        index = {}
+        new_index = 0
+        equations = [] # list of lambda functions mapping to the correct shit
+
+        for nt in self.fgg.N: # create phi equations
+            new_index = self.create_nl_phi_equations(index,new_index,equations,nt)
+
+        def system(x):
+            sol = []
+            index = 0
+            for xi in x:
+                sol.append(equations[index](x))
+                index+=1
+            return sol
+
+        solution = fsolve(system,[1]*new_index)
+        print(index)
+        print(solution)
+        return round(solution[index[&#34;phiS[]&#34;]],4) # the solver is not always precise. Return a rounded number</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fgg.fggsum_product.FGGsum_product.xiR"><code class="name flex">
+<span>def <span class="ident">xiR</span></span>(<span>self, fragment)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Enumerates all possible assignments of free variables of a FG fragment</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>fragment</code></strong> :&ensp;<code>Fragment</code></dt>
+<dd>The fragment for which we want to enumerate all</dd>
+</dl>
+<p>possible variable assignments</p>
+<h2 id="returns">Returns</h2>
+<p>assignments (list): A list of lists where every entry corresponds to
+a list of assignments to the fragments free variables</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def xiR(self,fragment):
+    &#39;&#39;&#39;
+    Enumerates all possible assignments of free variables of a FG fragment
+
+    Args:
+        fragment (Fragment): The fragment for which we want to enumerate all
+        possible variable assignments
+
+    Returns:
+        assignments (list): A list of lists where every entry corresponds to
+        a list of assignments to the fragments free variables
+    &#39;&#39;&#39;
+    assignments = [[]]
+    for n in fragment.V:
+        if(n not in fragment.external):
+            new_assignments = []
+            for v in self.fgg.domains[n].enumerate():
+                for a in assignments:
+                    ap = a.copy()
+                    ap.append(v)
+                    new_assignments.append(ap)
+            assignments = new_assignments
+    return assignments</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fgg.fggsum_product.FGGsum_product.xiX"><code class="name flex">
+<span>def <span class="ident">xiX</span></span>(<span>self, X)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Enumerates all possible assignments of variables adjacent to a nonterminal X</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>X</code></strong></dt>
+<dd>The nonterminal labelling the edge for which we want to enumerate</dd>
+</dl>
+<p>the possible variable assignments</p>
+<h2 id="returns">Returns</h2>
+<p>assignments (list): A list of lists where every entry corresponds to
+a list of assignments to the adjacent variables</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def xiX(self,X):
+    &#39;&#39;&#39;
+    Enumerates all possible assignments of variables adjacent to a nonterminal X
+
+    Args:
+        X: The nonterminal labelling the edge for which we want to enumerate
+        the possible variable assignments
+
+    Returns:
+        assignments (list): A list of lists where every entry corresponds to
+        a list of assignments to the adjacent variables
+    &#39;&#39;&#39;
+    assignments = [[]]
+    for p in self.fgg.P:
+        for e in p.body.E:
+            if(e.label==X):
+                for t in e.targets:
+                    new_assignments = []
+                    for v in self.fgg.domains[t].enumerate():
+                        for a in assignments:
+                            ap = a.copy()
+                            ap.append(v)
+                            new_assignments.append(ap)
+                    assignments = new_assignments
+                if(assignments==[[]]):
+                    continue
+                return assignments
+    return assignments</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="fgglib.fgg" href="index.html">fgglib.fgg</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="fgglib.fgg.fggsum_product.CondEquals" href="#fgglib.fgg.fggsum_product.CondEquals">CondEquals</a></code></h4>
+</li>
+<li>
+<h4><code><a title="fgglib.fgg.fggsum_product.CondFactor" href="#fgglib.fgg.fggsum_product.CondFactor">CondFactor</a></code></h4>
+</li>
+<li>
+<h4><code><a title="fgglib.fgg.fggsum_product.CondNormalize" href="#fgglib.fgg.fggsum_product.CondNormalize">CondNormalize</a></code></h4>
+</li>
+<li>
+<h4><code><a title="fgglib.fgg.fggsum_product.CondOne" href="#fgglib.fgg.fggsum_product.CondOne">CondOne</a></code></h4>
+</li>
+<li>
+<h4><code><a title="fgglib.fgg.fggsum_product.CondStart" href="#fgglib.fgg.fggsum_product.CondStart">CondStart</a></code></h4>
+</li>
+<li>
+<h4><code><a title="fgglib.fgg.fggsum_product.FGGsum_product" href="#fgglib.fgg.fggsum_product.FGGsum_product">FGGsum_product</a></code></h4>
+<ul class="">
+<li><code><a title="fgglib.fgg.fggsum_product.FGGsum_product.calculate_phi" href="#fgglib.fgg.fggsum_product.FGGsum_product.calculate_phi">calculate_phi</a></code></li>
+<li><code><a title="fgglib.fgg.fggsum_product.FGGsum_product.calculate_tau" href="#fgglib.fgg.fggsum_product.FGGsum_product.calculate_tau">calculate_tau</a></code></li>
+<li><code><a title="fgglib.fgg.fggsum_product.FGGsum_product.create_nl_phi_equations" href="#fgglib.fgg.fggsum_product.FGGsum_product.create_nl_phi_equations">create_nl_phi_equations</a></code></li>
+<li><code><a title="fgglib.fgg.fggsum_product.FGGsum_product.create_nl_tau_equations" href="#fgglib.fgg.fggsum_product.FGGsum_product.create_nl_tau_equations">create_nl_tau_equations</a></code></li>
+<li><code><a title="fgglib.fgg.fggsum_product.FGGsum_product.create_phi_equations" href="#fgglib.fgg.fggsum_product.FGGsum_product.create_phi_equations">create_phi_equations</a></code></li>
+<li><code><a title="fgglib.fgg.fggsum_product.FGGsum_product.create_tau_equations" href="#fgglib.fgg.fggsum_product.FGGsum_product.create_tau_equations">create_tau_equations</a></code></li>
+<li><code><a title="fgglib.fgg.fggsum_product.FGGsum_product.function_from_list" href="#fgglib.fgg.fggsum_product.FGGsum_product.function_from_list">function_from_list</a></code></li>
+<li><code><a title="fgglib.fgg.fggsum_product.FGGsum_product.inference" href="#fgglib.fgg.fggsum_product.FGGsum_product.inference">inference</a></code></li>
+<li><code><a title="fgglib.fgg.fggsum_product.FGGsum_product.inference_finite_states" href="#fgglib.fgg.fggsum_product.FGGsum_product.inference_finite_states">inference_finite_states</a></code></li>
+<li><code><a title="fgglib.fgg.fggsum_product.FGGsum_product.inference_finite_variables" href="#fgglib.fgg.fggsum_product.FGGsum_product.inference_finite_variables">inference_finite_variables</a></code></li>
+<li><code><a title="fgglib.fgg.fggsum_product.FGGsum_product.xiR" href="#fgglib.fgg.fggsum_product.FGGsum_product.xiR">xiR</a></code></li>
+<li><code><a title="fgglib.fgg.fggsum_product.FGGsum_product.xiX" href="#fgglib.fgg.fggsum_product.FGGsum_product.xiX">xiX</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

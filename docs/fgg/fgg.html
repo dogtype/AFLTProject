@@ -1,0 +1,1252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>fgglib.fgg.fgg API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>fgglib.fgg.fgg</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from fgglib.fgg.production import Production
+from fgglib.fg.fragment import Fragment
+from fgglib.fg.factorfunction import FactorFunction
+
+
+class FGG:
+    &#39;&#39;&#39;
+    A class representing a factor graph grammar. A FGG is a 4-Tuple &lt;T,N,S,P&gt;
+    &#39;&#39;&#39;
+
+    def __init__(self, T : set[Fragment], N : set, S : str, P : set[Production]): # S NT is imported
+        &#39;&#39;&#39;
+        Creates a new FGG object.
+
+        Args:
+            T (set): A set of terminals, which are factor graph fragments
+            N (set): A set of nonterminal edge labels
+            S: A single start symbol for the grammar
+            P (set): A set of production rules with nonterminals on the left and
+            factor graph fragments on the right-hand side
+
+        Returns:
+            FGG: The newly created FGG object.
+        &#39;&#39;&#39;
+        self.T = T
+        self.N = N
+        self.S = S
+        self._P = P
+        self.domains = {}
+
+    @property
+    def P(self):
+        &#39;&#39;&#39;
+        A generator for all production rules
+        &#39;&#39;&#39;
+        for p in self._P:
+            yield p
+
+    def set_function(self, edge, f: FactorFunction) -&gt; None:
+        &#39;&#39;&#39;
+        Sets a function for a specific edge in all production rules
+
+        Args:
+            edge (Edge): The edge for which the Factorfunction is to be changed
+            f (FactorFunction): The function to be assigned to edge
+        &#39;&#39;&#39;
+        for p in self.P:
+            for e in p.body.E:
+                if(e.label in self.N): # cannot assign functions to nonterminal edges
+                    continue
+                if(e==edge):
+                    e.function=f
+
+    def set_variable_domain(self,vertex_label,domain):
+        &#39;&#39;&#39;
+        Sets a variable domain for vertices (by label)
+
+        Args:
+            vetex_label: The label of the vertex for which the variable domain is set
+            domain (VariableDomain): The new variabledomain for the vertices
+        &#39;&#39;&#39;
+        for p in self.P:
+            for v in p.body.V:
+                if(v.label==vertex_label):
+                    self.domains[v] = domain
+
+    def nProductions(self, n):
+        &#39;&#39;&#39;
+        Determines a set of productions with nonterminal n on the left-hand side
+
+        Args:
+            n: The nonterminal label to be searched
+
+        Returns:
+            result (set): The set of productions with nonterminal n on the left
+        &#39;&#39;&#39;
+        result = set()
+        for p in self.P:
+            if(p.head!=n):
+                continue
+            else:
+                result.add(p)
+        return result
+
+    def recursion_helper(self, visited : set, closed : set, nt , curr) -&gt; bool:
+        &#39;&#39;&#39;
+        A helper function to determine the recusiveness of a grammar.
+        Essentially uses a modified dfs
+
+        Args:
+            visited (set): A set of nodes already visited by the traversal
+            closed (set): A set of nodes closed by the traversal
+            nt: The nonterminal currently searched for
+            curr:  The nonterminal currently considered
+
+        Returns:
+            A boolean flag expressing if the searched nonterminal can be reached by
+            productions with nonterminal curr on the left-hand side
+        &#39;&#39;&#39;
+        visited.add(curr)
+        for p in self.nProductions(curr):
+            if(nt in p.body.nonterminals(self.N)):
+                return True
+            for n in p.body.nonterminals(self.N):
+                if(n not in visited and self.recursion_helper(visited,closed,nt,n)):
+                    return True
+        closed.add(curr)
+        return False
+
+    def recursive(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Checks if the grammar has an X-type derivation containing an X-type
+        derivation as subtree (definition of recursiveness by Chiang and Riley)
+
+        Returns:
+            A boolean flag expressing if the grammar is actually recursive
+        &#34;&#34;&#34;
+        for p in self.P:
+            if(self.recursion_helper(set(),set(),p.head,p.head)):
+                return True
+        return False
+
+    def linear_recursion_helper(self, visited : set, closed : set, nt, curr) -&gt; int:
+        &#34;&#34;&#34;
+        Helper function checking for linear recursiveness by performing a modified dfs
+
+        Args:
+            visited (set): A set of nodes already visited by the traversal
+            closed (set): A set of nodes closed by the traversal
+            nt: The nonterminal currently searched for
+            curr:  The nonterminal currently considered
+
+        Returns:
+            num_recursions (int): The number of times, a nt nonterminal can occur starting from productions
+            with nonterminal curr on the left-hand side
+        &#34;&#34;&#34;
+        visited.add(curr)
+        num_recursions = 0
+        for p in self.nProductions(curr):
+            num_prod_recursions = 0
+            for n in p.body.nonterminals(self.N):
+                if(n==nt):
+                    num_prod_recursions+=1
+            for n in p.body.nonterminals(self.N):
+                if(n not in visited):
+                    num_prod_recursions += self.linear_recursion_helper(visited,closed,nt,n)
+            num_recursions = max(num_recursions,num_prod_recursions)
+        closed.add(curr)
+        return num_recursions
+
+    def linearly_recursive(self) -&gt; bool:
+        &#39;&#39;&#39;
+        Checks if the grammar lacks an X-type derivation containing more than
+        one X-type derivation as subtree (definition of nonlinear recursiveness)&#34;&#34;&#34;
+
+        Returns:
+            A boolean flag expressing if the number of X-type derivation subtrees
+            in an X-type derivation is exactly 1
+        &#39;&#39;&#39;
+        num_recursions = 0
+        for p in self.P:
+            num_recursions = max(num_recursions,self.linear_recursion_helper(set(),set(),p.head,p.head))
+        return num_recursions==1
+
+    def duplicate(self, nt, duplicates : set) -&gt; bool:
+        &#39;&#39;&#39;
+        Checks if the current nonterminal can produce a duplicate nt
+
+        Args:
+            nt: Nonterminal for which the duplicate property is to be checked
+            duplicates (set): A set of possible duplicates that can be found
+
+        Returns:
+            A boolean flag expressing if the specified nonterminal can produce duplicates
+        &#39;&#39;&#39;
+        if(nt in duplicates):
+            return True
+        else:
+            for p in self.nProductions(nt):
+                self.recursion_helper({},{},nt,p.head())
+
+    def diffDerivTree(self) -&gt; set:
+        &#39;&#39;&#39;
+        Determines a set of nonterminals that have more than one different derivation tree
+
+        Returns:
+            different (set): A set of nonterminals with the desired property
+        &#39;&#39;&#39;
+        different = set()
+        nts = set()
+        for p in self.P:
+            if(p.head in nts):
+                different.add(p.head)
+            nts.add(p.head)
+        different_copy = set()
+        while(different_copy!=different): # check if something has changed since last iteration
+            different_copy = different.copy()
+            for p in self.P:
+                for nt in p.body.nonterminals(self.N):
+                    if(nt in different):
+                        different.add(p.head)
+        return different
+
+
+    def reentrant(self) -&gt; bool:
+        &#39;&#39;&#39;
+        Checks if the grammar lacks a X-type derivation containing more than one
+        different X-type derivation as subtree (definition of nonreentrant)
+
+        Returns:
+            A boolean flag expressing if such an X-type derivation exists
+        &#39;&#39;&#39;
+        if(self.recursive()):
+            return True
+        else:
+            different = self.diffDerivTree()
+            for n in self.N:
+                if(n in different):
+                    for np in self.N:
+                        if(self.linear_recursion_helper(set(),set(),n,np)&gt;1):
+                            return True
+
+            return False
+
+    def conjunction(self,fgg):
+        &#39;&#39;&#39;
+        Implements the conjunction algorithm for factor graph grammars
+
+        Args:
+            fgg (FGG): The factor graph grammar, with which the current object is intersected
+
+        Return:
+            newGrammar (FGG): A newly generated grammar corresponding to the
+            conjunction of the two original grammars
+        &#39;&#39;&#39;
+        rules = set() # set of new rules that are part of the conjoined grammar
+        new_T = set() # set of new terminals (fragments)  that are created by conjunction
+        new_N = self.N.union(fgg.N)
+        for p in self.P:
+            for pp in fgg.P:
+                if(p.conjoinable(pp, new_N)):
+                    con = p.conjoin(pp, new_N)
+                    new_T.add(con.body)
+                    rules.add(con)
+        newGrammar = FGG(new_T,new_N,self.S,rules)
+        return newGrammar
+
+    def finite_domain(self) -&gt; bool:
+        for v in self.domains:
+            if(self.domains[v].infinite):
+                return False
+        return True
+
+    def add(self, head, body) -&gt; bool:
+        &#39;&#39;&#39;
+        Adds a single production to the FGG while updating terminal and nonterminal sets
+
+        Args:
+            head: The nonterminal on the left-hand side of the production
+            body: The FG fragement on the right-hand side of the production
+        &#39;&#39;&#39;
+
+        self.N.add(head)
+        self.N.update(body.nonterminals(self.N))
+        self.T.add(body)
+
+        self._P.add(Production(head, body))
+
+    def copy(self):
+        &#39;&#39;&#39;
+        Returns a deepcopy of the entire grammar
+
+        Returns:
+            The copied grammar
+        &#39;&#39;&#39;
+        return copy.deepcopy(self)
+
+    def __str__(self) -&gt; str:
+        &#39;&#39;&#39;
+        Returns a readable string representation of the grammar
+
+        Returns:
+            A readable string representing the grammar
+        &#39;&#39;&#39;
+        return self.__repr__()
+
+    def __repr__(self) -&gt; str():
+        &#39;&#39;&#39;
+        Returns a string identifying of the grammar
+
+        Returns:
+            A string identifying the grammar
+        &#39;&#39;&#39;
+        string = &#34;start: &#34; + str(self.S) + &#34;\n&#34;
+        for p in self.P:
+            string += str(p) +&#34;\n&#34;
+        return string
+
+    def __eq__(self,other) -&gt; bool:
+        &#39;&#39;&#39;
+        A predicate that checks if two FGGs are the same by comparing the
+        nonterminal and terminal sets, as well as the production rules
+
+        Args:
+            other (FGG): the FGG that the current grammar will be compared to
+
+        Return:
+            The result of the check
+        &#39;&#39;&#39;
+        if(self.N!= other.N) or (self.S!=other.S) or (self.T!=other.T):
+            return False
+        for p in self.P:
+            if(p not in other.P):
+                return False
+        for p in other.P:
+            if(p not in self.P):
+                return False
+        return True
+
+    def __hash__(self):
+        &#39;&#39;&#39;
+        A function that computes a hash value for a FGG object
+
+        Return:
+            The hash value computed
+        &#39;&#39;&#39;
+        return hash(self.__repr__())</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="fgglib.fgg.fgg.FGG"><code class="flex name class">
+<span>class <span class="ident">FGG</span></span>
+<span>(</span><span>T: set[<a title="fgglib.fg.fragment.Fragment" href="../fg/fragment.html#fgglib.fg.fragment.Fragment">Fragment</a>], N: set, S: str, P: set[<a title="fgglib.fgg.production.Production" href="production.html#fgglib.fgg.production.Production">Production</a>])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class representing a factor graph grammar. A FGG is a 4-Tuple <T,N,S,P></p>
+<p>Creates a new FGG object.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>T</code></strong> :&ensp;<code>set</code></dt>
+<dd>A set of terminals, which are factor graph fragments</dd>
+<dt><strong><code>N</code></strong> :&ensp;<code>set</code></dt>
+<dd>A set of nonterminal edge labels</dd>
+<dt><strong><code>S</code></strong></dt>
+<dd>A single start symbol for the grammar</dd>
+<dt><strong><code>P</code></strong> :&ensp;<code>set</code></dt>
+<dd>A set of production rules with nonterminals on the left and</dd>
+</dl>
+<p>factor graph fragments on the right-hand side</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="fgglib.fgg.fgg.FGG" href="#fgglib.fgg.fgg.FGG">FGG</a></code></dt>
+<dd>The newly created FGG object.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class FGG:
+    &#39;&#39;&#39;
+    A class representing a factor graph grammar. A FGG is a 4-Tuple &lt;T,N,S,P&gt;
+    &#39;&#39;&#39;
+
+    def __init__(self, T : set[Fragment], N : set, S : str, P : set[Production]): # S NT is imported
+        &#39;&#39;&#39;
+        Creates a new FGG object.
+
+        Args:
+            T (set): A set of terminals, which are factor graph fragments
+            N (set): A set of nonterminal edge labels
+            S: A single start symbol for the grammar
+            P (set): A set of production rules with nonterminals on the left and
+            factor graph fragments on the right-hand side
+
+        Returns:
+            FGG: The newly created FGG object.
+        &#39;&#39;&#39;
+        self.T = T
+        self.N = N
+        self.S = S
+        self._P = P
+        self.domains = {}
+
+    @property
+    def P(self):
+        &#39;&#39;&#39;
+        A generator for all production rules
+        &#39;&#39;&#39;
+        for p in self._P:
+            yield p
+
+    def set_function(self, edge, f: FactorFunction) -&gt; None:
+        &#39;&#39;&#39;
+        Sets a function for a specific edge in all production rules
+
+        Args:
+            edge (Edge): The edge for which the Factorfunction is to be changed
+            f (FactorFunction): The function to be assigned to edge
+        &#39;&#39;&#39;
+        for p in self.P:
+            for e in p.body.E:
+                if(e.label in self.N): # cannot assign functions to nonterminal edges
+                    continue
+                if(e==edge):
+                    e.function=f
+
+    def set_variable_domain(self,vertex_label,domain):
+        &#39;&#39;&#39;
+        Sets a variable domain for vertices (by label)
+
+        Args:
+            vetex_label: The label of the vertex for which the variable domain is set
+            domain (VariableDomain): The new variabledomain for the vertices
+        &#39;&#39;&#39;
+        for p in self.P:
+            for v in p.body.V:
+                if(v.label==vertex_label):
+                    self.domains[v] = domain
+
+    def nProductions(self, n):
+        &#39;&#39;&#39;
+        Determines a set of productions with nonterminal n on the left-hand side
+
+        Args:
+            n: The nonterminal label to be searched
+
+        Returns:
+            result (set): The set of productions with nonterminal n on the left
+        &#39;&#39;&#39;
+        result = set()
+        for p in self.P:
+            if(p.head!=n):
+                continue
+            else:
+                result.add(p)
+        return result
+
+    def recursion_helper(self, visited : set, closed : set, nt , curr) -&gt; bool:
+        &#39;&#39;&#39;
+        A helper function to determine the recusiveness of a grammar.
+        Essentially uses a modified dfs
+
+        Args:
+            visited (set): A set of nodes already visited by the traversal
+            closed (set): A set of nodes closed by the traversal
+            nt: The nonterminal currently searched for
+            curr:  The nonterminal currently considered
+
+        Returns:
+            A boolean flag expressing if the searched nonterminal can be reached by
+            productions with nonterminal curr on the left-hand side
+        &#39;&#39;&#39;
+        visited.add(curr)
+        for p in self.nProductions(curr):
+            if(nt in p.body.nonterminals(self.N)):
+                return True
+            for n in p.body.nonterminals(self.N):
+                if(n not in visited and self.recursion_helper(visited,closed,nt,n)):
+                    return True
+        closed.add(curr)
+        return False
+
+    def recursive(self) -&gt; bool:
+        &#34;&#34;&#34;
+        Checks if the grammar has an X-type derivation containing an X-type
+        derivation as subtree (definition of recursiveness by Chiang and Riley)
+
+        Returns:
+            A boolean flag expressing if the grammar is actually recursive
+        &#34;&#34;&#34;
+        for p in self.P:
+            if(self.recursion_helper(set(),set(),p.head,p.head)):
+                return True
+        return False
+
+    def linear_recursion_helper(self, visited : set, closed : set, nt, curr) -&gt; int:
+        &#34;&#34;&#34;
+        Helper function checking for linear recursiveness by performing a modified dfs
+
+        Args:
+            visited (set): A set of nodes already visited by the traversal
+            closed (set): A set of nodes closed by the traversal
+            nt: The nonterminal currently searched for
+            curr:  The nonterminal currently considered
+
+        Returns:
+            num_recursions (int): The number of times, a nt nonterminal can occur starting from productions
+            with nonterminal curr on the left-hand side
+        &#34;&#34;&#34;
+        visited.add(curr)
+        num_recursions = 0
+        for p in self.nProductions(curr):
+            num_prod_recursions = 0
+            for n in p.body.nonterminals(self.N):
+                if(n==nt):
+                    num_prod_recursions+=1
+            for n in p.body.nonterminals(self.N):
+                if(n not in visited):
+                    num_prod_recursions += self.linear_recursion_helper(visited,closed,nt,n)
+            num_recursions = max(num_recursions,num_prod_recursions)
+        closed.add(curr)
+        return num_recursions
+
+    def linearly_recursive(self) -&gt; bool:
+        &#39;&#39;&#39;
+        Checks if the grammar lacks an X-type derivation containing more than
+        one X-type derivation as subtree (definition of nonlinear recursiveness)&#34;&#34;&#34;
+
+        Returns:
+            A boolean flag expressing if the number of X-type derivation subtrees
+            in an X-type derivation is exactly 1
+        &#39;&#39;&#39;
+        num_recursions = 0
+        for p in self.P:
+            num_recursions = max(num_recursions,self.linear_recursion_helper(set(),set(),p.head,p.head))
+        return num_recursions==1
+
+    def duplicate(self, nt, duplicates : set) -&gt; bool:
+        &#39;&#39;&#39;
+        Checks if the current nonterminal can produce a duplicate nt
+
+        Args:
+            nt: Nonterminal for which the duplicate property is to be checked
+            duplicates (set): A set of possible duplicates that can be found
+
+        Returns:
+            A boolean flag expressing if the specified nonterminal can produce duplicates
+        &#39;&#39;&#39;
+        if(nt in duplicates):
+            return True
+        else:
+            for p in self.nProductions(nt):
+                self.recursion_helper({},{},nt,p.head())
+
+    def diffDerivTree(self) -&gt; set:
+        &#39;&#39;&#39;
+        Determines a set of nonterminals that have more than one different derivation tree
+
+        Returns:
+            different (set): A set of nonterminals with the desired property
+        &#39;&#39;&#39;
+        different = set()
+        nts = set()
+        for p in self.P:
+            if(p.head in nts):
+                different.add(p.head)
+            nts.add(p.head)
+        different_copy = set()
+        while(different_copy!=different): # check if something has changed since last iteration
+            different_copy = different.copy()
+            for p in self.P:
+                for nt in p.body.nonterminals(self.N):
+                    if(nt in different):
+                        different.add(p.head)
+        return different
+
+
+    def reentrant(self) -&gt; bool:
+        &#39;&#39;&#39;
+        Checks if the grammar lacks a X-type derivation containing more than one
+        different X-type derivation as subtree (definition of nonreentrant)
+
+        Returns:
+            A boolean flag expressing if such an X-type derivation exists
+        &#39;&#39;&#39;
+        if(self.recursive()):
+            return True
+        else:
+            different = self.diffDerivTree()
+            for n in self.N:
+                if(n in different):
+                    for np in self.N:
+                        if(self.linear_recursion_helper(set(),set(),n,np)&gt;1):
+                            return True
+
+            return False
+
+    def conjunction(self,fgg):
+        &#39;&#39;&#39;
+        Implements the conjunction algorithm for factor graph grammars
+
+        Args:
+            fgg (FGG): The factor graph grammar, with which the current object is intersected
+
+        Return:
+            newGrammar (FGG): A newly generated grammar corresponding to the
+            conjunction of the two original grammars
+        &#39;&#39;&#39;
+        rules = set() # set of new rules that are part of the conjoined grammar
+        new_T = set() # set of new terminals (fragments)  that are created by conjunction
+        new_N = self.N.union(fgg.N)
+        for p in self.P:
+            for pp in fgg.P:
+                if(p.conjoinable(pp, new_N)):
+                    con = p.conjoin(pp, new_N)
+                    new_T.add(con.body)
+                    rules.add(con)
+        newGrammar = FGG(new_T,new_N,self.S,rules)
+        return newGrammar
+
+    def finite_domain(self) -&gt; bool:
+        for v in self.domains:
+            if(self.domains[v].infinite):
+                return False
+        return True
+
+    def add(self, head, body) -&gt; bool:
+        &#39;&#39;&#39;
+        Adds a single production to the FGG while updating terminal and nonterminal sets
+
+        Args:
+            head: The nonterminal on the left-hand side of the production
+            body: The FG fragement on the right-hand side of the production
+        &#39;&#39;&#39;
+
+        self.N.add(head)
+        self.N.update(body.nonterminals(self.N))
+        self.T.add(body)
+
+        self._P.add(Production(head, body))
+
+    def copy(self):
+        &#39;&#39;&#39;
+        Returns a deepcopy of the entire grammar
+
+        Returns:
+            The copied grammar
+        &#39;&#39;&#39;
+        return copy.deepcopy(self)
+
+    def __str__(self) -&gt; str:
+        &#39;&#39;&#39;
+        Returns a readable string representation of the grammar
+
+        Returns:
+            A readable string representing the grammar
+        &#39;&#39;&#39;
+        return self.__repr__()
+
+    def __repr__(self) -&gt; str():
+        &#39;&#39;&#39;
+        Returns a string identifying of the grammar
+
+        Returns:
+            A string identifying the grammar
+        &#39;&#39;&#39;
+        string = &#34;start: &#34; + str(self.S) + &#34;\n&#34;
+        for p in self.P:
+            string += str(p) +&#34;\n&#34;
+        return string
+
+    def __eq__(self,other) -&gt; bool:
+        &#39;&#39;&#39;
+        A predicate that checks if two FGGs are the same by comparing the
+        nonterminal and terminal sets, as well as the production rules
+
+        Args:
+            other (FGG): the FGG that the current grammar will be compared to
+
+        Return:
+            The result of the check
+        &#39;&#39;&#39;
+        if(self.N!= other.N) or (self.S!=other.S) or (self.T!=other.T):
+            return False
+        for p in self.P:
+            if(p not in other.P):
+                return False
+        for p in other.P:
+            if(p not in self.P):
+                return False
+        return True
+
+    def __hash__(self):
+        &#39;&#39;&#39;
+        A function that computes a hash value for a FGG object
+
+        Return:
+            The hash value computed
+        &#39;&#39;&#39;
+        return hash(self.__repr__())</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="fgglib.fgg.fgg.FGG.P"><code class="name">var <span class="ident">P</span></code></dt>
+<dd>
+<div class="desc"><p>A generator for all production rules</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def P(self):
+    &#39;&#39;&#39;
+    A generator for all production rules
+    &#39;&#39;&#39;
+    for p in self._P:
+        yield p</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="fgglib.fgg.fgg.FGG.add"><code class="name flex">
+<span>def <span class="ident">add</span></span>(<span>self, head, body) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Adds a single production to the FGG while updating terminal and nonterminal sets</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>head</code></strong></dt>
+<dd>The nonterminal on the left-hand side of the production</dd>
+<dt><strong><code>body</code></strong></dt>
+<dd>The FG fragement on the right-hand side of the production</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add(self, head, body) -&gt; bool:
+    &#39;&#39;&#39;
+    Adds a single production to the FGG while updating terminal and nonterminal sets
+
+    Args:
+        head: The nonterminal on the left-hand side of the production
+        body: The FG fragement on the right-hand side of the production
+    &#39;&#39;&#39;
+
+    self.N.add(head)
+    self.N.update(body.nonterminals(self.N))
+    self.T.add(body)
+
+    self._P.add(Production(head, body))</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fgg.fgg.FGG.conjunction"><code class="name flex">
+<span>def <span class="ident">conjunction</span></span>(<span>self, fgg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Implements the conjunction algorithm for factor graph grammars</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>fgg</code></strong> :&ensp;<code><a title="fgglib.fgg.fgg.FGG" href="#fgglib.fgg.fgg.FGG">FGG</a></code></dt>
+<dd>The factor graph grammar, with which the current object is intersected</dd>
+</dl>
+<h2 id="return">Return</h2>
+<p>newGrammar (FGG): A newly generated grammar corresponding to the
+conjunction of the two original grammars</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def conjunction(self,fgg):
+    &#39;&#39;&#39;
+    Implements the conjunction algorithm for factor graph grammars
+
+    Args:
+        fgg (FGG): The factor graph grammar, with which the current object is intersected
+
+    Return:
+        newGrammar (FGG): A newly generated grammar corresponding to the
+        conjunction of the two original grammars
+    &#39;&#39;&#39;
+    rules = set() # set of new rules that are part of the conjoined grammar
+    new_T = set() # set of new terminals (fragments)  that are created by conjunction
+    new_N = self.N.union(fgg.N)
+    for p in self.P:
+        for pp in fgg.P:
+            if(p.conjoinable(pp, new_N)):
+                con = p.conjoin(pp, new_N)
+                new_T.add(con.body)
+                rules.add(con)
+    newGrammar = FGG(new_T,new_N,self.S,rules)
+    return newGrammar</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fgg.fgg.FGG.copy"><code class="name flex">
+<span>def <span class="ident">copy</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns a deepcopy of the entire grammar</p>
+<h2 id="returns">Returns</h2>
+<p>The copied grammar</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def copy(self):
+    &#39;&#39;&#39;
+    Returns a deepcopy of the entire grammar
+
+    Returns:
+        The copied grammar
+    &#39;&#39;&#39;
+    return copy.deepcopy(self)</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fgg.fgg.FGG.diffDerivTree"><code class="name flex">
+<span>def <span class="ident">diffDerivTree</span></span>(<span>self) ‑> set</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Determines a set of nonterminals that have more than one different derivation tree</p>
+<h2 id="returns">Returns</h2>
+<p>different (set): A set of nonterminals with the desired property</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def diffDerivTree(self) -&gt; set:
+    &#39;&#39;&#39;
+    Determines a set of nonterminals that have more than one different derivation tree
+
+    Returns:
+        different (set): A set of nonterminals with the desired property
+    &#39;&#39;&#39;
+    different = set()
+    nts = set()
+    for p in self.P:
+        if(p.head in nts):
+            different.add(p.head)
+        nts.add(p.head)
+    different_copy = set()
+    while(different_copy!=different): # check if something has changed since last iteration
+        different_copy = different.copy()
+        for p in self.P:
+            for nt in p.body.nonterminals(self.N):
+                if(nt in different):
+                    different.add(p.head)
+    return different</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fgg.fgg.FGG.duplicate"><code class="name flex">
+<span>def <span class="ident">duplicate</span></span>(<span>self, nt, duplicates: set) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Checks if the current nonterminal can produce a duplicate nt</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>nt</code></strong></dt>
+<dd>Nonterminal for which the duplicate property is to be checked</dd>
+<dt><strong><code>duplicates</code></strong> :&ensp;<code>set</code></dt>
+<dd>A set of possible duplicates that can be found</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>A boolean flag expressing if the specified nonterminal can produce duplicates</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def duplicate(self, nt, duplicates : set) -&gt; bool:
+    &#39;&#39;&#39;
+    Checks if the current nonterminal can produce a duplicate nt
+
+    Args:
+        nt: Nonterminal for which the duplicate property is to be checked
+        duplicates (set): A set of possible duplicates that can be found
+
+    Returns:
+        A boolean flag expressing if the specified nonterminal can produce duplicates
+    &#39;&#39;&#39;
+    if(nt in duplicates):
+        return True
+    else:
+        for p in self.nProductions(nt):
+            self.recursion_helper({},{},nt,p.head())</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fgg.fgg.FGG.finite_domain"><code class="name flex">
+<span>def <span class="ident">finite_domain</span></span>(<span>self) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def finite_domain(self) -&gt; bool:
+    for v in self.domains:
+        if(self.domains[v].infinite):
+            return False
+    return True</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fgg.fgg.FGG.linear_recursion_helper"><code class="name flex">
+<span>def <span class="ident">linear_recursion_helper</span></span>(<span>self, visited: set, closed: set, nt, curr) ‑> int</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Helper function checking for linear recursiveness by performing a modified dfs</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>visited</code></strong> :&ensp;<code>set</code></dt>
+<dd>A set of nodes already visited by the traversal</dd>
+<dt><strong><code>closed</code></strong> :&ensp;<code>set</code></dt>
+<dd>A set of nodes closed by the traversal</dd>
+<dt><strong><code>nt</code></strong></dt>
+<dd>The nonterminal currently searched for</dd>
+<dt><strong><code>curr</code></strong></dt>
+<dd>The nonterminal currently considered</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>num_recursions (int): The number of times, a nt nonterminal can occur starting from productions
+with nonterminal curr on the left-hand side</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def linear_recursion_helper(self, visited : set, closed : set, nt, curr) -&gt; int:
+    &#34;&#34;&#34;
+    Helper function checking for linear recursiveness by performing a modified dfs
+
+    Args:
+        visited (set): A set of nodes already visited by the traversal
+        closed (set): A set of nodes closed by the traversal
+        nt: The nonterminal currently searched for
+        curr:  The nonterminal currently considered
+
+    Returns:
+        num_recursions (int): The number of times, a nt nonterminal can occur starting from productions
+        with nonterminal curr on the left-hand side
+    &#34;&#34;&#34;
+    visited.add(curr)
+    num_recursions = 0
+    for p in self.nProductions(curr):
+        num_prod_recursions = 0
+        for n in p.body.nonterminals(self.N):
+            if(n==nt):
+                num_prod_recursions+=1
+        for n in p.body.nonterminals(self.N):
+            if(n not in visited):
+                num_prod_recursions += self.linear_recursion_helper(visited,closed,nt,n)
+        num_recursions = max(num_recursions,num_prod_recursions)
+    closed.add(curr)
+    return num_recursions</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fgg.fgg.FGG.linearly_recursive"><code class="name flex">
+<span>def <span class="ident">linearly_recursive</span></span>(<span>self) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Checks if the grammar lacks an X-type derivation containing more than
+one X-type derivation as subtree (definition of nonlinear recursiveness)"""</p>
+<h2 id="returns">Returns</h2>
+<p>A boolean flag expressing if the number of X-type derivation subtrees
+in an X-type derivation is exactly 1</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def linearly_recursive(self) -&gt; bool:
+    &#39;&#39;&#39;
+    Checks if the grammar lacks an X-type derivation containing more than
+    one X-type derivation as subtree (definition of nonlinear recursiveness)&#34;&#34;&#34;
+
+    Returns:
+        A boolean flag expressing if the number of X-type derivation subtrees
+        in an X-type derivation is exactly 1
+    &#39;&#39;&#39;
+    num_recursions = 0
+    for p in self.P:
+        num_recursions = max(num_recursions,self.linear_recursion_helper(set(),set(),p.head,p.head))
+    return num_recursions==1</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fgg.fgg.FGG.nProductions"><code class="name flex">
+<span>def <span class="ident">nProductions</span></span>(<span>self, n)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Determines a set of productions with nonterminal n on the left-hand side</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>n</code></strong></dt>
+<dd>The nonterminal label to be searched</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>result (set): The set of productions with nonterminal n on the left</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def nProductions(self, n):
+    &#39;&#39;&#39;
+    Determines a set of productions with nonterminal n on the left-hand side
+
+    Args:
+        n: The nonterminal label to be searched
+
+    Returns:
+        result (set): The set of productions with nonterminal n on the left
+    &#39;&#39;&#39;
+    result = set()
+    for p in self.P:
+        if(p.head!=n):
+            continue
+        else:
+            result.add(p)
+    return result</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fgg.fgg.FGG.recursion_helper"><code class="name flex">
+<span>def <span class="ident">recursion_helper</span></span>(<span>self, visited: set, closed: set, nt, curr) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A helper function to determine the recusiveness of a grammar.
+Essentially uses a modified dfs</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>visited</code></strong> :&ensp;<code>set</code></dt>
+<dd>A set of nodes already visited by the traversal</dd>
+<dt><strong><code>closed</code></strong> :&ensp;<code>set</code></dt>
+<dd>A set of nodes closed by the traversal</dd>
+<dt><strong><code>nt</code></strong></dt>
+<dd>The nonterminal currently searched for</dd>
+<dt><strong><code>curr</code></strong></dt>
+<dd>The nonterminal currently considered</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>A boolean flag expressing if the searched nonterminal can be reached by
+productions with nonterminal curr on the left-hand side</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def recursion_helper(self, visited : set, closed : set, nt , curr) -&gt; bool:
+    &#39;&#39;&#39;
+    A helper function to determine the recusiveness of a grammar.
+    Essentially uses a modified dfs
+
+    Args:
+        visited (set): A set of nodes already visited by the traversal
+        closed (set): A set of nodes closed by the traversal
+        nt: The nonterminal currently searched for
+        curr:  The nonterminal currently considered
+
+    Returns:
+        A boolean flag expressing if the searched nonterminal can be reached by
+        productions with nonterminal curr on the left-hand side
+    &#39;&#39;&#39;
+    visited.add(curr)
+    for p in self.nProductions(curr):
+        if(nt in p.body.nonterminals(self.N)):
+            return True
+        for n in p.body.nonterminals(self.N):
+            if(n not in visited and self.recursion_helper(visited,closed,nt,n)):
+                return True
+    closed.add(curr)
+    return False</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fgg.fgg.FGG.recursive"><code class="name flex">
+<span>def <span class="ident">recursive</span></span>(<span>self) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Checks if the grammar has an X-type derivation containing an X-type
+derivation as subtree (definition of recursiveness by Chiang and Riley)</p>
+<h2 id="returns">Returns</h2>
+<p>A boolean flag expressing if the grammar is actually recursive</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def recursive(self) -&gt; bool:
+    &#34;&#34;&#34;
+    Checks if the grammar has an X-type derivation containing an X-type
+    derivation as subtree (definition of recursiveness by Chiang and Riley)
+
+    Returns:
+        A boolean flag expressing if the grammar is actually recursive
+    &#34;&#34;&#34;
+    for p in self.P:
+        if(self.recursion_helper(set(),set(),p.head,p.head)):
+            return True
+    return False</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fgg.fgg.FGG.reentrant"><code class="name flex">
+<span>def <span class="ident">reentrant</span></span>(<span>self) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Checks if the grammar lacks a X-type derivation containing more than one
+different X-type derivation as subtree (definition of nonreentrant)</p>
+<h2 id="returns">Returns</h2>
+<p>A boolean flag expressing if such an X-type derivation exists</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def reentrant(self) -&gt; bool:
+    &#39;&#39;&#39;
+    Checks if the grammar lacks a X-type derivation containing more than one
+    different X-type derivation as subtree (definition of nonreentrant)
+
+    Returns:
+        A boolean flag expressing if such an X-type derivation exists
+    &#39;&#39;&#39;
+    if(self.recursive()):
+        return True
+    else:
+        different = self.diffDerivTree()
+        for n in self.N:
+            if(n in different):
+                for np in self.N:
+                    if(self.linear_recursion_helper(set(),set(),n,np)&gt;1):
+                        return True
+
+        return False</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fgg.fgg.FGG.set_function"><code class="name flex">
+<span>def <span class="ident">set_function</span></span>(<span>self, edge, f: <a title="fgglib.fg.factorfunction.FactorFunction" href="../fg/factorfunction.html#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a>) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets a function for a specific edge in all production rules</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>edge</code></strong> :&ensp;<code>Edge</code></dt>
+<dd>The edge for which the Factorfunction is to be changed</dd>
+<dt><strong><code>f</code></strong> :&ensp;<code>FactorFunction</code></dt>
+<dd>The function to be assigned to edge</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_function(self, edge, f: FactorFunction) -&gt; None:
+    &#39;&#39;&#39;
+    Sets a function for a specific edge in all production rules
+
+    Args:
+        edge (Edge): The edge for which the Factorfunction is to be changed
+        f (FactorFunction): The function to be assigned to edge
+    &#39;&#39;&#39;
+    for p in self.P:
+        for e in p.body.E:
+            if(e.label in self.N): # cannot assign functions to nonterminal edges
+                continue
+            if(e==edge):
+                e.function=f</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fgg.fgg.FGG.set_variable_domain"><code class="name flex">
+<span>def <span class="ident">set_variable_domain</span></span>(<span>self, vertex_label, domain)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets a variable domain for vertices (by label)</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>vetex_label</code></strong></dt>
+<dd>The label of the vertex for which the variable domain is set</dd>
+<dt><strong><code>domain</code></strong> :&ensp;<code>VariableDomain</code></dt>
+<dd>The new variabledomain for the vertices</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_variable_domain(self,vertex_label,domain):
+    &#39;&#39;&#39;
+    Sets a variable domain for vertices (by label)
+
+    Args:
+        vetex_label: The label of the vertex for which the variable domain is set
+        domain (VariableDomain): The new variabledomain for the vertices
+    &#39;&#39;&#39;
+    for p in self.P:
+        for v in p.body.V:
+            if(v.label==vertex_label):
+                self.domains[v] = domain</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="fgglib.fgg" href="index.html">fgglib.fgg</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="fgglib.fgg.fgg.FGG" href="#fgglib.fgg.fgg.FGG">FGG</a></code></h4>
+<ul class="">
+<li><code><a title="fgglib.fgg.fgg.FGG.P" href="#fgglib.fgg.fgg.FGG.P">P</a></code></li>
+<li><code><a title="fgglib.fgg.fgg.FGG.add" href="#fgglib.fgg.fgg.FGG.add">add</a></code></li>
+<li><code><a title="fgglib.fgg.fgg.FGG.conjunction" href="#fgglib.fgg.fgg.FGG.conjunction">conjunction</a></code></li>
+<li><code><a title="fgglib.fgg.fgg.FGG.copy" href="#fgglib.fgg.fgg.FGG.copy">copy</a></code></li>
+<li><code><a title="fgglib.fgg.fgg.FGG.diffDerivTree" href="#fgglib.fgg.fgg.FGG.diffDerivTree">diffDerivTree</a></code></li>
+<li><code><a title="fgglib.fgg.fgg.FGG.duplicate" href="#fgglib.fgg.fgg.FGG.duplicate">duplicate</a></code></li>
+<li><code><a title="fgglib.fgg.fgg.FGG.finite_domain" href="#fgglib.fgg.fgg.FGG.finite_domain">finite_domain</a></code></li>
+<li><code><a title="fgglib.fgg.fgg.FGG.linear_recursion_helper" href="#fgglib.fgg.fgg.FGG.linear_recursion_helper">linear_recursion_helper</a></code></li>
+<li><code><a title="fgglib.fgg.fgg.FGG.linearly_recursive" href="#fgglib.fgg.fgg.FGG.linearly_recursive">linearly_recursive</a></code></li>
+<li><code><a title="fgglib.fgg.fgg.FGG.nProductions" href="#fgglib.fgg.fgg.FGG.nProductions">nProductions</a></code></li>
+<li><code><a title="fgglib.fgg.fgg.FGG.recursion_helper" href="#fgglib.fgg.fgg.FGG.recursion_helper">recursion_helper</a></code></li>
+<li><code><a title="fgglib.fgg.fgg.FGG.recursive" href="#fgglib.fgg.fgg.FGG.recursive">recursive</a></code></li>
+<li><code><a title="fgglib.fgg.fgg.FGG.reentrant" href="#fgglib.fgg.fgg.FGG.reentrant">reentrant</a></code></li>
+<li><code><a title="fgglib.fgg.fgg.FGG.set_function" href="#fgglib.fgg.fgg.FGG.set_function">set_function</a></code></li>
+<li><code><a title="fgglib.fgg.fgg.FGG.set_variable_domain" href="#fgglib.fgg.fgg.FGG.set_variable_domain">set_variable_domain</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
