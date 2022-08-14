@@ -485,19 +485,18 @@ class FGGsum_product:
         fg.add_edge(start_e)
         for X in self.fgg.N:
             if X != self.fgg.S:
-                p_X_left = [p for p in productions if X == p.head]
-                e = FGEdge(X, "CondOne(B_" + X + ''.join([','+rules_bin_vars[p_].label for p_ in p_X_left]) + ")", fg.R, CondOne(fg.R, 1 + len(p_X_left)))
-                e.add_target(nt_bin_vars[X])
-                for p in p_X_left:
-                    e.add_target(rules_bin_vars[p])
-                fg.add_edge(e)
-
                 p_X_right = [p for p in productions if X in p.body.nonterminals(self.fgg.N)]
                 e = FGEdge(X, "CondOne(B_" + X + ''.join([','+rules_bin_vars[p_].label for p_ in p_X_right]) + ")", fg.R, CondOne(fg.R, 1 + len(p_X_right)))
                 e.add_target(nt_bin_vars[X])
                 for p in p_X_right:
                     e.add_target(rules_bin_vars[p])
                 fg.add_edge(e)
+            p_X_left = [p for p in productions if X == p.head]
+            e = FGEdge(X, "CondOne(B_" + X + ''.join([','+rules_bin_vars[p_].label for p_ in p_X_left]) + ")", fg.R, CondOne(fg.R, 1 + len(p_X_left)))
+            e.add_target(nt_bin_vars[X])
+            for p in p_X_left:
+                e.add_target(rules_bin_vars[p])
+            fg.add_edge(e)
 
         # create clusters
         new_p_vars = {}
