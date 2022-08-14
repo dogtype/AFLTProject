@@ -479,13 +479,10 @@ class FGGsum_product:
             fg.add_vertex(b_var)
             rules_bin_vars[p] = b_var
 
-        pprint.pprint(fg)
-        pprint.pprint(nt_bin_vars)
-        pprint.pprint(rules_bin_vars)
-
         # add conditions to constraint to valid derivations
         start_e = FGEdge(self.fgg.S, "B_S = true", fg.R, CondStart(fg.R))
         start_e.add_target(nt_bin_vars[self.fgg.S])
+        fg.add_edge(start_e)
         for X in self.fgg.N:
             if X != self.fgg.S:
                 p_X_left = [p for p in productions if X == p.head]
@@ -527,11 +524,11 @@ class FGGsum_product:
         for X in self.fgg.N:
             for p in productions:
                 if X in p.body.nonterminals(self.fgg.N):
-                    X_vars = {}
+                    X_vars = []
                     e = p.body.get_edge(X)
-                    for t in e.targets:
-                        v = FGVertex(X, t.label + "_" + X, fg.R, t.domain)
-                        X_vars[t] = v
+                    for i, t in enumerate(e.targets):
+                        v = FGVertex(X, X + "_" + str(i), fg.R, t.domain)
+                        X_vars.append(v)
                         new_edge = FGEdge(X, "CN_" + v.label + "_" + X, fg.R, CondNormalize(t.domain))
                         new_edge.add_target(nt_bin_vars[X])
                         new_edge.add_target(v)
@@ -539,27 +536,24 @@ class FGGsum_product:
                         fg.add_edge(new_edge)
                     new_nt_vars[X] = X_vars
 
-        print(new_nt_vars)
         # create same-variable bindings
         for X in self.fgg.N:
             for i, p in enumerate(productions):
                 if X == p.head:
-                    for v in p.body.external:
+                    for j, v in enumerate(p.body.external):
                         new_edge = FGEdge(X, "CE_" + X + "_" + str(i) + "_" + v.label, fg.R, CondEquals(fg.R))
                         new_edge.add_target(rules_bin_vars[p])
-                        new_edge.add_target(new_nt_vars[X][v])
+                        new_edge.add_target(new_nt_vars[X][j])
                         new_edge.add_target(new_p_vars[p][v])
 
                 if X in p.body.nonterminals(self.fgg.N):
                     e = p.body.get_edge(X)
-                    for t in e.targets:
+                    for j, t in enumerate(e.targets):
                         new_edge = FGEdge(X, "CE_" + X + "_" + str(i) + "_" + t.label, fg.R, CondEquals(fg.R))
                         new_edge.add_target(rules_bin_vars[p])
-                        print(X,v.label)
-                        new_edge.add_target(new_nt_vars[X][t])
+                        new_edge.add_target(new_nt_vars[X][j])
                         new_edge.add_target(new_p_vars[p][t])
-
-        return fg.normalization_constant()
+        return fg
 
 
 class CondStart(FactorFunction):
@@ -580,7 +574,7 @@ class CondOne(FactorFunction):
         super().__init__(R, arg_num)
 
     def compute(self, *args):
-        if len(args) != arg_num:
+        if len(args) != self.arg_num:
             raise Exception("wrong number of arguments")
 
         if args[0]:
@@ -595,7 +589,7 @@ class CondEquals(FactorFunction):
         super().__init__(R, 3)
 
     def compute(self, *args):
-        if len(args) != arg_num:
+        if len(args) != self.arg_num:
             raise Exception("wrong number of arguments")
 
         if args[0]:
@@ -611,11 +605,11 @@ class CondFactor(FactorFunction):
         self.f = f
 
     def compute(self, *args):
-        if len(args) != arg_num:
+        if len(args) != self.arg_num:
             raise Exception("wrong number of arguments")
 
         if args[0]:
-            return f.compute(*args[1:])
+            return self.f.compute(*args[1:])
         else:
             return self.R.one
 
@@ -627,7 +621,7 @@ class CondNormalize(FactorFunction):
         self.weight_distr = lambda x : float(1) / float(len(domain.content))
 
     def compute(self, *args):
-        if len(args) != arg_num:
+        if len(args) != self.arg_num:
             raise Exception("wrong number of arguments")
 
         if args[0]:

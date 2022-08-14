@@ -6,6 +6,7 @@ from fgglib.fg.factorfunction import FactorFunction
 from fgglib.fg.edge import FGEdge
 from fgglib.fg.vertex import FGVertex
 from fgglib.fg.variabledomain import VariableDomain
+from fgglib.fg.factorfunction import MulIdentityFactorFunction
 
 class Factorgraph(Hypergraph):
     '''
@@ -151,6 +152,7 @@ class Factorgraph(Hypergraph):
                         v.set_msg(e, incoming_msg)
 
         return {v:v.marginal(incoming_msg) for v in self.V}
+
 
     def sum_product(self, max_iter=100) -> dict[FGVertex, FactorFunction]:
         '''

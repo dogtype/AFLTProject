@@ -178,10 +178,7 @@ def test_inference_finite_variables_example4():
     assert fggsp.inference()==0.5
 
 def test_inference_finite_states_example1():
-    assert True
-    return
 
-    # STILL NOT WORKING!!!
     fggsp = FGGsum_product(finStatesFGG)
 
     finStatesDomain = VariableDomain(False)
@@ -194,8 +191,6 @@ def test_inference_finite_states_example1():
         for e in p.body.E:
             if e.label not in finStatesFGG.N:
                 e.function = finStatesFunction
-
-
 
     fggsp.inference_finite_states()
     assert True
