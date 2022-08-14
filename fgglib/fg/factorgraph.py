@@ -40,7 +40,7 @@ class Factorgraph(Hypergraph):
         self.add_vertex(v)
         return v
 
-    def createVertices(self, contentSet, labelSet, R):
+    def createVertices(self, contentSet, labelSet, R, domain):
         '''
         Adds a set of vertices to the factorgraph, by calling createVertex repeatedly
 
