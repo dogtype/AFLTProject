@@ -544,6 +544,7 @@ class FGGsum_product:
                         new_edge.add_target(rules_bin_vars[p])
                         new_edge.add_target(new_nt_vars[X][j])
                         new_edge.add_target(new_p_vars[p][v])
+                        fg.add_edge(new_edge)
 
                 if X in p.body.nonterminals(self.fgg.N):
                     e = p.body.get_edge(X)
@@ -552,6 +553,7 @@ class FGGsum_product:
                         new_edge.add_target(rules_bin_vars[p])
                         new_edge.add_target(new_nt_vars[X][j])
                         new_edge.add_target(new_p_vars[p][t])
+                        fg.add_edge(new_edge)
         return fg
 
 
