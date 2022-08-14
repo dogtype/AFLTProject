@@ -59,23 +59,56 @@ class Factorgraph(Hypergraph):
             v= self.createVertex(content, label, R)
 
     def createEdge(self, content, label, targets, f, semiring):
+        '''
+        Adds a single edge to the factorgraph
+
+        Args:
+            content: The content of the edge to be added
+            label: The label of the newly added edge
+            targets (set): A set of target vertices of the new edge
+            f (Factorfunction): The function of the edge that is to be added
+            semiring (semiring): The class of the semiring over which the vertices are defined
+        '''
         fgedge = FGEdge(content,label,semiring, f)
         self.add_edge(fgedge)
         for t in targets:
             fgedge.add_target(self.get_vertex(t))
 
     def set_function(self, edge, f: FactorFunction) -> None:
+        '''
+        Set a specific function for a specified edge
+
+        Args:
+            edge (Edge): The edge of which the function is to be changed
+            f (Factorfunction): The function of the edge that is to be added
+        '''
         for e in self.E:
             if(e.label==edge.label):
                 e.function=f
 
     def compute_assignment(self, *args):
+        '''
+        Computes the value of an assignment to the variables of the factorgraph
+        by multiplying individual factors
+
+        Args:
+            *args (dict): A dictionary of assignments to the variables of the graph
+
+        Returns:
+            result: The computed assignment value
+        '''
         result = self.R.one
         for e in self.E:
             result *= e.function.compute(*[args[v] for v in factor.targets])
         return result
 
     def _acyclic_sum_product(self) -> dict[FGVertex, FactorFunction]:
+        '''
+        Computes the sum-product of a factorgraph for acylcic graphs
+
+        Result:
+            A dictionary mapping every vertex in the graph to its marginal
+        '''
         states = {v:0 for v in self.V}
         states.update({e:0 for e in self.E})
         incoming_msg = {v:{e:None for e in self.E if v in e.targets} for v in self.V}
@@ -99,6 +132,12 @@ class Factorgraph(Hypergraph):
         return {v:v.marginal(incoming_msg) for v in self.V}
 
     def _cyclic_sum_product(self, max_iter) -> dict[FGVertex, FactorFunction]:
+        '''
+        Computes the sum-product of a factorgraph for cyclic graphs
+
+        Result:
+            A dictionary mapping every vertex in the graph to its marginal
+        '''
         incoming_msg = {v:{e:MulIdentityFactorFunction(self.R) for e in self.E if v in e.targets} for v in self.V}
         incoming_msg.update({e:{v:MulIdentityFactorFunction(self.R) for v in e.targets} for e in self.E})
 
@@ -113,13 +152,23 @@ class Factorgraph(Hypergraph):
 
         return {v:v.marginal(incoming_msg) for v in self.V}
 
-
-
-
     def sum_product(self, max_iter=100) -> dict[FGVertex, FactorFunction]:
+        '''
+        Computes the sum-product of a factorgraph by distinguishing between the
+        cyclic and acylcic case
+
+        Result:
+            A dictionary mapping every vertex in the graph to its marginal
+        '''
         return self._cyclic_sum_product(max_iter) if self.cyclic() else self._acyclic_sum_product()
 
     def normalization_constant_(self, root=None):
+        '''
+        Computes the normalizing constant of a factorgraph
+
+        Result:
+            Z (number): A single value corresponding to the normalizing constant for the graph
+        '''
         # inefficient version: generate all assignments and compute the product of the functions summing over them
         v_indexes = {v:i for i, v in enumerate(self.V)}
 
@@ -145,13 +194,22 @@ class Factorgraph(Hypergraph):
         return Z
 
     def normalization_constant(self, root=None):
+        '''
+        Computes the normalizing constant of a factorgraph more efficiently
+
+        Result:
+            Z (number): A single value corresponding to the normalizing constant for the graph
+        '''
         # efficient version: run sum product and compute the normalization constant of a marginal
         if root is None:
             root = list(self.V)[0]
         return self.sum_product()[root].normalization_constant(root.domain)
 
 
-    def createFGGraph(self, vertexSet, edgeSet, semiring):
+    def createFGGraph(self, vertexSet, edgeSet, semiring): # redundant
+        '''
+        Compare to the createFGGraph method in fgglib/autotesting/testenvironment
+        '''
         fg = Factorgraph(semiring)
         for v in vertexSet:
             fg.add_vertex(v)
@@ -159,7 +217,10 @@ class Factorgraph(Hypergraph):
             fg.add_edge(e)
         return fg
 
-    def buildGraph(V, E, semiring): # prohibits use of label multiple times
+    def buildGraph(V, E, semiring): # redundant
+        '''
+        Compare to the buildGraph method in fgglib/autotesting/testenvironment
+        '''
         vertexDict = {l: FGVertex(None,l,semiring) for l in V}
         vertexSet = {v for l,v in vertexDict.items()}
         edgeSet = set()

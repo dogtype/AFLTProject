@@ -166,7 +166,7 @@ class Hypergraph:
 
     def __hash__(self):
         '''
-        A function that computes the hash value for a hypergraph object
+        A function that computes a hash value for a hypergraph object
 
         Return:
             The hash value computed

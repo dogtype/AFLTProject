@@ -14,7 +14,7 @@ def createEdge(content,label,targets): # add this as a classmethod alternatively
         targets (list): a list of vertices that the edge connects
 
     Returns:
-        e: The constructed edge
+        e (Edge): The constructed edge
     """
     e = Edge(content,label)
     for t in targets:
@@ -31,7 +31,7 @@ def createFGEdge(content,label,targets, semiring=None):
         semiring (semiring): the semiring on which the edge is defined
 
     Returns:
-        e: The constructed edge
+        e (Edge): The constructed edge
     """
     e = FGEdge(content,label,semiring, None)
     for t in targets:
@@ -48,7 +48,7 @@ def createFragment(vertexList, edgeList, external, semiring=None):
         semiring (semiring): the semiring on which the fragment is defined
 
     Returns:
-        frag: The constructed fragment
+        frag (Fragment): The constructed fragment
     """
     frag = Fragment(semiring)
     for v in vertexList:
@@ -69,7 +69,7 @@ def createFGGraph(vertexList, edgeList, semiring):
         semiring (semiring): the semiring on which the fragment is defined
 
     Returns:
-        fg: The constructed factorgraph
+        fg (Factorgraph): The constructed factorgraph
     """
     fg = Factorgraph(semiring)
     for v in vertexList:
@@ -89,7 +89,7 @@ def buildGraph(V, E, semiring): # prohibits use of label multiple times
         semiring (semiring): the semiring on which the fragment is defined
 
     Returns:
-        The constructed factorgraph
+        Factorgraph: The constructed factorgraph
     """
     vertexDict = {l: FGVertex(None,l,semiring,defaultDomain) for l in V}
     vertexSet = {v for l,v in vertexDict.items()}
@@ -111,7 +111,7 @@ def buildFragment(V, E, ext, semiring=None): # prohibits use of vertex label mul
         semiring (semiring): the semiring on which the fragment is defined
 
     Returns:
-        The constructed factorgraph fragment
+        Fragment: The constructed factorgraph fragment
     """
     vertexDict = {l: FGVertex(None,l,semiring,defaultDomain) for l in V}
     vertexSet = {v for i,v in vertexDict.items()}

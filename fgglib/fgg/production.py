@@ -3,19 +3,46 @@ from fgglib.fg.edge import Edge
 from fgglib.fg.fragment import Fragment
 
 class Production(namedtuple("Production", "head, body")):
+	'''
+	A  class representing a production of a factor graph grammar. Productions are
+	tuples of a head (nonterminal) and body (factor graph fragment)
+	'''
 
 	def __str__(self):
+		'''
+		Computes a string representation of the Production
+
+		Returns:
+			Concatenated string representation of head and body
+		'''
 		return str(self.head) + " → " +  str(self.body) # requires a string representation of the factor graph fragment
 
 	def edge_in_set(self,query):
-		""" checks if an edge is in the edgeset of the body, without checking label """
+		'''
+		Checks if an edge is in the edgeset of the body, without checking label
+
+		Args:
+			query (Edge): Edge to be searched in the graph fragment
+
+		Returns:
+		 	A boolean flag corrensponding to the result of the check
+		'''
 		for e in self.body.E:
 			if(e.content==query.content and e.targets == query.targets):
 				return True
 		return False
 
 	def conjoinable(self, other, nts) -> bool:
-		""" asserts if two Productions are conjoinable (given a set of nonterminals) """
+		'''
+		Asserts if two Productions are conjoinable (given a set of nonterminals)
+
+		Args:
+			other (Production): The second Production to be used for the check
+			nts (list): A list of labels considered nonterminals in the grammar
+
+		Returns:
+		 	A boolean flag corresponding to the result of the check
+		'''
 		if(type(self.head) != type(other.head)
 		or self.body.V != other.body.V
 		or self.body.external != other.body.external):
@@ -32,7 +59,16 @@ class Production(namedtuple("Production", "head, body")):
 
 
 	def conjoin(self, other, nts):
-		""" returns the conjunction of two different productions """
+		'''
+		Returns the conjunction of two different productions
+
+		Args:
+			other: the production rule with witch the object is to be conjoined
+			nts: A list of labels that are considered to be nonterminals in the grammar
+
+		Returns:
+			Production: A new production corresponding to the conjunction of the two productions
+		'''
 		new_head = (self.head, other.head)
 
 		new_E=set()
