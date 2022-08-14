@@ -68,19 +68,37 @@ prod8 = Production(('X','(i-1)'),frag8)
 #-------------------------------- TESTS ----.-----------------------------------
 
 def test_conjoinable1():
+    '''
+    Testing the conjoinable predicate for two simple conjoinable productions
+    '''
     assert prod0.conjoinable(prod1, {'X','(n)'})
 
 def test_conjoinable2():
+    '''
+    Testing the conjoinable predicate for two conjoinable productions
+    '''
     assert prod3.conjoinable(prod4, {'S','(0)2','X2'})
 
 def test_conjoinable3():
+    '''
+    Testing the conjoinable predicate for two conjoinable productions
+    '''
     assert prod6.conjoinable(prod7, {'(i-1)','(i)4','X4'})
 
 def test_conjoin1():
+    '''
+    Testing the conjunction operation for two simple productions
+    '''
     assert prod0.conjoin(prod1, {'X','(n)'}) == prod2
 
 def test_conjoin2():
+    '''
+    Testing the conjunction operation for two productions
+    '''
     assert prod3.conjoin(prod4, {'S','(0)2','X2'}) == prod5
 
 def test_conjoin3():
+    '''
+    Testing the conjunction operation for two productions
+    '''
     assert prod6.conjoin(prod7, {'(i-1)','(i)4','X4'}) == prod8

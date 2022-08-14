@@ -243,66 +243,134 @@ conFGG3 = FGG(
 
 
 def test_add_example1():
+    '''
+    Testing the add function for FGGs on an example of an empty grammar
+    '''
     addFGG.add('S',recFrag0)
     assert addFGG.nProductions('S')=={('S',recFrag0)}
 
-def copy_exampl1e():
+def copy_example1():
+    '''
+    Testing the copy function for FGGs
+    '''
     newFGG = addFGG.copy()
     assert newFGG == addFGG
 
 def test_nProductions_example1():
+    '''
+    Testing the nProductions function for FGGs on a simple example of a recursive grammar
+    '''
     assert recFGG.nProductions('X')=={('X',recFrag0),('X',recFrag1)}
 
 def test_recursive_example1():
+    '''
+    Testing the recursive function on an example of a recursive FGG
+    '''
     assert recFGG.recursive()==True
 
 def test_recursive_example2():
+    '''
+    Testing the recursive function on an example of a simple nonrecursive FGG
+    '''
     assert nonRecFGG.recursive()==False
 
 def test_linearly_recursive_example1():
+    '''
+    Testing the linearly_recursive function on a simple example of a recursive FGG
+    '''
     assert recFGG.linearly_recursive()==True
 
 def test_linearly_recursive_example2():
+    '''
+    Testing the linearly_recursive function on an example of a recursive, but
+    nonlinearly recursive factor graph grammar
+    '''
     assert nonlinRecFGG.linearly_recursive()==False
 
 def test_linearly_recursive_example3():
+    '''
+    Testing the linearly_recursive function on an example of a nonlinearly recursive grammar
+    '''
     assert nonlinRecFGG2.linearly_recursive()==False
 
 def test_linearly_recursive_example4():
+    '''
+    Testing the linearly_recursive function on an example of a nonlinearly recursive grammar
+    '''
     assert nonlinRecFGG3.linearly_recursive()==False
 
 def test_linearly_recursive_example5():
+    '''
+    Testing the linearly_recursive function on an example of a nonlinearly recursive grammar
+    '''
     assert nonlinRecFGG4.linearly_recursive()==False
 
-def test_linearly_recursive_example5():
+def test_linearly_recursive_example6():
+    '''
+    Testing the linearly_recursive function on an example of a nonlinearly recursive grammar
+    '''
     assert nonlinRecFGG5.linearly_recursive()==False
 
-def test_linearly_recursive_example6():
+def test_linearly_recursive_example7():
+    '''
+    Testing the linearly_recursive function on a different example of a linearly
+    recursive grammar
+    '''
     assert linRecFGG.linearly_recursive()==True
 
 def test_diffDerivTree1():
+    '''
+    Testing the diffDerivTree function on a simple example of a recursive grammar
+    '''
     assert recFGG.diffDerivTree()=={'S','X'}
 
 def test_diffDerivTree2():
+    '''
+    Testing the diffDerivTree function on a simple example of a nonrecursive grammar
+    '''
     assert nonRecFGG.diffDerivTree()==set()
 
 def test_diffDerivTree3():
+    '''
+    Testing the diffDerivTree function on an example of a nonlinearly recursive grammar
+    '''
     assert nonlinRecFGG.diffDerivTree()=={'S','X'}
 
 def test_reentrant_example1():
+    '''
+    Testing the reentrant function on an example of a simple recursive FGG
+    '''
     assert recFGG.reentrant()==True
 
 def test_reentrant_example2():
+    '''
+    Testing the reentrant function on an example of a simple nonrecursive FGG
+    '''
     assert nonRecFGG.reentrant()==False
 
 def test_reentrant_example3():
+    '''
+    Testing the reentrant function on an example of an empty FGG
+    '''
     assert addFGG.reentrant()==False
 
 def test_reentrant_example4():
+    '''
+    Testing the reentrant predicate on an example of a specifically nonrecursive
+    and nonreentrant FGG
+    '''
     assert nonReentFGG.reentrant()==False
 
 def test_reentrant_example5():
+    '''
+    Testing the reentrant predicate on an example of a specifically nonrecursive
+    but reentrant FGG
+    '''
     assert reentFGG.reentrant()==True
 
 def test_conjunction_example1():
+    '''
+    Testing the conjunction algorithm on an example from Chiang, D., & Riley, D. (2020).
+    Factor Graph Grammars. In Proc. NeurIPS (pp. 6648–6658).
+    '''
     assert conFGG1.conjunction(conFGG2) == conFGG3

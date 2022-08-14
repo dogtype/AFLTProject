@@ -1,0 +1,888 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>fgglib.fg.factorgraph API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>fgglib.fg.factorgraph</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from typing import Set, Tuple
+from collections import defaultdict
+
+from fgglib.fg.hypergraph import Hypergraph
+from fgglib.fg.factorfunction import FactorFunction
+from fgglib.fg.edge import FGEdge
+from fgglib.fg.vertex import FGVertex
+from fgglib.fg.variabledomain import VariableDomain
+
+class Factorgraph(Hypergraph):
+    &#39;&#39;&#39;
+    A class that represents factorgraphs: hypergraphs equipped with a mapping
+    to a factor function for edges and a variable domain for vertices
+    &#39;&#39;&#39;
+
+    def __init__(self, R) -&gt; None:
+        &#39;&#39;&#39;
+        Creates a new Factorgraph object.
+
+        Args:
+            R(): the class of the semiring over which the factorgraph is defined
+
+        Returns:
+            Factorgraph: The newly created Factorgraph object.
+        &#39;&#39;&#39;
+        super().__init__()
+        self.R = R
+
+    def createVertex(self, content, label, R, domain=False):
+        &#39;&#39;&#39;
+        Adds a single vertex to the factorgraph
+
+        Args:
+            content: The content of the vertex to be added
+            label: The label of the newly added vertex
+            R: The class of the semiring over which the vertex is defined
+            domain: Optional parameter for a variable domain of the new vertex
+        &#39;&#39;&#39;
+        v = FGVertex(content, label, R, domain)
+        self.add_vertex(v)
+        return v
+
+    def createVertices(self, contentSet, labelSet, R):
+        &#39;&#39;&#39;
+        Adds a set of vertices to the factorgraph, by calling createVertex repeatedly
+
+        Args:
+            contentSet: A set of contents for the new vertices
+            labelSet: A set of labels for the new vertices
+            R: The class of the semiring over which the vertices are defined
+        &#39;&#39;&#39;
+        iter = len(labelSet)
+        for i in range(iter):
+            if contentSet != None:
+                content=contentSet[i]
+            else:
+                content=None
+            label=labelSet[i]
+            v= self.createVertex(content, label, R)
+
+    def createEdge(self, content, label, targets, f, semiring):
+        &#39;&#39;&#39;
+        Adds a single edge to the factorgraph
+
+        Args:
+            content: The content of the edge to be added
+            label: The label of the newly added edge
+            targets (set): A set of target vertices of the new edge
+            f (Factorfunction): The function of the edge that is to be added
+            semiring (semiring): The class of the semiring over which the vertices are defined
+        &#39;&#39;&#39;
+        fgedge = FGEdge(content,label,semiring, f)
+        self.add_edge(fgedge)
+        for t in targets:
+            fgedge.add_target(self.get_vertex(t))
+
+    def set_function(self, edge, f: FactorFunction) -&gt; None:
+        &#39;&#39;&#39;
+        Set a specific function for a specified edge
+
+        Args:
+            edge (Edge): The edge of which the function is to be changed
+            f (Factorfunction): The function of the edge that is to be added
+        &#39;&#39;&#39;
+        for e in self.E:
+            if(e.label==edge.label):
+                e.function=f
+
+    def compute_assignment(self, *args):
+        &#39;&#39;&#39;
+        Computes the value of an assignment to the variables of the factorgraph
+        by multiplying individual factors
+
+        Args:
+            *args (dict): A dictionary of assignments to the variables of the graph
+
+        Returns:
+            result: The computed assignment value
+        &#39;&#39;&#39;
+        result = self.R.one
+        for e in self.E:
+            result *= e.function.compute(*[args[v] for v in factor.targets])
+        return result
+
+    def _acyclic_sum_product(self) -&gt; dict[FGVertex, FactorFunction]:
+        &#39;&#39;&#39;
+        Computes the sum-product of a factorgraph for acylcic graphs
+
+        Result:
+            A dictionary mapping every vertex in the graph to its marginal
+        &#39;&#39;&#39;
+        states = {v:0 for v in self.V}
+        states.update({e:0 for e in self.E})
+        incoming_msg = {v:{e:None for e in self.E if v in e.targets} for v in self.V}
+        incoming_msg.update({e:{v:None for v in e.targets} for e in self.E})
+        stack = list(self.leaves() | {e for e in self.E if len(e.targets) == 1})
+        while stack:
+            node = stack.pop(0) # here with &#34;node&#34; with mean both vertices and hyperedges
+            missing_neighbors = [neigh for neigh, f in incoming_msg[node].items() if f is None]
+
+            if states[node] == 0 and len(missing_neighbors) == 1:
+                dest = missing_neighbors.pop()
+                node.set_msg(dest, incoming_msg)
+                stack.append(dest)
+                states[node] = 1
+            elif states[node] != 2 and len(missing_neighbors) == 0:
+                for dest in list(incoming_msg[node].keys()):
+                    node.set_msg(dest, incoming_msg)
+                    stack.append(dest)
+                states[node] = 2
+
+        return {v:v.marginal(incoming_msg) for v in self.V}
+
+    def _cyclic_sum_product(self, max_iter) -&gt; dict[FGVertex, FactorFunction]:
+        &#39;&#39;&#39;
+        Computes the sum-product of a factorgraph for cyclic graphs
+
+        Result:
+            A dictionary mapping every vertex in the graph to its marginal
+        &#39;&#39;&#39;
+        incoming_msg = {v:{e:MulIdentityFactorFunction(self.R) for e in self.E if v in e.targets} for v in self.V}
+        incoming_msg.update({e:{v:MulIdentityFactorFunction(self.R) for v in e.targets} for e in self.E})
+
+        for _ in range(max_iter):
+            for e in self.E:
+                for t in e.targets:
+                    e.set_msg(t, incoming_msg)
+            for v in self.V:
+                for e in self.E:
+                    if v in e.targets:
+                        v.set_msg(e, incoming_msg)
+
+        return {v:v.marginal(incoming_msg) for v in self.V}
+
+    def sum_product(self, max_iter=100) -&gt; dict[FGVertex, FactorFunction]:
+        &#39;&#39;&#39;
+        Computes the sum-product of a factorgraph by distinguishing between the
+        cyclic and acylcic case
+
+        Result:
+            A dictionary mapping every vertex in the graph to its marginal
+        &#39;&#39;&#39;
+        return self._cyclic_sum_product(max_iter) if self.cyclic() else self._acyclic_sum_product()
+
+    def normalization_constant_(self, root=None):
+        &#39;&#39;&#39;
+        Computes the normalizing constant of a factorgraph
+
+        Result:
+            Z (number): A single value corresponding to the normalizing constant for the graph
+        &#39;&#39;&#39;
+        # inefficient version: generate all assignments and compute the product of the functions summing over them
+        v_indexes = {v:i for i, v in enumerate(self.V)}
+
+        arg_combs = []
+        for v, _ in v_indexes.items():
+            d = v.domain
+            if len(arg_combs) == 0:
+                for value in d.enumerate():
+                    arg_combs.append([value])
+            else:
+                new_arg_combs = []
+                for value in d.enumerate():
+                    new_arg_combs += [a + [value] for a in arg_combs]
+                arg_combs = new_arg_combs
+
+        Z = self.R.zero
+        for comb in arg_combs:
+            cur_res = self.R.one
+            for e in self.E:
+                args = [comb[v_indexes[v]] for v in e.targets]
+                cur_res *= e.function.compute(*args)
+            Z += cur_res
+        return Z
+
+    def normalization_constant(self, root=None):
+        &#39;&#39;&#39;
+        Computes the normalizing constant of a factorgraph more efficiently
+
+        Result:
+            Z (number): A single value corresponding to the normalizing constant for the graph
+        &#39;&#39;&#39;
+        # efficient version: run sum product and compute the normalization constant of a marginal
+        if root is None:
+            root = list(self.V)[0]
+        return self.sum_product()[root].normalization_constant(root.domain)
+
+
+    def createFGGraph(self, vertexSet, edgeSet, semiring): # redundant
+        &#39;&#39;&#39;
+        Compare to the createFGGraph method in fgglib/autotesting/testenvironment
+        &#39;&#39;&#39;
+        fg = Factorgraph(semiring)
+        for v in vertexSet:
+            fg.add_vertex(v)
+        for e in edgeSet:
+            fg.add_edge(e)
+        return fg
+
+    def buildGraph(V, E, semiring): # redundant
+        &#39;&#39;&#39;
+        Compare to the buildGraph method in fgglib/autotesting/testenvironment
+        &#39;&#39;&#39;
+        vertexDict = {l: FGVertex(None,l,semiring) for l in V}
+        vertexSet = {v for l,v in vertexDict.items()}
+        edgeSet = set()
+        for l,s in E.items():
+            vs = [vertexDict[i] for i in s]
+            edgeSet.add(self.createEdge(None, l, vs, None, semiring))
+        return self.createFGGraph(vertexSet, edgeSet, semiring)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="fgglib.fg.factorgraph.Factorgraph"><code class="flex name class">
+<span>class <span class="ident">Factorgraph</span></span>
+<span>(</span><span>R)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class that represents factorgraphs: hypergraphs equipped with a mapping
+to a factor function for edges and a variable domain for vertices</p>
+<p>Creates a new Factorgraph object.</p>
+<h2 id="args">Args</h2>
+<p>R(): the class of the semiring over which the factorgraph is defined</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code><a title="fgglib.fg.factorgraph.Factorgraph" href="#fgglib.fg.factorgraph.Factorgraph">Factorgraph</a></code></dt>
+<dd>The newly created Factorgraph object.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Factorgraph(Hypergraph):
+    &#39;&#39;&#39;
+    A class that represents factorgraphs: hypergraphs equipped with a mapping
+    to a factor function for edges and a variable domain for vertices
+    &#39;&#39;&#39;
+
+    def __init__(self, R) -&gt; None:
+        &#39;&#39;&#39;
+        Creates a new Factorgraph object.
+
+        Args:
+            R(): the class of the semiring over which the factorgraph is defined
+
+        Returns:
+            Factorgraph: The newly created Factorgraph object.
+        &#39;&#39;&#39;
+        super().__init__()
+        self.R = R
+
+    def createVertex(self, content, label, R, domain=False):
+        &#39;&#39;&#39;
+        Adds a single vertex to the factorgraph
+
+        Args:
+            content: The content of the vertex to be added
+            label: The label of the newly added vertex
+            R: The class of the semiring over which the vertex is defined
+            domain: Optional parameter for a variable domain of the new vertex
+        &#39;&#39;&#39;
+        v = FGVertex(content, label, R, domain)
+        self.add_vertex(v)
+        return v
+
+    def createVertices(self, contentSet, labelSet, R):
+        &#39;&#39;&#39;
+        Adds a set of vertices to the factorgraph, by calling createVertex repeatedly
+
+        Args:
+            contentSet: A set of contents for the new vertices
+            labelSet: A set of labels for the new vertices
+            R: The class of the semiring over which the vertices are defined
+        &#39;&#39;&#39;
+        iter = len(labelSet)
+        for i in range(iter):
+            if contentSet != None:
+                content=contentSet[i]
+            else:
+                content=None
+            label=labelSet[i]
+            v= self.createVertex(content, label, R)
+
+    def createEdge(self, content, label, targets, f, semiring):
+        &#39;&#39;&#39;
+        Adds a single edge to the factorgraph
+
+        Args:
+            content: The content of the edge to be added
+            label: The label of the newly added edge
+            targets (set): A set of target vertices of the new edge
+            f (Factorfunction): The function of the edge that is to be added
+            semiring (semiring): The class of the semiring over which the vertices are defined
+        &#39;&#39;&#39;
+        fgedge = FGEdge(content,label,semiring, f)
+        self.add_edge(fgedge)
+        for t in targets:
+            fgedge.add_target(self.get_vertex(t))
+
+    def set_function(self, edge, f: FactorFunction) -&gt; None:
+        &#39;&#39;&#39;
+        Set a specific function for a specified edge
+
+        Args:
+            edge (Edge): The edge of which the function is to be changed
+            f (Factorfunction): The function of the edge that is to be added
+        &#39;&#39;&#39;
+        for e in self.E:
+            if(e.label==edge.label):
+                e.function=f
+
+    def compute_assignment(self, *args):
+        &#39;&#39;&#39;
+        Computes the value of an assignment to the variables of the factorgraph
+        by multiplying individual factors
+
+        Args:
+            *args (dict): A dictionary of assignments to the variables of the graph
+
+        Returns:
+            result: The computed assignment value
+        &#39;&#39;&#39;
+        result = self.R.one
+        for e in self.E:
+            result *= e.function.compute(*[args[v] for v in factor.targets])
+        return result
+
+    def _acyclic_sum_product(self) -&gt; dict[FGVertex, FactorFunction]:
+        &#39;&#39;&#39;
+        Computes the sum-product of a factorgraph for acylcic graphs
+
+        Result:
+            A dictionary mapping every vertex in the graph to its marginal
+        &#39;&#39;&#39;
+        states = {v:0 for v in self.V}
+        states.update({e:0 for e in self.E})
+        incoming_msg = {v:{e:None for e in self.E if v in e.targets} for v in self.V}
+        incoming_msg.update({e:{v:None for v in e.targets} for e in self.E})
+        stack = list(self.leaves() | {e for e in self.E if len(e.targets) == 1})
+        while stack:
+            node = stack.pop(0) # here with &#34;node&#34; with mean both vertices and hyperedges
+            missing_neighbors = [neigh for neigh, f in incoming_msg[node].items() if f is None]
+
+            if states[node] == 0 and len(missing_neighbors) == 1:
+                dest = missing_neighbors.pop()
+                node.set_msg(dest, incoming_msg)
+                stack.append(dest)
+                states[node] = 1
+            elif states[node] != 2 and len(missing_neighbors) == 0:
+                for dest in list(incoming_msg[node].keys()):
+                    node.set_msg(dest, incoming_msg)
+                    stack.append(dest)
+                states[node] = 2
+
+        return {v:v.marginal(incoming_msg) for v in self.V}
+
+    def _cyclic_sum_product(self, max_iter) -&gt; dict[FGVertex, FactorFunction]:
+        &#39;&#39;&#39;
+        Computes the sum-product of a factorgraph for cyclic graphs
+
+        Result:
+            A dictionary mapping every vertex in the graph to its marginal
+        &#39;&#39;&#39;
+        incoming_msg = {v:{e:MulIdentityFactorFunction(self.R) for e in self.E if v in e.targets} for v in self.V}
+        incoming_msg.update({e:{v:MulIdentityFactorFunction(self.R) for v in e.targets} for e in self.E})
+
+        for _ in range(max_iter):
+            for e in self.E:
+                for t in e.targets:
+                    e.set_msg(t, incoming_msg)
+            for v in self.V:
+                for e in self.E:
+                    if v in e.targets:
+                        v.set_msg(e, incoming_msg)
+
+        return {v:v.marginal(incoming_msg) for v in self.V}
+
+    def sum_product(self, max_iter=100) -&gt; dict[FGVertex, FactorFunction]:
+        &#39;&#39;&#39;
+        Computes the sum-product of a factorgraph by distinguishing between the
+        cyclic and acylcic case
+
+        Result:
+            A dictionary mapping every vertex in the graph to its marginal
+        &#39;&#39;&#39;
+        return self._cyclic_sum_product(max_iter) if self.cyclic() else self._acyclic_sum_product()
+
+    def normalization_constant_(self, root=None):
+        &#39;&#39;&#39;
+        Computes the normalizing constant of a factorgraph
+
+        Result:
+            Z (number): A single value corresponding to the normalizing constant for the graph
+        &#39;&#39;&#39;
+        # inefficient version: generate all assignments and compute the product of the functions summing over them
+        v_indexes = {v:i for i, v in enumerate(self.V)}
+
+        arg_combs = []
+        for v, _ in v_indexes.items():
+            d = v.domain
+            if len(arg_combs) == 0:
+                for value in d.enumerate():
+                    arg_combs.append([value])
+            else:
+                new_arg_combs = []
+                for value in d.enumerate():
+                    new_arg_combs += [a + [value] for a in arg_combs]
+                arg_combs = new_arg_combs
+
+        Z = self.R.zero
+        for comb in arg_combs:
+            cur_res = self.R.one
+            for e in self.E:
+                args = [comb[v_indexes[v]] for v in e.targets]
+                cur_res *= e.function.compute(*args)
+            Z += cur_res
+        return Z
+
+    def normalization_constant(self, root=None):
+        &#39;&#39;&#39;
+        Computes the normalizing constant of a factorgraph more efficiently
+
+        Result:
+            Z (number): A single value corresponding to the normalizing constant for the graph
+        &#39;&#39;&#39;
+        # efficient version: run sum product and compute the normalization constant of a marginal
+        if root is None:
+            root = list(self.V)[0]
+        return self.sum_product()[root].normalization_constant(root.domain)
+
+
+    def createFGGraph(self, vertexSet, edgeSet, semiring): # redundant
+        &#39;&#39;&#39;
+        Compare to the createFGGraph method in fgglib/autotesting/testenvironment
+        &#39;&#39;&#39;
+        fg = Factorgraph(semiring)
+        for v in vertexSet:
+            fg.add_vertex(v)
+        for e in edgeSet:
+            fg.add_edge(e)
+        return fg
+
+    def buildGraph(V, E, semiring): # redundant
+        &#39;&#39;&#39;
+        Compare to the buildGraph method in fgglib/autotesting/testenvironment
+        &#39;&#39;&#39;
+        vertexDict = {l: FGVertex(None,l,semiring) for l in V}
+        vertexSet = {v for l,v in vertexDict.items()}
+        edgeSet = set()
+        for l,s in E.items():
+            vs = [vertexDict[i] for i in s]
+            edgeSet.add(self.createEdge(None, l, vs, None, semiring))
+        return self.createFGGraph(vertexSet, edgeSet, semiring)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fgglib.fg.hypergraph.Hypergraph" href="hypergraph.html#fgglib.fg.hypergraph.Hypergraph">Hypergraph</a></li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="fgglib.fg.fragment.Fragment" href="fragment.html#fgglib.fg.fragment.Fragment">Fragment</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="fgglib.fg.factorgraph.Factorgraph.buildGraph"><code class="name flex">
+<span>def <span class="ident">buildGraph</span></span>(<span>V, E, semiring)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compare to the buildGraph method in fgglib/autotesting/testenvironment</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def buildGraph(V, E, semiring): # redundant
+    &#39;&#39;&#39;
+    Compare to the buildGraph method in fgglib/autotesting/testenvironment
+    &#39;&#39;&#39;
+    vertexDict = {l: FGVertex(None,l,semiring) for l in V}
+    vertexSet = {v for l,v in vertexDict.items()}
+    edgeSet = set()
+    for l,s in E.items():
+        vs = [vertexDict[i] for i in s]
+        edgeSet.add(self.createEdge(None, l, vs, None, semiring))
+    return self.createFGGraph(vertexSet, edgeSet, semiring)</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fg.factorgraph.Factorgraph.compute_assignment"><code class="name flex">
+<span>def <span class="ident">compute_assignment</span></span>(<span>self, *args)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes the value of an assignment to the variables of the factorgraph
+by multiplying individual factors</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>*args</code></strong> :&ensp;<code>dict</code></dt>
+<dd>A dictionary of assignments to the variables of the graph</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>result</code></dt>
+<dd>The computed assignment value</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_assignment(self, *args):
+    &#39;&#39;&#39;
+    Computes the value of an assignment to the variables of the factorgraph
+    by multiplying individual factors
+
+    Args:
+        *args (dict): A dictionary of assignments to the variables of the graph
+
+    Returns:
+        result: The computed assignment value
+    &#39;&#39;&#39;
+    result = self.R.one
+    for e in self.E:
+        result *= e.function.compute(*[args[v] for v in factor.targets])
+    return result</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fg.factorgraph.Factorgraph.createEdge"><code class="name flex">
+<span>def <span class="ident">createEdge</span></span>(<span>self, content, label, targets, f, semiring)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Adds a single edge to the factorgraph</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>content</code></strong></dt>
+<dd>The content of the edge to be added</dd>
+<dt><strong><code>label</code></strong></dt>
+<dd>The label of the newly added edge</dd>
+<dt><strong><code>targets</code></strong> :&ensp;<code>set</code></dt>
+<dd>A set of target vertices of the new edge</dd>
+<dt><strong><code>f</code></strong> :&ensp;<code>Factorfunction</code></dt>
+<dd>The function of the edge that is to be added</dd>
+<dt><strong><code>semiring</code></strong> :&ensp;<code>semiring</code></dt>
+<dd>The class of the semiring over which the vertices are defined</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def createEdge(self, content, label, targets, f, semiring):
+    &#39;&#39;&#39;
+    Adds a single edge to the factorgraph
+
+    Args:
+        content: The content of the edge to be added
+        label: The label of the newly added edge
+        targets (set): A set of target vertices of the new edge
+        f (Factorfunction): The function of the edge that is to be added
+        semiring (semiring): The class of the semiring over which the vertices are defined
+    &#39;&#39;&#39;
+    fgedge = FGEdge(content,label,semiring, f)
+    self.add_edge(fgedge)
+    for t in targets:
+        fgedge.add_target(self.get_vertex(t))</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fg.factorgraph.Factorgraph.createFGGraph"><code class="name flex">
+<span>def <span class="ident">createFGGraph</span></span>(<span>self, vertexSet, edgeSet, semiring)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compare to the createFGGraph method in fgglib/autotesting/testenvironment</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def createFGGraph(self, vertexSet, edgeSet, semiring): # redundant
+    &#39;&#39;&#39;
+    Compare to the createFGGraph method in fgglib/autotesting/testenvironment
+    &#39;&#39;&#39;
+    fg = Factorgraph(semiring)
+    for v in vertexSet:
+        fg.add_vertex(v)
+    for e in edgeSet:
+        fg.add_edge(e)
+    return fg</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fg.factorgraph.Factorgraph.createVertex"><code class="name flex">
+<span>def <span class="ident">createVertex</span></span>(<span>self, content, label, R, domain=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Adds a single vertex to the factorgraph</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>content</code></strong></dt>
+<dd>The content of the vertex to be added</dd>
+<dt><strong><code>label</code></strong></dt>
+<dd>The label of the newly added vertex</dd>
+<dt><strong><code>R</code></strong></dt>
+<dd>The class of the semiring over which the vertex is defined</dd>
+<dt><strong><code>domain</code></strong></dt>
+<dd>Optional parameter for a variable domain of the new vertex</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def createVertex(self, content, label, R, domain=False):
+    &#39;&#39;&#39;
+    Adds a single vertex to the factorgraph
+
+    Args:
+        content: The content of the vertex to be added
+        label: The label of the newly added vertex
+        R: The class of the semiring over which the vertex is defined
+        domain: Optional parameter for a variable domain of the new vertex
+    &#39;&#39;&#39;
+    v = FGVertex(content, label, R, domain)
+    self.add_vertex(v)
+    return v</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fg.factorgraph.Factorgraph.createVertices"><code class="name flex">
+<span>def <span class="ident">createVertices</span></span>(<span>self, contentSet, labelSet, R)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Adds a set of vertices to the factorgraph, by calling createVertex repeatedly</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>contentSet</code></strong></dt>
+<dd>A set of contents for the new vertices</dd>
+<dt><strong><code>labelSet</code></strong></dt>
+<dd>A set of labels for the new vertices</dd>
+<dt><strong><code>R</code></strong></dt>
+<dd>The class of the semiring over which the vertices are defined</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def createVertices(self, contentSet, labelSet, R):
+    &#39;&#39;&#39;
+    Adds a set of vertices to the factorgraph, by calling createVertex repeatedly
+
+    Args:
+        contentSet: A set of contents for the new vertices
+        labelSet: A set of labels for the new vertices
+        R: The class of the semiring over which the vertices are defined
+    &#39;&#39;&#39;
+    iter = len(labelSet)
+    for i in range(iter):
+        if contentSet != None:
+            content=contentSet[i]
+        else:
+            content=None
+        label=labelSet[i]
+        v= self.createVertex(content, label, R)</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fg.factorgraph.Factorgraph.normalization_constant"><code class="name flex">
+<span>def <span class="ident">normalization_constant</span></span>(<span>self, root=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes the normalizing constant of a factorgraph more efficiently</p>
+<h2 id="result">Result</h2>
+<p>Z (number): A single value corresponding to the normalizing constant for the graph</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def normalization_constant(self, root=None):
+    &#39;&#39;&#39;
+    Computes the normalizing constant of a factorgraph more efficiently
+
+    Result:
+        Z (number): A single value corresponding to the normalizing constant for the graph
+    &#39;&#39;&#39;
+    # efficient version: run sum product and compute the normalization constant of a marginal
+    if root is None:
+        root = list(self.V)[0]
+    return self.sum_product()[root].normalization_constant(root.domain)</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fg.factorgraph.Factorgraph.normalization_constant_"><code class="name flex">
+<span>def <span class="ident">normalization_constant_</span></span>(<span>self, root=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes the normalizing constant of a factorgraph</p>
+<h2 id="result">Result</h2>
+<p>Z (number): A single value corresponding to the normalizing constant for the graph</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def normalization_constant_(self, root=None):
+    &#39;&#39;&#39;
+    Computes the normalizing constant of a factorgraph
+
+    Result:
+        Z (number): A single value corresponding to the normalizing constant for the graph
+    &#39;&#39;&#39;
+    # inefficient version: generate all assignments and compute the product of the functions summing over them
+    v_indexes = {v:i for i, v in enumerate(self.V)}
+
+    arg_combs = []
+    for v, _ in v_indexes.items():
+        d = v.domain
+        if len(arg_combs) == 0:
+            for value in d.enumerate():
+                arg_combs.append([value])
+        else:
+            new_arg_combs = []
+            for value in d.enumerate():
+                new_arg_combs += [a + [value] for a in arg_combs]
+            arg_combs = new_arg_combs
+
+    Z = self.R.zero
+    for comb in arg_combs:
+        cur_res = self.R.one
+        for e in self.E:
+            args = [comb[v_indexes[v]] for v in e.targets]
+            cur_res *= e.function.compute(*args)
+        Z += cur_res
+    return Z</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fg.factorgraph.Factorgraph.set_function"><code class="name flex">
+<span>def <span class="ident">set_function</span></span>(<span>self, edge, f: <a title="fgglib.fg.factorfunction.FactorFunction" href="factorfunction.html#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a>) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Set a specific function for a specified edge</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>edge</code></strong> :&ensp;<code>Edge</code></dt>
+<dd>The edge of which the function is to be changed</dd>
+<dt><strong><code>f</code></strong> :&ensp;<code>Factorfunction</code></dt>
+<dd>The function of the edge that is to be added</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_function(self, edge, f: FactorFunction) -&gt; None:
+    &#39;&#39;&#39;
+    Set a specific function for a specified edge
+
+    Args:
+        edge (Edge): The edge of which the function is to be changed
+        f (Factorfunction): The function of the edge that is to be added
+    &#39;&#39;&#39;
+    for e in self.E:
+        if(e.label==edge.label):
+            e.function=f</code></pre>
+</details>
+</dd>
+<dt id="fgglib.fg.factorgraph.Factorgraph.sum_product"><code class="name flex">
+<span>def <span class="ident">sum_product</span></span>(<span>self, max_iter=100) ‑> dict[<a title="fgglib.fg.vertex.FGVertex" href="vertex.html#fgglib.fg.vertex.FGVertex">FGVertex</a>, <a title="fgglib.fg.factorfunction.FactorFunction" href="factorfunction.html#fgglib.fg.factorfunction.FactorFunction">FactorFunction</a>]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes the sum-product of a factorgraph by distinguishing between the
+cyclic and acylcic case</p>
+<h2 id="result">Result</h2>
+<p>A dictionary mapping every vertex in the graph to its marginal</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def sum_product(self, max_iter=100) -&gt; dict[FGVertex, FactorFunction]:
+    &#39;&#39;&#39;
+    Computes the sum-product of a factorgraph by distinguishing between the
+    cyclic and acylcic case
+
+    Result:
+        A dictionary mapping every vertex in the graph to its marginal
+    &#39;&#39;&#39;
+    return self._cyclic_sum_product(max_iter) if self.cyclic() else self._acyclic_sum_product()</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="fgglib.fg.hypergraph.Hypergraph" href="hypergraph.html#fgglib.fg.hypergraph.Hypergraph">Hypergraph</a></b></code>:
+<ul class="hlist">
+<li><code><a title="fgglib.fg.hypergraph.Hypergraph.add_edge" href="hypergraph.html#fgglib.fg.hypergraph.Hypergraph.add_edge">add_edge</a></code></li>
+<li><code><a title="fgglib.fg.hypergraph.Hypergraph.add_edges" href="hypergraph.html#fgglib.fg.hypergraph.Hypergraph.add_edges">add_edges</a></code></li>
+<li><code><a title="fgglib.fg.hypergraph.Hypergraph.add_vertex" href="hypergraph.html#fgglib.fg.hypergraph.Hypergraph.add_vertex">add_vertex</a></code></li>
+<li><code><a title="fgglib.fg.hypergraph.Hypergraph.add_vertices" href="hypergraph.html#fgglib.fg.hypergraph.Hypergraph.add_vertices">add_vertices</a></code></li>
+<li><code><a title="fgglib.fg.hypergraph.Hypergraph.cyclic" href="hypergraph.html#fgglib.fg.hypergraph.Hypergraph.cyclic">cyclic</a></code></li>
+<li><code><a title="fgglib.fg.hypergraph.Hypergraph.get_edge" href="hypergraph.html#fgglib.fg.hypergraph.Hypergraph.get_edge">get_edge</a></code></li>
+<li><code><a title="fgglib.fg.hypergraph.Hypergraph.get_vertex" href="hypergraph.html#fgglib.fg.hypergraph.Hypergraph.get_vertex">get_vertex</a></code></li>
+<li><code><a title="fgglib.fg.hypergraph.Hypergraph.leaves" href="hypergraph.html#fgglib.fg.hypergraph.Hypergraph.leaves">leaves</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="fgglib.fg" href="index.html">fgglib.fg</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="fgglib.fg.factorgraph.Factorgraph" href="#fgglib.fg.factorgraph.Factorgraph">Factorgraph</a></code></h4>
+<ul class="">
+<li><code><a title="fgglib.fg.factorgraph.Factorgraph.buildGraph" href="#fgglib.fg.factorgraph.Factorgraph.buildGraph">buildGraph</a></code></li>
+<li><code><a title="fgglib.fg.factorgraph.Factorgraph.compute_assignment" href="#fgglib.fg.factorgraph.Factorgraph.compute_assignment">compute_assignment</a></code></li>
+<li><code><a title="fgglib.fg.factorgraph.Factorgraph.createEdge" href="#fgglib.fg.factorgraph.Factorgraph.createEdge">createEdge</a></code></li>
+<li><code><a title="fgglib.fg.factorgraph.Factorgraph.createFGGraph" href="#fgglib.fg.factorgraph.Factorgraph.createFGGraph">createFGGraph</a></code></li>
+<li><code><a title="fgglib.fg.factorgraph.Factorgraph.createVertex" href="#fgglib.fg.factorgraph.Factorgraph.createVertex">createVertex</a></code></li>
+<li><code><a title="fgglib.fg.factorgraph.Factorgraph.createVertices" href="#fgglib.fg.factorgraph.Factorgraph.createVertices">createVertices</a></code></li>
+<li><code><a title="fgglib.fg.factorgraph.Factorgraph.normalization_constant" href="#fgglib.fg.factorgraph.Factorgraph.normalization_constant">normalization_constant</a></code></li>
+<li><code><a title="fgglib.fg.factorgraph.Factorgraph.normalization_constant_" href="#fgglib.fg.factorgraph.Factorgraph.normalization_constant_">normalization_constant_</a></code></li>
+<li><code><a title="fgglib.fg.factorgraph.Factorgraph.set_function" href="#fgglib.fg.factorgraph.Factorgraph.set_function">set_function</a></code></li>
+<li><code><a title="fgglib.fg.factorgraph.Factorgraph.sum_product" href="#fgglib.fg.factorgraph.Factorgraph.sum_product">sum_product</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
