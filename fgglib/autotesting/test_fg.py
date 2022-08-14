@@ -77,6 +77,10 @@ spaFG2 = buildGraph(
 #-------------------------------- TESTS ----------------------------------------
 
 def test_sum_product1():
+    '''
+    Testing the sum-product algorithm on an example for discrete density
+    functions taken from https://github.com/danbar/fglib/blob/master/examples/example_spa
+    '''
     d1 = VariableDomain(False)
     d1.set_content({0,1})
     d2 = VariableDomain(False)
@@ -85,7 +89,7 @@ def test_sum_product1():
     spaFG1.get_vertex('X2').domain = d2
     spaFG1.get_vertex('X3').domain = d1
     spaFG1.get_vertex('X4').domain = d1
-    
+
     spaFG1.set_function(spaFG1.get_edge('fa'), DiscreteDensity([[0.3, 0.2, 0.1],[0.3, 0, 0.1]]))
     spaFG1.set_function(spaFG1.get_edge('fb'), DiscreteDensity([[0.3, 0.2],[0.3, 0],[0.1, 0.1]]))
     spaFG1.set_function(spaFG1.get_edge('fc'), DiscreteDensity([[0.3, 0.2],[0.3, 0],[0.1, 0.1]]))
@@ -99,7 +103,7 @@ def test_sum_product1():
     assert np.allclose(np.asarray([m2.compute(0).score, m2.compute(1).score, m2.compute(2).score]) / m2.normalization_constant(d2).score, [0.852272, 0.102272, 0.045454], atol=1e-3)
     assert np.allclose(np.asarray([m3.compute(0).score, m3.compute(1).score]) / m3.normalization_constant(d1).score, [0.636363, 0.363636], atol=1e-3)
     assert np.allclose(np.asarray([m4.compute(0).score, m4.compute(1).score]) / m3.normalization_constant(d1).score, [0.636363, 0.363636], atol=1e-3)
-    
+
 def test_normalization_constant1():
     d1 = VariableDomain(False)
     d1.set_content({0,1})
@@ -109,15 +113,19 @@ def test_normalization_constant1():
     spaFG1.get_vertex('X2').domain = d2
     spaFG1.get_vertex('X3').domain = d1
     spaFG1.get_vertex('X4').domain = d1
-    
+
     spaFG1.set_function(spaFG1.get_edge('fa'), DiscreteDensity([[0.3, 0.2, 0.1],[0.3, 0, 0.1]]))
     spaFG1.set_function(spaFG1.get_edge('fb'), DiscreteDensity([[0.3, 0.2],[0.3, 0],[0.1, 0.1]]))
     spaFG1.set_function(spaFG1.get_edge('fc'), DiscreteDensity([[0.3, 0.2],[0.3, 0],[0.1, 0.1]]))
-    
+
     assert np.allclose(float(spaFG1.normalization_constant().score), 0.176, atol=1e-3)
-    
-    
+
+
 def test_sum_product2():
+    '''
+    Testing the sum-product algorithm on an example of tropical multiplicative
+    factor functions
+    '''
     d1 = VariableDomain(False)
     d1.set_content({1,2,3})
     d2 = VariableDomain(False)
@@ -130,10 +138,10 @@ def test_sum_product2():
     spaFG2.get_vertex('X2').domain = d2
     spaFG2.get_vertex('X3').domain = d3
     spaFG2.get_vertex('X4').domain = d4
-    
+
     spaFG2.set_function(spaFG2.get_edge('fa'), TropicalMul(2))
     spaFG2.set_function(spaFG2.get_edge('fb'), TropicalMul(3))
-    
+
     marginals = spaFG2.sum_product()
     assert np.allclose(marginals[spaFG2.get_vertex('X1')].compute(1).score, 22, atol=1e-3)
     assert np.allclose(marginals[spaFG2.get_vertex('X1')].compute(2).score, 23, atol=1e-3)
@@ -143,8 +151,12 @@ def test_sum_product2():
     assert np.allclose(marginals[spaFG2.get_vertex('X3')].compute(6).score, 22, atol=1e-3)
     assert np.allclose(marginals[spaFG2.get_vertex('X4')].compute(7).score, 22, atol=1e-3)
     assert np.allclose(marginals[spaFG2.get_vertex('X4')].compute(8).score, 23, atol=1e-3)
-    
+
 def test_normalization_constant2():
+    '''
+    Testing the computation of the normalizing constant on an example with the
+    tropical mul FactorFunction
+    '''
     d1 = VariableDomain(False)
     d1.set_content({1,2,3})
     d2 = VariableDomain(False)
@@ -157,12 +169,12 @@ def test_normalization_constant2():
     spaFG2.get_vertex('X2').domain = d2
     spaFG2.get_vertex('X3').domain = d3
     spaFG2.get_vertex('X4').domain = d4
-    
+
     spaFG2.set_function(spaFG2.get_edge('fa'), TropicalMul(2))
     spaFG2.set_function(spaFG2.get_edge('fb'), TropicalMul(3))
-    
+
     assert spaFG2.normalization_constant().score == 22
-    
+
 def test_sum_product3():
     # set domains
     # set functions (normals)
@@ -174,25 +186,47 @@ def test_normalization_constant3():
     pass
 
 def test_cyclic1():
+    '''
+    Testing the cyclic predicate on an example for a factorgraph of a hidden
+    markov model
+    '''
     assert hmmFG.cyclic() == False
 
 def test_cyclic2():
+    '''
+    Testing the cyclic predicate on an example of a simple cyclic factorgraph
+    '''
     assert cyclicFG.cyclic() == True
 
 def test_leaves1():
+    '''
+    Testing the leaves function on an example for a factorgraph of an HMM
+    '''
     assert hmmFG.leaves()=={FGVertex(None,'W2',Real,defaultDomain),FGVertex(None,'W4',Real,defaultDomain),FGVertex(None,'W6',Real,defaultDomain)}
 
 def test_leaves2():
+    '''
+    Testing the leaves function on a simple example of a fragement to check the external nodes
+    '''
     assert frag1.leaves()=={FGVertex(None,'EXT1',frag1.R, VariableDomain(False)),FGVertex(None,'EXT2',frag1.R, VariableDomain(False))}
 
 def test_leaves3():
+    '''
+    Testing the leaves function on another example of a factorgraph fragment
+    '''
     assert frag2.leaves()=={FGVertex(None,'V3',frag2.R, VariableDomain(False))}
 
 def test_nonterminals1():
+    '''
+    Testing the nonterminals function on a simple example of a fragment
+    '''
     assert set(frag1.nonterminals({'A'}))==set()
     assert set(frag1.nonterminals({'N'}))=={'N'}
 
 def test_nonterminals2():
+    '''
+    Testsing the nonterminals function with different inputs on another fragment
+    '''
     assert set(frag2.nonterminals(set()))==set()
     assert set(frag2.nonterminals({'N','M','Y'}))=={'N','M'}
     assert set(frag2.nonterminals({'X','Y','V'}))=={'X','V'}

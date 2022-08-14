@@ -118,10 +118,19 @@ finStatesFGG = FGG(
 #-------------------------------- TESTS ----.-----------------------------------
 
 def test_inference_finite_variables_example1():
+    '''
+    Testing inference in the finite variable domain case on a self constructed
+    example in which case 1 of the inference algorithm applies (nonrecursive)
+    '''
     fggsp = FGGsum_product(nonRecFGG)
     assert fggsp.inference()==0.25
 
 def test_inference_finite_variables_example2():
+    '''
+    Testing inference in the finite variable case on a self constructed example
+    in which case 1 of the inference algorithm applies (nonrecursive),
+    but with different domain
+    '''
     nonRecFGG.set_variable_domain('V',defaultDomain)
     nonRecFGG.set_variable_domain('EXT1',defaultDomain)
     nonRecFGG.set_variable_domain('EXT2',defaultDomain)
@@ -129,34 +138,40 @@ def test_inference_finite_variables_example2():
     assert fggsp.inference()==0.875
 
 def test_inference_finite_variables_example3():
+    '''
+    Testing inference in the finite variable case on a self constructed example
+    in which case 2 of the inference algorithm applies (linearly recursive)
+    '''
     fggsp = FGGsum_product(recFGG)
     assert fggsp.inference()==0.3333333333333333
 
 def test_inference_finite_variables_example4():
+    '''
+    Testing inference in the finite variable case on a self constructed example
+    in which case 3 of the inference algorithm applies (nonlinearly recursive)
+    '''
     fggsp = FGGsum_product(nonlinRecFGG)
     assert fggsp.inference()==0.5
-
-test_inference_finite_variables_example4()
 
 def test_inference_finite_states_example1():
     assert True
     return
-    
+
     # STILL NOT WORKING!!!
     fggsp = FGGsum_product(finStatesFGG)
-    
+
     finStatesDomain = VariableDomain(False)
     finStatesDomain.set_content({0, 1})
     finStatesFunction = DiscreteDensity([[0.1, 0.5],[0.3, 0.2]])
-    
+
     for p in finStatesFGG.P:
         for v in p.body.V:
             v.domain = finStatesDomain
         for e in p.body.E:
             if e.label not in finStatesFGG.N:
                 e.function = finStatesFunction
-            
-    
-    
+
+
+
     fggsp.inference_finite_states()
     assert True

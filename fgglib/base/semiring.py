@@ -7,6 +7,9 @@ from collections import defaultdict
 
 
 class Semiring:
+    '''
+    A class representing a semiring with all its basic functions
+    '''
 
     zero = None
     one = None
@@ -34,20 +37,34 @@ class Semiring:
         return W
 
     def __add__(self, other):
+        '''
+        semiring ⊕ operation
+        '''
         raise NotImplementedError
 
     def __mul__(self, other):
+        '''
+        semiring ⊗ operation
+        '''
         raise NotImplementedError
 
     def __eq__(self, other):
+        '''
+        semiring = operation
+        '''
         return self.score == other.score
 
     def __hash__(self):
+        '''
+        hashing method for the semiring
+        '''
         return hash(self.score)
-        
-        
-class Boolean(Semiring):
 
+
+class Boolean(Semiring):
+    '''
+    Implementation of the Boolean semiring: True, False reals and logical and/or operations
+    '''
     def __init__(self, score):
         super().__init__(score)
 
@@ -85,6 +102,9 @@ Boolean.idempotent = True
 
 
 class Tropical(Semiring):
+    '''
+    Implementation of the Tropical semiring: positive reals and min and + operations
+    '''
 
     def __init__(self, score):
         self.score = score
@@ -122,7 +142,7 @@ class Tropical(Semiring):
 
     def __str__(self):
         return str(self.score)
-        
+
 
 Tropical.zero = Tropical(float('inf'))
 Tropical.one = Tropical(0.0)
@@ -132,6 +152,9 @@ Tropical.cancellative = True
 
 
 class Real(Semiring):
+    '''
+    Implementation of the Real semiring: Real numbers and classic + and ⋅ operations
+    '''
 
     def __init__(self, score):
         # TODO: this is hack to deal with the fact

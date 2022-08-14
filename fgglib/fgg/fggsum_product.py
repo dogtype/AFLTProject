@@ -9,14 +9,31 @@ from fgglib.fg.variabledomain import VariableDomain
 import pprint
 
 class FGGsum_product:
-    # A helper class to compute the sum_product of a factor graph grammar
+    '''
+    A helper class to compute the sum product of FGGs
+    '''
 
     def __init__(self, fgg):
+        '''
+        Creates a new FGGsum_product object.
+
+        Args:
+            fgg: The factor graph grammar of which the sum-product is to be computed
+
+        Returns:
+            FGGsum_product: The newly created FGGsum_product object.
+        '''
         self.fgg = fgg
         self.variable_domain = {0.25,0.5,0.75}
 
     def inference(self):
-        """ returns the sum product of a factor graph grammar for the general case """
+        '''
+        Computes the sum-product of a factor graph grammar by distinguishing
+        between the finite variable domain and finite graph language case
+
+        Returns:
+            The computed sum-product
+        '''
         if(self.fgg.finite_domain()): # finite variable domain
             return self.inference_finite_variables()
         if(not fgg.recursive()): # finite graph language
@@ -25,7 +42,17 @@ class FGGsum_product:
             raise Exception("Inference undecidable for infinite graph languages and infinte variable domain!") # both infinte
 
     def xiX(self,X):
-        """ returns a set of possible assignments to variable endpoints of an edge labelled X """
+        '''
+        Enumerates all possible assignments of variables adjacent to a nonterminal X
+
+        Args:
+            X: The nonterminal labelling the edge for which we want to enumerate
+            the possible variable assignments
+
+        Returns:
+            assignments (list): A list of lists where every entry corresponds to
+            a list of assignments to the adjacent variables
+        '''
         assignments = [[]]
         for p in self.fgg.P:
             for e in p.body.E:
@@ -44,7 +71,17 @@ class FGGsum_product:
         return assignments
 
     def xiR(self,fragment):
-        """ returns a set of possible assignments to variables of a fragment """
+        '''
+        Enumerates all possible assignments of free variables of a FG fragment
+
+        Args:
+            fragment (Fragment): The fragment for which we want to enumerate all
+            possible variable assignments
+
+        Returns:
+            assignments (list): A list of lists where every entry corresponds to
+            a list of assignments to the fragments free variables
+        '''
         assignments = [[]]
         for n in fragment.V:
             if(n not in fragment.external):
@@ -58,7 +95,20 @@ class FGGsum_product:
         return assignments
 
     def calculate_phi(self,X,xi,db):
-        """ calculates the phi variable for nonterminal X directly """
+        '''
+        Directly calculates the value of the phi variable (sum-product of a nonterminal)
+        for a given nonterminal and assignment
+
+        Args:
+            X: The nonterminal for which the sum-product is to be computed
+            xi (list): A list of assignments to the variables adjacent to X
+            db (dict): A dictionary used for storing the result of recursive
+            computations in order to avoid redundance
+
+        Returns:
+            result: The computed sum-product for the variable X and the assignment xi
+        '''
+
         if("phi"+str(X)+str(xi) in db):
             return db["phi"+str(X)+str(xi)]
         result = 0
@@ -68,7 +118,20 @@ class FGGsum_product:
         return result
 
     def calculate_tau(self,frag,xi,db):
-        """ calculates the tau variable for fragment R directly """
+        '''
+        Directly calculates the value of the tau variable (sum-product of a right-hand side)
+        for a given fragment and assignment
+
+        Args:
+            frag (Fragment): The fragment for which the sum-product is to be computed
+            xi (list): A list of assignments to the external variables of frag
+            db (dict): A dictionary used for storing the result of recursive
+            computations in order to avoid redundance
+
+        Returns:
+            result: The computed sum-product for fragment frag and the assignment xi
+        '''
+
         if("tau"+str(frag)+str(xi) in db):
             return db["phi"+str(frag)+str(xi)]
         result = 0
@@ -102,7 +165,21 @@ class FGGsum_product:
         return result
 
     def create_phi_equations(self,index,new_index,equations,B,nt):
-        """ creates phi equations for a nonterminal nt for the equation system"""
+        '''
+        Helper function to calculate the value of the phi variable (sum-product of a nonterminal)
+         that creates linear equations and adds them to the equation system
+
+        Args:
+            index (dict): A mapping of variables to indices in the equation system
+            new_index (index): The value of the next free index for new variables
+            equations (list): A matrix storing the equations for the equation system
+            B (list): The vector for which the linear system in matrix form is to be solved
+            nt: The nonterminal, for which we want to create the phi equation
+
+        Returns:
+            new_index: The new index of the next free variable. All other changes are passed by reference
+        '''
+
         for v in self.xiX(nt):
             new_equation = [0]*new_index
             if(not ("phi"+str(nt)+str(v)) in index):
@@ -125,12 +202,27 @@ class FGGsum_product:
             B.append(0)
 
             for p in self.fgg.nProductions(nt): # create tau equations for every v
-                new_index = self.create_tau_equations(index,new_index,equations,B,nt,p.body,v)
+                new_index = self.create_tau_equations(index,new_index,equations,B,p.body,v)
 
         return new_index # return the current new index. All other parameters are passed by object reference
 
-    def create_tau_equations(self,index,new_index,equations,B,nt,r,v):
-        """ creates tau equations for a production p and assignment v for the equation system """
+    def create_tau_equations(self,index,new_index,equations,B,r,v):
+        '''
+        Helper function to calculate the value of the tau variable (sum-product of a fragment)
+         that creates linear equations and adds them to the equation system
+
+        Args:
+            index (dict): A mapping of variables to indices in the equation system
+            new_index (index): The value of the next free index for new variables
+            equations (list): A matrix storing the equations for the equation system
+            B (list): The vector for which the linear system in matrix form is to be solved
+            r (Fragment): The fragment for which we want to compute the sum-product
+            v (list): The list of external assignments given to the fragment
+
+        Returns:
+            new_index: The new index of the next free variable. All other changes are passed by reference
+        '''
+
         new_equation = [0]*new_index
         new_equation[index["tau"+str(r)+str(v)]]=-1
         for var in self.xiR(r):
@@ -173,7 +265,20 @@ class FGGsum_product:
         return new_index # return the current new index. All other parameters are passed by object reference
 
     def create_nl_phi_equations(self,index,new_index,equations,nt):
-        """ creates phi equations and possibly nonlinear tau equations for the solver """
+        '''
+        Helper function to calculate the value of the phi variable (sum-product of a nonterminal)
+         that creates nonlinear equations and adds them to the equation system
+
+        Args:
+            index (dict): A mapping of variables to indices in the equation system
+            new_index (index): The value of the next free index for new variables
+            equations (list): A list of functions calculating the value of every equation in the system
+            nt: The nonterminal, for which we want to create the phi equation
+
+        Returns:
+            new_index: The new index of the next free variable. All other changes are passed by reference
+        '''
+
         for v in self.xiX(nt):
             new_equation = []
             if(not ("phi"+str(nt)+str(v)) in index):
@@ -192,12 +297,26 @@ class FGGsum_product:
             equations.append(self.function_from_list(new_equation))
 
             for p in self.fgg.nProductions(nt): # create tau equations
-                new_index = self.create_nl_tau_equations(index,new_index,equations,nt,p.body,v)
+                new_index = self.create_nl_tau_equations(index,new_index,equations,p.body,v)
 
         return new_index
 
-    def create_nl_tau_equations(self,index,new_index,equations,nt,r,v):
-        """ creates possibly nonlinear tau equations for the solver """
+    def create_nl_tau_equations(self,index,new_index,equations,r,v):
+        '''
+        Helper function to calculate the value of the phi variable (sum-product of a nonterminal)
+         that creates nonlinear equations and adds them to the equation system
+
+        Args:
+            index (dict): A mapping of variables to indices in the equation system
+            new_index (index): The value of the next free index for new variables
+            equations (list): A list of functions calculating the value of every equation in the system
+            r (Fragment): The fragment for which we want to compute the sum-product
+            v (list): The list of external assignments given to the fragment
+
+        Returns:
+            new_index: The new index of the next free variable. All other changes are passed by reference
+        '''
+
         new_equation = []
         new_equation.append((-1,index["tau"+str(r)+str(v)],1))
         for var in self.xiR(r):
@@ -244,8 +363,16 @@ class FGGsum_product:
         return new_index
 
     def function_from_list(self,entries):
-        """ returns a lambda function created from the list of factors in the function """
-        print("equation:",entries)
+        '''
+        Creates and returns a function that represents a equation in the system
+        from the list of all factors, variables and powers in the equation
+
+        Args:
+            entries (list): A list of tuples of factor, variable index and power of a summand
+
+        Return:
+            g: The function computing a single equation line
+        '''
         def f(x):
             result = 0
             for e in entries:
@@ -256,7 +383,13 @@ class FGGsum_product:
         return f
 
     def inference_finite_variables(self):
-        """ returns the sum product of a factor graph grammar with finite variable domain """
+        '''
+        Computes the sum product of a factor graph grammar with finite variable domain
+        by distinguishing between nonrecursive, linearly recursive and nonlinearly recursive grammars
+
+        Returns:
+            The computed sum-product of the grammer
+        '''
         g = nx.DiGraph()
         for p in self.fgg.P:
             for nt in p.body.nonterminals(self.fgg.N):
@@ -316,10 +449,15 @@ class FGGsum_product:
 
 
     def inference_finite_states(self):
-        """ returns the sum product of a factor graph grammar with finite number of states """
+        '''
+        Returns the sum product of a factor graph grammar with finite graph language
+
+        Returns:
+            The sum product of the FGG of the FGGsum object
+        '''
         productions = list(self.fgg.P)
         fg = Factorgraph(productions[0].body.R)
-        
+
         # add binary variables for all nonterminals and rules
         bin_domain = VariableDomain(False)
         bin_domain.set_content({False, True})
@@ -333,11 +471,11 @@ class FGGsum_product:
             b_var = FGVertex(p, "B_π" + str(i), fg.R, bin_domain)
             fg.add_vertex(b_var)
             rules_bin_vars[p] = b_var
-            
+
         pprint.pprint(fg)
         pprint.pprint(nt_bin_vars)
         pprint.pprint(rules_bin_vars)
-        
+
         # add conditions to constraint to valid derivations
         start_e = FGEdge(self.fgg.S, "B_S = true", fg.R, CondStart(fg.R))
         start_e.add_target(nt_bin_vars[self.fgg.S])
@@ -349,14 +487,14 @@ class FGGsum_product:
                 for p in p_X_left:
                     e.add_target(rules_bin_vars[p])
                 fg.add_edge(e)
-                
+
                 p_X_right = [p for p in productions if X in p.body.nonterminals(self.fgg.N)]
                 e = FGEdge(X, "CondOne(B_" + X + ''.join([','+rules_bin_vars[p_].label for p_ in p_X_right]) + ")", fg.R, CondOne(fg.R, 1 + len(p_X_right)))
                 e.add_target(nt_bin_vars[X])
                 for p in p_X_right:
                     e.add_target(rules_bin_vars[p])
                 fg.add_edge(e)
-                    
+
         # create clusters
         new_p_vars = {}
         for i, p in enumerate(productions):
@@ -377,7 +515,7 @@ class FGGsum_product:
                         new_edge.add_target(new_vars[v])
                     fg.add_edge(new_edge)
             new_p_vars[p] = new_vars
-                
+
         new_nt_vars = {}
         for X in self.fgg.N:
             for p in productions:
@@ -393,7 +531,7 @@ class FGGsum_product:
                         fg.add_vertex(v)
                         fg.add_edge(new_edge)
                     new_nt_vars[X] = X_vars
-                    
+
         print(new_nt_vars)
         # create same-variable bindings
         for X in self.fgg.N:
@@ -404,7 +542,7 @@ class FGGsum_product:
                         new_edge.add_target(rules_bin_vars[p])
                         new_edge.add_target(new_nt_vars[X][v])
                         new_edge.add_target(new_p_vars[p][v])
-                        
+
                 if X in p.body.nonterminals(self.fgg.N):
                     e = p.body.get_edge(X)
                     for t in e.targets:
@@ -413,78 +551,78 @@ class FGGsum_product:
                         print(X,v.label)
                         new_edge.add_target(new_nt_vars[X][t])
                         new_edge.add_target(new_p_vars[p][t])
-                        
+
         return fg.normalization_constant()
 
 
 class CondStart(FactorFunction):
-    
+
     def __init__(self, R):
         super().__init__(R, 1)
-        
+
     def compute(self, *args):
         if len(args) != arg_num:
             raise Exception("wrong number of arguments")
-            
+
         return self.R.one if args[0] else self.R.zero
-    
-    
+
+
 class CondOne(FactorFunction):
-        
+
     def __init__(self, R, arg_num):
         super().__init__(R, arg_num)
-        
+
     def compute(self, *args):
         if len(args) != arg_num:
             raise Exception("wrong number of arguments")
-            
+
         if args[0]:
             return self.R.one if args[1:].count(True) == 1 else self.R.zero
         else:
             return self.R.one if args[1:].count(True) == 0 else self.R.zero
-            
-            
+
+
 class CondEquals(FactorFunction):
-    
+
     def __init__(self, R):
         super().__init__(R, 3)
-        
+
     def compute(self, *args):
         if len(args) != arg_num:
             raise Exception("wrong number of arguments")
-            
+
         if args[0]:
             return self.R.one if args[1] == args[2] else self.R.zero
         else:
             return self.R.one
-            
+
 
 class CondFactor(FactorFunction):
-    
+
     def __init__(self, R, f):
         super().__init__(R, 1 + f.arg_num)
         self.f = f
-        
+
     def compute(self, *args):
         if len(args) != arg_num:
             raise Exception("wrong number of arguments")
-            
+
         if args[0]:
             return f.compute(*args[1:])
         else:
             return self.R.one
-            
-            
+
+
 class CondNormalize(FactorFunction):
-    
+
     def __init__(self, domain):
         super().__init__(Real, 2)
         self.weight_distr = lambda x : float(1) / float(len(domain.content))
-        
+
     def compute(self, *args):
         if len(args) != arg_num:
             raise Exception("wrong number of arguments")
-            
+
         if args[0]:
             return Real(self.weight_distr(args[1]))
         else:

@@ -1,4 +1,3 @@
-from fgglib.fgg.exceptions import *
 from fgglib.fgg.production import Production
 from fgglib.fg.fragment import Fragment
 from fgglib.fg.factorfunction import FactorFunction

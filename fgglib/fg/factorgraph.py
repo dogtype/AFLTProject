@@ -8,17 +8,47 @@ from fgglib.fg.vertex import FGVertex
 from fgglib.fg.variabledomain import VariableDomain
 
 class Factorgraph(Hypergraph):
+    '''
+    A class that represents factorgraphs: hypergraphs equipped with a mapping
+    to a factor function for edges and a variable domain for vertices
+    '''
 
     def __init__(self, R) -> None:
+        '''
+        Creates a new Factorgraph object.
+
+        Args:
+            R(): the class of the semiring over which the factorgraph is defined
+
+        Returns:
+            Factorgraph: The newly created Factorgraph object.
+        '''
         super().__init__()
         self.R = R
-        
+
     def createVertex(self, content, label, R, domain=False):
+        '''
+        Adds a single vertex to the factorgraph
+
+        Args:
+            content: The content of the vertex to be added
+            label: The label of the newly added vertex
+            R: The class of the semiring over which the vertex is defined
+            domain: Optional parameter for a variable domain of the new vertex
+        '''
         v = FGVertex(content, label, R, domain)
         self.add_vertex(v)
         return v
-    
+
     def createVertices(self, contentSet, labelSet, R):
+        '''
+        Adds a set of vertices to the factorgraph, by calling createVertex repeatedly
+
+        Args:
+            contentSet: A set of contents for the new vertices
+            labelSet: A set of labels for the new vertices
+            R: The class of the semiring over which the vertices are defined
+        '''
         iter = len(labelSet)
         for i in range(iter):
             if contentSet != None:
@@ -27,13 +57,13 @@ class Factorgraph(Hypergraph):
                 content=None
             label=labelSet[i]
             v= self.createVertex(content, label, R)
-        
+
     def createEdge(self, content, label, targets, f, semiring):
         fgedge = FGEdge(content,label,semiring, f)
         self.add_edge(fgedge)
         for t in targets:
             fgedge.add_target(self.get_vertex(t))
-            
+
     def set_function(self, edge, f: FactorFunction) -> None:
         for e in self.E:
             if(e.label==edge.label):
@@ -54,7 +84,7 @@ class Factorgraph(Hypergraph):
         while stack:
             node = stack.pop(0) # here with "node" with mean both vertices and hyperedges
             missing_neighbors = [neigh for neigh, f in incoming_msg[node].items() if f is None]
- 
+
             if states[node] == 0 and len(missing_neighbors) == 1:
                 dest = missing_neighbors.pop()
                 node.set_msg(dest, incoming_msg)
@@ -71,7 +101,7 @@ class Factorgraph(Hypergraph):
     def _cyclic_sum_product(self, max_iter) -> dict[FGVertex, FactorFunction]:
         incoming_msg = {v:{e:MulIdentityFactorFunction(self.R) for e in self.E if v in e.targets} for v in self.V}
         incoming_msg.update({e:{v:MulIdentityFactorFunction(self.R) for v in e.targets} for e in self.E})
-        
+
         for _ in range(max_iter):
             for e in self.E:
                 for t in e.targets:
@@ -80,19 +110,19 @@ class Factorgraph(Hypergraph):
                 for e in self.E:
                     if v in e.targets:
                         v.set_msg(e, incoming_msg)
-                        
+
         return {v:v.marginal(incoming_msg) for v in self.V}
-        
-                
-                
+
+
+
 
     def sum_product(self, max_iter=100) -> dict[FGVertex, FactorFunction]:
         return self._cyclic_sum_product(max_iter) if self.cyclic() else self._acyclic_sum_product()
-        
+
     def normalization_constant_(self, root=None):
         # inefficient version: generate all assignments and compute the product of the functions summing over them
         v_indexes = {v:i for i, v in enumerate(self.V)}
-            
+
         arg_combs = []
         for v, _ in v_indexes.items():
             d = v.domain
@@ -104,7 +134,7 @@ class Factorgraph(Hypergraph):
                 for value in d.enumerate():
                     new_arg_combs += [a + [value] for a in arg_combs]
                 arg_combs = new_arg_combs
-                
+
         Z = self.R.zero
         for comb in arg_combs:
             cur_res = self.R.one
@@ -113,14 +143,14 @@ class Factorgraph(Hypergraph):
                 cur_res *= e.function.compute(*args)
             Z += cur_res
         return Z
-        
+
     def normalization_constant(self, root=None):
         # efficient version: run sum product and compute the normalization constant of a marginal
         if root is None:
             root = list(self.V)[0]
         return self.sum_product()[root].normalization_constant(root.domain)
-        
-    
+
+
     def createFGGraph(self, vertexSet, edgeSet, semiring):
         fg = Factorgraph(semiring)
         for v in vertexSet:
@@ -128,7 +158,7 @@ class Factorgraph(Hypergraph):
         for e in edgeSet:
             fg.add_edge(e)
         return fg
-    
+
     def buildGraph(V, E, semiring): # prohibits use of label multiple times
         vertexDict = {l: FGVertex(None,l,semiring) for l in V}
         vertexSet = {v for l,v in vertexDict.items()}
