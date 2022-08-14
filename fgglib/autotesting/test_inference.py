@@ -4,21 +4,38 @@ from fgglib.fgg.production import *
 from fgglib.fgg.fggsum_product import FGGsum_product
 from fgglib.base.semiring import Real
 from fgglib.fg.functions.discretedensity import DiscreteDensity
+from fgglib.fg.factorfunction import FactorFunction
 from fgglib.autotesting.testenvironment import *
 
 #--------------------------- DEFINITIONS --------------------------------------
+
+class MultiplicativeFactorFunction(FactorFunction):
+    def __init__(self):
+        super().__init__(Real,1)
+
+    def compute(self,*args):
+        result = 1
+        for a in args:
+            result*=a
+        return result
+
+mff = MultiplicativeFactorFunction()
 
 recFrag0 = buildFragment(
     {'EXT1', 'EXT2'}, # V
     [('X', {'EXT1','EXT2'})], # E
     {'EXT1','EXT2'}, # ext
 )
+for e in recFrag0.E:
+    recFrag0.set_function(e,mff)
 
 recFrag1 = buildFragment(
     {'EXT1', 'EXT2'}, # V
     [('l', {'EXT1','EXT2'})], # E
     {'EXT1','EXT2'}, # ext
 )
+for e in recFrag1.E:
+    recFrag1.set_function(e,mff)
 
 recFragp = buildFragment(
     {'V'}, # V
@@ -26,18 +43,25 @@ recFragp = buildFragment(
     {}, # ext
 )
 recFragp.get_edge('X').add_target(recFragp.get_vertex('V')) # workaround for edge assignment of the test environment
+for e in recFragp.E:
+    recFragp.set_function(e,mff)
+
 
 recFrag0p = buildFragment(
     {'EXT1', 'EXT2', 'V'}, # V
     [('X', {'EXT1','V'}),('b',{'V','EXT2'})], # E
     {'EXT1','EXT2'}, # ext
 )
+for e in recFrag0p.E:
+    recFrag0p.set_function(e,mff)
 
 nonlinRecFrag1 = buildFragment(
     {'EXT1', 'EXT2', 'V'}, # V
     [('X', {'EXT1','V'}), ('X',{'V','EXT2'})], # E
     {'EXT1','EXT2'}, # ext
 )
+for e in nonlinRecFrag1.E:
+    nonlinRecFrag1.set_function(e,mff)
 
 nonRecFGG = FGG(
     {recFrag1, recFragp}, # T

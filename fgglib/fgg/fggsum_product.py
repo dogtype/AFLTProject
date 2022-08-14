@@ -157,8 +157,10 @@ class FGGsum_product:
                         asmntList.append(varMap[tgt])
                     ntproduct *= self.calculate_phi(e.label,asmntList,db)
                 else: # case E_T
+                    args = ()
                     for tgt in e.targets:
-                        tproduct *= varMap[tgt] # would want to use factorfunction, but hypergraphs don't have functions!
+                        args += (varMap[tgt],) # would want to use factorfunction, but hypergraphs don't have functions!
+                    tproduct *= e.function.compute(*args)
             result += ntproduct * tproduct
 
         db["phi"+str(frag)+str(xi)] = result
@@ -240,8 +242,10 @@ class FGGsum_product:
             product = 1
             for e in r.E: # add actual variables
                 if(e.label not in self.fgg.N): # case E_T
+                    args = ()
                     for tgt in e.targets:
-                        product *= varMap[tgt]
+                        args += (varMap[tgt],) # would want to use factorfunction, but hypergraphs don't have functions!
+                    product *= e.function.compute(*args)
             containsNT = False
             for e in r.E:
                 if(e.label in self.fgg.N): # case E_N
@@ -334,8 +338,10 @@ class FGGsum_product:
             product = 1
             for e in r.E: # add actual variables
                 if(e.label not in self.fgg.N): # case E_T
+                    args = ()
                     for tgt in e.targets:
-                        product *= varMap[tgt]
+                        args += (varMap[tgt],) # would want to use factorfunction, but hypergraphs don't have functions!
+                    product *= e.function.compute(*args)
             occurances = {} # checks the number of times a nonterminal occurs
             for e in r.E:
                 if(e.label in self.fgg.N):
@@ -390,6 +396,7 @@ class FGGsum_product:
         Returns:
             The computed sum-product of the grammer
         '''
+
         g = nx.DiGraph()
         for p in self.fgg.P:
             for nt in p.body.nonterminals(self.fgg.N):
